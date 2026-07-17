@@ -1,0 +1,36 @@
+aid: flock-safety
+name: Flock Safety
+description: 'Flock Safety is a company surfaced as a portfolio company of a16z, crv, founders-fund, initialized-capital,
+  kleiner-perkins, matrix-partners, spark-capital, sv-angel, y-combinator and added to the API Evangelist
+  network as a stub for enrichment. Sector: american-dynamism. This profile is a lead awaiting the enrichment
+  pipeline.'
+url: https://raw.githubusercontent.com/api-evangelist/flock-safety/refs/heads/main/apis.yml
+x-type: company
+x-source: vc-portfolio
+x-backed-by:
+- a16z
+- crv
+- founders-fund
+- initialized-capital
+- kleiner-perkins
+- matrix-partners
+- spark-capital
+- sv-angel
+- y-combinator
+x-tier: stub
+x-tier-reason: portfolio-lead
+specificationVersion: '0.20'
+created: '2026-07-17'
+modified: '2026-07-17'
+tags:
+- Company
+- American Dynamism
+apis: []
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
+- FN: APIs.json
+  email: info@apis.io
+common:
+- type: Website
+  url: https://flocksafety.com
