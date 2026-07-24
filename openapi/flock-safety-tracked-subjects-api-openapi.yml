@@ -1,0 +1,309 @@
+openapi: 3.0.3
+info:
+  title: Flock Safety API Platform (v3) Alerts Tracked Subjects API
+  description: Flock Safety v3 API Platform harvested from the public developer hub (docs.flocksafety.com). Combines the Device, Custom Hotlist, LPR Search, Plate Lookup, Hotlist Alerts Subscription, Geolocation, CAD, Inbound Alerts, and Vehicle Detections Ingest APIs. OAuth2 client_credentials (machine) and authorization_code (user) flows against api.flocksafety.com.
+  version: 3.0.0
+  contact:
+    name: Flock Safety Developer Hub
+    url: https://docs.flocksafety.com/
+servers:
+- url: https://api.flocksafety.com/api/v3
+  description: Production
+- url: https://dev-api.flocksafety.com/api/v3
+  description: Development sandbox (at Flock discretion)
+tags:
+- name: Tracked Subjects
+paths:
+  /geo/subjects/{externalSubjectId}:
+    delete:
+      summary: Disable a Tracked Subject
+      tags:
+      - Tracked Subjects
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: externalSubjectId
+        in: path
+        description: ID of the subject you are updating
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Disable a subject
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Heartbeat'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found (provided id doesn't match any existing)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    get:
+      summary: Retrieving a Tracked Subject
+      description: Get a single subject's current location.
+      tags:
+      - Tracked Subjects
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: externalSubjectId
+        in: path
+        description: ID of the subject type you are fetching
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Get a single subject's current location
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Heartbeat'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found (provided id doesn't match any existing)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /geo/subjects:
+    get:
+      summary: Retrieve All Tracked Subjects
+      description: Get all subjects' current locations
+      tags:
+      - Tracked Subjects
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: since
+        in: query
+        description: Unix timestamp in seconds
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: page
+        in: query
+        description: Page number, defaults to 1
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: subjectType
+        in: query
+        description: Filter by subject type
+        required: false
+        schema:
+          type: string
+          enum:
+          - vehicle
+          - person
+          - drone
+          - other
+      - name: subjectSubtype
+        in: query
+        description: Filter by subject subtype
+        required: false
+        schema:
+          type: string
+      - name: showInactive
+        in: query
+        description: Show inactive subjects
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Get all subjects' current locations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Heartbeat'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    put:
+      summary: Create or updating a Tracked Subject
+      description: Add or update a subject's location
+      tags:
+      - Tracked Subjects
+      security:
+      - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Heartbeat'
+      responses:
+        '200':
+          description: Add or update a subject's location
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Heartbeat'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    Heartbeat:
+      type: object
+      required:
+      - externalId
+      - subjectType
+      - subjectSubtype
+      - latitude
+      - longitude
+      properties:
+        subjectId:
+          type: string
+          readOnly: true
+          description: ID of the subject in flocks system
+        subjectType:
+          type: string
+          enum:
+          - vehicle
+          - person
+          - drone
+          - other
+          description: base type of the subject. This is used to filter subjects on the map
+        subjectSubtype:
+          type: string
+          description: subtype of the subject. This is used to filter subjects on the map
+        externalId:
+          type: string
+          description: ID of the subject in your system. Must be unique per organization.
+        createdAt:
+          readOnly: true
+          type: string
+          format: date-time
+          description: RFC3339 UTC datetime string of when subject was created
+        updatedAt:
+          readOnly: false
+          type: string
+          format: date-time
+          description: RFC3339 UTC datetime string of when subject was last updated. Use this if different time than createdAt or the current time.
+        disableAt:
+          readOnly: true
+          type: string
+          format: date-time
+          description: RFC3339 UTC datetime string of when subject should be inactive
+        latitude:
+          type: number
+          format: float64
+        longitude:
+          type: number
+          format: float64
+        altitude:
+          type: number
+          format: float64
+          description: altitude in meters, defaults to 0.0 and returned as 0.0 if not provided
+        additionalMetadata:
+          type: object
+          properties:
+            type:
+              enum:
+              - string
+              - number
+              - boolean
+              description: What type the value of the metadata value is
+            value:
+              type: object
+              description: value of the metadata. Must be a string, number, or boolean
+          description: flat json object, defaults to {} and returned as {} if not provided
+        deviceLink:
+          type: string
+          description: URL to the device, defaults to "" and returned as "" if not provided
+        deviceStatus:
+          type: string
+          default: null
+          description: status of the device such as buffering, recording, etc
+        isRecording:
+          type: boolean
+          default: false
+          description: if the subject is recording or not
+        nickname:
+          type: string
+          description: nickname of the subject
+          default: ''
+        isLawEnforcement:
+          type: boolean
+          default: false
+          description: if the subject is a law enforcement subject or not
+    ErrorResponse:
+      properties:
+        error:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    oauth2Auth:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://api.flocksafety.com/oauth/token
+          scopes:
+            custom-holists:read: Read access to custom hotlists
+            custom-holists:write: Write access to custom hotlists
+    FlockOAuth:
+      type: oauth2
+      description: OAuth 2 with the client credentials flow
+      flows:
+        clientCredentials:
+          scopes:
+            plate-reads:lookup: Access to perform lookups on license plate reads.
+          tokenUrl: https://api.flocksafety.com/oauth/token
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://api.flocksafety.com/oauth/token
+          scopes: {}

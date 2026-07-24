@@ -1,0 +1,325 @@
+openapi: 3.0.3
+info:
+  title: Flock Safety API Platform (v3) Alerts LPR Hotlist Alert Subscriptions API
+  description: Flock Safety v3 API Platform harvested from the public developer hub (docs.flocksafety.com). Combines the Device, Custom Hotlist, LPR Search, Plate Lookup, Hotlist Alerts Subscription, Geolocation, CAD, Inbound Alerts, and Vehicle Detections Ingest APIs. OAuth2 client_credentials (machine) and authorization_code (user) flows against api.flocksafety.com.
+  version: 3.0.0
+  contact:
+    name: Flock Safety Developer Hub
+    url: https://docs.flocksafety.com/
+servers:
+- url: https://api.flocksafety.com/api/v3
+  description: Production
+- url: https://dev-api.flocksafety.com/api/v3
+  description: Development sandbox (at Flock discretion)
+tags:
+- name: LPR Hotlist Alert Subscriptions
+paths:
+  /integrations/lpr/alerts/subscriptions/{id}:
+    delete:
+      summary: Delete Subscription
+      description: Delete existing LPR hotlist alert webhook subscription by id
+      tags:
+      - LPR Hotlist Alert Subscriptions
+      security:
+      - bearerAuth: []
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      responses:
+        '204':
+          description: Success
+        '403':
+          description: Forbidden (lacking appropriate scope or client claims)
+        '404':
+          description: Subscription Not Found
+        '500':
+          description: Internal Server Error
+    get:
+      summary: Get Subscription
+      description: Get existing LPR hotlist alert webhook subscription by id
+      tags:
+      - LPR Hotlist Alert Subscriptions
+      security:
+      - bearerAuth: []
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+        '403':
+          description: Forbidden (lacking appropriate scope or client claims)
+        '404':
+          description: Subscription Not Found
+        '500':
+          description: Internal Server Error
+  /integrations/lpr/alerts/subscriptions:
+    get:
+      summary: Get Subscriptions
+      description: Get existing LPR hotlist alerts webhook subscriptions
+      tags:
+      - LPR Hotlist Alert Subscriptions
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Subscription'
+        '403':
+          description: Forbidden (lacking appropriate scope or client claims)
+        '500':
+          description: Internal Server Error
+    post:
+      summary: Create Subscription
+      description: Create a new LPR hotlist alert webhook subscription
+      tags:
+      - LPR Hotlist Alert Subscriptions
+      security:
+      - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSubscriptionRequest'
+      responses:
+        '201':
+          description: Subscription Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+        '400':
+          description: Bad Request (missing required field or credentials failed to validate)
+        '403':
+          description: Forbidden (lacking appropriate scope or client claims)
+        '409':
+          description: Conflict (violates a unique constraint)
+        '500':
+          description: Internal Server Error
+    put:
+      summary: Update Subscription
+      description: Update an existing LPR hotlist alert webhook subscription
+      tags:
+      - LPR Hotlist Alert Subscriptions
+      security:
+      - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSubscriptionRequest'
+      responses:
+        '200':
+          description: Subscription Updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+        '400':
+          description: Bad Request (missing required field or credentials failed to validate)
+        '403':
+          description: Forbidden (lacking appropriate scope or client claims)
+        '404':
+          description: Subscription Not Found
+        '500':
+          description: Internal Server Error
+components:
+  schemas:
+    UpdateSubscriptionRequest:
+      type: object
+      description: request body schema to update an existing webhook subscription
+      allOf:
+      - $ref: '#/components/schemas/CreateSubscriptionRequest'
+      - type: object
+        properties:
+          id:
+            type: string
+            format: uuid
+            description: id of the webhook subscription
+        required:
+        - id
+    CreateSubscriptionRequest:
+      type: object
+      description: request body schema to create a new webhook subscription
+      properties:
+        name:
+          type: string
+          description: optional name to describe the webhook subscription
+        callbackUrl:
+          type: string
+          description: endpoint that webhooks should be submitted to
+          format: url
+          example: https://example.com/your/webhook
+        credentials:
+          $ref: '#/components/schemas/Credentials'
+        contentType:
+          type: string
+          description: content type that webhooks should be provided as
+          enum:
+          - application/json
+          - application/xml
+        customHotlistAudienceFilter:
+          type: string
+          description: "Optionally include LPR hotlist alerts from custom hotlists with restricted audiences\n * `any` - Custom hotlists with organization-wide audience and restricted audience e.g. role-based or user-based audiences\n * `organization` - Custom hotlists with organization-wide audience only\n"
+          enum:
+          - any
+          - organization
+          default: organization
+        enabledFirstResponderJurisdictionAlerts:
+          type: boolean
+          description: indicates whether the subscription should accept hotlist alerts from shared networks in the organization's First Responder Jurisdiction or not
+        enabled:
+          type: boolean
+          description: indicates whether the subscription should be enabled or not
+      required:
+      - callbackUrl
+      - credentials
+      - contentType
+    Credentials:
+      type: object
+      description: authentication details for calling the webhook endpoint
+      properties:
+        scheme:
+          type: string
+          description: authentication scheme used by webhook endpoint
+          enum:
+          - none
+          - apiKey
+          - basic
+          - oauth2
+        apiKey:
+          type: object
+          description: API key credentials, required if scheme is "apiKey"
+          properties:
+            key:
+              type: string
+              description: API key (this field will be redacted when fetching existing subscriptions)
+            headerName:
+              type: string
+              description: HTTP header name that should be used to supply the API key
+              example: x-api-key
+          required:
+          - key
+          - headerName
+        basic:
+          type: object
+          description: basic credentials, required if scheme is "basic"
+          properties:
+            username:
+              type: string
+              description: username
+            password:
+              type: string
+              description: password (this field will be redacted when fetching existing subscriptions)
+            headerName:
+              type: string
+              description: HTTP header name that should be used to supply the basic credentials
+              example: Authorization
+          required:
+          - username
+          - password
+          - headerName
+        oauth2:
+          type: object
+          description: OAuth2 credentials, required if scheme is "oauth2"
+          properties:
+            tokenEndpoint:
+              type: string
+              description: endpoint where OAuth2 token should be retrieved
+              format: url
+              example: https://example.auth0.com/oauth/token
+            tokenScheme:
+              type: string
+              description: token scheme used to authenticate the token endpoint
+              enum:
+              - body
+              - basic
+              default: body
+            clientId:
+              type: string
+              description: OAuth2 client ID
+            clientSecret:
+              type: string
+              description: OAuth2 client secret (this field will be redactd when fetching existing subscriptions)
+            grantType:
+              type: string
+              description: OAuth2 client grant type
+              example: client_credentials
+            scope:
+              type: string
+              description: scope to request for token
+            customFields:
+              type: object
+              description: key-value pairs to be appended to token request (values will be redacted when fetching existing subscriptions)
+              additionalProperties: true
+            headerName:
+              type: string
+              description: HTTP header name that should be used to supply the OAuth2 token
+              example: Authorization
+          required:
+          - tokenEndpoint
+          - clientId
+          - clientSecret
+          - grantType
+          - headerName
+      required:
+      - scheme
+    Subscription:
+      type: object
+      description: response object when creating, updating or fetching a webhook subscription
+      allOf:
+      - $ref: '#/components/schemas/UpdateSubscriptionRequest'
+      - type: object
+        properties:
+          createdAt:
+            type: string
+            format: date-time
+            description: RFC3339 UTC timestamp of when the webhook subscription was created
+          updatedAt:
+            type: string
+            format: date-time
+            description: RFC3339 UTC timestamp of when the webhook subscription was most recently updated
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    oauth2Auth:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://api.flocksafety.com/oauth/token
+          scopes:
+            custom-holists:read: Read access to custom hotlists
+            custom-holists:write: Write access to custom hotlists
+    FlockOAuth:
+      type: oauth2
+      description: OAuth 2 with the client credentials flow
+      flows:
+        clientCredentials:
+          scopes:
+            plate-reads:lookup: Access to perform lookups on license plate reads.
+          tokenUrl: https://api.flocksafety.com/oauth/token
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://api.flocksafety.com/oauth/token
+          scopes: {}

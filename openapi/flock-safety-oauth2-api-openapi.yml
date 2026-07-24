@@ -1,0 +1,114 @@
+openapi: 3.0.3
+info:
+  title: Flock Safety API Platform (v3) Alerts OAuth2 API
+  description: Flock Safety v3 API Platform harvested from the public developer hub (docs.flocksafety.com). Combines the Device, Custom Hotlist, LPR Search, Plate Lookup, Hotlist Alerts Subscription, Geolocation, CAD, Inbound Alerts, and Vehicle Detections Ingest APIs. OAuth2 client_credentials (machine) and authorization_code (user) flows against api.flocksafety.com.
+  version: 3.0.0
+  contact:
+    name: Flock Safety Developer Hub
+    url: https://docs.flocksafety.com/
+servers:
+- url: https://api.flocksafety.com/api/v3
+  description: Production
+- url: https://dev-api.flocksafety.com/api/v3
+  description: Development sandbox (at Flock discretion)
+tags:
+- name: OAuth2
+paths:
+  /oauth/token:
+    post:
+      summary: Retrieve an Access Token
+      tags:
+      - OAuth2
+      security:
+      - oauth2: []
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                grant_type:
+                  type: string
+                  example: client_credentials
+                client_id:
+                  type: string
+                  example: your_client_id
+                client_secret:
+                  type: string
+                  example: your_client_secret
+                audience:
+                  type: string
+                  example: search
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  access_token:
+                    type: string
+                    example: your_access_token
+                  token_type:
+                    type: string
+                    example: Bearer
+                  expires_in:
+                    type: integer
+                    example: 3600
+                    description: Access token expiration time in seconds
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Client credentials invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Invalid or missing audience
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      servers:
+      - url: https://api.flocksafety.com
+        description: OAuth token endpoint (root, not /api/v3)
+components:
+  schemas:
+    ErrorResponse:
+      properties:
+        error:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    oauth2Auth:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://api.flocksafety.com/oauth/token
+          scopes:
+            custom-holists:read: Read access to custom hotlists
+            custom-holists:write: Write access to custom hotlists
+    FlockOAuth:
+      type: oauth2
+      description: OAuth 2 with the client credentials flow
+      flows:
+        clientCredentials:
+          scopes:
+            plate-reads:lookup: Access to perform lookups on license plate reads.
+          tokenUrl: https://api.flocksafety.com/oauth/token
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://api.flocksafety.com/oauth/token
+          scopes: {}

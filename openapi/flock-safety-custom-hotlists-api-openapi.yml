@@ -1,0 +1,466 @@
+openapi: 3.0.3
+info:
+  title: Flock Safety API Platform (v3) Alerts Custom Hotlists API
+  description: Flock Safety v3 API Platform harvested from the public developer hub (docs.flocksafety.com). Combines the Device, Custom Hotlist, LPR Search, Plate Lookup, Hotlist Alerts Subscription, Geolocation, CAD, Inbound Alerts, and Vehicle Detections Ingest APIs. OAuth2 client_credentials (machine) and authorization_code (user) flows against api.flocksafety.com.
+  version: 3.0.0
+  contact:
+    name: Flock Safety Developer Hub
+    url: https://docs.flocksafety.com/
+servers:
+- url: https://api.flocksafety.com/api/v3
+  description: Production
+- url: https://dev-api.flocksafety.com/api/v3
+  description: Development sandbox (at Flock discretion)
+tags:
+- name: Custom Hotlists
+paths:
+  /hotlists/{hotlistId}:
+    delete:
+      description: Delete hotlist
+      summary: Delete a custom hotlist
+      tags:
+      - Custom Hotlists
+      security:
+      - oauth2Auth:
+        - custom-hotlists:write
+      parameters:
+      - $ref: '#/components/parameters/HotlistIdParam'
+      responses:
+        '204':
+          description: The hotlist was deleted successfully
+        '401':
+          description: Unauthorized, authentication token was invalid or not provided
+        '403':
+          description: Forbidden, your client does not have access to this resource
+        '404':
+          description: No hotlist was found with the given ID
+    get:
+      description: Retrieve a hotlist with the given ID
+      summary: Retrieve a custom hotlist
+      tags:
+      - Custom Hotlists
+      security:
+      - oauth2Auth:
+        - custom-hotlists:read
+      parameters:
+      - $ref: '#/components/parameters/HotlistIdParam'
+      responses:
+        '200':
+          description: The hotlist was successfully retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Hotlist'
+        '401':
+          description: Unauthorized, authentication token was invalid or not provided
+        '403':
+          description: Forbidden, your client does not have access to this resource
+        '404':
+          description: No hotlist was found with the given ID
+    put:
+      description: Update a hotlist
+      summary: Update a custom hotlist
+      tags:
+      - Custom Hotlists
+      security:
+      - oauth2Auth:
+        - custom-hotlists:write
+      parameters:
+      - $ref: '#/components/parameters/HotlistIdParam'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateHotlistRequest'
+      responses:
+        '204':
+          description: The hotlist was updated successfully
+        '401':
+          description: Unauthorized, authentication token was invalid or not provided
+        '403':
+          description: Forbidden, your client does not have access to this resource
+        '404':
+          description: No hotlist was found with the given ID
+        '413':
+          description: Request entity too large, the number of entries exceeds the organization's limit
+  /hotlists/{hotlistId}/entries:
+    get:
+      description: Retrieve a page of entries for the hotlist with the given ID
+      summary: Retrieve a page of entries for a hotlist
+      tags:
+      - Custom Hotlists
+      security:
+      - oauth2Auth:
+        - custom-hotlists:read
+      parameters:
+      - $ref: '#/components/parameters/HotlistIdParam'
+      - name: limit
+        in: query
+        description: The maximum number of hotlist entries to return
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 3000
+          default: 3000
+      - name: cursor
+        in: query
+        description: A cursor for the next page of results
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The hotlist entries were successfully retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetHotlistEntriesResponse'
+        '401':
+          description: Unauthorized, authentication token was invalid or not provided
+        '403':
+          description: Forbidden, your client does not have access to this resource
+        '404':
+          description: No hotlist was found with the given ID
+  /hotlists:
+    get:
+      description: Retrieve custom hotlists for the organization
+      summary: Retrieve custom hotlists
+      tags:
+      - Custom Hotlists
+      security:
+      - oauth2Auth:
+        - custom-hotlists:read
+      responses:
+        '200':
+          description: The hotlists for your organization were successfully retrieved.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrgHotlist'
+        '401':
+          description: Unauthorized, authentication token was invalid or not provided
+        '403':
+          description: Forbidden, your client does not have access to this resource
+    post:
+      description: Create an organization-level hotlist
+      summary: Create a custom hotlist
+      tags:
+      - Custom Hotlists
+      security:
+      - oauth2Auth:
+        - custom-hotlists:write
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateHotlistRequest'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateHotlistResponse'
+        '401':
+          description: Unauthorized, authentication token was invalid or not provided
+        '403':
+          description: Forbidden, your client does not have access to this resource
+        '413':
+          description: Request entity too large, the number of entries exceeds the organization's limit
+  /hotlists/{hotlistId}/entries/addBatch:
+    post:
+      description: Add a batch of entries to the hotlist with the provided hotlistID. All entries will be normalized (O->0) and have whitespace trimmed. Duplicate entries will be ignored.
+      summary: Add a batch of entries to a hotlist
+      tags:
+      - Custom Hotlists
+      security:
+      - oauth2Auth:
+        - custom-hotlists:write
+      parameters:
+      - $ref: '#/components/parameters/HotlistIdParam'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateHotlistEntriesRequest'
+      responses:
+        '200':
+          description: The batch of hotlist entries was successfully normalized and created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateEntriesResponse'
+        '400':
+          description: Bad request, either the batch contained a duplicate plate or the request body was malformed.
+        '401':
+          description: Unauthorized, authentication token was invalid or not provided
+        '403':
+          description: Forbidden, your client does not have access to this resource
+        '404':
+          description: No hotlist was found with the given ID
+  /hotlists/{hotlistId}/entries/deleteBatch:
+    post:
+      description: Delete a batch of entries from the hotlist with the provided hotlistID. Ignores any ids for which an entry does not exist
+      summary: Delete a batch of entries from a hotlist
+      tags:
+      - Custom Hotlists
+      security:
+      - oauth2Auth:
+        - custom-hotlists:write
+      parameters:
+      - $ref: '#/components/parameters/HotlistIdParam'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteHotlistEntriesRequest'
+      responses:
+        '200':
+          description: The batch of hotlist entries was successfully deleted.
+        '401':
+          description: Unauthorized, authentication token was invalid or not provided
+        '403':
+          description: Forbidden, your client does not have access to this resource
+        '404':
+          description: No hotlist was found with the given ID
+components:
+  schemas:
+    State:
+      type: string
+      enum:
+      - alabama
+      - alaska
+      - arizona
+      - arkansas
+      - california
+      - colorado
+      - connecticut
+      - delaware
+      - washington_dc
+      - florida
+      - georgia
+      - hawaii
+      - idaho
+      - illinois
+      - indiana
+      - iowa
+      - kansas
+      - kentucky
+      - louisiana
+      - maine
+      - maryland
+      - massachusetts
+      - michigan
+      - minnesota
+      - mississippi
+      - missouri
+      - montana
+      - nebraska
+      - nevada
+      - new_hampshire
+      - new_jersey
+      - new_mexico
+      - new_york
+      - north_carolina
+      - north_dakota
+      - ohio
+      - oklahoma
+      - oregon
+      - pennsylvania
+      - rhode_island
+      - south_carolina
+      - south_dakota
+      - tennessee
+      - texas
+      - utah
+      - vermont
+      - virginia
+      - washington
+      - west_virginia
+      - wisconsin
+      - wyoming
+      - puerto_rico
+    HotlistEntryNote:
+      type: object
+      description: Optional note with message field for the hotlist entry
+      required:
+      - message
+      properties:
+        message:
+          type: string
+          description: Note message text (supports URLs for clickable links in UI)
+          example: Vehicle observed at 5th and Main. Contact Det. Smith at 555-0123.
+    CreateHotlistEntriesRequest:
+      properties:
+        entries:
+          items:
+            $ref: '#/components/schemas/CreateHotlistEntryRequest'
+          type: array
+      required:
+      - entries
+      type: object
+    CreateHotlistResponse:
+      properties:
+        id:
+          format: uuid
+          type: string
+      required:
+      - id
+      type: object
+    CreateHotlistEntryRequest:
+      properties:
+        caseNumber:
+          type: string
+        expiry:
+          description: ISO datetime string. After this date, alerts will not be triggered for this entry.
+          type: string
+          format: date-time
+        plate:
+          type: string
+        reason:
+          type: string
+        state:
+          $ref: '#/components/schemas/State'
+        note:
+          $ref: '#/components/schemas/HotlistEntryNote'
+      required:
+      - caseNumber
+      - plate
+      - reason
+      type: object
+    DeleteHotlistEntriesRequest:
+      properties:
+        ids:
+          items:
+            type: string
+          type: array
+      required:
+      - ids
+      type: object
+    GetHotlistEntriesResponse:
+      properties:
+        entries:
+          items:
+            $ref: '#/components/schemas/HotlistEntry'
+          type: array
+        totalResults:
+          type: integer
+        nextPage:
+          type: string
+          nullable: true
+      required:
+      - entries
+      - id
+      - name
+      - organizationId
+      type: object
+    CreateEntriesResponse:
+      properties:
+        entries:
+          items:
+            $ref: '#/components/schemas/HotlistEntry'
+          type: array
+      required:
+      - entries
+      type: object
+    Hotlist:
+      properties:
+        entries:
+          items:
+            $ref: '#/components/schemas/HotlistEntry'
+          type: array
+        id:
+          type: string
+        name:
+          type: string
+      required:
+      - entries
+      - id
+      - name
+      - organizationId
+      type: object
+    UpdateHotlistRequest:
+      properties:
+        entries:
+          items:
+            $ref: '#/components/schemas/CreateHotlistEntryRequest'
+          type: array
+          maxItems: 3000
+        name:
+          type: string
+      required:
+      - entries
+      - name
+      type: object
+    CreateHotlistRequest:
+      properties:
+        entries:
+          items:
+            $ref: '#/components/schemas/CreateHotlistEntryRequest'
+          type: array
+          maxItems: 3000
+        name:
+          type: string
+      required:
+      - entries
+      - name
+      type: object
+    OrgHotlist:
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    HotlistEntry:
+      properties:
+        id:
+          type: string
+        caseNumber:
+          type: string
+        expiry:
+          description: ISO datetime string
+          type: string
+          format: date-time
+        plate:
+          type: string
+        reason:
+          type: string
+        state:
+          $ref: '#/components/schemas/State'
+        note:
+          $ref: '#/components/schemas/HotlistEntryNote'
+      required:
+      - caseNumber
+      - plate
+      - reason
+      type: object
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    oauth2Auth:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://api.flocksafety.com/oauth/token
+          scopes:
+            custom-holists:read: Read access to custom hotlists
+            custom-holists:write: Write access to custom hotlists
+    FlockOAuth:
+      type: oauth2
+      description: OAuth 2 with the client credentials flow
+      flows:
+        clientCredentials:
+          scopes:
+            plate-reads:lookup: Access to perform lookups on license plate reads.
+          tokenUrl: https://api.flocksafety.com/oauth/token
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://api.flocksafety.com/oauth/token
+          scopes: {}

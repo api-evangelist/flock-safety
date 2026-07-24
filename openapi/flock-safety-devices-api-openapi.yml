@@ -1,0 +1,400 @@
+openapi: 3.0.3
+info:
+  title: Flock Safety API Platform (v3) Alerts Devices API
+  description: Flock Safety v3 API Platform harvested from the public developer hub (docs.flocksafety.com). Combines the Device, Custom Hotlist, LPR Search, Plate Lookup, Hotlist Alerts Subscription, Geolocation, CAD, Inbound Alerts, and Vehicle Detections Ingest APIs. OAuth2 client_credentials (machine) and authorization_code (user) flows against api.flocksafety.com.
+  version: 3.0.0
+  contact:
+    name: Flock Safety Developer Hub
+    url: https://docs.flocksafety.com/
+servers:
+- url: https://api.flocksafety.com/api/v3
+  description: Production
+- url: https://dev-api.flocksafety.com/api/v3
+  description: Development sandbox (at Flock discretion)
+tags:
+- name: Devices
+paths:
+  /devices/{deviceId}:
+    get:
+      summary: Retrieving a device.
+      description: Retrieves a particular device.
+      tags:
+      - Devices
+      parameters:
+      - $ref: '#/components/parameters/DeviceIdParam'
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: The device was successfully retrieved.
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#/components/schemas/Device'
+        '401':
+          $ref: '#/components/responses/AuthorizationError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '429':
+          $ref: '#/components/responses/RateLimitError'
+        '500':
+          $ref: '#/components/responses/InternalError'
+    patch:
+      summary: Updating a device.
+      description: Updates a device.
+      tags:
+      - Devices
+      parameters:
+      - $ref: '#/components/parameters/DeviceIdParam'
+      security:
+      - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateDeviceRequest'
+            examples:
+              Update Device Metadata:
+                value:
+                  metadata:
+                    deviceSerial: 21204
+                    url: https://example.com/cameras/0021204
+              Update Device Name:
+                value:
+                  name: 'Camera #0004 - Bowman Rd'
+      responses:
+        '204':
+          description: The device was successfully updated.
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/AuthorizationError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '422':
+          description: The given device update request contains one or more errors.
+          $ref: '#/components/responses/ValidationError'
+        '429':
+          $ref: '#/components/responses/RateLimitError'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /devices:
+    get:
+      summary: Retrieving devices.
+      description: Retrieves the devices that belong to your organization.
+      tags:
+      - Devices
+      security:
+      - bearerAuth: []
+      parameters:
+      - in: query
+        name: latitude
+        description: Used to filter by area.
+        required: false
+        schema:
+          type: number
+      - in: query
+        name: longitude
+        description: Used to filter by area.
+        required: false
+        schema:
+          type: number
+      - in: query
+        name: radius
+        description: Used to filter by area.
+        required: false
+        schema:
+          type: number
+      - in: query
+        name: page
+        description: The page from which to retrieve results.
+        required: false
+        schema:
+          type: number
+      - in: query
+        name: pageSize
+        description: The maximum number of results that should be on each page.
+        required: false
+        schema:
+          type: number
+      responses:
+        '200':
+          description: The devices were successfully retrieved.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - results
+                - totalItems
+                - totalPages
+                properties:
+                  results:
+                    type: array
+                    description: List of devices
+                    items:
+                      $ref: '#/components/schemas/Device'
+                  totalItems:
+                    type: number
+                    description: The total number of devices that are available to view.
+                    example: 2
+                  totalPages:
+                    type: number
+                    description: The total number of pages.
+                    example: 1
+              example:
+                results:
+                - id: 97cf0365-1a50-4fce-98a7-93cf45fb658b
+                  type: camera
+                  name: 'Camera #0001 - Main Street'
+                  location:
+                    latitude: 40.783871
+                    longitude: -73.97541
+                  createdAt: '2023-12-31T23:59:59.999Z'
+                  modifiedAt: '2024-03-10T12:59:59.999Z'
+                - id: b140dfc4-d197-4c65-be5d-efe5cb98ecb4
+                  type: camera
+                  name: 'Third Party Camera #6932 - Sixth Ave'
+                  location:
+                    latitude: 40.76319188039752
+                    longitude: -73.98077364019883
+                  metadata:
+                    deviceManufacturer: Corp
+                    deviceSerial: 239503
+                  createdAt: '2024-07-29T15:05:59.433Z'
+                  modifiedAt: '2024-07-29T15:05:59.433Z'
+                totalItems: 2
+                totalPages: 1
+        '401':
+          $ref: '#/components/responses/AuthorizationError'
+        '422':
+          $ref: '#/components/responses/GetDevicesValidationError'
+        '429':
+          $ref: '#/components/responses/RateLimitError'
+        '500':
+          $ref: '#/components/responses/InternalError'
+    post:
+      summary: Creating a device.
+      description: Creates a device.
+      tags:
+      - Devices
+      security:
+      - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDeviceRequest'
+      responses:
+        '201':
+          description: The device was successfully created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Device'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/AuthorizationError'
+        '422':
+          description: The given device creation request contains one or more errors.
+          $ref: '#/components/responses/ValidationError'
+        '429':
+          description: The maximum number of requests you can perform per second or the maximum number of devices you can create per day has been exceeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Rate Limit Error:
+                  $ref: '#/components/examples/RateLimitError'
+                Create Limit Error:
+                  $ref: '#/components/examples/CreateLimitError'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /devices/{deviceId}/decommission:
+    post:
+      summary: Decommissioning a device.
+      description: Decommissions a device. Once a device is decommissioned, vehicle images from that device can no longer be ingested. However, the device will remain in the system for compliance and auditing purposes.
+      tags:
+      - Devices
+      parameters:
+      - $ref: '#/components/parameters/DeviceIdParam'
+      responses:
+        '204':
+          description: The device was successfully decommissioned.
+        '401':
+          $ref: '#/components/responses/AuthorizationError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '429':
+          description: The maximum number of requests per second has been exceeded or the maximum number of devices that can be decommissioned per day has been exceeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Rate Limit Error:
+                  $ref: '#/components/examples/RateLimitError'
+                Decommission Limit Error:
+                  $ref: '#/components/examples/DecommissionLimitError'
+        '500':
+          $ref: '#/components/responses/InternalError'
+components:
+  schemas:
+    Network:
+      type: object
+      description: The network that the device belongs to.
+      required:
+      - id
+      - name
+      properties:
+        id:
+          type: string
+          description: The ID for the network
+          example: 72d97364-3f45-4e16-ae52-631aea3141cc
+        name:
+          type: string
+          description: The name of the network
+          example: Little Rock AR PD
+    ErrorResponse:
+      properties:
+        error:
+          type: string
+    Location:
+      properties:
+        name:
+          type: string
+          description: commmon name to identify location by
+        latitude:
+          type: number
+        longitude:
+          type: number
+        streetAddress:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        country:
+          type: string
+        additionalMetadata:
+          $ref: '#/components/schemas/AdditionalMetadata'
+      description: either latitude and longitude is required, or one of streetAddress/city/state
+    Device:
+      type: object
+      required:
+      - id
+      - type
+      - name
+      - location
+      - network
+      - metadata
+      - createdAt
+      - modifiedAt
+      properties:
+        id:
+          type: string
+          description: The ID of the device.
+        type:
+          $ref: '#/components/schemas/DeviceType'
+        name:
+          type: string
+          description: The name of the device.
+        location:
+          $ref: '#/components/schemas/Location'
+        network:
+          $ref: '#/components/schemas/Network'
+        metadata:
+          type: object
+          description: Metadata about the device.
+        createdAt:
+          type: object
+          description: The timestamp (in RFC3339 UTC format) indicating when the image was captured.
+          example: '2023-12-31T23:59:59.999999Z'
+        modifiedAt:
+          type: object
+          description: The timestamp (in RFC3339 UTC format) indicating when the image was captured.
+          example: '2023-12-31T23:59:59.999999Z'
+        link:
+          type: string
+          description: A link to view the device in the Flock UI.
+          example: https://hotlist.flocksafety.com/dispatch/type/audio?id=00000000-0000-0000-000000000000
+    UpdateDeviceRequest:
+      type: object
+      minProperties: 1
+      properties:
+        name:
+          type: string
+          description: The name of the device.
+          example: Camera \#001 - Main Street
+        metadata:
+          type: object
+          description: Metadata about the device.
+        location:
+          $ref: '#/components/schemas/Location'
+          description: The location where the device is located.
+    AdditionalMetadata:
+      type: object
+      properties:
+        type:
+          enum:
+          - string
+          - number
+          - boolean
+          description: What type the value of the metadata value is
+        value:
+          type: object
+          description: value of the metadata. Must be a string, number, or boolean
+      description: flat json object, defaults to {} and returned as {} if not provided
+    DeviceType:
+      type: string
+      description: The device's type.
+      enum:
+      - camera
+      - video
+      - audio
+      - external
+    CreateDeviceRequest:
+      type: object
+      required:
+      - name
+      - location
+      properties:
+        name:
+          type: string
+          description: The name of the device.
+          example: 'Camera #001 - Main Street'
+        location:
+          $ref: '#/components/schemas/Location'
+        metadata:
+          type: object
+          description: Metadata about the device.
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    oauth2Auth:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://api.flocksafety.com/oauth/token
+          scopes:
+            custom-holists:read: Read access to custom hotlists
+            custom-holists:write: Write access to custom hotlists
+    FlockOAuth:
+      type: oauth2
+      description: OAuth 2 with the client credentials flow
+      flows:
+        clientCredentials:
+          scopes:
+            plate-reads:lookup: Access to perform lookups on license plate reads.
+          tokenUrl: https://api.flocksafety.com/oauth/token
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://api.flocksafety.com/oauth/token
+          scopes: {}

@@ -1,0 +1,535 @@
+openapi: 3.0.3
+info:
+  title: Flock Safety API Platform (v3) Alerts Plate Reads API
+  description: Flock Safety v3 API Platform harvested from the public developer hub (docs.flocksafety.com). Combines the Device, Custom Hotlist, LPR Search, Plate Lookup, Hotlist Alerts Subscription, Geolocation, CAD, Inbound Alerts, and Vehicle Detections Ingest APIs. OAuth2 client_credentials (machine) and authorization_code (user) flows against api.flocksafety.com.
+  version: 3.0.0
+  contact:
+    name: Flock Safety Developer Hub
+    url: https://docs.flocksafety.com/
+servers:
+- url: https://api.flocksafety.com/api/v3
+  description: Production
+- url: https://dev-api.flocksafety.com/api/v3
+  description: Development sandbox (at Flock discretion)
+tags:
+- name: Plate Reads
+paths:
+  /reads/lookup/page/{pageId}:
+    get:
+      summary: View license plate reads lookup results
+      description: 'View the results of a license plate read lookup
+
+        ## Required API scope
+
+        [plate-reads:lookup](https://docs.flocksafety.com/developer-hub/docs/client-credentials)
+
+        '
+      tags:
+      - Plate Reads
+      parameters:
+      - in: path
+        name: pageId
+        schema:
+          type: string
+        required: true
+        description: The ID of the page to view.
+      responses:
+        '200':
+          description: List of license plate reads
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LookupResult'
+        '401':
+          $ref: '#/components/responses/AuthorizationError'
+        '403':
+          $ref: '#/components/responses/UnauthorizedError'
+        '422':
+          description: The page ID is missing.
+          $ref: '#/components/responses/ValidationError'
+        '429':
+          description: The maximum number of requests you can perform per second has been exceeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Rate Limit Error:
+                  $ref: '#/components/examples/RateLimitError'
+  /reads/lookup:
+    post:
+      summary: Lookup license plate reads
+      description: 'Look up license plate reads by full license plate characters.
+
+        ## Required API scope
+
+        [plate-reads:lookup](https://docs.flocksafety.com/developer-hub/docs/client-credentials)
+
+        '
+      tags:
+      - Plate Reads
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LookupRequest'
+      responses:
+        '200':
+          description: List of license plate reads
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LookupResult'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/AuthorizationError'
+        '403':
+          $ref: '#/components/responses/UnauthorizedError'
+        '422':
+          description: The given lookup criteria contain one or more errors.
+          $ref: '#/components/responses/ValidationError'
+        '429':
+          description: The maximum number of requests you can perform per second has been exceeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Rate Limit Error:
+                  $ref: '#/components/examples/RateLimitError'
+components:
+  schemas:
+    LookupRequest:
+      type: object
+      description: A request to lookup license plate reads.
+      required:
+      - plate
+      - reason
+      - startDate
+      - endDate
+      properties:
+        plate:
+          type: string
+          description: The license plate to lookup.
+          example: FNA579
+        startDate:
+          type: string
+          description: The beginning date range for the lookup. The specified date must be in ISO8601 format.
+          example: '2022-08-06T12:26:00.000Z'
+          format: date-time
+        endDate:
+          type: string
+          description: The end of the date range for the lookup. The specified date must be in ISO8601 format.
+          example: '2022-08-09T23:59:59.000Z'
+          format: date-time
+        limit:
+          type: number
+          minimum: 1
+          maximum: 50
+          description: The limit for the maximum number of reads that can be returned on a single page.
+        minConfidences:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConfidenceFilter'
+        state:
+          type: string
+          enum:
+          - alabama
+          - alaska
+          - arizona
+          - arkansas
+          - california
+          - colorado
+          - connecticut
+          - delaware
+          - washington_dc
+          - florida
+          - georgia
+          - hawaii
+          - idaho
+          - illinois
+          - indiana
+          - iowa
+          - kansas
+          - kentucky
+          - louisiana
+          - maine
+          - maryland
+          - massachusetts
+          - michigan
+          - minnesota
+          - mississippi
+          - missouri
+          - montana
+          - nebraska
+          - nevada
+          - new_hampshire
+          - new_jersey
+          - new_mexico
+          - new_york
+          - north_carolina
+          - north_dakota
+          - ohio
+          - oklahoma
+          - oregon
+          - pennsylvania
+          - rhode_island
+          - south_carolina
+          - south_dakota
+          - tennessee
+          - texas
+          - utah
+          - vermont
+          - virginia
+          - washington
+          - west_virginia
+          - wisconsin
+          - wyoming
+          - puerto_rico
+          description: Filters results to where only plate from the specified state are returned.
+        reason:
+          type: string
+          description: 'The reason this plate reads lookup is being done.  This is in place in order to ensure the system can be audited for misuse for customers.
+
+            '
+          example: 'Tracking vehicle involved with case #103024'
+        caseNumber:
+          type: string
+          description: The relevant case number for this lookup, if applicable.
+          example: '103024'
+        sort:
+          type: array
+          items:
+            $ref: '#/components/schemas/SortCriteria'
+        radius:
+          $ref: '#/components/schemas/RadiusFilter'
+          description: Optional raidus filter to apply to the lookup.
+        area:
+          $ref: '#/components/schemas/AreaFilter'
+          description: Optional area filter to apply to the lookup.
+      not:
+        required:
+        - radius
+        - area
+      example:
+        plate: FNA579
+        reason: 'Tracking vehicle involved with case #103024'
+        startDate: '2022-08-06T12:26:00Z'
+        endDate: '2022-08-09T23:59:59Z'
+        limit: 10
+        state: arkansas
+        caseNumber: '103024'
+        sort:
+        - field: capturedAt
+          order: desc
+        radius:
+          radius:
+            latitude: 40.783871
+            longitude: -73.97541
+            radius: 5
+    Network:
+      type: object
+      description: The network that the device belongs to.
+      required:
+      - id
+      - name
+      properties:
+        id:
+          type: string
+          description: The ID for the network
+          example: 72d97364-3f45-4e16-ae52-631aea3141cc
+        name:
+          type: string
+          description: The name of the network
+          example: Little Rock AR PD
+    LicensePlateRead:
+      type: object
+      description: A license plate read
+      required:
+      - id
+      - capturedAt
+      - device
+      - plate
+      properties:
+        id:
+          type: string
+          description: The ID that identifies this specific license plate read.
+          example: 4171ae2b-843f-405b-922d-b1e89921f24f
+        capturedAt:
+          type: string
+          description: The timestamp (in RFC3339 UTC format) indicating when the license plate was captured.
+          example: '2023-12-31T23:59:59.999999Z'
+        device:
+          description: The device that captured the license plate.
+          $ref: '#/components/schemas/Device'
+        state:
+          $ref: '#/components/schemas/StateInfo'
+        plate:
+          $ref: '#/components/schemas/PlateInfo'
+        link:
+          type: string
+          description: A link to view the license plate read within our UI.
+          example: https://share.flocksafety.com/lookup/33fc2d53-5b1e-4f9a-95b8-a3fe47823d26
+    ErrorResponse:
+      properties:
+        error:
+          type: string
+    Location:
+      properties:
+        name:
+          type: string
+          description: commmon name to identify location by
+        latitude:
+          type: number
+        longitude:
+          type: number
+        streetAddress:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        country:
+          type: string
+        additionalMetadata:
+          $ref: '#/components/schemas/AdditionalMetadata'
+      description: either latitude and longitude is required, or one of streetAddress/city/state
+    SortCriteria:
+      type: object
+      properties:
+        field:
+          type: string
+          enum:
+          - capturedAt
+          description: The field to sort results by.
+        order:
+          type: string
+          enum:
+          - asc
+          - desc
+          description: "The order to sort by:\n  * `asc` - Ascending, from the oldest to the newest.\n  * `desc` - Descending, from the newest to the oldest.\n"
+      required:
+      - field
+      - order
+    Device:
+      type: object
+      required:
+      - id
+      - type
+      - name
+      - location
+      - network
+      - metadata
+      - createdAt
+      - modifiedAt
+      properties:
+        id:
+          type: string
+          description: The ID of the device.
+        type:
+          $ref: '#/components/schemas/DeviceType'
+        name:
+          type: string
+          description: The name of the device.
+        location:
+          $ref: '#/components/schemas/Location'
+        network:
+          $ref: '#/components/schemas/Network'
+        metadata:
+          type: object
+          description: Metadata about the device.
+        createdAt:
+          type: object
+          description: The timestamp (in RFC3339 UTC format) indicating when the image was captured.
+          example: '2023-12-31T23:59:59.999999Z'
+        modifiedAt:
+          type: object
+          description: The timestamp (in RFC3339 UTC format) indicating when the image was captured.
+          example: '2023-12-31T23:59:59.999999Z'
+        link:
+          type: string
+          description: A link to view the device in the Flock UI.
+          example: https://hotlist.flocksafety.com/dispatch/type/audio?id=00000000-0000-0000-000000000000
+    RadiusFilter:
+      type: object
+      description: Filters the results to where only reads captured within this radius will be returned.
+      properties:
+        radius:
+          type: object
+          properties:
+            latitude:
+              type: number
+              description: The latitude for the center-point of the radius.
+              example: 40.783871
+            longitude:
+              type: number
+              description: The longitude for the center-point of the radius.
+              example: -73.97541
+            radius:
+              type: number
+              minimum: 1
+              maximum: 2000
+              example: 5
+              description: The radius, in miles, of the circle around the centerpoint.
+    AdditionalMetadata:
+      type: object
+      properties:
+        type:
+          enum:
+          - string
+          - number
+          - boolean
+          description: What type the value of the metadata value is
+        value:
+          type: object
+          description: value of the metadata. Must be a string, number, or boolean
+      description: flat json object, defaults to {} and returned as {} if not provided
+    LookupResult:
+      type: object
+      description: Results
+      required:
+      - results
+      - totalItems
+      properties:
+        results:
+          type: array
+          description: List of license plate reads
+          items:
+            $ref: '#/components/schemas/LicensePlateRead'
+        nextPageId:
+          type: string
+          description: The ID of the next page. This ID is used in the [Get Results](#/paths/~1reads~1lookup/get) endpoint.
+        previousPageId:
+          type: string
+          description: The ID of the previous page. This ID is used in the [Get Results](#/paths/~1reads~1lookup/get) endpoint.
+        totalItems:
+          type: number
+          description: The total number of reads that are available to view.
+          example: 2
+    DeviceType:
+      type: string
+      description: The device's type.
+      enum:
+      - camera
+      - video
+      - audio
+      - external
+    StateInfo:
+      type: object
+      required:
+      - state
+      - confidence
+      properties:
+        state:
+          type: string
+          description: The state that the license plate is from.
+          example: arkansas
+        confidence:
+          type: number
+          description: A number expressing certainty in that the state was correctly identified. The range is between 0.0 and 1.0
+          example: 0.75
+    ConfidenceFilter:
+      type: object
+      required:
+      - attribute
+      - minConfidence
+      properties:
+        attribute:
+          type: string
+          enum:
+          - plate
+          - state
+          description: Specifies the attribute to which the confidence filter should be applied.
+        minConfidence:
+          type: number
+          minimum: 0
+          maximum: 1
+          example: 0.5
+          description: 'The minimum confidence threshold, expressed as a decimal between 0.0 and 1.0. This filter applies only to the specified attribute. Results where the confidence score for the specified attribute is below this value will be excluded.
+
+            '
+    AreaFilter:
+      type: object
+      description: 'Filters the results to where only reads captured within an area will be returned. The area must be defined as a [GeoJSON Polygon with a single ring](https://mapsam.com/geojson-ring-visual/).
+
+        '
+      properties:
+        area:
+          type: object
+          required:
+          - type
+          - coordinates
+          properties:
+            type:
+              type: string
+              enum:
+              - Polygon
+            coordinates:
+              type: array
+              minItems: 1
+              maxItems: 1
+              items:
+                type: array
+                minItems: 4
+                items:
+                  type: array
+                  minItems: 2
+                  maxItems: 2
+                  items:
+                    type: number
+          example:
+            type: Polygon
+            coordinates:
+            - - - 102
+                - 2
+              - - 103
+                - 2
+              - - 103
+                - 3
+              - - 102
+                - 3
+              - - 102
+                - 2
+    PlateInfo:
+      type: object
+      required:
+      - plate
+      - confidence
+      properties:
+        plate:
+          type: string
+          description: The license plate.
+          example: XNA357
+        confidence:
+          type: number
+          description: A number expressing certainty in that the license plate was correctly identified. The range is between 0.0 and 1.0
+          example: 0.9
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    oauth2Auth:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://api.flocksafety.com/oauth/token
+          scopes:
+            custom-holists:read: Read access to custom hotlists
+            custom-holists:write: Write access to custom hotlists
+    FlockOAuth:
+      type: oauth2
+      description: OAuth 2 with the client credentials flow
+      flows:
+        clientCredentials:
+          scopes:
+            plate-reads:lookup: Access to perform lookups on license plate reads.
+          tokenUrl: https://api.flocksafety.com/oauth/token
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://api.flocksafety.com/oauth/token
+          scopes: {}

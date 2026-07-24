@@ -1,0 +1,633 @@
+openapi: 3.0.3
+info:
+  title: Flock Safety API Platform (v3) Alerts CAD Events API
+  description: Flock Safety v3 API Platform harvested from the public developer hub (docs.flocksafety.com). Combines the Device, Custom Hotlist, LPR Search, Plate Lookup, Hotlist Alerts Subscription, Geolocation, CAD, Inbound Alerts, and Vehicle Detections Ingest APIs. OAuth2 client_credentials (machine) and authorization_code (user) flows against api.flocksafety.com.
+  version: 3.0.0
+  contact:
+    name: Flock Safety Developer Hub
+    url: https://docs.flocksafety.com/
+servers:
+- url: https://api.flocksafety.com/api/v3
+  description: Production
+- url: https://dev-api.flocksafety.com/api/v3
+  description: Development sandbox (at Flock discretion)
+tags:
+- name: CAD Events
+paths:
+  /cad/events/active:
+    get:
+      summary: Retrieving Active Events
+      description: Gets all active events in chronological order of when they were created (most recent first)
+      tags:
+      - CAD Events
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventsResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    post:
+      summary: Updating Active Events
+      description: Creates or updates each provided event in the same manner as /v3/cad/events, then closes any open events not provided in the request
+      tags:
+      - CAD Events
+      security:
+      - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventsBody'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventsResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Event Not Found (provided externalId doesn't match any existing)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /cad/events/{externalId}:
+    get:
+      summary: Retrieving an Event by ExternalID
+      description: gets event for provided externalId
+      tags:
+      - CAD Events
+      security:
+      - bearerAuth: []
+      parameters:
+      - in: path
+        name: externalId
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Event Not Found (provided externalId doesn't match any existing)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /cad/events:
+    get:
+      summary: Retrieving Events
+      description: Gets events in chronological order of when they were created (most recent first)
+      tags:
+      - CAD Events
+      security:
+      - bearerAuth: []
+      parameters:
+      - in: query
+        name: start
+        required: true
+        schema:
+          type: string
+          format: date-time
+          description: RFC3339 UTC datetime string
+        description: start of time range to get events for
+      - in: query
+        name: end
+        schema:
+          type: string
+          format: date-time
+          description: RFC3339 UTC datetime string
+        description: end of time range to get events for (defaults to current time if not provided)
+      - in: query
+        name: pageSize
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 25
+        description: maximum number of events to return per request (defaults to max of 25 if not provided)
+      - in: query
+        name: page
+        schema:
+          type: integer
+          minimum: 1
+        description: page number of events to return (defaults to first page if not provided)
+      - in: query
+        name: activeOnly
+        schema:
+          type: boolean
+        description: whether to return only active events (defaults to false)
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventsResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    post:
+      summary: Creating or Updating an Event
+      description: Creates a new event, or updates an event if externalId matches an existing event
+      tags:
+      - CAD Events
+      security:
+      - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Event'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Event Not Found (provided externalId doesn't match any existing)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /cad/events/{externalId}/close:
+    post:
+      summary: Marking an Event as Closed
+      description: Closes event with given externalId
+      tags:
+      - CAD Events
+      security:
+      - bearerAuth: []
+      parameters:
+      - in: path
+        name: externalId
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - in: query
+        name: timestamp
+        schema:
+          type: string
+          format: date-time
+          description: RFC3339 UTC datetime string
+        description: time to mark the event as closed (defaults to current time if not provided)
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Event Not Found (provided externalId doesn't match any existing)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /cad/events/{externalId}/narrative:
+    post:
+      summary: Appending a Narrative Entry
+      description: Appends new narrative entry to event
+      tags:
+      - CAD Events
+      security:
+      - bearerAuth: []
+      parameters:
+      - in: path
+        name: externalId
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NarrativeBody'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Event Not Found (provided externalId doesn't match any existing)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /cad/events/{externalId}/open:
+    post:
+      summary: Marking an Event as Open
+      description: Opens event with given externalId (removes closedAt time).
+      tags:
+      - CAD Events
+      security:
+      - bearerAuth: []
+      parameters:
+      - in: path
+        name: externalId
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Event Not Found (provided externalId doesn't match any existing)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /cad/events/externalIds:
+    post:
+      summary: Retrieving Events by ExternalIDs
+      description: Get events for provided externalIds
+      tags:
+      - CAD Events
+      security:
+      - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExternalIdsBody'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Event Not Found (provided externalId doesn't match any existing)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    EventsBody:
+      properties:
+        events:
+          items:
+            $ref: '#/components/schemas/Event'
+      required:
+      - events
+    Location:
+      properties:
+        name:
+          type: string
+          description: commmon name to identify location by
+        latitude:
+          type: number
+        longitude:
+          type: number
+        streetAddress:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        country:
+          type: string
+        additionalMetadata:
+          $ref: '#/components/schemas/AdditionalMetadata'
+      description: either latitude and longitude is required, or one of streetAddress/city/state
+    CallerInfo:
+      properties:
+        name:
+          type: string
+        phoneNumber:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+          description: RFC3339 UTC datetime string
+        location:
+          $ref: '#/components/schemas/Location'
+        additionalMetadata:
+          $ref: '#/components/schemas/AdditionalMetadata'
+    EventsResponse:
+      properties:
+        events:
+          items:
+            $ref: '#/components/schemas/Event'
+    DispatchedUnit:
+      properties:
+        id:
+          type: string
+        displayId:
+          type: string
+          description: optional override of unit id to be displayed in UI
+        dispatchTime:
+          type: string
+          format: date-time
+          description: RFC3339 UTC datetime string
+        arrivalTime:
+          type: string
+          format: date-time
+          description: RFC3339 UTC datetime string
+        additionalMetadata:
+          $ref: '#/components/schemas/AdditionalMetadata'
+      required:
+      - id
+      - dispatchTime
+    AdditionalMetadata:
+      type: object
+      properties:
+        type:
+          enum:
+          - string
+          - number
+          - boolean
+          description: What type the value of the metadata value is
+        value:
+          type: object
+          description: value of the metadata. Must be a string, number, or boolean
+      description: flat json object, defaults to {} and returned as {} if not provided
+    ExternalIdsBody:
+      properties:
+        externalIds:
+          type: array
+          items:
+            type: string
+      required:
+      - externalIds
+    InvolvedVehicle:
+      properties:
+        color:
+          type: string
+        make:
+          type: string
+        model:
+          type: string
+        year:
+          type: integer
+          minimum: 1900
+        plateNumber:
+          type: string
+        plateState:
+          type: string
+        additionalMetadata:
+          $ref: '#/components/schemas/AdditionalMetadata'
+    NarrativeBody:
+      properties:
+        narratives:
+          type: array
+          items:
+            type: string
+      required:
+      - narratives
+    ErrorResponse:
+      properties:
+        error:
+          type: string
+    InvolvedPerson:
+      properties:
+        name:
+          type: string
+        externalId:
+          type: string
+          description: unique identifier for person, generated if not provided
+        description:
+          type: string
+        dateOfBirth:
+          type: string
+          format: date
+          example: '2017-01-20'
+        email:
+          type: string
+        secondaryEmail:
+          type: string
+        phone:
+          type: string
+        secondaryPhone:
+          type: string
+        streetAddress:
+          type: string
+        secondaryStreetAddress:
+          type: string
+        ethnicity:
+          type: string
+        eyeColor:
+          type: string
+        hairColor:
+          type: string
+        height:
+          type: string
+        age:
+          type: integer
+        gender:
+          type: string
+        additionalMetadata:
+          $ref: '#/components/schemas/AdditionalMetadata'
+    Event:
+      properties:
+        externalId:
+          type: string
+          description: external id of event used for identification
+        groupingId:
+          type: string
+          description: optional id used to link multiple events together
+        displayId:
+          type: string
+          description: optional override of external id to be displayed in UI
+        eventType:
+          type: string
+        priority:
+          type: integer
+          minimum: 1
+          description: 1-indexed value representing priority of the event (lower is higher priority)
+        displayPriority:
+          type: string
+          description: optional override of priority value to be displayed in UI
+        timestamp:
+          type: string
+          format: date-time
+          description: RFC3339 UTC datetime string of when event started (defaults to current time if not provided)
+        closedAt:
+          type: string
+          format: date-time
+          description: RFC3339 UTC datetime string of when event ended (event considered open if not set)
+        displayStatus:
+          type: string
+          description: optional custom status of event to be displayed in UI
+        department:
+          type: string
+          description: optional field for specifying department involved (fire, EMS, etc.)
+        area:
+          type: string
+          description: optional field for specifying district/sector/beat involved in event
+        narratives:
+          type: array
+          items:
+            type: string
+            description: ordered list of comments relating to event
+        location:
+          $ref: '#/components/schemas/Location'
+        callerInfo:
+          $ref: '#/components/schemas/CallerInfo'
+        dispatchedUnits:
+          items:
+            $ref: '#/components/schemas/DispatchedUnit'
+        involvedVehicles:
+          items:
+            $ref: '#/components/schemas/InvolvedVehicle'
+        involvedPersons:
+          items:
+            $ref: '#/components/schemas/InvolvedPerson'
+        additionalMetadata:
+          $ref: '#/components/schemas/AdditionalMetadata'
+      required:
+      - externalId
+      - eventType
+      - priority
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    oauth2Auth:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://api.flocksafety.com/oauth/token
+          scopes:
+            custom-holists:read: Read access to custom hotlists
+            custom-holists:write: Write access to custom hotlists
+    FlockOAuth:
+      type: oauth2
+      description: OAuth 2 with the client credentials flow
+      flows:
+        clientCredentials:
+          scopes:
+            plate-reads:lookup: Access to perform lookups on license plate reads.
+          tokenUrl: https://api.flocksafety.com/oauth/token
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://api.flocksafety.com/oauth/token
+          scopes: {}

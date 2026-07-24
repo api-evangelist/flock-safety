@@ -1,0 +1,136 @@
+openapi: 3.0.3
+info:
+  title: Flock Safety API Platform (v3) Alerts Vehicle Images API
+  description: Flock Safety v3 API Platform harvested from the public developer hub (docs.flocksafety.com). Combines the Device, Custom Hotlist, LPR Search, Plate Lookup, Hotlist Alerts Subscription, Geolocation, CAD, Inbound Alerts, and Vehicle Detections Ingest APIs. OAuth2 client_credentials (machine) and authorization_code (user) flows against api.flocksafety.com.
+  version: 3.0.0
+  contact:
+    name: Flock Safety Developer Hub
+    url: https://docs.flocksafety.com/
+servers:
+- url: https://api.flocksafety.com/api/v3
+  description: Production
+- url: https://dev-api.flocksafety.com/api/v3
+  description: Development sandbox (at Flock discretion)
+tags:
+- name: Vehicle Images
+paths:
+  /devices/{deviceId}/images:
+    post:
+      summary: Uploading images of a vehicle.
+      description: Uploads images of a vehicle that will be ingested and processed. The total size of the main vehicle image and all of the context images must not exceed 9 MB. File size is calculated in binary mb (MB), where 1 MB is 1048576 bytes.
+      tags:
+      - Vehicle Images
+      parameters:
+      - in: path
+        name: deviceId
+        schema:
+          type: string
+        required: true
+        description: The ID of the device that this image was captured by.
+      security:
+      - bearerAuth: []
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ImageUpload'
+            encoding:
+              image:
+                contentType: image/jpeg
+              contextImages:
+                contentType: image/jpeg
+      responses:
+        '204':
+          description: The image was successfully ingested.
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '401':
+          $ref: '#/components/responses/AuthorizationError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '413':
+          description: 'The total size of all the images uploaded exceeds 9 MiB. Total file sizes: 13 MiB'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: max_image_size_exceeded
+                  message: 'The total size of all the images uploaded exceeds 9 MiB. Total size: 13 MiB'
+                  errors:
+                  - field: image
+                    message: 'The total size of all the images uploaded exceeds 9 MiB. Total size: 13 MiB'
+        '429':
+          $ref: '#/components/responses/RateLimitError'
+        '500':
+          $ref: '#/components/responses/InternalError'
+components:
+  schemas:
+    ImageUpload:
+      type: object
+      required:
+      - image
+      properties:
+        image:
+          type: string
+          description: The image to ingest and process into FlockOS.
+          format: binary
+        contextImages:
+          type: array
+          description: 'Additional context images to be ingested. These images will not be processed but will be viewable alongside the main image
+
+            '
+          items:
+            type: string
+            format: binary
+        capturedAt:
+          type: string
+          format: date-time
+          description: The timestamp (in RFC3339 UTC format) indicating when the image was captured.
+          example: '2024-07-26T17:31:51.000Z'
+        latitude:
+          type: number
+          format: float
+          example: 40.783979987434215
+          description: The latitude of the location where the images were captured.
+          minimum: -90
+          maximum: 90
+        longitude:
+          type: number
+          format: float
+          description: The longitude of the location where the images were captured.
+          example: -73.97539595767532
+          minimum: -180
+          maximum: 180
+    ErrorResponse:
+      properties:
+        error:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    oauth2Auth:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://api.flocksafety.com/oauth/token
+          scopes:
+            custom-holists:read: Read access to custom hotlists
+            custom-holists:write: Write access to custom hotlists
+    FlockOAuth:
+      type: oauth2
+      description: OAuth 2 with the client credentials flow
+      flows:
+        clientCredentials:
+          scopes:
+            plate-reads:lookup: Access to perform lookups on license plate reads.
+          tokenUrl: https://api.flocksafety.com/oauth/token
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://api.flocksafety.com/oauth/token
+          scopes: {}

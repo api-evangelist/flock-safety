@@ -1,0 +1,186 @@
+openapi: 3.0.3
+info:
+  title: Flock Safety API Platform (v3) Alerts Tracked Subject Types API
+  description: Flock Safety v3 API Platform harvested from the public developer hub (docs.flocksafety.com). Combines the Device, Custom Hotlist, LPR Search, Plate Lookup, Hotlist Alerts Subscription, Geolocation, CAD, Inbound Alerts, and Vehicle Detections Ingest APIs. OAuth2 client_credentials (machine) and authorization_code (user) flows against api.flocksafety.com.
+  version: 3.0.0
+  contact:
+    name: Flock Safety Developer Hub
+    url: https://docs.flocksafety.com/
+servers:
+- url: https://api.flocksafety.com/api/v3
+  description: Production
+- url: https://dev-api.flocksafety.com/api/v3
+  description: Development sandbox (at Flock discretion)
+tags:
+- name: Tracked Subject Types
+paths:
+  /geo/types/{typeId}:
+    delete:
+      summary: Deleting a Subject Type
+      description: Delete a subject type. This will delete tracking information on subjects of that type
+      tags:
+      - Tracked Subject Types
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: typeId
+        in: path
+        description: ID of the subject type you are deleting
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Delete a subject type. This will remove tracking information on subjects of that type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubjectType'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found (provided id doesn't match any existing)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /geo/types:
+    get:
+      summary: List Subject Types
+      tags:
+      - Tracked Subject Types
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: List Subject Types
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SubjectType'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found (provided id doesn't match any existing)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    post:
+      summary: Register a Subject Type
+      tags:
+      - Tracked Subject Types
+      security:
+      - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubjectType'
+      responses:
+        '200':
+          description: Register a subject type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubjectType'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found (provided id doesn't match any existing)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: Conflict (subject type already exists with provided type and subtype)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    SubjectType:
+      type: object
+      required:
+      - subjectType
+      - subjectSubtype
+      - displayName
+      properties:
+        subjectType:
+          type: string
+          enum:
+          - vehicle
+          - person
+          - drone
+          - other
+        subjectSubtype:
+          type: string
+        displayName:
+          type: string
+        ttlSeconds:
+          type: integer
+          description: 0 is disabled TTL
+    ErrorResponse:
+      properties:
+        error:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    oauth2Auth:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://api.flocksafety.com/oauth/token
+          scopes:
+            custom-holists:read: Read access to custom hotlists
+            custom-holists:write: Write access to custom hotlists
+    FlockOAuth:
+      type: oauth2
+      description: OAuth 2 with the client credentials flow
+      flows:
+        clientCredentials:
+          scopes:
+            plate-reads:lookup: Access to perform lookups on license plate reads.
+          tokenUrl: https://api.flocksafety.com/oauth/token
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://api.flocksafety.com/oauth/token
+          scopes: {}

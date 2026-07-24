@@ -1,0 +1,588 @@
+openapi: 3.0.3
+info:
+  title: Flock Safety API Platform (v3) Alerts API
+  description: Flock Safety v3 API Platform harvested from the public developer hub (docs.flocksafety.com). Combines the Device, Custom Hotlist, LPR Search, Plate Lookup, Hotlist Alerts Subscription, Geolocation, CAD, Inbound Alerts, and Vehicle Detections Ingest APIs. OAuth2 client_credentials (machine) and authorization_code (user) flows against api.flocksafety.com.
+  version: 3.0.0
+  contact:
+    name: Flock Safety Developer Hub
+    url: https://docs.flocksafety.com/
+servers:
+- url: https://api.flocksafety.com/api/v3
+  description: Production
+- url: https://dev-api.flocksafety.com/api/v3
+  description: Development sandbox (at Flock discretion)
+tags:
+- name: Alerts
+paths:
+  /alerts/{alertId}:
+    get:
+      summary: Fetching a single Alert
+      description: Fetches an existing alert
+      tags:
+      - Alerts
+      security:
+      - bearerAuth: []
+      parameters:
+      - in: path
+        name: alertId
+        schema:
+          type: string
+        required: true
+        description: The ID of the alert that will be fetched.
+      responses:
+        '200':
+          description: Successfully fetched single alert.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericAlert'
+              example:
+                Generic Alert:
+                  value:
+                    id: 00000000-0000-0000-0000-000000000000
+                    createdAt: '2023-12-31T23:59:59.999999Z'
+                    updatedAt: '2023-12-31T23:59:59.999999Z'
+                    vendorId: 00000000-0000-0000-0000-000000000000
+                    vendorName: Example Vendor
+                    status: closed
+                    type: other
+                    subType: traffic-accident
+                    title: Traffic Accident
+                    description: Traffic Accident at 456 State St
+                    priority: 3
+                    eventTime: '2023-12-31T23:59:59.999999Z'
+                    subjectId: 00000000-0000-0000-0000-000000000000
+                    ttl: 600
+                    location: null
+                    attachments:
+                    - type: link
+                      name: Accident link
+                      url: https://example/links/00000000-0000-0000-0000-000000000000
+                    metadata:
+                      foo: bar
+        '401':
+          description: The provided token is either expired or invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: The token is either expired or invalid.
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: alert not found
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: Throttled
+    put:
+      summary: Updating an Alert
+      description: Updates an existing alert displayed in FlockOS
+      tags:
+      - Alerts
+      security:
+      - bearerAuth: []
+      parameters:
+      - in: path
+        name: alertId
+        schema:
+          type: string
+        required: true
+        description: The ID of the alert that will be updated.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenericAlert'
+            example:
+              Generic Alert:
+                value:
+                  type: other
+                  subType: traffic-accident
+                  title: Updated Traffic Accident
+                  description: Traffic Accident at 456 State St
+                  priority: 3
+                  eventTime: '2023-12-31T23:59:59.999999Z'
+                  subjectId: 00000000-0000-0000-0000-000000000000
+                  attachments:
+                  - type: link
+                    name: Accident link
+                    url: https://example/links/00000000-0000-0000-0000-000000000000
+                  metadata:
+                    foo: bar
+      responses:
+        '200':
+          description: The alert was successfully updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericAlert'
+              example:
+                Generic Alert:
+                  value:
+                    id: 00000000-0000-0000-0000-000000000000
+                    createdAt: '2023-12-31T23:59:59.999999Z'
+                    updatedAt: '2023-12-31T23:59:59.999999Z'
+                    vendorId: 00000000-0000-0000-0000-000000000000
+                    vendorName: Example Vendor
+                    status: open
+                    type: other
+                    subType: traffic-accident
+                    title: Updated Traffic Accident
+                    description: Traffic Accident at 456 State St
+                    priority: 3
+                    eventTime: '2023-12-31T23:59:59.999999Z'
+                    subjectId: 00000000-0000-0000-0000-000000000000
+                    ttl: 600
+                    location: null
+                    attachments:
+                    - type: link
+                      name: Accident link
+                      url: https://example/links/00000000-0000-0000-0000-000000000000
+                    metadata:
+                      foo: bar
+        '400':
+          description: The given alert contains one or more errors.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: subject not found
+        '401':
+          description: The provided token is either expired or invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: The token is either expired or invalid.
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: alert not found
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: Throttled
+  /alerts:
+    get:
+      summary: Fetching all recent Alerts
+      description: Fetches all recent alerts that are displayed in FlockOS
+      tags:
+      - Alerts
+      security:
+      - bearerAuth: []
+      parameters:
+      - in: query
+        name: includeInactive
+        schema:
+          type: string
+          enum:
+          - 'true'
+          - 'false'
+          default: 'false'
+        required: false
+        description: Whether to include inactive alerts in the results.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 100
+        required: false
+        description: The maximum number of alerts returned in the response (1-100).
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          default: 0
+          minimum: 0
+        required: false
+        description: The number of alert results to skip before starting to collect the set of alerts.
+      responses:
+        '200':
+          description: The alerts were successfully fetched.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/GenericAlert'
+              example:
+                results:
+                - id: 00000000-0000-0000-0000-000000000000
+                  createdAt: '2023-12-31T23:59:59.999999Z'
+                  updatedAt: '2023-12-31T23:59:59.999999Z'
+                  vendorId: 00000000-0000-0000-0000-000000000000
+                  vendorName: Example Vendor
+                  status: open
+                  type: vehicle
+                  subType: other
+                  title: Vehicle Alert
+                  description: Vehicle Alert at 835 Main St
+                  priority: 1
+                  eventTime: '2023-12-31T23:59:59.999999Z'
+                  subjectId: 00000000-0000-0000-0000-000000000000
+                  ttl: 600
+                  location: null
+                  attachments:
+                  - type: link
+                    name: Accident link
+                    url: https://example/links/00000000-0000-0000-0000-000000000000
+                  metadata:
+                    foo: bar
+                - id: 00000000-0000-0000-0000-000000000000
+                  createdAt: '2023-12-31T23:59:59.999999Z'
+                  updatedAt: '2023-12-31T23:59:59.999999Z'
+                  vendorId: 00000000-0000-0000-0000-000000000000
+                  vendorName: Example Vendor
+                  status: open
+                  type: vehicle
+                  subType: hotlist
+                  title: Vehicle Alert
+                  description: Vehicle Alert at 835 Main St
+                  priority: 1
+                  eventTime: '2023-12-31T23:59:59.999999Z'
+                  subjectId: 00000000-0000-0000-0000-000000000000
+                  ttl: 600
+                  location: null
+                  attachments:
+                  - type: link
+                    name: Accident link
+                    url: https://example/links/00000000-0000-0000-0000-000000000000
+                  metadata:
+                    foo: bar
+                - id: 00000000-0000-0000-0000-000000000000
+                  createdAt: '2023-12-31T23:59:59.999999Z'
+                  updatedAt: '2023-12-31T23:59:59.999999Z'
+                  vendorId: 00000000-0000-0000-0000-000000000000
+                  vendorName: Example Vendor
+                  status: open
+                  type: vehicle
+                  subType: customHotlist
+                  title: Vehicle Alert
+                  description: Vehicle Alert at 835 Main St
+                  priority: 1
+                  eventTime: '2023-12-31T23:59:59.999999Z'
+                  subjectId: null
+                  ttl: 600
+                  location:
+                    latitude: 40.783871
+                    longitude: -73.97541
+                    address: 129 W 81st St, New York, NY 10024
+                  attachments:
+                  - type: link
+                    name: Accident link
+                    url: https://example/links/00000000-0000-0000-0000-000000000000
+                  metadata:
+                    foo: bar
+                - id: 00000000-0000-0000-0000-000000000000
+                  createdAt: '2023-12-31T23:59:59.999999Z'
+                  updatedAt: '2023-12-31T23:59:59.999999Z'
+                  vendorId: 00000000-0000-0000-0000-000000000000
+                  vendorName: Example Vendor
+                  status: open
+                  type: other
+                  subType: traffic-accident
+                  title: Traffic Accident
+                  description: Traffic Accident at 456 State St
+                  priority: 3
+                  eventTime: '2023-12-31T23:59:59.999999Z'
+                  subjectId: 00000000-0000-0000-0000-000000000000
+                  ttl: 600
+                  location: null
+                  attachments:
+                  - type: link
+                    name: Accident link
+                    url: https://example/links/00000000-0000-0000-0000-000000000000
+                  metadata:
+                    foo: bar
+        '401':
+          description: The provided token is either expired or invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: The token is either expired or invalid.
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: Throttled
+    post:
+      summary: Creating an Generic Alert
+      description: Creates a new generic alert that will be displayed in FlockOS
+      tags:
+      - Alerts
+      security:
+      - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenericAlert'
+            example:
+              Generic Alert:
+                value:
+                  title: Traffic Accident
+                  description: Traffic Accident at 456 State St
+                  type: other
+                  subType: traffic-accident
+                  priority: 3
+                  eventTime: '2023-12-31T23:59:59.999999Z'
+                  subjectId: 00000000-0000-0000-0000-000000000000
+                  ttl: 600
+                  location: null
+                  attachments:
+                  - type: link
+                    name: Accident link
+                    url: https://example/links/00000000-0000-0000-0000-000000000000
+                  metadata:
+                    foo: bar
+      responses:
+        '200':
+          description: The alert was successfully created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericAlert'
+              example:
+                Generic Alert:
+                  value:
+                    id: 00000000-0000-0000-0000-000000000000
+                    createdAt: '2023-12-31T23:59:59.999999Z'
+                    updatedAt: '2023-12-31T23:59:59.999999Z'
+                    vendorId: 00000000-0000-0000-0000-000000000000
+                    vendorName: Example Vendor
+                    status: open
+                    type: other
+                    subType: traffic-accident
+                    title: Traffic Accident
+                    description: Traffic Accident at 456 State St
+                    priority: 3
+                    eventTime: '2023-12-31T23:59:59.999999Z'
+                    subjectId: 00000000-0000-0000-0000-000000000000
+                    ttl: 600
+                    location: null
+                    attachments:
+                    - type: link
+                      name: Accident link
+                      url: https://example/links/00000000-0000-0000-0000-000000000000
+                    metadata:
+                      foo: bar
+        '400':
+          description: The given alert contains one or more errors.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: subject not found
+        '401':
+          description: The provided token is either expired or invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: The token is either expired or invalid.
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: Throttled
+  /alerts/{alertId}/close:
+    post:
+      summary: Closing an Alert.
+      description: Closes an alert so that it is no longer visible
+      tags:
+      - Alerts
+      security:
+      - bearerAuth: []
+      parameters:
+      - in: path
+        name: alertId
+        schema:
+          type: string
+        required: true
+        description: The ID of the alert that will be closed.
+      responses:
+        '204':
+          description: The alert was successfully closed.
+        '401':
+          description: The provided token is either expired or invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: The token is either expired or invalid.
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: Throttled
+components:
+  schemas:
+    Attachment:
+      type: object
+      required:
+      - type
+      - name
+      - url
+      properties:
+        type:
+          type: string
+          enum:
+          - link
+          description: The type of attachment.
+        name:
+          type: string
+          description: The display name for the attachment.
+        url:
+          type: string
+          description: The url for the attachment.
+    ErrorResponse:
+      properties:
+        error:
+          type: string
+    GenericAlert:
+      type: object
+      required:
+      - title
+      - priority
+      - eventTime
+      - location
+      - type
+      properties:
+        title:
+          type: string
+          description: 'The title for the alert. Example: "An Attempted Break-In Occurred"'
+        description:
+          type: string
+          description: "A description for the alert. Example: \"There was an attempted break-in detected at 123 Main St.\"          \n"
+        type:
+          type: string
+          enum:
+          - vehicle
+          - person
+          - drone
+          - other
+        subType:
+          type: string
+          description: A developer provided type that helps differentiate and organize the various alert types within the UI. You can use alphanumeric characters and dashes as part of the string.
+        priority:
+          type: integer
+          default: 3
+          minimum: 1
+          maximum: 5
+          description: The priority of the alert. A priority must be between 1 and 5, where 1 is the highest priority.
+        eventTime:
+          type: string
+          format: date-time
+          description: The timestamp (RFC3339 UTC format) of when the event related to this alert occurred.
+          example: '2023-12-31T23:59:59.999999Z'
+        subjectId:
+          type: string
+          description: The subjectId from the Geo API from which this alert was generated.
+        ttl:
+          type: integer
+          description: 'The amount of time (in seconds) that the alert should be visible for. If a TTL is not provided, the alert will remain visible until closed.
+
+            '
+        location:
+          type: object
+          description: The location of the alert. If a subjectId is provided, a location will not be accepted in this request, as the location of the related subject will take priority.
+          required:
+          - latitude
+          - longitude
+          properties:
+            latitude:
+              type: number
+              format: double
+              minimum: -90
+              maximum: 90
+              description: The latitude of the event that this alert is related to.  Precision is only 32 bit so it is only accurate for 6 to 9 decimal places.
+              example: 33.786147
+            longitude:
+              type: number
+              format: double
+              minimum: -180
+              maximum: 180
+              description: The longitude of the event that this alert is related to.  Precision is only 32 bit so it is only accurate for 6 to 9 decimal places.
+              example: -84.412822
+            address:
+              type: string
+              description: The address that this alert is related to.
+              example: 1170 Howell Mill Rd NW, Atlanta, GA 30318
+        attachments:
+          type: array
+          maxItems: 1
+          items:
+            anyOf:
+            - $ref: '#/components/schemas/Attachment'
+          description: Attachments that will be displayed with the alert.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          description: Custom metadata for the alert
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    oauth2Auth:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://api.flocksafety.com/oauth/token
+          scopes:
+            custom-holists:read: Read access to custom hotlists
+            custom-holists:write: Write access to custom hotlists
+    FlockOAuth:
+      type: oauth2
+      description: OAuth 2 with the client credentials flow
+      flows:
+        clientCredentials:
+          scopes:
+            plate-reads:lookup: Access to perform lookups on license plate reads.
+          tokenUrl: https://api.flocksafety.com/oauth/token
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://api.flocksafety.com/oauth/token
+          scopes: {}
