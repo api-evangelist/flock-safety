@@ -1,0 +1,47 @@
+generated: '2026-07-19'
+method: searched
+source: openapi/flock-safety-openapi-original.yml
+docs: https://docs.flocksafety.com/developer-hub/docs/client-credentials
+notes: >-
+  Scopes are declared per OAuth application when Flock registers an integration; they govern what a
+  Flock App can access. The oauth2Auth scheme in the spec spells the hotlist scopes 'custom-holists:*'
+  (a source typo, missing a 't'), while operation security requirements use 'custom-hotlists:*'. Both
+  spellings are preserved below; treat 'custom-hotlists:*' as canonical.
+schemes:
+- name: oauth2Auth
+  source: openapi/flock-safety-openapi-original.yml
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://api.flocksafety.com/oauth/token
+- name: FlockOAuth
+  source: openapi/flock-safety-openapi-original.yml
+  description: OAuth 2 with the client credentials flow
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://api.flocksafety.com/oauth/token
+- name: oauth2
+  source: openapi/flock-safety-openapi-original.yml
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://api.flocksafety.com/oauth/token
+scopes:
+- scope: custom-hotlists:read
+  description: Read access to custom hotlists (canonical spelling used in operation security requirements).
+  flows: [clientCredentials]
+  sources: [openapi/flock-safety-openapi-original.yml]
+- scope: custom-hotlists:write
+  description: Write access to custom hotlists (canonical spelling used in operation security requirements).
+  flows: [clientCredentials]
+  sources: [openapi/flock-safety-openapi-original.yml]
+- scope: custom-holists:read
+  description: 'Read access to custom hotlists (verbatim from oauth2Auth scheme; note the source typo "holists").'
+  flows: [clientCredentials]
+  sources: [openapi/flock-safety-openapi-original.yml]
+- scope: custom-holists:write
+  description: 'Write access to custom hotlists (verbatim from oauth2Auth scheme; note the source typo "holists").'
+  flows: [clientCredentials]
+  sources: [openapi/flock-safety-openapi-original.yml]
+- scope: plate-reads:lookup
+  description: Access to perform lookups on license plate reads.
+  flows: [clientCredentials]
+  sources: [openapi/flock-safety-openapi-original.yml]

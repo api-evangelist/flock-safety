@@ -1,0 +1,24 @@
+generated: '2026-07-19'
+method: searched
+source: Live probes of Flock Safety hosts on 2026-07-19
+hosts:
+- host: https://api.flocksafety.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+- host: https://flocksafety.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+notes: >-
+  No /.well-known/ discovery documents are published on the API or marketing hosts. OAuth token and
+  authorization metadata are documented narratively in the developer hub rather than via RFC 8414 /
+  OIDC discovery. Absence recorded as valid data.

@@ -1,9 +1,27 @@
 aid: flock-safety
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/flock-safety.png
 name: Flock Safety
-description: 'Flock Safety is a company surfaced as a portfolio company of a16z, crv, founders-fund, initialized-capital,
-  kleiner-perkins, matrix-partners, spark-capital, sv-angel, y-combinator and added to the API Evangelist
-  network as a stub for enrichment. Sector: american-dynamism. This profile is a lead awaiting the enrichment
-  pipeline.'
+description: 'Flock Safety is a public safety technology company whose platform connects communities,
+  businesses, and law enforcement through crime detection, investigation, and response tools built
+  around license plate recognition (LPR) cameras, audio detection, video, and the FlockOS situational-awareness
+  platform. Its v3 API Platform (api.flocksafety.com) lets approved customer organizations and third-party
+  developers build "Flock Apps" that bring data in (register hardware as devices, ingest vehicle images
+  for detection, push CAD events, alerts, and geolocation telemetry, manage custom hotlists) and connect
+  Flock data out (retrieve devices, look up license plate reads, and subscribe to real-time LPR hotlist
+  alert webhooks). The APIs use OAuth 2.0 with machine-level (client_credentials) and recommended user-level
+  (authorization_code) flows, role-based access control, audit logging, and data-stewardship requirements.'
 url: https://raw.githubusercontent.com/api-evangelist/flock-safety/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -21,16 +39,260 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-19'
 tags:
 - Company
 - American Dynamism
-apis: []
+- Public Safety
+- Law Enforcement
+- License Plate Recognition
+- LPR
+- Physical Security
+- Surveillance
+- Computer Vision
+- Webhooks
+- Geolocation
+- CAD
+apis:
+- aid: flock-safety:flock-safety-alerts-api
+  name: Flock Safety Alerts API
+  description: The Alerts API from Flock Safety — 3 operation(s) for alerts.
+  humanURL: https://docs.flocksafety.com/developer-hub/docs/flock-developer-platform-overview
+  baseURL: https://api.flocksafety.com/api/v3
+  tags:
+  - Alerts
+  properties:
+  - type: OpenAPI
+    url: openapi/flock-safety-alerts-api-openapi.yml
+  - type: Documentation
+    url: https://docs.flocksafety.com/developer-hub/docs/flock-developer-platform-overview
+  - type: APIReference
+    url: https://docs.flocksafety.com/developer-hub/reference/post_oauth-token
+  - type: GettingStarted
+    url: https://docs.flocksafety.com/developer-hub/docs/quickstart
+- aid: flock-safety:flock-safety-cad-events-api
+  name: Flock Safety CAD Events API
+  description: The CAD Events API from Flock Safety — 7 operation(s) for cad events.
+  humanURL: https://docs.flocksafety.com/developer-hub/docs/flock-developer-platform-overview
+  baseURL: https://api.flocksafety.com/api/v3
+  tags:
+  - CAD Events
+  properties:
+  - type: OpenAPI
+    url: openapi/flock-safety-cad-events-api-openapi.yml
+  - type: Documentation
+    url: https://docs.flocksafety.com/developer-hub/docs/flock-developer-platform-overview
+  - type: APIReference
+    url: https://docs.flocksafety.com/developer-hub/reference/post_oauth-token
+  - type: GettingStarted
+    url: https://docs.flocksafety.com/developer-hub/docs/quickstart
+- aid: flock-safety:flock-safety-custom-hotlists-api
+  name: Flock Safety Custom Hotlists API
+  description: The Custom Hotlists API from Flock Safety — 5 operation(s) for custom hotlists.
+  humanURL: https://docs.flocksafety.com/developer-hub/docs/flock-developer-platform-overview
+  baseURL: https://api.flocksafety.com/api/v3
+  tags:
+  - Custom Hotlists
+  properties:
+  - type: OpenAPI
+    url: openapi/flock-safety-custom-hotlists-api-openapi.yml
+  - type: Documentation
+    url: https://docs.flocksafety.com/developer-hub/docs/flock-developer-platform-overview
+  - type: APIReference
+    url: https://docs.flocksafety.com/developer-hub/reference/post_oauth-token
+  - type: GettingStarted
+    url: https://docs.flocksafety.com/developer-hub/docs/quickstart
+- aid: flock-safety:flock-safety-devices-api
+  name: Flock Safety Devices API
+  description: The Devices API from Flock Safety — 3 operation(s) for devices.
+  humanURL: https://docs.flocksafety.com/developer-hub/docs/flock-developer-platform-overview
+  baseURL: https://api.flocksafety.com/api/v3
+  tags:
+  - Devices
+  properties:
+  - type: OpenAPI
+    url: openapi/flock-safety-devices-api-openapi.yml
+  - type: Documentation
+    url: https://docs.flocksafety.com/developer-hub/docs/flock-developer-platform-overview
+  - type: APIReference
+    url: https://docs.flocksafety.com/developer-hub/reference/post_oauth-token
+  - type: GettingStarted
+    url: https://docs.flocksafety.com/developer-hub/docs/quickstart
+- aid: flock-safety:flock-safety-lpr-hotlist-alert-subscriptions-api
+  name: Flock Safety LPR Hotlist Alert Subscriptions API
+  description: >-
+    The LPR Hotlist Alert Subscriptions API from Flock Safety — 2 operation(s) for lpr hotlist alert subscriptions.
+  humanURL: https://docs.flocksafety.com/developer-hub/docs/flock-developer-platform-overview
+  baseURL: https://api.flocksafety.com/api/v3
+  tags:
+  - LPR Hotlist Alert Subscriptions
+  properties:
+  - type: OpenAPI
+    url: openapi/flock-safety-lpr-hotlist-alert-subscriptions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.flocksafety.com/developer-hub/docs/flock-developer-platform-overview
+  - type: APIReference
+    url: https://docs.flocksafety.com/developer-hub/reference/post_oauth-token
+  - type: GettingStarted
+    url: https://docs.flocksafety.com/developer-hub/docs/quickstart
+- aid: flock-safety:flock-safety-oauth2-api
+  name: Flock Safety OAuth2 API
+  description: The OAuth2 API from Flock Safety — 1 operation(s) for oauth2.
+  humanURL: https://docs.flocksafety.com/developer-hub/docs/flock-developer-platform-overview
+  baseURL: https://api.flocksafety.com/api/v3
+  tags:
+  - OAuth2
+  properties:
+  - type: OpenAPI
+    url: openapi/flock-safety-oauth2-api-openapi.yml
+  - type: Documentation
+    url: https://docs.flocksafety.com/developer-hub/docs/flock-developer-platform-overview
+  - type: APIReference
+    url: https://docs.flocksafety.com/developer-hub/reference/post_oauth-token
+  - type: GettingStarted
+    url: https://docs.flocksafety.com/developer-hub/docs/quickstart
+- aid: flock-safety:flock-safety-plate-reads-api
+  name: Flock Safety Plate Reads API
+  description: The Plate Reads API from Flock Safety — 2 operation(s) for plate reads.
+  humanURL: https://docs.flocksafety.com/developer-hub/docs/flock-developer-platform-overview
+  baseURL: https://api.flocksafety.com/api/v3
+  tags:
+  - Plate Reads
+  properties:
+  - type: OpenAPI
+    url: openapi/flock-safety-plate-reads-api-openapi.yml
+  - type: Documentation
+    url: https://docs.flocksafety.com/developer-hub/docs/flock-developer-platform-overview
+  - type: APIReference
+    url: https://docs.flocksafety.com/developer-hub/reference/post_oauth-token
+  - type: GettingStarted
+    url: https://docs.flocksafety.com/developer-hub/docs/quickstart
+- aid: flock-safety:flock-safety-tracked-subject-types-api
+  name: Flock Safety Tracked Subject Types API
+  description: >-
+    The Tracked Subject Types API from Flock Safety — 2 operation(s) for tracked subject types.
+  humanURL: https://docs.flocksafety.com/developer-hub/docs/flock-developer-platform-overview
+  baseURL: https://api.flocksafety.com/api/v3
+  tags:
+  - Tracked Subject Types
+  properties:
+  - type: OpenAPI
+    url: openapi/flock-safety-tracked-subject-types-api-openapi.yml
+  - type: Documentation
+    url: https://docs.flocksafety.com/developer-hub/docs/flock-developer-platform-overview
+  - type: APIReference
+    url: https://docs.flocksafety.com/developer-hub/reference/post_oauth-token
+  - type: GettingStarted
+    url: https://docs.flocksafety.com/developer-hub/docs/quickstart
+- aid: flock-safety:flock-safety-tracked-subjects-api
+  name: Flock Safety Tracked Subjects API
+  description: The Tracked Subjects API from Flock Safety — 2 operation(s) for tracked subjects.
+  humanURL: https://docs.flocksafety.com/developer-hub/docs/flock-developer-platform-overview
+  baseURL: https://api.flocksafety.com/api/v3
+  tags:
+  - Tracked Subjects
+  properties:
+  - type: OpenAPI
+    url: openapi/flock-safety-tracked-subjects-api-openapi.yml
+  - type: Documentation
+    url: https://docs.flocksafety.com/developer-hub/docs/flock-developer-platform-overview
+  - type: APIReference
+    url: https://docs.flocksafety.com/developer-hub/reference/post_oauth-token
+  - type: GettingStarted
+    url: https://docs.flocksafety.com/developer-hub/docs/quickstart
+- aid: flock-safety:flock-safety-vehicle-images-api
+  name: Flock Safety Vehicle Images API
+  description: The Vehicle Images API from Flock Safety — 1 operation(s) for vehicle images.
+  humanURL: https://docs.flocksafety.com/developer-hub/docs/flock-developer-platform-overview
+  baseURL: https://api.flocksafety.com/api/v3
+  tags:
+  - Vehicle Images
+  properties:
+  - type: OpenAPI
+    url: openapi/flock-safety-vehicle-images-api-openapi.yml
+  - type: Documentation
+    url: https://docs.flocksafety.com/developer-hub/docs/flock-developer-platform-overview
+  - type: APIReference
+    url: https://docs.flocksafety.com/developer-hub/reference/post_oauth-token
+  - type: GettingStarted
+    url: https://docs.flocksafety.com/developer-hub/docs/quickstart
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: TrustCenter
+  url: security/flock-safety-trust-center.yml
 - type: Website
   url: https://flocksafety.com
+- type: DeveloperPortal
+  url: https://docs.flocksafety.com/
+- type: Documentation
+  url: https://docs.flocksafety.com/developer-hub/docs/flock-developer-platform-overview
+- type: APIReference
+  url: https://docs.flocksafety.com/developer-hub/reference/post_oauth-token
+- type: GettingStarted
+  url: https://docs.flocksafety.com/developer-hub/docs/quickstart
+- type: Support
+  url: https://help.flocksafety.com/s/
+- type: Blog
+  url: https://flocksafety.com/blog
+- type: StatusPage
+  url: https://status.flocksafety.com/
+- type: ChangeLog
+  url: https://docs.flocksafety.com/developer-hub/changelog
+- type: Pricing
+  url: https://flocksafety.com/pricing
+- type: TermsOfService
+  url: https://flocksafety.com/legal/terms-of-service
+- type: PrivacyPolicy
+  url: https://flocksafety.com/legal/privacy-notice
+- type: Compliance
+  url: https://security.flocksafety.com/
+- type: RateLimits
+  url: rate-limits/flock-safety-rate-limits.yml
+- type: GitHubOrganization
+  url: https://github.com/Flock-Safety
+- type: Authentication
+  url: authentication/flock-safety-authentication.yml
+- type: OAuthScopes
+  url: scopes/flock-safety-scopes.yml
+- type: Conventions
+  url: conventions/flock-safety-conventions.yml
+- type: Idempotency
+  url: conventions/flock-safety-conventions.yml
+- type: ErrorCatalog
+  url: errors/flock-safety-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/flock-safety-lifecycle.yml
+- type: Deprecation
+  url: lifecycle/flock-safety-lifecycle.yml
+- type: Conformance
+  url: conformance/flock-safety-conformance.yml
+- type: DataModel
+  url: data-model/flock-safety-data-model.yml
+- type: Packages
+  url: packages/flock-safety-packages.yml
+- type: MCPServer
+  url: mcp/flock-safety-mcp.yml
+- type: LLMsTxt
+  url: llms/flock-safety-llms.txt
+- type: DomainSecurity
+  url: security/flock-safety-domain-security.yml
+- type: AsyncAPI
+  url: asyncapi/flock-safety-lpr-alerts-asyncapi.yml
+- type: Webhooks
+  url: asyncapi/flock-safety-lpr-alerts-asyncapi.yml
+- type: ChangeLog
+  url: changelog/flock-safety-changelog.yml
+  name: Flock Safety Changelog (structured)
+- type: AgentSkill
+  url: skills/_index.yml
+- type: AgenticAccess
+  url: agentic-access/flock-safety-agentic-access.yml
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence

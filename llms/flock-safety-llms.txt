@@ -1,0 +1,77 @@
+# Developer Hub Documentation
+
+> Documentation for Developer Hub
+
+## Guides
+- [Developer Platform Overview](https://docs.flocksafety.com/developer-hub/docs/flock-developer-platform-overview.md)
+- [Quickstart](https://docs.flocksafety.com/developer-hub/docs/quickstart.md)
+- [Platform Concepts](https://docs.flocksafety.com/developer-hub/docs/platform-concepts.md)
+- [Flock App Lifecycle](https://docs.flocksafety.com/developer-hub/docs/flock-app-lifecycle.md)
+- [Authentication Overview](https://docs.flocksafety.com/developer-hub/docs/authentication-overview.md)
+- [Tokens](https://docs.flocksafety.com/developer-hub/docs/tokens.md)
+- [Using User-Level OAuth](https://docs.flocksafety.com/developer-hub/docs/user-level-oauth.md)
+- [Using Token Rotation](https://docs.flocksafety.com/developer-hub/docs/using-token-rotation.md)
+- [Using Machine-Level OAuth](https://docs.flocksafety.com/developer-hub/docs/using-organization-level-oauth.md)
+- [Using the Device API](https://docs.flocksafety.com/developer-hub/docs/retrieving-updating-and-creating-devices.md)
+- [Using the Custom Hotlist API](https://docs.flocksafety.com/developer-hub/docs/managing-custom-hotlists.md)
+- [Using the Vehicle Detections Ingest API](https://docs.flocksafety.com/developer-hub/docs/uploading-vehicle-images.md)
+- [Using the Inbound Alerts API](https://docs.flocksafety.com/developer-hub/docs/integrating-alerts-from-third-party-systems-into-flock-safetys-platform.md)
+- [Using the CAD API](https://docs.flocksafety.com/developer-hub/docs/importing-cad-events.md)
+- [Using the Device Geolocation API](https://docs.flocksafety.com/developer-hub/docs/tracking-objects-people-and-vehicles-on-the-flockos-map.md)
+- [Using the Plate Lookup API](https://docs.flocksafety.com/developer-hub/docs/lpr-plate-lookup-api-guide.md)
+- [Overview](https://docs.flocksafety.com/developer-hub/docs/being-notified-about-lpr-alerts.md)
+- [Third Party Endpoint Authentication for Flock Webhooks](https://docs.flocksafety.com/developer-hub/docs/third-party-endpoint-authentication-for-flock-webhooks.md)
+- [Flock Safety API v3 migration guide](https://docs.flocksafety.com/developer-hub/docs/migrating-existing-integrations-to-v3.md)
+
+## API Reference
+- [Retrieve an Access Token](https://docs.flocksafety.com/developer-hub/reference/post_oauth-token.md)
+- [Retrieving devices.](https://docs.flocksafety.com/developer-hub/reference/get_devices.md): Retrieves the devices that belong to your organization.
+- [Creating a device.](https://docs.flocksafety.com/developer-hub/reference/post_devices.md): Creates a device.
+- [Retrieving a device.](https://docs.flocksafety.com/developer-hub/reference/get_devices-deviceid.md): Retrieves a particular device.
+- [Updating a device.](https://docs.flocksafety.com/developer-hub/reference/patch_devices-deviceid.md): Updates a device.
+- [Decommissioning a device.](https://docs.flocksafety.com/developer-hub/reference/post_devices-deviceid-decommission.md): Decommissions a device. Once a device is decommissioned, vehicle images from that device can no longer be ingested. However, the device will remain in the system for compliance and auditing purposes.
+- [Retrieve custom hotlists](https://docs.flocksafety.com/developer-hub/reference/get_hotlists.md): Retrieve custom hotlists for the organization
+- [Create a custom hotlist](https://docs.flocksafety.com/developer-hub/reference/post_hotlists.md): Create an organization-level hotlist
+- [Retrieve a custom hotlist](https://docs.flocksafety.com/developer-hub/reference/get_hotlists-hotlistid.md): Retrieve a hotlist with the given ID
+- [Update a custom hotlist](https://docs.flocksafety.com/developer-hub/reference/put_hotlists-hotlistid.md): Update a hotlist
+- [Delete a custom hotlist](https://docs.flocksafety.com/developer-hub/reference/delete_hotlists-hotlistid.md): Delete hotlist
+- [Retrieve a page of entries for a hotlist](https://docs.flocksafety.com/developer-hub/reference/get_hotlists-hotlistid-entries.md): Retrieve a page of entries for the hotlist with the given ID
+- [Add a batch of entries to a hotlist](https://docs.flocksafety.com/developer-hub/reference/post_hotlists-hotlistid-entries-addbatch.md): Add a batch of entries to the hotlist with the provided hotlistID. All entries will be normalized (O->0) and have whitespace trimmed. Duplicate entries will be ignored.
+- [Delete a batch of entries from a hotlist](https://docs.flocksafety.com/developer-hub/reference/post_hotlists-hotlistid-entries-deletebatch.md): Delete a batch of entries from the hotlist with the provided hotlistID. Ignores any ids for which an entry does not exist
+- [Get Subscriptions](https://docs.flocksafety.com/developer-hub/reference/get_integrations-lpr-alerts-subscriptions.md): Get existing LPR hotlist alerts webhook subscriptions
+- [Create Subscription](https://docs.flocksafety.com/developer-hub/reference/post_integrations-lpr-alerts-subscriptions.md): Create a new LPR hotlist alert webhook subscription
+- [Update Subscription](https://docs.flocksafety.com/developer-hub/reference/put_integrations-lpr-alerts-subscriptions.md): Update an existing LPR hotlist alert webhook subscription
+- [Get Subscription](https://docs.flocksafety.com/developer-hub/reference/get_integrations-lpr-alerts-subscriptions-id.md): Get existing LPR hotlist alert webhook subscription by id
+- [Delete Subscription](https://docs.flocksafety.com/developer-hub/reference/delete_integrations-lpr-alerts-subscriptions-id.md): Delete existing LPR hotlist alert webhook subscription by id
+- [Lookup license plate reads](https://docs.flocksafety.com/developer-hub/reference/post_reads-lookup-1.md): Look up license plate reads by full license plate characters. ## Required API scope [plate-reads:lookup](https://docs.flocksafety.com/developer-hub/docs/client-credentials)
+- [View license plate reads lookup results](https://docs.flocksafety.com/developer-hub/reference/get_reads-lookup-page-pageid-1.md): View the results of a license plate read lookup ## Required API scope [plate-reads:lookup](https://docs.flocksafety.com/developer-hub/docs/client-credentials)
+- [Register a Subject Type](https://docs.flocksafety.com/developer-hub/reference/post_geo-types.md)
+- [List Subject Types](https://docs.flocksafety.com/developer-hub/reference/get_geo-types.md)
+- [Deleting a Subject Type](https://docs.flocksafety.com/developer-hub/reference/delete_geo-types-typeid.md): Delete a subject type. This will delete tracking information on subjects of that type
+- [Retrieving a Tracked Subject](https://docs.flocksafety.com/developer-hub/reference/get_geo-subjects-externalsubjectid.md): Get a single subject's current location.
+- [Disable a Tracked Subject](https://docs.flocksafety.com/developer-hub/reference/delete_geo-subjects-externalsubjectid.md)
+- [Create or updating a Tracked Subject](https://docs.flocksafety.com/developer-hub/reference/put_geo-subjects.md): Add or update a subject's location
+- [Retrieve All Tracked Subjects](https://docs.flocksafety.com/developer-hub/reference/get_geo-subjects.md): Get all subjects' current locations
+- [Creating or Updating an Event](https://docs.flocksafety.com/developer-hub/reference/post_cad-events.md): Creates a new event, or updates an event if externalId matches an existing event
+- [Retrieving Events](https://docs.flocksafety.com/developer-hub/reference/get_cad-events.md): Gets events in chronological order of when they were created (most recent first)
+- [Updating Active Events](https://docs.flocksafety.com/developer-hub/reference/post_cad-events-active.md): Creates or updates each provided event in the same manner as /v3/cad/events, then closes any open events not provided in the request
+- [Retrieving Active Events](https://docs.flocksafety.com/developer-hub/reference/get_cad-events-active.md): Gets all active events in chronological order of when they were created (most recent first)
+- [Retrieving Events by ExternalIDs](https://docs.flocksafety.com/developer-hub/reference/post_cad-events-externalids.md): Get events for provided externalIds
+- [Retrieving an Event by ExternalID](https://docs.flocksafety.com/developer-hub/reference/get_cad-events-externalid.md): gets event for provided externalId
+- [Marking an Event as Closed](https://docs.flocksafety.com/developer-hub/reference/post_cad-events-externalid-close.md): Closes event with given externalId
+- [Marking an Event as Open](https://docs.flocksafety.com/developer-hub/reference/post_cad-events-externalid-open.md): Opens event with given externalId (removes closedAt time).
+- [Appending a Narrative Entry](https://docs.flocksafety.com/developer-hub/reference/post_cad-events-externalid-narrative.md): Appends new narrative entry to event
+- [Creating an Generic Alert](https://docs.flocksafety.com/developer-hub/reference/post_alerts.md): Creates a new generic alert that will be displayed in FlockOS
+- [Fetching all recent Alerts](https://docs.flocksafety.com/developer-hub/reference/get_alerts.md): Fetches all recent alerts that are displayed in FlockOS
+- [Fetching a single Alert](https://docs.flocksafety.com/developer-hub/reference/get_alerts-alertid.md): Fetches an existing alert
+- [Updating an Alert](https://docs.flocksafety.com/developer-hub/reference/put_alerts-alertid.md): Updates an existing alert displayed in FlockOS
+- [Closing an Alert.](https://docs.flocksafety.com/developer-hub/reference/post_alerts-alertid-close.md): Closes an alert so that it is no longer visible
+- [Uploading images of a vehicle.](https://docs.flocksafety.com/developer-hub/reference/inbound-vehicle-images-api.md): Uploads images of a vehicle that will be ingested and processed. The total size of the main vehicle image and all of the context images must not exceed 9 MB. File size is calculated in binary mb (MB), where 1 MB is 1048576 bytes.
+
+## Changelog
+- [User-Level OAuth Framework](https://docs.flocksafety.com/developer-hub/changelog/user-level-oauth-framework-early-access.md)
+- [Vehicle Detections Search API v4 (Early Access)](https://docs.flocksafety.com/developer-hub/changelog/vehicle-detections-search-api-v4-early-access.md)
+- [Audience Controls for Custom Hotlist LPR Alerts](https://docs.flocksafety.com/developer-hub/changelog/update-audience-controls-for-custom-hotlist-lpr-alerts.md)
+- [LPR Hotlist Alerts from Shared Cameras in First Responder](https://docs.flocksafety.com/developer-hub/changelog/lpr-hotlist-alerts-from-shared-cameras-in-first-responder.md)
+- [Transition to New LPR Hotlist Event Subscription API](https://docs.flocksafety.com/developer-hub/changelog/transition-to-new-lpr-hotlist-event-subscription-api.md)
+

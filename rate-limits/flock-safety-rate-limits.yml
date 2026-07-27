@@ -1,0 +1,19 @@
+generated: '2026-07-19'
+method: searched
+source: >-
+  https://docs.flocksafety.com/developer-hub/docs/authentication-overview +
+  openapi/flock-safety-openapi-original.yml (429 responses)
+signal:
+  http_status: 429
+  message: 'The maximum number of requests per second has been exceeded or the max concurrent requests exceeded.'
+  observed_on_operations: 13
+quotas:
+  model: >-
+    Org-level (machine) tokens are subject to organization-wide caps. User-level OAuth grants each user
+    their own, higher and more accurate quota — recommended for real-time, on-demand features.
+  published_numeric_limits: false
+headers:
+  documented: false
+notes: >-
+  Flock documents a 429 rate-limit signal and a per-user vs per-org quota model, but does not publish
+  concrete numeric limits or rate-limit response headers on the public developer hub. No values invented.

@@ -1,0 +1,30 @@
+generated: '2026-07-19'
+method: searched
+source: https://docs.flocksafety.com/developer-hub
+versioning:
+  scheme: uri-path
+  current: v3
+  path_prefix: /api/v3
+  maturity_labels:
+  - Stable
+  - Early Access
+  notes: >-
+    APIs are versioned in the URL path (v3). Individual API products additionally carry maturity labels
+    (e.g. "Vehicle Detections Search API v4 (Early Access)", "User-Level OAuth Framework (Early Access)").
+migration:
+  policy: migration-guide
+  guide_url: https://docs.flocksafety.com/developer-hub/docs/migrating-existing-integrations-to-v3
+  notes: >-
+    Flock publishes a v3 migration guide for moving existing integrations off prior versions, and a
+    "Transition to New LPR Hotlist Event Subscription API" changelog migration. No formal RFC 8594
+    Sunset/Deprecation header policy is documented on the public developer hub.
+deprecation:
+  policy_url: https://docs.flocksafety.com/developer-hub/docs/migrating-existing-integrations-to-v3
+  sunset_header: unknown
+  evidence: v3 migration guide + LPR subscription API transition (deprecation communicated via changelog/migration guides)
+status_page: https://status.flocksafety.com/
+changelog: https://docs.flocksafety.com/developer-hub/changelog
+token_lifecycle:
+  machine_token: { grant: client_credentials, access_ttl: 24h, refresh: none }
+  user_token: { grant: authorization_code, access_ttl: 30m, refresh_token_ttl: 12h, rotation: true }
+deprecated_operations: []

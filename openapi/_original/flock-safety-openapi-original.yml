@@ -1,0 +1,3182 @@
+openapi: 3.0.3
+info:
+  title: Flock Safety API Platform (v3)
+  description: Flock Safety v3 API Platform harvested from the public developer hub (docs.flocksafety.com).
+    Combines the Device, Custom Hotlist, LPR Search, Plate Lookup, Hotlist Alerts Subscription, Geolocation,
+    CAD, Inbound Alerts, and Vehicle Detections Ingest APIs. OAuth2 client_credentials (machine) and authorization_code
+    (user) flows against api.flocksafety.com.
+  version: 3.0.0
+  contact:
+    name: Flock Safety Developer Hub
+    url: https://docs.flocksafety.com/
+servers:
+- url: https://api.flocksafety.com/api/v3
+  description: Production
+- url: https://dev-api.flocksafety.com/api/v3
+  description: Development sandbox (at Flock discretion)
+paths:
+  /geo/subjects/{externalSubjectId}:
+    delete:
+      summary: Disable a Tracked Subject
+      tags:
+      - Tracked Subjects
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: externalSubjectId
+        in: path
+        description: ID of the subject you are updating
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Disable a subject
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Heartbeat'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found (provided id doesn't match any existing)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    get:
+      summary: Retrieving a Tracked Subject
+      description: Get a single subject's current location.
+      tags:
+      - Tracked Subjects
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: externalSubjectId
+        in: path
+        description: ID of the subject type you are fetching
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Get a single subject's current location
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Heartbeat'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found (provided id doesn't match any existing)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /geo/types/{typeId}:
+    delete:
+      summary: Deleting a Subject Type
+      description: Delete a subject type. This will delete tracking information on subjects of that type
+      tags:
+      - Tracked Subject Types
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: typeId
+        in: path
+        description: ID of the subject type you are deleting
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Delete a subject type. This will remove tracking information on subjects of that
+            type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubjectType'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found (provided id doesn't match any existing)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /hotlists/{hotlistId}:
+    delete:
+      description: Delete hotlist
+      summary: Delete a custom hotlist
+      tags:
+      - Custom Hotlists
+      security:
+      - oauth2Auth:
+        - custom-hotlists:write
+      parameters:
+      - $ref: '#/components/parameters/HotlistIdParam'
+      responses:
+        '204':
+          description: The hotlist was deleted successfully
+        '401':
+          description: Unauthorized, authentication token was invalid or not provided
+        '403':
+          description: Forbidden, your client does not have access to this resource
+        '404':
+          description: No hotlist was found with the given ID
+    get:
+      description: Retrieve a hotlist with the given ID
+      summary: Retrieve a custom hotlist
+      tags:
+      - Custom Hotlists
+      security:
+      - oauth2Auth:
+        - custom-hotlists:read
+      parameters:
+      - $ref: '#/components/parameters/HotlistIdParam'
+      responses:
+        '200':
+          description: The hotlist was successfully retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Hotlist'
+        '401':
+          description: Unauthorized, authentication token was invalid or not provided
+        '403':
+          description: Forbidden, your client does not have access to this resource
+        '404':
+          description: No hotlist was found with the given ID
+    put:
+      description: Update a hotlist
+      summary: Update a custom hotlist
+      tags:
+      - Custom Hotlists
+      security:
+      - oauth2Auth:
+        - custom-hotlists:write
+      parameters:
+      - $ref: '#/components/parameters/HotlistIdParam'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateHotlistRequest'
+      responses:
+        '204':
+          description: The hotlist was updated successfully
+        '401':
+          description: Unauthorized, authentication token was invalid or not provided
+        '403':
+          description: Forbidden, your client does not have access to this resource
+        '404':
+          description: No hotlist was found with the given ID
+        '413':
+          description: Request entity too large, the number of entries exceeds the organization's limit
+  /integrations/lpr/alerts/subscriptions/{id}:
+    delete:
+      summary: Delete Subscription
+      description: Delete existing LPR hotlist alert webhook subscription by id
+      tags:
+      - LPR Hotlist Alert Subscriptions
+      security:
+      - bearerAuth: []
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      responses:
+        '204':
+          description: Success
+        '403':
+          description: Forbidden (lacking appropriate scope or client claims)
+        '404':
+          description: Subscription Not Found
+        '500':
+          description: Internal Server Error
+    get:
+      summary: Get Subscription
+      description: Get existing LPR hotlist alert webhook subscription by id
+      tags:
+      - LPR Hotlist Alert Subscriptions
+      security:
+      - bearerAuth: []
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+          format: uuid
+        required: true
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+        '403':
+          description: Forbidden (lacking appropriate scope or client claims)
+        '404':
+          description: Subscription Not Found
+        '500':
+          description: Internal Server Error
+  /alerts/{alertId}:
+    get:
+      summary: Fetching a single Alert
+      description: Fetches an existing alert
+      tags:
+      - Alerts
+      security:
+      - bearerAuth: []
+      parameters:
+      - in: path
+        name: alertId
+        schema:
+          type: string
+        required: true
+        description: The ID of the alert that will be fetched.
+      responses:
+        '200':
+          description: Successfully fetched single alert.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericAlert'
+              example:
+                Generic Alert:
+                  value:
+                    id: 00000000-0000-0000-0000-000000000000
+                    createdAt: '2023-12-31T23:59:59.999999Z'
+                    updatedAt: '2023-12-31T23:59:59.999999Z'
+                    vendorId: 00000000-0000-0000-0000-000000000000
+                    vendorName: Example Vendor
+                    status: closed
+                    type: other
+                    subType: traffic-accident
+                    title: Traffic Accident
+                    description: Traffic Accident at 456 State St
+                    priority: 3
+                    eventTime: '2023-12-31T23:59:59.999999Z'
+                    subjectId: 00000000-0000-0000-0000-000000000000
+                    ttl: 600
+                    location: null
+                    attachments:
+                    - type: link
+                      name: Accident link
+                      url: https://example/links/00000000-0000-0000-0000-000000000000
+                    metadata:
+                      foo: bar
+        '401':
+          description: The provided token is either expired or invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: The token is either expired or invalid.
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: alert not found
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: Throttled
+    put:
+      summary: Updating an Alert
+      description: Updates an existing alert displayed in FlockOS
+      tags:
+      - Alerts
+      security:
+      - bearerAuth: []
+      parameters:
+      - in: path
+        name: alertId
+        schema:
+          type: string
+        required: true
+        description: The ID of the alert that will be updated.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenericAlert'
+            example:
+              Generic Alert:
+                value:
+                  type: other
+                  subType: traffic-accident
+                  title: Updated Traffic Accident
+                  description: Traffic Accident at 456 State St
+                  priority: 3
+                  eventTime: '2023-12-31T23:59:59.999999Z'
+                  subjectId: 00000000-0000-0000-0000-000000000000
+                  attachments:
+                  - type: link
+                    name: Accident link
+                    url: https://example/links/00000000-0000-0000-0000-000000000000
+                  metadata:
+                    foo: bar
+      responses:
+        '200':
+          description: The alert was successfully updated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericAlert'
+              example:
+                Generic Alert:
+                  value:
+                    id: 00000000-0000-0000-0000-000000000000
+                    createdAt: '2023-12-31T23:59:59.999999Z'
+                    updatedAt: '2023-12-31T23:59:59.999999Z'
+                    vendorId: 00000000-0000-0000-0000-000000000000
+                    vendorName: Example Vendor
+                    status: open
+                    type: other
+                    subType: traffic-accident
+                    title: Updated Traffic Accident
+                    description: Traffic Accident at 456 State St
+                    priority: 3
+                    eventTime: '2023-12-31T23:59:59.999999Z'
+                    subjectId: 00000000-0000-0000-0000-000000000000
+                    ttl: 600
+                    location: null
+                    attachments:
+                    - type: link
+                      name: Accident link
+                      url: https://example/links/00000000-0000-0000-0000-000000000000
+                    metadata:
+                      foo: bar
+        '400':
+          description: The given alert contains one or more errors.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: subject not found
+        '401':
+          description: The provided token is either expired or invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: The token is either expired or invalid.
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: alert not found
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: Throttled
+  /alerts:
+    get:
+      summary: Fetching all recent Alerts
+      description: Fetches all recent alerts that are displayed in FlockOS
+      tags:
+      - Alerts
+      security:
+      - bearerAuth: []
+      parameters:
+      - in: query
+        name: includeInactive
+        schema:
+          type: string
+          enum:
+          - 'true'
+          - 'false'
+          default: 'false'
+        required: false
+        description: Whether to include inactive alerts in the results.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 100
+        required: false
+        description: The maximum number of alerts returned in the response (1-100).
+      - in: query
+        name: offset
+        schema:
+          type: integer
+          default: 0
+          minimum: 0
+        required: false
+        description: The number of alert results to skip before starting to collect the set of alerts.
+      responses:
+        '200':
+          description: The alerts were successfully fetched.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/GenericAlert'
+              example:
+                results:
+                - id: 00000000-0000-0000-0000-000000000000
+                  createdAt: '2023-12-31T23:59:59.999999Z'
+                  updatedAt: '2023-12-31T23:59:59.999999Z'
+                  vendorId: 00000000-0000-0000-0000-000000000000
+                  vendorName: Example Vendor
+                  status: open
+                  type: vehicle
+                  subType: other
+                  title: Vehicle Alert
+                  description: Vehicle Alert at 835 Main St
+                  priority: 1
+                  eventTime: '2023-12-31T23:59:59.999999Z'
+                  subjectId: 00000000-0000-0000-0000-000000000000
+                  ttl: 600
+                  location: null
+                  attachments:
+                  - type: link
+                    name: Accident link
+                    url: https://example/links/00000000-0000-0000-0000-000000000000
+                  metadata:
+                    foo: bar
+                - id: 00000000-0000-0000-0000-000000000000
+                  createdAt: '2023-12-31T23:59:59.999999Z'
+                  updatedAt: '2023-12-31T23:59:59.999999Z'
+                  vendorId: 00000000-0000-0000-0000-000000000000
+                  vendorName: Example Vendor
+                  status: open
+                  type: vehicle
+                  subType: hotlist
+                  title: Vehicle Alert
+                  description: Vehicle Alert at 835 Main St
+                  priority: 1
+                  eventTime: '2023-12-31T23:59:59.999999Z'
+                  subjectId: 00000000-0000-0000-0000-000000000000
+                  ttl: 600
+                  location: null
+                  attachments:
+                  - type: link
+                    name: Accident link
+                    url: https://example/links/00000000-0000-0000-0000-000000000000
+                  metadata:
+                    foo: bar
+                - id: 00000000-0000-0000-0000-000000000000
+                  createdAt: '2023-12-31T23:59:59.999999Z'
+                  updatedAt: '2023-12-31T23:59:59.999999Z'
+                  vendorId: 00000000-0000-0000-0000-000000000000
+                  vendorName: Example Vendor
+                  status: open
+                  type: vehicle
+                  subType: customHotlist
+                  title: Vehicle Alert
+                  description: Vehicle Alert at 835 Main St
+                  priority: 1
+                  eventTime: '2023-12-31T23:59:59.999999Z'
+                  subjectId: null
+                  ttl: 600
+                  location:
+                    latitude: 40.783871
+                    longitude: -73.97541
+                    address: 129 W 81st St, New York, NY 10024
+                  attachments:
+                  - type: link
+                    name: Accident link
+                    url: https://example/links/00000000-0000-0000-0000-000000000000
+                  metadata:
+                    foo: bar
+                - id: 00000000-0000-0000-0000-000000000000
+                  createdAt: '2023-12-31T23:59:59.999999Z'
+                  updatedAt: '2023-12-31T23:59:59.999999Z'
+                  vendorId: 00000000-0000-0000-0000-000000000000
+                  vendorName: Example Vendor
+                  status: open
+                  type: other
+                  subType: traffic-accident
+                  title: Traffic Accident
+                  description: Traffic Accident at 456 State St
+                  priority: 3
+                  eventTime: '2023-12-31T23:59:59.999999Z'
+                  subjectId: 00000000-0000-0000-0000-000000000000
+                  ttl: 600
+                  location: null
+                  attachments:
+                  - type: link
+                    name: Accident link
+                    url: https://example/links/00000000-0000-0000-0000-000000000000
+                  metadata:
+                    foo: bar
+        '401':
+          description: The provided token is either expired or invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: The token is either expired or invalid.
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: Throttled
+    post:
+      summary: Creating an Generic Alert
+      description: Creates a new generic alert that will be displayed in FlockOS
+      tags:
+      - Alerts
+      security:
+      - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenericAlert'
+            example:
+              Generic Alert:
+                value:
+                  title: Traffic Accident
+                  description: Traffic Accident at 456 State St
+                  type: other
+                  subType: traffic-accident
+                  priority: 3
+                  eventTime: '2023-12-31T23:59:59.999999Z'
+                  subjectId: 00000000-0000-0000-0000-000000000000
+                  ttl: 600
+                  location: null
+                  attachments:
+                  - type: link
+                    name: Accident link
+                    url: https://example/links/00000000-0000-0000-0000-000000000000
+                  metadata:
+                    foo: bar
+      responses:
+        '200':
+          description: The alert was successfully created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericAlert'
+              example:
+                Generic Alert:
+                  value:
+                    id: 00000000-0000-0000-0000-000000000000
+                    createdAt: '2023-12-31T23:59:59.999999Z'
+                    updatedAt: '2023-12-31T23:59:59.999999Z'
+                    vendorId: 00000000-0000-0000-0000-000000000000
+                    vendorName: Example Vendor
+                    status: open
+                    type: other
+                    subType: traffic-accident
+                    title: Traffic Accident
+                    description: Traffic Accident at 456 State St
+                    priority: 3
+                    eventTime: '2023-12-31T23:59:59.999999Z'
+                    subjectId: 00000000-0000-0000-0000-000000000000
+                    ttl: 600
+                    location: null
+                    attachments:
+                    - type: link
+                      name: Accident link
+                      url: https://example/links/00000000-0000-0000-0000-000000000000
+                    metadata:
+                      foo: bar
+        '400':
+          description: The given alert contains one or more errors.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: subject not found
+        '401':
+          description: The provided token is either expired or invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: The token is either expired or invalid.
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: Throttled
+  /cad/events/active:
+    get:
+      summary: Retrieving Active Events
+      description: Gets all active events in chronological order of when they were created (most recent
+        first)
+      tags:
+      - CAD Events
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventsResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    post:
+      summary: Updating Active Events
+      description: Creates or updates each provided event in the same manner as /v3/cad/events, then closes
+        any open events not provided in the request
+      tags:
+      - CAD Events
+      security:
+      - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EventsBody'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventsResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Event Not Found (provided externalId doesn't match any existing)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /cad/events/{externalId}:
+    get:
+      summary: Retrieving an Event by ExternalID
+      description: gets event for provided externalId
+      tags:
+      - CAD Events
+      security:
+      - bearerAuth: []
+      parameters:
+      - in: path
+        name: externalId
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Event Not Found (provided externalId doesn't match any existing)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /cad/events:
+    get:
+      summary: Retrieving Events
+      description: Gets events in chronological order of when they were created (most recent first)
+      tags:
+      - CAD Events
+      security:
+      - bearerAuth: []
+      parameters:
+      - in: query
+        name: start
+        required: true
+        schema:
+          type: string
+          format: date-time
+          description: RFC3339 UTC datetime string
+        description: start of time range to get events for
+      - in: query
+        name: end
+        schema:
+          type: string
+          format: date-time
+          description: RFC3339 UTC datetime string
+        description: end of time range to get events for (defaults to current time if not provided)
+      - in: query
+        name: pageSize
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 25
+        description: maximum number of events to return per request (defaults to max of 25 if not provided)
+      - in: query
+        name: page
+        schema:
+          type: integer
+          minimum: 1
+        description: page number of events to return (defaults to first page if not provided)
+      - in: query
+        name: activeOnly
+        schema:
+          type: boolean
+        description: whether to return only active events (defaults to false)
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventsResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    post:
+      summary: Creating or Updating an Event
+      description: Creates a new event, or updates an event if externalId matches an existing event
+      tags:
+      - CAD Events
+      security:
+      - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Event'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Event Not Found (provided externalId doesn't match any existing)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /devices/{deviceId}:
+    get:
+      summary: Retrieving a device.
+      description: Retrieves a particular device.
+      tags:
+      - Devices
+      parameters:
+      - $ref: '#/components/parameters/DeviceIdParam'
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: The device was successfully retrieved.
+          content:
+            application/json:
+              schema:
+                type: object
+                $ref: '#/components/schemas/Device'
+        '401':
+          $ref: '#/components/responses/AuthorizationError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '429':
+          $ref: '#/components/responses/RateLimitError'
+        '500':
+          $ref: '#/components/responses/InternalError'
+    patch:
+      summary: Updating a device.
+      description: Updates a device.
+      tags:
+      - Devices
+      parameters:
+      - $ref: '#/components/parameters/DeviceIdParam'
+      security:
+      - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateDeviceRequest'
+            examples:
+              Update Device Metadata:
+                value:
+                  metadata:
+                    deviceSerial: 21204
+                    url: https://example.com/cameras/0021204
+              Update Device Name:
+                value:
+                  name: 'Camera #0004 - Bowman Rd'
+      responses:
+        '204':
+          description: The device was successfully updated.
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/AuthorizationError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '422':
+          description: The given device update request contains one or more errors.
+          $ref: '#/components/responses/ValidationError'
+        '429':
+          $ref: '#/components/responses/RateLimitError'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /devices:
+    get:
+      summary: Retrieving devices.
+      description: Retrieves the devices that belong to your organization.
+      tags:
+      - Devices
+      security:
+      - bearerAuth: []
+      parameters:
+      - in: query
+        name: latitude
+        description: Used to filter by area.
+        required: false
+        schema:
+          type: number
+      - in: query
+        name: longitude
+        description: Used to filter by area.
+        required: false
+        schema:
+          type: number
+      - in: query
+        name: radius
+        description: Used to filter by area.
+        required: false
+        schema:
+          type: number
+      - in: query
+        name: page
+        description: The page from which to retrieve results.
+        required: false
+        schema:
+          type: number
+      - in: query
+        name: pageSize
+        description: The maximum number of results that should be on each page.
+        required: false
+        schema:
+          type: number
+      responses:
+        '200':
+          description: The devices were successfully retrieved.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - results
+                - totalItems
+                - totalPages
+                properties:
+                  results:
+                    type: array
+                    description: List of devices
+                    items:
+                      $ref: '#/components/schemas/Device'
+                  totalItems:
+                    type: number
+                    description: The total number of devices that are available to view.
+                    example: 2
+                  totalPages:
+                    type: number
+                    description: The total number of pages.
+                    example: 1
+              example:
+                results:
+                - id: 97cf0365-1a50-4fce-98a7-93cf45fb658b
+                  type: camera
+                  name: 'Camera #0001 - Main Street'
+                  location:
+                    latitude: 40.783871
+                    longitude: -73.97541
+                  createdAt: '2023-12-31T23:59:59.999Z'
+                  modifiedAt: '2024-03-10T12:59:59.999Z'
+                - id: b140dfc4-d197-4c65-be5d-efe5cb98ecb4
+                  type: camera
+                  name: 'Third Party Camera #6932 - Sixth Ave'
+                  location:
+                    latitude: 40.76319188039752
+                    longitude: -73.98077364019883
+                  metadata:
+                    deviceManufacturer: Corp
+                    deviceSerial: 239503
+                  createdAt: '2024-07-29T15:05:59.433Z'
+                  modifiedAt: '2024-07-29T15:05:59.433Z'
+                totalItems: 2
+                totalPages: 1
+        '401':
+          $ref: '#/components/responses/AuthorizationError'
+        '422':
+          $ref: '#/components/responses/GetDevicesValidationError'
+        '429':
+          $ref: '#/components/responses/RateLimitError'
+        '500':
+          $ref: '#/components/responses/InternalError'
+    post:
+      summary: Creating a device.
+      description: Creates a device.
+      tags:
+      - Devices
+      security:
+      - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateDeviceRequest'
+      responses:
+        '201':
+          description: The device was successfully created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Device'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/AuthorizationError'
+        '422':
+          description: The given device creation request contains one or more errors.
+          $ref: '#/components/responses/ValidationError'
+        '429':
+          description: The maximum number of requests you can perform per second or the maximum number
+            of devices you can create per day has been exceeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Rate Limit Error:
+                  $ref: '#/components/examples/RateLimitError'
+                Create Limit Error:
+                  $ref: '#/components/examples/CreateLimitError'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /geo/subjects:
+    get:
+      summary: Retrieve All Tracked Subjects
+      description: Get all subjects' current locations
+      tags:
+      - Tracked Subjects
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: since
+        in: query
+        description: Unix timestamp in seconds
+        required: false
+        schema:
+          type: integer
+          format: int64
+      - name: page
+        in: query
+        description: Page number, defaults to 1
+        required: false
+        schema:
+          type: integer
+          format: int32
+      - name: subjectType
+        in: query
+        description: Filter by subject type
+        required: false
+        schema:
+          type: string
+          enum:
+          - vehicle
+          - person
+          - drone
+          - other
+      - name: subjectSubtype
+        in: query
+        description: Filter by subject subtype
+        required: false
+        schema:
+          type: string
+      - name: showInactive
+        in: query
+        description: Show inactive subjects
+        required: false
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: Get all subjects' current locations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Heartbeat'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    put:
+      summary: Create or updating a Tracked Subject
+      description: Add or update a subject's location
+      tags:
+      - Tracked Subjects
+      security:
+      - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Heartbeat'
+      responses:
+        '200':
+          description: Add or update a subject's location
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Heartbeat'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /geo/types:
+    get:
+      summary: List Subject Types
+      tags:
+      - Tracked Subject Types
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: List Subject Types
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SubjectType'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found (provided id doesn't match any existing)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    post:
+      summary: Register a Subject Type
+      tags:
+      - Tracked Subject Types
+      security:
+      - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubjectType'
+      responses:
+        '200':
+          description: Register a subject type
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubjectType'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Not Found (provided id doesn't match any existing)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: Conflict (subject type already exists with provided type and subtype)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /hotlists/{hotlistId}/entries:
+    get:
+      description: Retrieve a page of entries for the hotlist with the given ID
+      summary: Retrieve a page of entries for a hotlist
+      tags:
+      - Custom Hotlists
+      security:
+      - oauth2Auth:
+        - custom-hotlists:read
+      parameters:
+      - $ref: '#/components/parameters/HotlistIdParam'
+      - name: limit
+        in: query
+        description: The maximum number of hotlist entries to return
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 3000
+          default: 3000
+      - name: cursor
+        in: query
+        description: A cursor for the next page of results
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The hotlist entries were successfully retrieved.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetHotlistEntriesResponse'
+        '401':
+          description: Unauthorized, authentication token was invalid or not provided
+        '403':
+          description: Forbidden, your client does not have access to this resource
+        '404':
+          description: No hotlist was found with the given ID
+  /hotlists:
+    get:
+      description: Retrieve custom hotlists for the organization
+      summary: Retrieve custom hotlists
+      tags:
+      - Custom Hotlists
+      security:
+      - oauth2Auth:
+        - custom-hotlists:read
+      responses:
+        '200':
+          description: The hotlists for your organization were successfully retrieved.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrgHotlist'
+        '401':
+          description: Unauthorized, authentication token was invalid or not provided
+        '403':
+          description: Forbidden, your client does not have access to this resource
+    post:
+      description: Create an organization-level hotlist
+      summary: Create a custom hotlist
+      tags:
+      - Custom Hotlists
+      security:
+      - oauth2Auth:
+        - custom-hotlists:write
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateHotlistRequest'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateHotlistResponse'
+        '401':
+          description: Unauthorized, authentication token was invalid or not provided
+        '403':
+          description: Forbidden, your client does not have access to this resource
+        '413':
+          description: Request entity too large, the number of entries exceeds the organization's limit
+  /integrations/lpr/alerts/subscriptions:
+    get:
+      summary: Get Subscriptions
+      description: Get existing LPR hotlist alerts webhook subscriptions
+      tags:
+      - LPR Hotlist Alert Subscriptions
+      security:
+      - bearerAuth: []
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Subscription'
+        '403':
+          description: Forbidden (lacking appropriate scope or client claims)
+        '500':
+          description: Internal Server Error
+    post:
+      summary: Create Subscription
+      description: Create a new LPR hotlist alert webhook subscription
+      tags:
+      - LPR Hotlist Alert Subscriptions
+      security:
+      - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSubscriptionRequest'
+      responses:
+        '201':
+          description: Subscription Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+        '400':
+          description: Bad Request (missing required field or credentials failed to validate)
+        '403':
+          description: Forbidden (lacking appropriate scope or client claims)
+        '409':
+          description: Conflict (violates a unique constraint)
+        '500':
+          description: Internal Server Error
+    put:
+      summary: Update Subscription
+      description: Update an existing LPR hotlist alert webhook subscription
+      tags:
+      - LPR Hotlist Alert Subscriptions
+      security:
+      - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateSubscriptionRequest'
+      responses:
+        '200':
+          description: Subscription Updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+        '400':
+          description: Bad Request (missing required field or credentials failed to validate)
+        '403':
+          description: Forbidden (lacking appropriate scope or client claims)
+        '404':
+          description: Subscription Not Found
+        '500':
+          description: Internal Server Error
+  /reads/lookup/page/{pageId}:
+    get:
+      summary: View license plate reads lookup results
+      description: 'View the results of a license plate read lookup
+
+        ## Required API scope
+
+        [plate-reads:lookup](https://docs.flocksafety.com/developer-hub/docs/client-credentials)
+
+        '
+      tags:
+      - Plate Reads
+      parameters:
+      - in: path
+        name: pageId
+        schema:
+          type: string
+        required: true
+        description: The ID of the page to view.
+      responses:
+        '200':
+          description: List of license plate reads
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LookupResult'
+        '401':
+          $ref: '#/components/responses/AuthorizationError'
+        '403':
+          $ref: '#/components/responses/UnauthorizedError'
+        '422':
+          description: The page ID is missing.
+          $ref: '#/components/responses/ValidationError'
+        '429':
+          description: The maximum number of requests you can perform per second has been exceeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Rate Limit Error:
+                  $ref: '#/components/examples/RateLimitError'
+  /devices/{deviceId}/images:
+    post:
+      summary: Uploading images of a vehicle.
+      description: Uploads images of a vehicle that will be ingested and processed. The total size of
+        the main vehicle image and all of the context images must not exceed 9 MB. File size is calculated
+        in binary mb (MB), where 1 MB is 1048576 bytes.
+      tags:
+      - Vehicle Images
+      parameters:
+      - in: path
+        name: deviceId
+        schema:
+          type: string
+        required: true
+        description: The ID of the device that this image was captured by.
+      security:
+      - bearerAuth: []
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ImageUpload'
+            encoding:
+              image:
+                contentType: image/jpeg
+              contextImages:
+                contentType: image/jpeg
+      responses:
+        '204':
+          description: The image was successfully ingested.
+        '400':
+          $ref: '#/components/responses/ValidationError'
+        '401':
+          $ref: '#/components/responses/AuthorizationError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '413':
+          description: 'The total size of all the images uploaded exceeds 9 MiB. Total file sizes: 13
+            MiB'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error:
+                  code: max_image_size_exceeded
+                  message: 'The total size of all the images uploaded exceeds 9 MiB. Total size: 13 MiB'
+                  errors:
+                  - field: image
+                    message: 'The total size of all the images uploaded exceeds 9 MiB. Total size: 13
+                      MiB'
+        '429':
+          $ref: '#/components/responses/RateLimitError'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /alerts/{alertId}/close:
+    post:
+      summary: Closing an Alert.
+      description: Closes an alert so that it is no longer visible
+      tags:
+      - Alerts
+      security:
+      - bearerAuth: []
+      parameters:
+      - in: path
+        name: alertId
+        schema:
+          type: string
+        required: true
+        description: The ID of the alert that will be closed.
+      responses:
+        '204':
+          description: The alert was successfully closed.
+        '401':
+          description: The provided token is either expired or invalid.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: The token is either expired or invalid.
+        '429':
+          description: Too Many Requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              example:
+                error: Throttled
+  /cad/events/{externalId}/close:
+    post:
+      summary: Marking an Event as Closed
+      description: Closes event with given externalId
+      tags:
+      - CAD Events
+      security:
+      - bearerAuth: []
+      parameters:
+      - in: path
+        name: externalId
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - in: query
+        name: timestamp
+        schema:
+          type: string
+          format: date-time
+          description: RFC3339 UTC datetime string
+        description: time to mark the event as closed (defaults to current time if not provided)
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Event Not Found (provided externalId doesn't match any existing)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /cad/events/{externalId}/narrative:
+    post:
+      summary: Appending a Narrative Entry
+      description: Appends new narrative entry to event
+      tags:
+      - CAD Events
+      security:
+      - bearerAuth: []
+      parameters:
+      - in: path
+        name: externalId
+        required: true
+        schema:
+          type: string
+          format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NarrativeBody'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Event Not Found (provided externalId doesn't match any existing)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /cad/events/{externalId}/open:
+    post:
+      summary: Marking an Event as Open
+      description: Opens event with given externalId (removes closedAt time).
+      tags:
+      - CAD Events
+      security:
+      - bearerAuth: []
+      parameters:
+      - in: path
+        name: externalId
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Event Not Found (provided externalId doesn't match any existing)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /cad/events/externalIds:
+    post:
+      summary: Retrieving Events by ExternalIDs
+      description: Get events for provided externalIds
+      tags:
+      - CAD Events
+      security:
+      - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExternalIdsBody'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Event Not Found (provided externalId doesn't match any existing)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /devices/{deviceId}/decommission:
+    post:
+      summary: Decommissioning a device.
+      description: Decommissions a device. Once a device is decommissioned, vehicle images from that device
+        can no longer be ingested. However, the device will remain in the system for compliance and auditing
+        purposes.
+      tags:
+      - Devices
+      parameters:
+      - $ref: '#/components/parameters/DeviceIdParam'
+      responses:
+        '204':
+          description: The device was successfully decommissioned.
+        '401':
+          $ref: '#/components/responses/AuthorizationError'
+        '404':
+          $ref: '#/components/responses/NotFoundError'
+        '429':
+          description: The maximum number of requests per second has been exceeded or the maximum number
+            of devices that can be decommissioned per day has been exceeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Rate Limit Error:
+                  $ref: '#/components/examples/RateLimitError'
+                Decommission Limit Error:
+                  $ref: '#/components/examples/DecommissionLimitError'
+        '500':
+          $ref: '#/components/responses/InternalError'
+  /hotlists/{hotlistId}/entries/addBatch:
+    post:
+      description: Add a batch of entries to the hotlist with the provided hotlistID. All entries will
+        be normalized (O->0) and have whitespace trimmed. Duplicate entries will be ignored.
+      summary: Add a batch of entries to a hotlist
+      tags:
+      - Custom Hotlists
+      security:
+      - oauth2Auth:
+        - custom-hotlists:write
+      parameters:
+      - $ref: '#/components/parameters/HotlistIdParam'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateHotlistEntriesRequest'
+      responses:
+        '200':
+          description: The batch of hotlist entries was successfully normalized and created.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateEntriesResponse'
+        '400':
+          description: Bad request, either the batch contained a duplicate plate or the request body was
+            malformed.
+        '401':
+          description: Unauthorized, authentication token was invalid or not provided
+        '403':
+          description: Forbidden, your client does not have access to this resource
+        '404':
+          description: No hotlist was found with the given ID
+  /hotlists/{hotlistId}/entries/deleteBatch:
+    post:
+      description: Delete a batch of entries from the hotlist with the provided hotlistID. Ignores any
+        ids for which an entry does not exist
+      summary: Delete a batch of entries from a hotlist
+      tags:
+      - Custom Hotlists
+      security:
+      - oauth2Auth:
+        - custom-hotlists:write
+      parameters:
+      - $ref: '#/components/parameters/HotlistIdParam'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DeleteHotlistEntriesRequest'
+      responses:
+        '200':
+          description: The batch of hotlist entries was successfully deleted.
+        '401':
+          description: Unauthorized, authentication token was invalid or not provided
+        '403':
+          description: Forbidden, your client does not have access to this resource
+        '404':
+          description: No hotlist was found with the given ID
+  /oauth/token:
+    post:
+      summary: Retrieve an Access Token
+      tags:
+      - OAuth2
+      security:
+      - oauth2: []
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                grant_type:
+                  type: string
+                  example: client_credentials
+                client_id:
+                  type: string
+                  example: your_client_id
+                client_secret:
+                  type: string
+                  example: your_client_secret
+                audience:
+                  type: string
+                  example: search
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  access_token:
+                    type: string
+                    example: your_access_token
+                  token_type:
+                    type: string
+                    example: Bearer
+                  expires_in:
+                    type: integer
+                    example: 3600
+                    description: Access token expiration time in seconds
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Client credentials invalid
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Invalid or missing audience
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      servers:
+      - url: https://api.flocksafety.com
+        description: OAuth token endpoint (root, not /api/v3)
+  /reads/lookup:
+    post:
+      summary: Lookup license plate reads
+      description: 'Look up license plate reads by full license plate characters.
+
+        ## Required API scope
+
+        [plate-reads:lookup](https://docs.flocksafety.com/developer-hub/docs/client-credentials)
+
+        '
+      tags:
+      - Plate Reads
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LookupRequest'
+      responses:
+        '200':
+          description: List of license plate reads
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LookupResult'
+        '400':
+          $ref: '#/components/responses/BadRequestError'
+        '401':
+          $ref: '#/components/responses/AuthorizationError'
+        '403':
+          $ref: '#/components/responses/UnauthorizedError'
+        '422':
+          description: The given lookup criteria contain one or more errors.
+          $ref: '#/components/responses/ValidationError'
+        '429':
+          description: The maximum number of requests you can perform per second has been exceeded.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+              examples:
+                Rate Limit Error:
+                  $ref: '#/components/examples/RateLimitError'
+components:
+  schemas:
+    Heartbeat:
+      type: object
+      required:
+      - externalId
+      - subjectType
+      - subjectSubtype
+      - latitude
+      - longitude
+      properties:
+        subjectId:
+          type: string
+          readOnly: true
+          description: ID of the subject in flocks system
+        subjectType:
+          type: string
+          enum:
+          - vehicle
+          - person
+          - drone
+          - other
+          description: base type of the subject. This is used to filter subjects on the map
+        subjectSubtype:
+          type: string
+          description: subtype of the subject. This is used to filter subjects on the map
+        externalId:
+          type: string
+          description: ID of the subject in your system. Must be unique per organization.
+        createdAt:
+          readOnly: true
+          type: string
+          format: date-time
+          description: RFC3339 UTC datetime string of when subject was created
+        updatedAt:
+          readOnly: false
+          type: string
+          format: date-time
+          description: RFC3339 UTC datetime string of when subject was last updated. Use this if different
+            time than createdAt or the current time.
+        disableAt:
+          readOnly: true
+          type: string
+          format: date-time
+          description: RFC3339 UTC datetime string of when subject should be inactive
+        latitude:
+          type: number
+          format: float64
+        longitude:
+          type: number
+          format: float64
+        altitude:
+          type: number
+          format: float64
+          description: altitude in meters, defaults to 0.0 and returned as 0.0 if not provided
+        additionalMetadata:
+          type: object
+          properties:
+            type:
+              enum:
+              - string
+              - number
+              - boolean
+              description: What type the value of the metadata value is
+            value:
+              type: object
+              description: value of the metadata. Must be a string, number, or boolean
+          description: flat json object, defaults to {} and returned as {} if not provided
+        deviceLink:
+          type: string
+          description: URL to the device, defaults to "" and returned as "" if not provided
+        deviceStatus:
+          type: string
+          default: null
+          description: status of the device such as buffering, recording, etc
+        isRecording:
+          type: boolean
+          default: false
+          description: if the subject is recording or not
+        nickname:
+          type: string
+          description: nickname of the subject
+          default: ''
+        isLawEnforcement:
+          type: boolean
+          default: false
+          description: if the subject is a law enforcement subject or not
+    ErrorResponse:
+      properties:
+        error:
+          type: string
+    SubjectType:
+      type: object
+      required:
+      - subjectType
+      - subjectSubtype
+      - displayName
+      properties:
+        subjectType:
+          type: string
+          enum:
+          - vehicle
+          - person
+          - drone
+          - other
+        subjectSubtype:
+          type: string
+        displayName:
+          type: string
+        ttlSeconds:
+          type: integer
+          description: 0 is disabled TTL
+    GenericAlert:
+      type: object
+      required:
+      - title
+      - priority
+      - eventTime
+      - location
+      - type
+      properties:
+        title:
+          type: string
+          description: 'The title for the alert. Example: "An Attempted Break-In Occurred"'
+        description:
+          type: string
+          description: "A description for the alert. Example: \"There was an attempted break-in detected\
+            \ at 123 Main St.\"          \n"
+        type:
+          type: string
+          enum:
+          - vehicle
+          - person
+          - drone
+          - other
+        subType:
+          type: string
+          description: A developer provided type that helps differentiate and organize the various alert
+            types within the UI. You can use alphanumeric characters and dashes as part of the string.
+        priority:
+          type: integer
+          default: 3
+          minimum: 1
+          maximum: 5
+          description: The priority of the alert. A priority must be between 1 and 5, where 1 is the highest
+            priority.
+        eventTime:
+          type: string
+          format: date-time
+          description: The timestamp (RFC3339 UTC format) of when the event related to this alert occurred.
+          example: '2023-12-31T23:59:59.999999Z'
+        subjectId:
+          type: string
+          description: The subjectId from the Geo API from which this alert was generated.
+        ttl:
+          type: integer
+          description: 'The amount of time (in seconds) that the alert should be visible for. If a TTL
+            is not provided, the alert will remain visible until closed.
+
+            '
+        location:
+          type: object
+          description: The location of the alert. If a subjectId is provided, a location will not be accepted
+            in this request, as the location of the related subject will take priority.
+          required:
+          - latitude
+          - longitude
+          properties:
+            latitude:
+              type: number
+              format: double
+              minimum: -90
+              maximum: 90
+              description: The latitude of the event that this alert is related to.  Precision is only
+                32 bit so it is only accurate for 6 to 9 decimal places.
+              example: 33.786147
+            longitude:
+              type: number
+              format: double
+              minimum: -180
+              maximum: 180
+              description: The longitude of the event that this alert is related to.  Precision is only
+                32 bit so it is only accurate for 6 to 9 decimal places.
+              example: -84.412822
+            address:
+              type: string
+              description: The address that this alert is related to.
+              example: 1170 Howell Mill Rd NW, Atlanta, GA 30318
+        attachments:
+          type: array
+          maxItems: 1
+          items:
+            anyOf:
+            - $ref: '#/components/schemas/Attachment'
+          description: Attachments that will be displayed with the alert.
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+          description: Custom metadata for the alert
+    Attachment:
+      type: object
+      required:
+      - type
+      - name
+      - url
+      properties:
+        type:
+          type: string
+          enum:
+          - link
+          description: The type of attachment.
+        name:
+          type: string
+          description: The display name for the attachment.
+        url:
+          type: string
+          description: The url for the attachment.
+    Event:
+      properties:
+        externalId:
+          type: string
+          description: external id of event used for identification
+        groupingId:
+          type: string
+          description: optional id used to link multiple events together
+        displayId:
+          type: string
+          description: optional override of external id to be displayed in UI
+        eventType:
+          type: string
+        priority:
+          type: integer
+          minimum: 1
+          description: 1-indexed value representing priority of the event (lower is higher priority)
+        displayPriority:
+          type: string
+          description: optional override of priority value to be displayed in UI
+        timestamp:
+          type: string
+          format: date-time
+          description: RFC3339 UTC datetime string of when event started (defaults to current time if
+            not provided)
+        closedAt:
+          type: string
+          format: date-time
+          description: RFC3339 UTC datetime string of when event ended (event considered open if not set)
+        displayStatus:
+          type: string
+          description: optional custom status of event to be displayed in UI
+        department:
+          type: string
+          description: optional field for specifying department involved (fire, EMS, etc.)
+        area:
+          type: string
+          description: optional field for specifying district/sector/beat involved in event
+        narratives:
+          type: array
+          items:
+            type: string
+            description: ordered list of comments relating to event
+        location:
+          $ref: '#/components/schemas/Location'
+        callerInfo:
+          $ref: '#/components/schemas/CallerInfo'
+        dispatchedUnits:
+          items:
+            $ref: '#/components/schemas/DispatchedUnit'
+        involvedVehicles:
+          items:
+            $ref: '#/components/schemas/InvolvedVehicle'
+        involvedPersons:
+          items:
+            $ref: '#/components/schemas/InvolvedPerson'
+        additionalMetadata:
+          $ref: '#/components/schemas/AdditionalMetadata'
+      required:
+      - externalId
+      - eventType
+      - priority
+    Location:
+      properties:
+        name:
+          type: string
+          description: commmon name to identify location by
+        latitude:
+          type: number
+        longitude:
+          type: number
+        streetAddress:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        country:
+          type: string
+        additionalMetadata:
+          $ref: '#/components/schemas/AdditionalMetadata'
+      description: either latitude and longitude is required, or one of streetAddress/city/state
+    CallerInfo:
+      properties:
+        name:
+          type: string
+        phoneNumber:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+          description: RFC3339 UTC datetime string
+        location:
+          $ref: '#/components/schemas/Location'
+        additionalMetadata:
+          $ref: '#/components/schemas/AdditionalMetadata'
+    DispatchedUnit:
+      properties:
+        id:
+          type: string
+        displayId:
+          type: string
+          description: optional override of unit id to be displayed in UI
+        dispatchTime:
+          type: string
+          format: date-time
+          description: RFC3339 UTC datetime string
+        arrivalTime:
+          type: string
+          format: date-time
+          description: RFC3339 UTC datetime string
+        additionalMetadata:
+          $ref: '#/components/schemas/AdditionalMetadata'
+      required:
+      - id
+      - dispatchTime
+    InvolvedVehicle:
+      properties:
+        color:
+          type: string
+        make:
+          type: string
+        model:
+          type: string
+        year:
+          type: integer
+          minimum: 1900
+        plateNumber:
+          type: string
+        plateState:
+          type: string
+        additionalMetadata:
+          $ref: '#/components/schemas/AdditionalMetadata'
+    InvolvedPerson:
+      properties:
+        name:
+          type: string
+        externalId:
+          type: string
+          description: unique identifier for person, generated if not provided
+        description:
+          type: string
+        dateOfBirth:
+          type: string
+          format: date
+          example: '2017-01-20'
+        email:
+          type: string
+        secondaryEmail:
+          type: string
+        phone:
+          type: string
+        secondaryPhone:
+          type: string
+        streetAddress:
+          type: string
+        secondaryStreetAddress:
+          type: string
+        ethnicity:
+          type: string
+        eyeColor:
+          type: string
+        hairColor:
+          type: string
+        height:
+          type: string
+        age:
+          type: integer
+        gender:
+          type: string
+        additionalMetadata:
+          $ref: '#/components/schemas/AdditionalMetadata'
+    AdditionalMetadata:
+      type: object
+      properties:
+        type:
+          enum:
+          - string
+          - number
+          - boolean
+          description: What type the value of the metadata value is
+        value:
+          type: object
+          description: value of the metadata. Must be a string, number, or boolean
+      description: flat json object, defaults to {} and returned as {} if not provided
+    EventsResponse:
+      properties:
+        events:
+          items:
+            $ref: '#/components/schemas/Event'
+    Device:
+      type: object
+      required:
+      - id
+      - type
+      - name
+      - location
+      - network
+      - metadata
+      - createdAt
+      - modifiedAt
+      properties:
+        id:
+          type: string
+          description: The ID of the device.
+        type:
+          $ref: '#/components/schemas/DeviceType'
+        name:
+          type: string
+          description: The name of the device.
+        location:
+          $ref: '#/components/schemas/Location'
+        network:
+          $ref: '#/components/schemas/Network'
+        metadata:
+          type: object
+          description: Metadata about the device.
+        createdAt:
+          type: object
+          description: The timestamp (in RFC3339 UTC format) indicating when the image was captured.
+          example: '2023-12-31T23:59:59.999999Z'
+        modifiedAt:
+          type: object
+          description: The timestamp (in RFC3339 UTC format) indicating when the image was captured.
+          example: '2023-12-31T23:59:59.999999Z'
+        link:
+          type: string
+          description: A link to view the device in the Flock UI.
+          example: https://hotlist.flocksafety.com/dispatch/type/audio?id=00000000-0000-0000-000000000000
+    Network:
+      type: object
+      description: The network that the device belongs to.
+      required:
+      - id
+      - name
+      properties:
+        id:
+          type: string
+          description: The ID for the network
+          example: 72d97364-3f45-4e16-ae52-631aea3141cc
+        name:
+          type: string
+          description: The name of the network
+          example: Little Rock AR PD
+    DeviceType:
+      type: string
+      description: The device's type.
+      enum:
+      - camera
+      - video
+      - audio
+      - external
+    Error:
+      required:
+      - message
+      properties:
+        field:
+          type: string
+          description: The name of the field that contains the error.
+        message:
+          type: string
+          description: A human-readable message that provides details about the error.
+    HotlistEntry:
+      properties:
+        id:
+          type: string
+        caseNumber:
+          type: string
+        expiry:
+          description: ISO datetime string
+          type: string
+          format: date-time
+        plate:
+          type: string
+        reason:
+          type: string
+        state:
+          $ref: '#/components/schemas/State'
+        note:
+          $ref: '#/components/schemas/HotlistEntryNote'
+      required:
+      - caseNumber
+      - plate
+      - reason
+      type: object
+    GetHotlistEntriesResponse:
+      properties:
+        entries:
+          items:
+            $ref: '#/components/schemas/HotlistEntry'
+          type: array
+        totalResults:
+          type: integer
+        nextPage:
+          type: string
+          nullable: true
+      required:
+      - entries
+      - id
+      - name
+      - organizationId
+      type: object
+    HotlistEntryNote:
+      type: object
+      description: Optional note with message field for the hotlist entry
+      required:
+      - message
+      properties:
+        message:
+          type: string
+          description: Note message text (supports URLs for clickable links in UI)
+          example: Vehicle observed at 5th and Main. Contact Det. Smith at 555-0123.
+    State:
+      type: string
+      enum:
+      - alabama
+      - alaska
+      - arizona
+      - arkansas
+      - california
+      - colorado
+      - connecticut
+      - delaware
+      - washington_dc
+      - florida
+      - georgia
+      - hawaii
+      - idaho
+      - illinois
+      - indiana
+      - iowa
+      - kansas
+      - kentucky
+      - louisiana
+      - maine
+      - maryland
+      - massachusetts
+      - michigan
+      - minnesota
+      - mississippi
+      - missouri
+      - montana
+      - nebraska
+      - nevada
+      - new_hampshire
+      - new_jersey
+      - new_mexico
+      - new_york
+      - north_carolina
+      - north_dakota
+      - ohio
+      - oklahoma
+      - oregon
+      - pennsylvania
+      - rhode_island
+      - south_carolina
+      - south_dakota
+      - tennessee
+      - texas
+      - utah
+      - vermont
+      - virginia
+      - washington
+      - west_virginia
+      - wisconsin
+      - wyoming
+      - puerto_rico
+    Hotlist:
+      properties:
+        entries:
+          items:
+            $ref: '#/components/schemas/HotlistEntry'
+          type: array
+        id:
+          type: string
+        name:
+          type: string
+      required:
+      - entries
+      - id
+      - name
+      - organizationId
+      type: object
+    OrgHotlist:
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    Credentials:
+      type: object
+      description: authentication details for calling the webhook endpoint
+      properties:
+        scheme:
+          type: string
+          description: authentication scheme used by webhook endpoint
+          enum:
+          - none
+          - apiKey
+          - basic
+          - oauth2
+        apiKey:
+          type: object
+          description: API key credentials, required if scheme is "apiKey"
+          properties:
+            key:
+              type: string
+              description: API key (this field will be redacted when fetching existing subscriptions)
+            headerName:
+              type: string
+              description: HTTP header name that should be used to supply the API key
+              example: x-api-key
+          required:
+          - key
+          - headerName
+        basic:
+          type: object
+          description: basic credentials, required if scheme is "basic"
+          properties:
+            username:
+              type: string
+              description: username
+            password:
+              type: string
+              description: password (this field will be redacted when fetching existing subscriptions)
+            headerName:
+              type: string
+              description: HTTP header name that should be used to supply the basic credentials
+              example: Authorization
+          required:
+          - username
+          - password
+          - headerName
+        oauth2:
+          type: object
+          description: OAuth2 credentials, required if scheme is "oauth2"
+          properties:
+            tokenEndpoint:
+              type: string
+              description: endpoint where OAuth2 token should be retrieved
+              format: url
+              example: https://example.auth0.com/oauth/token
+            tokenScheme:
+              type: string
+              description: token scheme used to authenticate the token endpoint
+              enum:
+              - body
+              - basic
+              default: body
+            clientId:
+              type: string
+              description: OAuth2 client ID
+            clientSecret:
+              type: string
+              description: OAuth2 client secret (this field will be redactd when fetching existing subscriptions)
+            grantType:
+              type: string
+              description: OAuth2 client grant type
+              example: client_credentials
+            scope:
+              type: string
+              description: scope to request for token
+            customFields:
+              type: object
+              description: key-value pairs to be appended to token request (values will be redacted when
+                fetching existing subscriptions)
+              additionalProperties: true
+            headerName:
+              type: string
+              description: HTTP header name that should be used to supply the OAuth2 token
+              example: Authorization
+          required:
+          - tokenEndpoint
+          - clientId
+          - clientSecret
+          - grantType
+          - headerName
+      required:
+      - scheme
+    CreateSubscriptionRequest:
+      type: object
+      description: request body schema to create a new webhook subscription
+      properties:
+        name:
+          type: string
+          description: optional name to describe the webhook subscription
+        callbackUrl:
+          type: string
+          description: endpoint that webhooks should be submitted to
+          format: url
+          example: https://example.com/your/webhook
+        credentials:
+          $ref: '#/components/schemas/Credentials'
+        contentType:
+          type: string
+          description: content type that webhooks should be provided as
+          enum:
+          - application/json
+          - application/xml
+        customHotlistAudienceFilter:
+          type: string
+          description: "Optionally include LPR hotlist alerts from custom hotlists with restricted audiences\n\
+            \ * `any` - Custom hotlists with organization-wide audience and restricted audience e.g. role-based\
+            \ or user-based audiences\n * `organization` - Custom hotlists with organization-wide audience\
+            \ only\n"
+          enum:
+          - any
+          - organization
+          default: organization
+        enabledFirstResponderJurisdictionAlerts:
+          type: boolean
+          description: indicates whether the subscription should accept hotlist alerts from shared networks
+            in the organization's First Responder Jurisdiction or not
+        enabled:
+          type: boolean
+          description: indicates whether the subscription should be enabled or not
+      required:
+      - callbackUrl
+      - credentials
+      - contentType
+    UpdateSubscriptionRequest:
+      type: object
+      description: request body schema to update an existing webhook subscription
+      allOf:
+      - $ref: '#/components/schemas/CreateSubscriptionRequest'
+      - type: object
+        properties:
+          id:
+            type: string
+            format: uuid
+            description: id of the webhook subscription
+        required:
+        - id
+    Subscription:
+      type: object
+      description: response object when creating, updating or fetching a webhook subscription
+      allOf:
+      - $ref: '#/components/schemas/UpdateSubscriptionRequest'
+      - type: object
+        properties:
+          createdAt:
+            type: string
+            format: date-time
+            description: RFC3339 UTC timestamp of when the webhook subscription was created
+          updatedAt:
+            type: string
+            format: date-time
+            description: RFC3339 UTC timestamp of when the webhook subscription was most recently updated
+    StateInfo:
+      type: object
+      required:
+      - state
+      - confidence
+      properties:
+        state:
+          type: string
+          description: The state that the license plate is from.
+          example: arkansas
+        confidence:
+          type: number
+          description: A number expressing certainty in that the state was correctly identified. The range
+            is between 0.0 and 1.0
+          example: 0.75
+    PlateInfo:
+      type: object
+      required:
+      - plate
+      - confidence
+      properties:
+        plate:
+          type: string
+          description: The license plate.
+          example: XNA357
+        confidence:
+          type: number
+          description: A number expressing certainty in that the license plate was correctly identified.
+            The range is between 0.0 and 1.0
+          example: 0.9
+    LicensePlateRead:
+      type: object
+      description: A license plate read
+      required:
+      - id
+      - capturedAt
+      - device
+      - plate
+      properties:
+        id:
+          type: string
+          description: The ID that identifies this specific license plate read.
+          example: 4171ae2b-843f-405b-922d-b1e89921f24f
+        capturedAt:
+          type: string
+          description: The timestamp (in RFC3339 UTC format) indicating when the license plate was captured.
+          example: '2023-12-31T23:59:59.999999Z'
+        device:
+          description: The device that captured the license plate.
+          $ref: '#/components/schemas/Device'
+        state:
+          $ref: '#/components/schemas/StateInfo'
+        plate:
+          $ref: '#/components/schemas/PlateInfo'
+        link:
+          type: string
+          description: A link to view the license plate read within our UI.
+          example: https://share.flocksafety.com/lookup/33fc2d53-5b1e-4f9a-95b8-a3fe47823d26
+    LookupResult:
+      type: object
+      description: Results
+      required:
+      - results
+      - totalItems
+      properties:
+        results:
+          type: array
+          description: List of license plate reads
+          items:
+            $ref: '#/components/schemas/LicensePlateRead'
+        nextPageId:
+          type: string
+          description: The ID of the next page. This ID is used in the [Get Results](#/paths/~1reads~1lookup/get)
+            endpoint.
+        previousPageId:
+          type: string
+          description: The ID of the previous page. This ID is used in the [Get Results](#/paths/~1reads~1lookup/get)
+            endpoint.
+        totalItems:
+          type: number
+          description: The total number of reads that are available to view.
+          example: 2
+    ImageUpload:
+      type: object
+      required:
+      - image
+      properties:
+        image:
+          type: string
+          description: The image to ingest and process into FlockOS.
+          format: binary
+        contextImages:
+          type: array
+          description: 'Additional context images to be ingested. These images will not be processed but
+            will be viewable alongside the main image
+
+            '
+          items:
+            type: string
+            format: binary
+        capturedAt:
+          type: string
+          format: date-time
+          description: The timestamp (in RFC3339 UTC format) indicating when the image was captured.
+          example: '2024-07-26T17:31:51.000Z'
+        latitude:
+          type: number
+          format: float
+          example: 40.783979987434215
+          description: The latitude of the location where the images were captured.
+          minimum: -90
+          maximum: 90
+        longitude:
+          type: number
+          format: float
+          description: The longitude of the location where the images were captured.
+          example: -73.97539595767532
+          minimum: -180
+          maximum: 180
+    UpdateDeviceRequest:
+      type: object
+      minProperties: 1
+      properties:
+        name:
+          type: string
+          description: The name of the device.
+          example: Camera \#001 - Main Street
+        metadata:
+          type: object
+          description: Metadata about the device.
+        location:
+          $ref: '#/components/schemas/Location'
+          description: The location where the device is located.
+    EventsBody:
+      properties:
+        events:
+          items:
+            $ref: '#/components/schemas/Event'
+      required:
+      - events
+    NarrativeBody:
+      properties:
+        narratives:
+          type: array
+          items:
+            type: string
+      required:
+      - narratives
+    ExternalIdsBody:
+      properties:
+        externalIds:
+          type: array
+          items:
+            type: string
+      required:
+      - externalIds
+    CreateDeviceRequest:
+      type: object
+      required:
+      - name
+      - location
+      properties:
+        name:
+          type: string
+          description: The name of the device.
+          example: 'Camera #001 - Main Street'
+        location:
+          $ref: '#/components/schemas/Location'
+        metadata:
+          type: object
+          description: Metadata about the device.
+    CreateHotlistEntriesRequest:
+      properties:
+        entries:
+          items:
+            $ref: '#/components/schemas/CreateHotlistEntryRequest'
+          type: array
+      required:
+      - entries
+      type: object
+    CreateHotlistEntryRequest:
+      properties:
+        caseNumber:
+          type: string
+        expiry:
+          description: ISO datetime string. After this date, alerts will not be triggered for this entry.
+          type: string
+          format: date-time
+        plate:
+          type: string
+        reason:
+          type: string
+        state:
+          $ref: '#/components/schemas/State'
+        note:
+          $ref: '#/components/schemas/HotlistEntryNote'
+      required:
+      - caseNumber
+      - plate
+      - reason
+      type: object
+    CreateEntriesResponse:
+      properties:
+        entries:
+          items:
+            $ref: '#/components/schemas/HotlistEntry'
+          type: array
+      required:
+      - entries
+      type: object
+    DeleteHotlistEntriesRequest:
+      properties:
+        ids:
+          items:
+            type: string
+          type: array
+      required:
+      - ids
+      type: object
+    CreateHotlistRequest:
+      properties:
+        entries:
+          items:
+            $ref: '#/components/schemas/CreateHotlistEntryRequest'
+          type: array
+          maxItems: 3000
+        name:
+          type: string
+      required:
+      - entries
+      - name
+      type: object
+    CreateHotlistResponse:
+      properties:
+        id:
+          format: uuid
+          type: string
+      required:
+      - id
+      type: object
+    ConfidenceFilter:
+      type: object
+      required:
+      - attribute
+      - minConfidence
+      properties:
+        attribute:
+          type: string
+          enum:
+          - plate
+          - state
+          description: Specifies the attribute to which the confidence filter should be applied.
+        minConfidence:
+          type: number
+          minimum: 0
+          maximum: 1
+          example: 0.5
+          description: 'The minimum confidence threshold, expressed as a decimal between 0.0 and 1.0.
+            This filter applies only to the specified attribute. Results where the confidence score for
+            the specified attribute is below this value will be excluded.
+
+            '
+    RadiusFilter:
+      type: object
+      description: Filters the results to where only reads captured within this radius will be returned.
+      properties:
+        radius:
+          type: object
+          properties:
+            latitude:
+              type: number
+              description: The latitude for the center-point of the radius.
+              example: 40.783871
+            longitude:
+              type: number
+              description: The longitude for the center-point of the radius.
+              example: -73.97541
+            radius:
+              type: number
+              minimum: 1
+              maximum: 2000
+              example: 5
+              description: The radius, in miles, of the circle around the centerpoint.
+    AreaFilter:
+      type: object
+      description: 'Filters the results to where only reads captured within an area will be returned.
+        The area must be defined as a [GeoJSON Polygon with a single ring](https://mapsam.com/geojson-ring-visual/).
+
+        '
+      properties:
+        area:
+          type: object
+          required:
+          - type
+          - coordinates
+          properties:
+            type:
+              type: string
+              enum:
+              - Polygon
+            coordinates:
+              type: array
+              minItems: 1
+              maxItems: 1
+              items:
+                type: array
+                minItems: 4
+                items:
+                  type: array
+                  minItems: 2
+                  maxItems: 2
+                  items:
+                    type: number
+          example:
+            type: Polygon
+            coordinates:
+            - - - 102
+                - 2
+              - - 103
+                - 2
+              - - 103
+                - 3
+              - - 102
+                - 3
+              - - 102
+                - 2
+    SortCriteria:
+      type: object
+      properties:
+        field:
+          type: string
+          enum:
+          - capturedAt
+          description: The field to sort results by.
+        order:
+          type: string
+          enum:
+          - asc
+          - desc
+          description: "The order to sort by:\n  * `asc` - Ascending, from the oldest to the newest.\n\
+            \  * `desc` - Descending, from the newest to the oldest.\n"
+      required:
+      - field
+      - order
+    LookupRequest:
+      type: object
+      description: A request to lookup license plate reads.
+      required:
+      - plate
+      - reason
+      - startDate
+      - endDate
+      properties:
+        plate:
+          type: string
+          description: The license plate to lookup.
+          example: FNA579
+        startDate:
+          type: string
+          description: The beginning date range for the lookup. The specified date must be in ISO8601
+            format.
+          example: '2022-08-06T12:26:00.000Z'
+          format: date-time
+        endDate:
+          type: string
+          description: The end of the date range for the lookup. The specified date must be in ISO8601
+            format.
+          example: '2022-08-09T23:59:59.000Z'
+          format: date-time
+        limit:
+          type: number
+          minimum: 1
+          maximum: 50
+          description: The limit for the maximum number of reads that can be returned on a single page.
+        minConfidences:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConfidenceFilter'
+        state:
+          type: string
+          enum:
+          - alabama
+          - alaska
+          - arizona
+          - arkansas
+          - california
+          - colorado
+          - connecticut
+          - delaware
+          - washington_dc
+          - florida
+          - georgia
+          - hawaii
+          - idaho
+          - illinois
+          - indiana
+          - iowa
+          - kansas
+          - kentucky
+          - louisiana
+          - maine
+          - maryland
+          - massachusetts
+          - michigan
+          - minnesota
+          - mississippi
+          - missouri
+          - montana
+          - nebraska
+          - nevada
+          - new_hampshire
+          - new_jersey
+          - new_mexico
+          - new_york
+          - north_carolina
+          - north_dakota
+          - ohio
+          - oklahoma
+          - oregon
+          - pennsylvania
+          - rhode_island
+          - south_carolina
+          - south_dakota
+          - tennessee
+          - texas
+          - utah
+          - vermont
+          - virginia
+          - washington
+          - west_virginia
+          - wisconsin
+          - wyoming
+          - puerto_rico
+          description: Filters results to where only plate from the specified state are returned.
+        reason:
+          type: string
+          description: 'The reason this plate reads lookup is being done.  This is in place in order to
+            ensure the system can be audited for misuse for customers.
+
+            '
+          example: 'Tracking vehicle involved with case #103024'
+        caseNumber:
+          type: string
+          description: The relevant case number for this lookup, if applicable.
+          example: '103024'
+        sort:
+          type: array
+          items:
+            $ref: '#/components/schemas/SortCriteria'
+        radius:
+          $ref: '#/components/schemas/RadiusFilter'
+          description: Optional raidus filter to apply to the lookup.
+        area:
+          $ref: '#/components/schemas/AreaFilter'
+          description: Optional area filter to apply to the lookup.
+      not:
+        required:
+        - radius
+        - area
+      example:
+        plate: FNA579
+        reason: 'Tracking vehicle involved with case #103024'
+        startDate: '2022-08-06T12:26:00Z'
+        endDate: '2022-08-09T23:59:59Z'
+        limit: 10
+        state: arkansas
+        caseNumber: '103024'
+        sort:
+        - field: capturedAt
+          order: desc
+        radius:
+          radius:
+            latitude: 40.783871
+            longitude: -73.97541
+            radius: 5
+    UpdateHotlistRequest:
+      properties:
+        entries:
+          items:
+            $ref: '#/components/schemas/CreateHotlistEntryRequest'
+          type: array
+          maxItems: 3000
+        name:
+          type: string
+      required:
+      - entries
+      - name
+      type: object
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    oauth2Auth:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://api.flocksafety.com/oauth/token
+          scopes:
+            custom-holists:read: Read access to custom hotlists
+            custom-holists:write: Write access to custom hotlists
+    FlockOAuth:
+      type: oauth2
+      description: OAuth 2 with the client credentials flow
+      flows:
+        clientCredentials:
+          scopes:
+            plate-reads:lookup: Access to perform lookups on license plate reads.
+          tokenUrl: https://api.flocksafety.com/oauth/token
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://api.flocksafety.com/oauth/token
+          scopes: {}

@@ -1,0 +1,119 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/flock-safety-openapi-original.yml
+format: http-status
+envelope:
+  oauth_token_endpoint: '{ "error": "invalid_request", "error_description": "..." } (OAuth 2.0 error envelope,
+    RFC 6749)'
+  v3_apis: Plain HTTP status codes; no application/problem+json (RFC 9457) declared in the published spec
+notes: Derived from 4xx/5xx responses across the 43 harvested v3 operations. Titles are the verbatim response
+  descriptions published in the developer-hub reference.
+problems:
+- status: 400
+  title: Bad request, either the batch contained a duplicate plate or the request body was malformed.
+  other_descriptions:
+  - Bad Request (missing required field or credentials failed to validate)
+  - The given alert contains one or more errors.
+  - Bad Request
+  - Bad request
+  occurrences: 26
+  example_operations:
+  - DELETE /geo/subjects/{externalSubjectId}
+  - GET /geo/subjects/{externalSubjectId}
+  - DELETE /geo/types/{typeId}
+  - PUT /alerts/{alertId}
+  - POST /alerts
+- status: 401
+  title: Unauthorized, authentication token was invalid or not provided
+  other_descriptions:
+  - The provided token is either expired or invalid.
+  - Client credentials invalid
+  - Unauthorized
+  occurrences: 38
+  example_operations:
+  - DELETE /geo/subjects/{externalSubjectId}
+  - GET /geo/subjects/{externalSubjectId}
+  - DELETE /geo/types/{typeId}
+  - DELETE /hotlists/{hotlistId}
+  - GET /hotlists/{hotlistId}
+- status: 403
+  title: Forbidden, your client does not have access to this resource
+  other_descriptions:
+  - Forbidden (lacking appropriate scope or client claims)
+  - Invalid or missing audience
+  occurrences: 16
+  example_operations:
+  - DELETE /hotlists/{hotlistId}
+  - GET /hotlists/{hotlistId}
+  - PUT /hotlists/{hotlistId}
+  - DELETE /integrations/lpr/alerts/subscriptions/{id}
+  - GET /integrations/lpr/alerts/subscriptions/{id}
+- status: 404
+  title: Event Not Found (provided externalId doesn't match any existing)
+  other_descriptions:
+  - Not Found (provided id doesn't match any existing)
+  - No hotlist was found with the given ID
+  - Subscription Not Found
+  - Not Found
+  occurrences: 27
+  example_operations:
+  - DELETE /geo/subjects/{externalSubjectId}
+  - GET /geo/subjects/{externalSubjectId}
+  - DELETE /geo/types/{typeId}
+  - DELETE /hotlists/{hotlistId}
+  - GET /hotlists/{hotlistId}
+- status: 409
+  title: Conflict (subject type already exists with provided type and subtype)
+  other_descriptions:
+  - Conflict (violates a unique constraint)
+  occurrences: 2
+  example_operations:
+  - POST /geo/types
+  - POST /integrations/lpr/alerts/subscriptions
+- status: 413
+  title: 'The total size of all the images uploaded exceeds 9 MiB. Total file sizes: 13 MiB'
+  other_descriptions:
+  - Request entity too large, the number of entries exceeds the organization's limit
+  occurrences: 3
+  example_operations:
+  - PUT /hotlists/{hotlistId}
+  - POST /hotlists
+  - POST /devices/{deviceId}/images
+- status: 422
+  title: The given device creation request contains one or more errors.
+  other_descriptions:
+  - The given device update request contains one or more errors.
+  - The given lookup criteria contain one or more errors.
+  - The page ID is missing.
+  occurrences: 5
+  example_operations:
+  - PATCH /devices/{deviceId}
+  - GET /devices
+  - POST /devices
+  - GET /reads/lookup/page/{pageId}
+  - POST /reads/lookup
+- status: 429
+  title: The maximum number of requests per second has been exceeded or the maximum number of devices
+    that can be decommissioned per day has been exceeded.
+  other_descriptions:
+  - The maximum number of requests you can perform per second or the maximum number of devices you can
+    create per day has been exceeded.
+  - The maximum number of requests you can perform per second has been exceeded.
+  - Too Many Requests
+  occurrences: 13
+  example_operations:
+  - GET /alerts/{alertId}
+  - PUT /alerts/{alertId}
+  - GET /alerts
+  - POST /alerts
+  - GET /devices/{deviceId}
+- status: 500
+  title: Internal Server Error
+  other_descriptions: []
+  occurrences: 11
+  example_operations:
+  - DELETE /integrations/lpr/alerts/subscriptions/{id}
+  - GET /integrations/lpr/alerts/subscriptions/{id}
+  - GET /devices/{deviceId}
+  - PATCH /devices/{deviceId}
+  - GET /devices

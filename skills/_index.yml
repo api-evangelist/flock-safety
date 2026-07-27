@@ -1,0 +1,23 @@
+generated: '2026-07-19'
+method: generated
+source: >-
+  Generated from openapi/flock-safety-openapi-original.yml + conventions/flock-safety-conventions.yml +
+  errors/flock-safety-problem-types.yml. No provider-published Agent Skills / AGENTS.md were found on the
+  Flock Safety developer hub. Every step is grounded in a real v3 operation (method + path).
+api: openapi/flock-safety-openapi-original.yml
+skills:
+- file: flock-safety-authenticate.md
+  name: Get a Flock Safety API access token
+  operations: ['POST /oauth/token']
+- file: flock-safety-manage-custom-hotlist.md
+  name: Create a custom hotlist and add plate entries
+  operations: ['POST /hotlists', 'POST /hotlists/{hotlistId}/entries/addBatch', 'GET /hotlists/{hotlistId}/entries']
+- file: flock-safety-subscribe-lpr-alerts.md
+  name: Subscribe to real-time LPR hotlist alert webhooks
+  operations: ['POST /integrations/lpr/alerts/subscriptions', 'GET /integrations/lpr/alerts/subscriptions']
+- file: flock-safety-plate-lookup.md
+  name: Look up license plate reads
+  operations: ['POST /reads/lookup', 'GET /reads/lookup/page/{pageId}']
+- file: flock-safety-push-cad-event.md
+  name: Upsert a CAD event and append a narrative
+  operations: ['POST /cad/events', 'POST /cad/events/{externalId}/narrative', 'POST /cad/events/{externalId}/close']

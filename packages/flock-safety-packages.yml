@@ -1,0 +1,13 @@
+generated: '2026-07-19'
+method: searched
+source: >-
+  Registry probes of npm, PyPI, and GitHub on 2026-07-19; Flock Safety developer hub
+  (docs.flocksafety.com) publishes no first-party client SDKs.
+notes: >-
+  Flock Safety's v3 API Platform is access-controlled: credentials (client_id/client_secret) are
+  provisioned privately per customer organization by a Flock Safety representative, and the docs show
+  only raw cURL examples. No official first-party client library was found on npm, PyPI, Maven Central,
+  NuGet, RubyGems, Packagist, crates.io, or pkg.go.dev. The npm scope '@flockos/*' belongs to the
+  unrelated Flock messaging platform (flock.com), NOT Flock Safety, so it is excluded. No SDKs pointer
+  is emitted because no first-party client library exists.
+packages: []

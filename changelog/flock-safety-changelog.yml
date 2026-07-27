@@ -1,0 +1,46 @@
+generated: '2026-07-19'
+method: searched
+source: https://docs.flocksafety.com/developer-hub/changelog
+scheme: dated (per-feature entries; API products versioned in URL path, labeled Stable / Early Access)
+current_version: v3
+entries:
+- title: User-Level OAuth Framework
+  date: '2026-02-12'
+  type: addition
+  maturity: Early Access
+  breaking: false
+  highlights: >-
+    New user-level (authorization_code) OAuth framework — tokens attributed to a specific Flock user,
+    inheriting RBAC, with per-user quotas and full audit trails; recommended for new/sensitive endpoints.
+  url: https://docs.flocksafety.com/developer-hub/changelog/user-level-oauth-framework-early-access
+- title: Vehicle Detections Search API v4
+  date: '2026-02-12'
+  type: addition
+  maturity: Early Access
+  breaking: false
+  highlights: New v4 Vehicle Detections Search API for querying vehicle detections.
+  url: https://docs.flocksafety.com/developer-hub/changelog/vehicle-detections-search-api-v4-early-access
+- title: Audience Controls for Custom Hotlist LPR Alerts
+  date: '2025-09-15'
+  type: enhancement
+  breaking: false
+  highlights: >-
+    Subscriptions can filter custom-hotlist LPR alerts by audience (organization-wide only vs all custom
+    hotlists including restricted-audience lists); customHotlistAudience field added to alert payloads.
+  url: https://docs.flocksafety.com/developer-hub/changelog/update-audience-controls-for-custom-hotlist-lpr-alerts
+- title: LPR Hotlist Alerts from Shared Cameras in First Responder
+  date: '2025-08-29'
+  type: addition
+  breaking: false
+  highlights: >-
+    Webhook now delivers hotlist alerts from cameras shared by other Flock customers located within a
+    law-enforcement customer's configured First Responder Jurisdiction (FRJ).
+  url: https://docs.flocksafety.com/developer-hub/changelog/lpr-hotlist-alerts-from-shared-cameras-in-first-responder
+- title: Transition to New LPR Hotlist Event Subscription API
+  date: '2025-03-26'
+  type: migration
+  breaking: true
+  highlights: >-
+    Migration to the new LPR hotlist event subscription API (/integrations/lpr/alerts/subscriptions)
+    from the prior event-subscription mechanism.
+  url: https://docs.flocksafety.com/developer-hub/changelog/transition-to-new-lpr-hotlist-event-subscription-api

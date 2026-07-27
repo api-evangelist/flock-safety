@@ -1,0 +1,51 @@
+generated: '2026-07-19'
+method: derived
+source: >-
+  openapi/flock-safety-openapi-original.yml + docs.flocksafety.com developer hub +
+  security.flocksafety.com trust center
+standards:
+- id: oauth2
+  conforms: true
+  evidence: >-
+    securitySchemes declare oauth2 with clientCredentials flow (oauth2Auth, FlockOAuth); docs document
+    client_credentials (machine) and authorization_code (user) grants against api.flocksafety.com/oauth/token
+- id: oauth2-client-credentials
+  conforms: true
+  evidence: RFC 6749 client_credentials grant with client_id/client_secret/audience form params
+- id: oauth2-authorization-code
+  conforms: true
+  evidence: User-Level OAuth uses authorization_code + refresh_token rotation (30m access / 12h refresh)
+- id: bearer-jwt
+  conforms: true
+  evidence: bearerAuth scheme type http/bearer with bearerFormat JWT; Authorization Bearer header
+- id: oidc-discovery
+  conforms: false
+  evidence: no /.well-known/openid-configuration (404)
+- id: rfc8414-oauth-metadata
+  conforms: false
+  evidence: no /.well-known/oauth-authorization-server (404)
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: >-
+    error responses use a simple {error, error_description} envelope on the OAuth endpoint and plain
+    HTTP status codes elsewhere; not application/problem+json
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: no /.well-known/security.txt (404)
+- id: webhooks
+  conforms: true
+  evidence: >-
+    LPR hotlist alert webhook delivers HTTP POST JSON; subscription-managed via
+    /integrations/lpr/alerts/subscriptions; third-party endpoint auth supports none/basic/apikey/oauth2
+- id: soc2
+  conforms: true
+  evidence: SOC 2 listed on security.flocksafety.com trust center
+- id: iso-27001
+  conforms: true
+  evidence: ISO/IEC 27001 listed on security.flocksafety.com trust center
+- id: iso-27017
+  conforms: true
+  evidence: ISO/IEC 27017 listed on security.flocksafety.com trust center
+- id: iso-27018
+  conforms: true
+  evidence: ISO/IEC 27018 listed on security.flocksafety.com trust center

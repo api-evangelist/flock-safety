@@ -1,0 +1,74 @@
+asyncapi: 2.6.0
+info:
+  title: Flock Safety LPR Hotlist Alerts Webhook
+  version: '3.0.0'
+  description: >-
+    Real-time webhook that delivers Flock Safety LPR (license plate recognition) hotlist alert events.
+    An alert fires when a plate captured by a Flock LPR camera (owned by, or shared within the First
+    Responder Jurisdiction of, the customer) matches a hotlist entry — e.g. NCIC/CJIS or a custom hotlist.
+    Flock sends an HTTP POST with a JSON body to the subscriber's endpoint per match. Subscriptions are
+    managed through the v3 API at /integrations/lpr/alerts/subscriptions. Harvested from the Flock Safety
+    developer hub (docs.flocksafety.com/developer-hub/docs/being-notified-about-lpr-alerts).
+  x-provenance:
+    generated: '2026-07-19'
+    method: searched
+    source: https://docs.flocksafety.com/developer-hub/docs/being-notified-about-lpr-alerts
+defaultContentType: application/json
+channels:
+  lpr/hotlist-alert:
+    description: >-
+      Delivered to the subscriber-registered HTTPS endpoint. Endpoint authentication is configured per
+      subscription and supports none, basic auth, API key, or OAuth2 client_credentials (Flock retrieves
+      a Bearer token from the subscriber's token endpoint and sends it in the Authorization header).
+    subscribe:
+      operationId: receiveLprHotlistAlert
+      summary: Receive a hotlist match alert for a captured license plate.
+      message:
+        $ref: '#/components/messages/LprHotlistAlert'
+components:
+  messages:
+    LprHotlistAlert:
+      name: LprHotlistAlert
+      title: LPR Hotlist Alert
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/LprHotlistAlert'
+  schemas:
+    LprHotlistAlert:
+      type: object
+      properties:
+        deviceLat: { type: number, format: float, description: Latitude of the camera where the read was captured. }
+        deviceLong: { type: number, format: float, description: Longitude of the camera where the read was captured. }
+        deviceName: { type: string, description: Name of the device that captured the read. }
+        deviceExternalId: { type: string, format: uuid, description: UUID of the device that captured the read. }
+        networkName: { type: string, description: Name of the network containing the capturing device. }
+        networkExternalId: { type: string, format: uuid, description: UUID of the network containing the capturing device. }
+        objectId: { type: string, format: uuid, description: UUID for the license plate read. }
+        eventTime: { type: string, format: date-time, description: 'Time the read occurred (ISO 8601).' }
+        imageUrl: { type: string, format: uri, description: Signed S3 URL for the best capture image of the vehicle. }
+        imageExpiration: { type: string, format: date-time, description: 'Expiry time of the signed image URL (ISO 8601).' }
+        detailsUrl: { type: string, format: uri, description: Deep link to the LPR alert in Flock Safety's platform. }
+        ocr:
+          type: [object, 'null']
+          description: OCR metadata about the read.
+          properties:
+            label: { type: string, description: Letters detected on the license plate. }
+            labelConfidence: { type: number, format: float, description: ML confidence of the OCR. }
+            state: { type: [string, 'null'], description: State detected. }
+            stateConfidence: { type: [number, 'null'], format: float, description: ML confidence of the state classification. }
+        sources:
+          type: array
+          description: The hotlists that contained the matched entry.
+          items:
+            type: object
+            properties:
+              name: { type: string, description: 'Name of the hotlist (e.g. "NCIC", "My Custom Hotlist").' }
+              reason: { type: string, description: 'Reason the vehicle was listed (e.g. "Stolen Vehicle").' }
+              caseNumber: { type: [string, 'null'], description: Case number assigned to the hotlist entry; omitted when absent. }
+              customHotlistAudience:
+                type: [string, 'null']
+                enum: [organization, restricted]
+                description: >-
+                  Intended audience for alerts from a custom hotlist (organization | restricted). Present
+                  only for custom-hotlist LPR alerts.
+      required: [deviceExternalId, objectId, eventTime, sources]

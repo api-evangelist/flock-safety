@@ -1,0 +1,142 @@
+generated: '2026-07-19'
+method: derived
+status: candidate
+source: openapi/flock-safety-openapi-original.yml
+notes: No official hosted/remote MCP server was found for Flock Safety (checked developer hub, npm @modelcontextprotocol,
+  and MCP registries on 2026-07-19). This is a CANDIDATE tool list derived one-per-operation from the
+  harvested v3 OpenAPI; it is a design starting point, not a published server. Requires OAuth2 client_credentials
+  (machine) or authorization_code (user) tokens.
+server:
+  name: flock-safety
+  transport: http
+  base_url: https://api.flocksafety.com/api/v3
+tools:
+- name: delete_geo_subjects_externalsubjectid
+  description: Disable a Tracked Subject
+  source_operation: openapi/flock-safety-openapi-original.yml#DELETE /geo/subjects/{externalSubjectId}
+- name: get_geo_subjects_externalsubjectid
+  description: Retrieving a Tracked Subject
+  source_operation: openapi/flock-safety-openapi-original.yml#GET /geo/subjects/{externalSubjectId}
+- name: delete_geo_types_typeid
+  description: Deleting a Subject Type
+  source_operation: openapi/flock-safety-openapi-original.yml#DELETE /geo/types/{typeId}
+- name: delete_hotlists_hotlistid
+  description: Delete a custom hotlist
+  source_operation: openapi/flock-safety-openapi-original.yml#DELETE /hotlists/{hotlistId}
+- name: get_hotlists_hotlistid
+  description: Retrieve a custom hotlist
+  source_operation: openapi/flock-safety-openapi-original.yml#GET /hotlists/{hotlistId}
+- name: put_hotlists_hotlistid
+  description: Update a custom hotlist
+  source_operation: openapi/flock-safety-openapi-original.yml#PUT /hotlists/{hotlistId}
+- name: delete_integrations_lpr_alerts_subscriptions_id
+  description: Delete Subscription
+  source_operation: openapi/flock-safety-openapi-original.yml#DELETE /integrations/lpr/alerts/subscriptions/{id}
+- name: get_integrations_lpr_alerts_subscriptions_id
+  description: Get Subscription
+  source_operation: openapi/flock-safety-openapi-original.yml#GET /integrations/lpr/alerts/subscriptions/{id}
+- name: get_alerts_alertid
+  description: Fetching a single Alert
+  source_operation: openapi/flock-safety-openapi-original.yml#GET /alerts/{alertId}
+- name: put_alerts_alertid
+  description: Updating an Alert
+  source_operation: openapi/flock-safety-openapi-original.yml#PUT /alerts/{alertId}
+- name: get_alerts
+  description: Fetching all recent Alerts
+  source_operation: openapi/flock-safety-openapi-original.yml#GET /alerts
+- name: post_alerts
+  description: Creating an Generic Alert
+  source_operation: openapi/flock-safety-openapi-original.yml#POST /alerts
+- name: get_cad_events_active
+  description: Retrieving Active Events
+  source_operation: openapi/flock-safety-openapi-original.yml#GET /cad/events/active
+- name: post_cad_events_active
+  description: Updating Active Events
+  source_operation: openapi/flock-safety-openapi-original.yml#POST /cad/events/active
+- name: get_cad_events_externalid
+  description: Retrieving an Event by ExternalID
+  source_operation: openapi/flock-safety-openapi-original.yml#GET /cad/events/{externalId}
+- name: get_cad_events
+  description: Retrieving Events
+  source_operation: openapi/flock-safety-openapi-original.yml#GET /cad/events
+- name: post_cad_events
+  description: Creating or Updating an Event
+  source_operation: openapi/flock-safety-openapi-original.yml#POST /cad/events
+- name: get_devices_deviceid
+  description: Retrieving a device.
+  source_operation: openapi/flock-safety-openapi-original.yml#GET /devices/{deviceId}
+- name: patch_devices_deviceid
+  description: Updating a device.
+  source_operation: openapi/flock-safety-openapi-original.yml#PATCH /devices/{deviceId}
+- name: get_devices
+  description: Retrieving devices.
+  source_operation: openapi/flock-safety-openapi-original.yml#GET /devices
+- name: post_devices
+  description: Creating a device.
+  source_operation: openapi/flock-safety-openapi-original.yml#POST /devices
+- name: get_geo_subjects
+  description: Retrieve All Tracked Subjects
+  source_operation: openapi/flock-safety-openapi-original.yml#GET /geo/subjects
+- name: put_geo_subjects
+  description: Create or updating a Tracked Subject
+  source_operation: openapi/flock-safety-openapi-original.yml#PUT /geo/subjects
+- name: get_geo_types
+  description: List Subject Types
+  source_operation: openapi/flock-safety-openapi-original.yml#GET /geo/types
+- name: post_geo_types
+  description: Register a Subject Type
+  source_operation: openapi/flock-safety-openapi-original.yml#POST /geo/types
+- name: get_hotlists_hotlistid_entries
+  description: Retrieve a page of entries for a hotlist
+  source_operation: openapi/flock-safety-openapi-original.yml#GET /hotlists/{hotlistId}/entries
+- name: get_hotlists
+  description: Retrieve custom hotlists
+  source_operation: openapi/flock-safety-openapi-original.yml#GET /hotlists
+- name: post_hotlists
+  description: Create a custom hotlist
+  source_operation: openapi/flock-safety-openapi-original.yml#POST /hotlists
+- name: get_integrations_lpr_alerts_subscriptions
+  description: Get Subscriptions
+  source_operation: openapi/flock-safety-openapi-original.yml#GET /integrations/lpr/alerts/subscriptions
+- name: post_integrations_lpr_alerts_subscriptions
+  description: Create Subscription
+  source_operation: openapi/flock-safety-openapi-original.yml#POST /integrations/lpr/alerts/subscriptions
+- name: put_integrations_lpr_alerts_subscriptions
+  description: Update Subscription
+  source_operation: openapi/flock-safety-openapi-original.yml#PUT /integrations/lpr/alerts/subscriptions
+- name: get_reads_lookup_page_pageid
+  description: View license plate reads lookup results
+  source_operation: openapi/flock-safety-openapi-original.yml#GET /reads/lookup/page/{pageId}
+- name: post_devices_deviceid_images
+  description: Uploading images of a vehicle.
+  source_operation: openapi/flock-safety-openapi-original.yml#POST /devices/{deviceId}/images
+- name: post_alerts_alertid_close
+  description: Closing an Alert.
+  source_operation: openapi/flock-safety-openapi-original.yml#POST /alerts/{alertId}/close
+- name: post_cad_events_externalid_close
+  description: Marking an Event as Closed
+  source_operation: openapi/flock-safety-openapi-original.yml#POST /cad/events/{externalId}/close
+- name: post_cad_events_externalid_narrative
+  description: Appending a Narrative Entry
+  source_operation: openapi/flock-safety-openapi-original.yml#POST /cad/events/{externalId}/narrative
+- name: post_cad_events_externalid_open
+  description: Marking an Event as Open
+  source_operation: openapi/flock-safety-openapi-original.yml#POST /cad/events/{externalId}/open
+- name: post_cad_events_externalIds
+  description: Retrieving Events by ExternalIDs
+  source_operation: openapi/flock-safety-openapi-original.yml#POST /cad/events/externalIds
+- name: post_devices_deviceid_decommission
+  description: Decommissioning a device.
+  source_operation: openapi/flock-safety-openapi-original.yml#POST /devices/{deviceId}/decommission
+- name: post_hotlists_hotlistid_entries_addBatch
+  description: Add a batch of entries to a hotlist
+  source_operation: openapi/flock-safety-openapi-original.yml#POST /hotlists/{hotlistId}/entries/addBatch
+- name: post_hotlists_hotlistid_entries_deleteBatch
+  description: Delete a batch of entries from a hotlist
+  source_operation: openapi/flock-safety-openapi-original.yml#POST /hotlists/{hotlistId}/entries/deleteBatch
+- name: post_oauth_token
+  description: Retrieve an Access Token
+  source_operation: openapi/flock-safety-openapi-original.yml#POST /oauth/token
+- name: post_reads_lookup
+  description: Lookup license plate reads
+  source_operation: openapi/flock-safety-openapi-original.yml#POST /reads/lookup

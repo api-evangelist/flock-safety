@@ -1,0 +1,28 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Flock Safety API Platform (v3)
+  version: 1.0.0
+extends: openapi/flock-safety-openapi-original.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-enriched: '2026-07-19'
+      x-apievangelist-source: https://docs.flocksafety.com/developer-hub
+      x-apievangelist-notes: >-
+        Spec harvested and merged from the per-operation OpenAPI fragments embedded in Flock
+        Safety's ReadMe-hosted developer hub (docs.flocksafety.com). The published surface exposes
+        no operationIds and no consolidated OpenAPI document; identifiers below map each path+method
+        to the developer-hub reference slug that documents it.
+  - target: $.info
+    update:
+      x-agent-readiness:
+        auth: OAuth 2.0 client_credentials (machine) + authorization_code (user); Bearer JWT
+        idempotency: externalId upsert (CAD events, tracked subjects) + batch dedup (hotlist entries)
+        events: LPR hotlist alert webhook (see asyncapi/flock-safety-lpr-alerts-asyncapi.yml)
+        errors: HTTP status codes 400/401/403/404/409/500 with OAuth ErrorResponse envelope on token
+  - target: $.info
+    update:
+      x-scope-typo-note: >-
+        The oauth2Auth scheme declares scopes 'custom-holists:read'/'custom-holists:write' (missing a
+        't'), while operation security requirements reference 'custom-hotlists:read'/'custom-hotlists:write'.
+        Both spellings are preserved verbatim from the source; treat 'custom-hotlists:*' as canonical.

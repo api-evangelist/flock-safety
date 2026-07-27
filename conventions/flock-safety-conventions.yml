@@ -1,0 +1,65 @@
+generated: '2026-07-19'
+method: searched
+source: >-
+  https://docs.flocksafety.com/developer-hub + openapi/flock-safety-openapi-original.yml
+authentication:
+  style: OAuth 2.0 (Bearer JWT in Authorization header)
+  flows:
+  - client_credentials (machine / org-level token, 24h, no refresh)
+  - authorization_code (user-level token, 30m access + 12h refresh, token rotation)
+  token_url: https://api.flocksafety.com/oauth/token
+  audience:
+    production: com.flocksafety.integrations
+    development: com.flocksafety.integrations.dev
+  header: 'Authorization: Bearer {access_token}'
+  rbac: >-
+    User-level OAuth inherits the Flock user's role-based access control (device-network access +
+    permitted actions); actions are attributed to the user for audit trails.
+  ref: authentication/flock-safety-authentication.yml
+idempotency:
+  supported: true
+  mechanism: resource-key upsert (not an Idempotency-Key header)
+  patterns:
+  - >-
+    CAD events are upserted by externalId — POST /cad/events "Creates a new event, or updates an event
+    if externalId matches an existing event"; retrying the same externalId is idempotent.
+  - >-
+    Tracked subjects use PUT /geo/subjects ("Add or update a subject's location"), an idempotent upsert
+    keyed by externalSubjectId.
+  - >-
+    Hotlist entry batches (POST /hotlists/{hotlistId}/entries/addBatch) normalize (O->0), trim
+    whitespace, and ignore duplicate entries, making re-submission safe.
+  notes: >-
+    Flock does not document a dedicated Idempotency-Key request header; idempotency is achieved through
+    externalId/PUT upsert semantics and batch de-duplication.
+pagination:
+  style: cursor / page-token
+  patterns:
+  - >-
+    LPR plate lookup is two-phase — POST /reads/lookup starts a lookup, then GET /reads/lookup/page/{pageId}
+    retrieves result pages by pageId.
+  - GET /hotlists/{hotlistId}/entries "Retrieve a page of entries for the hotlist".
+versioning:
+  style: uri-path (v3)
+  ref: lifecycle/flock-safety-lifecycle.yml
+error_handling:
+  oauth_envelope: '{ "error": "...", "error_description": "..." }'
+  http_status: standard codes (400/401/403/404/409/413/422/429/500)
+  best_practice: >-
+    Handle 401 by requesting a fresh token and retrying (machine tokens expire every 24h with no refresh).
+  ref: errors/flock-safety-problem-types.yml
+rate_limiting:
+  signal: HTTP 429 ("The maximum number of requests per second has been exceeded")
+  quotas: >-
+    User-level OAuth grants per-user quotas that are higher/more accurate than org-level caps; specific
+    numeric limits are not published on the developer hub.
+webhooks:
+  surface: LPR hotlist alert webhook (real-time HTTP POST JSON per hotlist match)
+  subscription_management: /integrations/lpr/alerts/subscriptions
+  endpoint_auth: none | basic | apikey | oauth2 (client_credentials) on the receiving endpoint
+  ref: asyncapi/flock-safety-lpr-alerts-asyncapi.yml
+data_stewardship:
+  requirements:
+  - Log a query reason for auditability.
+  - Fetch on demand rather than bulk-scraping (data-stewardship requirement for Flock Apps).
+  - Allowlist trusted IP addresses for API access.

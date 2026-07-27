@@ -1,0 +1,96 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/flock-safety-openapi-original.yml + docs.flocksafety.com developer hub
+notes: >-
+  Entity-relationship graph derived from the harvested v3 OpenAPI component schemas, path structure, and
+  documented id-reference fields (deviceExternalId, networkExternalId, hotlistId, externalId,
+  externalSubjectId). IDs are UUIDs; several resources are keyed by a caller-supplied external id.
+entities:
+- name: Device
+  key: id (UUID)
+  external_key: deviceExternalId
+  description: A registered piece of Flock hardware (camera | video | audio | external) at a location, in a network.
+  path: /devices
+- name: Network
+  key: id (UUID)
+  description: The network a device belongs to (e.g. an agency/jurisdiction grouping).
+- name: Location
+  description: Latitude/longitude of a device.
+- name: Hotlist
+  key: hotlistId (UUID)
+  aliases: [OrgHotlist]
+  description: An organization-level custom hotlist of plates to alert on.
+  path: /hotlists
+- name: HotlistEntry
+  description: A plate entry on a hotlist (normalized O->0, whitespace trimmed, deduped).
+  path: /hotlists/{hotlistId}/entries
+- name: Subscription
+  key: id (UUID)
+  description: A webhook subscription for LPR hotlist alerts (with audience filtering + endpoint auth).
+  path: /integrations/lpr/alerts/subscriptions
+- name: LicensePlateRead
+  key: objectId (UUID)
+  aliases: [LookupResult, PlateInfo]
+  description: A license plate read/detection captured by an LPR device.
+  path: /reads/lookup
+- name: SubjectType
+  key: typeId
+  description: A registered type of trackable subject (person/vehicle/object) for geolocation.
+  path: /geo/types
+- name: TrackedSubject
+  external_key: externalSubjectId
+  description: A subject with a current location tracked on the FlockOS map.
+  path: /geo/subjects
+- name: Event
+  external_key: externalId
+  description: A CAD (computer-aided dispatch) event, upserted by externalId, with narrative + involved persons/vehicles/units.
+  path: /cad/events
+- name: GenericAlert
+  key: alertId (UUID)
+  description: A generic alert displayed in FlockOS.
+  path: /alerts
+relationships:
+- from: Device
+  to: Network
+  type: belongs_to
+  via: network / networkExternalId
+- from: Device
+  to: Location
+  type: has_one
+  via: location
+- from: HotlistEntry
+  to: Hotlist
+  type: belongs_to
+  via: hotlistId
+- from: Subscription
+  to: Hotlist
+  type: references
+  via: customHotlistAudience (organization | restricted)
+- from: LicensePlateRead
+  to: Device
+  type: belongs_to
+  via: deviceExternalId
+- from: LicensePlateRead
+  to: Network
+  type: belongs_to
+  via: networkExternalId
+- from: LicensePlateRead
+  to: Hotlist
+  type: references
+  via: sources[].name (matched hotlist)
+- from: TrackedSubject
+  to: SubjectType
+  type: belongs_to
+  via: type
+- from: Event
+  to: InvolvedPerson
+  type: has_many
+  via: involvedPersons
+- from: Event
+  to: InvolvedVehicle
+  type: has_many
+  via: involvedVehicles
+- from: Event
+  to: DispatchedUnit
+  type: has_many
+  via: dispatchedUnits

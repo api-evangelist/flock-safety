@@ -1,0 +1,14 @@
+{
+  "repo": "flock-safety",
+  "feeds": [
+    {
+      "source": "https://help.flocksafety.com/s/",
+      "feed_url": "https://help.flocksafety.com/s/",
+      "title": "",
+      "saved": 0,
+      "method": "none"
+    }
+  ],
+  "post_count": 0,
+  "fetched": "2026-07-25T15:00:33Z"
+}
