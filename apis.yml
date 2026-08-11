@@ -222,6 +222,8 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: Overlay
+  url: overlays/flock-safety-api-platform-overlay.yaml
 - type: TrustCenter
   url: security/flock-safety-trust-center.yml
 - type: Website
