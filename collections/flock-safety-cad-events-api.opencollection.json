@@ -1,0 +1,235 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Flock Safety API Platform (v3) Alerts CAD Events API",
+    "version": "3.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "CAD Events",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieving Active Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.flocksafety.com/api/v3/cad/events/active",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Gets all active events in chronological order of when they were created (most recent first)"
+        },
+        {
+          "info": {
+            "name": "Updating Active Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.flocksafety.com/api/v3/cad/events/active",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates or updates each provided event in the same manner as /v3/cad/events, then closes any open events not provided in the request"
+        },
+        {
+          "info": {
+            "name": "Retrieving an Event by ExternalID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.flocksafety.com/api/v3/cad/events/:externalId",
+            "params": [
+              {
+                "name": "externalId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "gets event for provided externalId"
+        },
+        {
+          "info": {
+            "name": "Retrieving Events",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.flocksafety.com/api/v3/cad/events",
+            "params": [
+              {
+                "name": "start",
+                "value": "",
+                "type": "query",
+                "description": "start of time range to get events for"
+              },
+              {
+                "name": "end",
+                "value": "",
+                "type": "query",
+                "description": "end of time range to get events for (defaults to current time if not provided)"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "maximum number of events to return per request (defaults to max of 25 if not provided)"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "page number of events to return (defaults to first page if not provided)"
+              },
+              {
+                "name": "activeOnly",
+                "value": "",
+                "type": "query",
+                "description": "whether to return only active events (defaults to false)"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Gets events in chronological order of when they were created (most recent first)"
+        },
+        {
+          "info": {
+            "name": "Creating or Updating an Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.flocksafety.com/api/v3/cad/events",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a new event, or updates an event if externalId matches an existing event"
+        },
+        {
+          "info": {
+            "name": "Marking an Event as Closed",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.flocksafety.com/api/v3/cad/events/:externalId/close",
+            "params": [
+              {
+                "name": "externalId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "timestamp",
+                "value": "",
+                "type": "query",
+                "description": "time to mark the event as closed (defaults to current time if not provided)"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Closes event with given externalId"
+        },
+        {
+          "info": {
+            "name": "Appending a Narrative Entry",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.flocksafety.com/api/v3/cad/events/:externalId/narrative",
+            "params": [
+              {
+                "name": "externalId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Appends new narrative entry to event"
+        },
+        {
+          "info": {
+            "name": "Marking an Event as Open",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.flocksafety.com/api/v3/cad/events/:externalId/open",
+            "params": [
+              {
+                "name": "externalId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Opens event with given externalId (removes closedAt time)."
+        },
+        {
+          "info": {
+            "name": "Retrieving Events by ExternalIDs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.flocksafety.com/api/v3/cad/events/externalIds",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get events for provided externalIds"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

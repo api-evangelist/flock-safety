@@ -1,0 +1,208 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Flock Safety API Platform (v3) Alerts Custom Hotlists API",
+    "version": "3.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Custom Hotlists",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve a custom hotlist",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.flocksafety.com/api/v3/hotlists/:hotlistId",
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://api.flocksafety.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve a hotlist with the given ID"
+        },
+        {
+          "info": {
+            "name": "Update a custom hotlist",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.flocksafety.com/api/v3/hotlists/:hotlistId",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://api.flocksafety.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Update a hotlist"
+        },
+        {
+          "info": {
+            "name": "Delete a custom hotlist",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.flocksafety.com/api/v3/hotlists/:hotlistId",
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://api.flocksafety.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Delete hotlist"
+        },
+        {
+          "info": {
+            "name": "Retrieve a page of entries for a hotlist",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.flocksafety.com/api/v3/hotlists/:hotlistId/entries",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of hotlist entries to return"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "A cursor for the next page of results"
+              }
+            ],
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://api.flocksafety.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve a page of entries for the hotlist with the given ID"
+        },
+        {
+          "info": {
+            "name": "Retrieve custom hotlists",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.flocksafety.com/api/v3/hotlists",
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://api.flocksafety.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Retrieve custom hotlists for the organization"
+        },
+        {
+          "info": {
+            "name": "Create a custom hotlist",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.flocksafety.com/api/v3/hotlists",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://api.flocksafety.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Create an organization-level hotlist"
+        },
+        {
+          "info": {
+            "name": "Add a batch of entries to a hotlist",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.flocksafety.com/api/v3/hotlists/:hotlistId/entries/addBatch",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://api.flocksafety.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Add a batch of entries to the hotlist with the provided hotlistID. All entries will be normalized (O->0) and have whitespace trimmed. Duplicate entries will be ignored."
+        },
+        {
+          "info": {
+            "name": "Delete a batch of entries from a hotlist",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.flocksafety.com/api/v3/hotlists/:hotlistId/entries/deleteBatch",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "oauth2",
+              "flow": "client_credentials",
+              "accessTokenUrl": "https://api.flocksafety.com/oauth/token",
+              "credentials": {
+                "clientId": "{{clientId}}",
+                "clientSecret": "{{clientSecret}}"
+              }
+            }
+          },
+          "docs": "Delete a batch of entries from the hotlist with the provided hotlistID. Ignores any ids for which an entry does not exist"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

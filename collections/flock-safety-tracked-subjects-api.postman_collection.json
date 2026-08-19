@@ -1,0 +1,1042 @@
+{
+  "item": [
+    {
+      "id": "46029b26-f83a-444e-ac15-e47d37e2c1bb",
+      "name": "Tracked Subjects",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3fed89fb-e699-4897-b19b-20798a37a92a",
+          "name": "Disable a Tracked Subject",
+          "request": {
+            "name": "Disable a Tracked Subject",
+            "description": {},
+            "url": {
+              "path": [
+                "geo",
+                "subjects",
+                ":externalSubjectId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "externalSubjectId",
+                  "description": "(Required) ID of the subject you are updating"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b0b1d9ac-7832-4ffe-bd6d-3c270dc5b14a",
+              "name": "Disable a subject",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "geo",
+                    "subjects",
+                    ":externalSubjectId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalSubjectId",
+                      "description": "(Required) ID of the subject you are updating"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"externalId\": \"string\",\n  \"subjectType\": \"person\",\n  \"subjectSubtype\": \"string\",\n  \"latitude\": 5979.11242100929,\n  \"longitude\": 4951.184043896499,\n  \"subjectId\": \"string\",\n  \"createdAt\": \"2024-07-06T06:42:28.103Z\",\n  \"updatedAt\": \"2007-11-28T12:39:05.624Z\",\n  \"disableAt\": \"2020-08-23T15:23:26.737Z\",\n  \"altitude\": 2065.5221181434613,\n  \"additionalMetadata\": {\n    \"type\": \"string\",\n    \"value\": {}\n  },\n  \"deviceLink\": \"string\",\n  \"deviceStatus\": null,\n  \"isRecording\": false,\n  \"nickname\": \"\",\n  \"isLawEnforcement\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "18bcbd82-2ed1-4283-a1fa-7bf999fa1ab4",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "geo",
+                    "subjects",
+                    ":externalSubjectId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalSubjectId",
+                      "description": "(Required) ID of the subject you are updating"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d8ebc547-fcfc-4933-b1c0-91e010eaf995",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "geo",
+                    "subjects",
+                    ":externalSubjectId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalSubjectId",
+                      "description": "(Required) ID of the subject you are updating"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "457f0127-1e1f-4e4b-96f5-f6f61e4b20b8",
+              "name": "Not Found (provided id doesn't match any existing)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "geo",
+                    "subjects",
+                    ":externalSubjectId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalSubjectId",
+                      "description": "(Required) ID of the subject you are updating"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6ad16df7-3a8f-4bc4-b8e0-69bbcd5f5d67",
+          "name": "Retrieving a Tracked Subject",
+          "request": {
+            "name": "Retrieving a Tracked Subject",
+            "description": {
+              "content": "Get a single subject's current location.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "geo",
+                "subjects",
+                ":externalSubjectId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "externalSubjectId",
+                  "description": "(Required) ID of the subject type you are fetching"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "cb254428-a941-4d79-a319-3c8d8a7f03b4",
+              "name": "Get a single subject's current location",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "geo",
+                    "subjects",
+                    ":externalSubjectId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalSubjectId",
+                      "description": "(Required) ID of the subject type you are fetching"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"externalId\": \"string\",\n  \"subjectType\": \"person\",\n  \"subjectSubtype\": \"string\",\n  \"latitude\": 5979.11242100929,\n  \"longitude\": 4951.184043896499,\n  \"subjectId\": \"string\",\n  \"createdAt\": \"2024-07-06T06:42:28.103Z\",\n  \"updatedAt\": \"2007-11-28T12:39:05.624Z\",\n  \"disableAt\": \"2020-08-23T15:23:26.737Z\",\n  \"altitude\": 2065.5221181434613,\n  \"additionalMetadata\": {\n    \"type\": \"string\",\n    \"value\": {}\n  },\n  \"deviceLink\": \"string\",\n  \"deviceStatus\": null,\n  \"isRecording\": false,\n  \"nickname\": \"\",\n  \"isLawEnforcement\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "69c3a57a-e1ec-4c9b-a109-8a34abaff6f1",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "geo",
+                    "subjects",
+                    ":externalSubjectId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalSubjectId",
+                      "description": "(Required) ID of the subject type you are fetching"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ceb53353-1bbb-4f21-99e6-0ed27cb48114",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "geo",
+                    "subjects",
+                    ":externalSubjectId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalSubjectId",
+                      "description": "(Required) ID of the subject type you are fetching"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3bda947d-4a7b-4fa1-ac62-f06774a41e52",
+              "name": "Not Found (provided id doesn't match any existing)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "geo",
+                    "subjects",
+                    ":externalSubjectId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "externalSubjectId",
+                      "description": "(Required) ID of the subject type you are fetching"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8c5a88c9-8450-4195-93b0-1605a2a41b93",
+          "name": "Retrieve All Tracked Subjects",
+          "request": {
+            "name": "Retrieve All Tracked Subjects",
+            "description": {
+              "content": "Get all subjects' current locations",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "geo",
+                "subjects"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "since",
+                  "value": "<long>",
+                  "description": "Unix timestamp in seconds"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "Page number, defaults to 1"
+                },
+                {
+                  "disabled": false,
+                  "key": "subjectType",
+                  "value": "<string>",
+                  "description": "Filter by subject type"
+                },
+                {
+                  "disabled": false,
+                  "key": "subjectSubtype",
+                  "value": "<string>",
+                  "description": "Filter by subject subtype"
+                },
+                {
+                  "disabled": false,
+                  "key": "showInactive",
+                  "value": "<boolean>",
+                  "description": "Show inactive subjects"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "be8a9bba-206b-4204-b2db-69c5cbaf5782",
+              "name": "Get all subjects' current locations",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "geo",
+                    "subjects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "since",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "subjectType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "subjectSubtype",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "showInactive",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"externalId\": \"string\",\n    \"subjectType\": \"person\",\n    \"subjectSubtype\": \"string\",\n    \"latitude\": 3151.0290219302838,\n    \"longitude\": 6117.439681756246,\n    \"subjectId\": \"string\",\n    \"createdAt\": \"2025-12-05T00:04:40.728Z\",\n    \"updatedAt\": \"1991-07-02T08:50:26.363Z\",\n    \"disableAt\": \"1954-04-21T13:31:03.848Z\",\n    \"altitude\": 8712.342437307454,\n    \"additionalMetadata\": {\n      \"type\": \"string\",\n      \"value\": {}\n    },\n    \"deviceLink\": \"string\",\n    \"deviceStatus\": null,\n    \"isRecording\": false,\n    \"nickname\": \"\",\n    \"isLawEnforcement\": false\n  },\n  {\n    \"externalId\": \"string\",\n    \"subjectType\": \"vehicle\",\n    \"subjectSubtype\": \"string\",\n    \"latitude\": 8313.628290821229,\n    \"longitude\": 9443.706200945024,\n    \"subjectId\": \"string\",\n    \"createdAt\": \"1955-06-28T18:44:38.398Z\",\n    \"updatedAt\": \"1949-05-31T02:12:54.447Z\",\n    \"disableAt\": \"2004-10-27T10:50:00.377Z\",\n    \"altitude\": 233.0970114316766,\n    \"additionalMetadata\": {\n      \"type\": \"string\",\n      \"value\": {}\n    },\n    \"deviceLink\": \"string\",\n    \"deviceStatus\": null,\n    \"isRecording\": false,\n    \"nickname\": \"\",\n    \"isLawEnforcement\": false\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "71b2ac7a-b7f1-47ac-831f-cf8861c13703",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "geo",
+                    "subjects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "since",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "subjectType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "subjectSubtype",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "showInactive",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d16024d4-159d-4498-82db-9caf0059f827",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "geo",
+                    "subjects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "since",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "subjectType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "subjectSubtype",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "showInactive",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "48da4d2b-c579-4ce0-bc43-0a1d50d17dbe",
+          "name": "Create or updating a Tracked Subject",
+          "request": {
+            "name": "Create or updating a Tracked Subject",
+            "description": {
+              "content": "Add or update a subject's location",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "geo",
+                "subjects"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"externalId\": \"<string>\",\n  \"subjectType\": \"<string>\",\n  \"subjectSubtype\": \"<string>\",\n  \"latitude\": \"<float64>\",\n  \"longitude\": \"<float64>\",\n  \"updatedAt\": \"<dateTime>\",\n  \"altitude\": \"<float64>\",\n  \"additionalMetadata\": {\n    \"type\": \"<string>\",\n    \"value\": \"<object>\"\n  },\n  \"deviceLink\": \"<string>\",\n  \"deviceStatus\": null,\n  \"isRecording\": false,\n  \"nickname\": \"\",\n  \"isLawEnforcement\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ddc05f59-7ce9-4d40-a354-fb50eb5d8aa1",
+              "name": "Add or update a subject's location",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "geo",
+                    "subjects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalId\": \"<string>\",\n  \"subjectType\": \"<string>\",\n  \"subjectSubtype\": \"<string>\",\n  \"latitude\": \"<float64>\",\n  \"longitude\": \"<float64>\",\n  \"updatedAt\": \"<dateTime>\",\n  \"altitude\": \"<float64>\",\n  \"additionalMetadata\": {\n    \"type\": \"<string>\",\n    \"value\": \"<object>\"\n  },\n  \"deviceLink\": \"<string>\",\n  \"deviceStatus\": null,\n  \"isRecording\": false,\n  \"nickname\": \"\",\n  \"isLawEnforcement\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"externalId\": \"<string>\",\n  \"subjectType\": \"<string>\",\n  \"subjectSubtype\": \"<string>\",\n  \"latitude\": \"<float64>\",\n  \"longitude\": \"<float64>\",\n  \"subjectId\": \"string\",\n  \"createdAt\": \"1994-12-17T03:56:30.977Z\",\n  \"updatedAt\": \"<dateTime>\",\n  \"disableAt\": \"2010-04-05T15:29:38.273Z\",\n  \"altitude\": \"<float64>\",\n  \"additionalMetadata\": {\n    \"type\": \"<string>\",\n    \"value\": \"<object>\"\n  },\n  \"deviceLink\": \"<string>\",\n  \"deviceStatus\": null,\n  \"isRecording\": false,\n  \"nickname\": \"\",\n  \"isLawEnforcement\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1121f625-94b2-4c58-aadd-cb62b9b9694c",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "geo",
+                    "subjects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalId\": \"<string>\",\n  \"subjectType\": \"<string>\",\n  \"subjectSubtype\": \"<string>\",\n  \"latitude\": \"<float64>\",\n  \"longitude\": \"<float64>\",\n  \"updatedAt\": \"<dateTime>\",\n  \"altitude\": \"<float64>\",\n  \"additionalMetadata\": {\n    \"type\": \"<string>\",\n    \"value\": \"<object>\"\n  },\n  \"deviceLink\": \"<string>\",\n  \"deviceStatus\": null,\n  \"isRecording\": false,\n  \"nickname\": \"\",\n  \"isLawEnforcement\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d3661911-ecca-4902-8b8c-1dcd98b04711",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "geo",
+                    "subjects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalId\": \"<string>\",\n  \"subjectType\": \"<string>\",\n  \"subjectSubtype\": \"<string>\",\n  \"latitude\": \"<float64>\",\n  \"longitude\": \"<float64>\",\n  \"updatedAt\": \"<dateTime>\",\n  \"altitude\": \"<float64>\",\n  \"additionalMetadata\": {\n    \"type\": \"<string>\",\n    \"value\": \"<object>\"\n  },\n  \"deviceLink\": \"<string>\",\n  \"deviceStatus\": null,\n  \"isRecording\": false,\n  \"nickname\": \"\",\n  \"isLawEnforcement\": false\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.flocksafety.com/api/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "9ae76ccc-1d1c-4a60-8b4e-afd0719cab5e",
+    "name": "Flock Safety API Platform (v3) Alerts Tracked Subjects API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Flock Safety v3 API Platform harvested from the public developer hub (docs.flocksafety.com). Combines the Device, Custom Hotlist, LPR Search, Plate Lookup, Hotlist Alerts Subscription, Geolocation, CAD, Inbound Alerts, and Vehicle Detections Ingest APIs. OAuth2 client_credentials (machine) and authorization_code (user) flows against api.flocksafety.com.\n\nContact Support:\n Name: Flock Safety Developer Hub",
+      "type": "text/plain"
+    }
+  }
+}

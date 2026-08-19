@@ -1,0 +1,2434 @@
+{
+  "item": [
+    {
+      "id": "2a452e1e-0583-4bed-b66d-841ce5536580",
+      "name": "CAD Events",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "83b8ffc5-122c-4131-b0b4-cb02d2716f05",
+          "name": "Retrieving Active Events",
+          "request": {
+            "name": "Retrieving Active Events",
+            "description": {
+              "content": "Gets all active events in chronological order of when they were created (most recent first)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cad",
+                "events",
+                "active"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "6ad63efc-2625-404c-9ba4-2cbb76611fb2",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cad",
+                    "events",
+                    "active"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"events\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0f012ee4-c202-40ec-9f8a-1df57c684e54",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cad",
+                    "events",
+                    "active"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5fad1c09-93b6-41cc-ab11-84a0c463b8e9",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cad",
+                    "events",
+                    "active"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "83e81b57-c966-48ad-8428-f130108d9fc7",
+          "name": "Updating Active Events",
+          "request": {
+            "name": "Updating Active Events",
+            "description": {
+              "content": "Creates or updates each provided event in the same manner as /v3/cad/events, then closes any open events not provided in the request",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cad",
+                "events",
+                "active"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"events\": {}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "54a24c35-114e-404e-8929-76c045e0a659",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cad",
+                    "events",
+                    "active"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"events\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0982509d-9449-4b60-bcad-a3433ee486c2",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cad",
+                    "events",
+                    "active"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "43e31c12-ae1b-4ac7-a713-621bcd999f1f",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cad",
+                    "events",
+                    "active"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b586bed7-ff49-4ec7-91fe-cf2682ceb1d5",
+              "name": "Event Not Found (provided externalId doesn't match any existing)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cad",
+                    "events",
+                    "active"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"events\": {}\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5219188a-cc58-4b6e-beec-bf90fb42c13c",
+          "name": "Retrieving an Event by ExternalID",
+          "request": {
+            "name": "Retrieving an Event by ExternalID",
+            "description": {
+              "content": "gets event for provided externalId",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cad",
+                "events",
+                ":externalId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "externalId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4945c433-c650-469f-b94e-3415b1684cfb",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cad",
+                    "events",
+                    ":externalId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "externalId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"externalId\": \"string\",\n  \"eventType\": \"string\",\n  \"priority\": 337,\n  \"groupingId\": \"string\",\n  \"displayId\": \"string\",\n  \"displayPriority\": \"string\",\n  \"timestamp\": \"2020-06-08T20:47:19.436Z\",\n  \"closedAt\": \"2014-04-06T01:58:55.378Z\",\n  \"displayStatus\": \"string\",\n  \"department\": \"string\",\n  \"area\": \"string\",\n  \"narratives\": [\n    \"string\",\n    \"string\"\n  ],\n  \"location\": {\n    \"name\": \"string\",\n    \"latitude\": 483.7327663797364,\n    \"longitude\": 3101.3682686303623,\n    \"streetAddress\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"country\": \"string\",\n    \"additionalMetadata\": {\n      \"type\": \"string\",\n      \"value\": {}\n    }\n  },\n  \"callerInfo\": {\n    \"name\": \"string\",\n    \"phoneNumber\": \"string\",\n    \"timestamp\": \"1955-02-08T00:07:01.026Z\",\n    \"location\": {\n      \"name\": \"string\",\n      \"latitude\": 5818.541302350238,\n      \"longitude\": 7445.05080379026,\n      \"streetAddress\": \"string\",\n      \"city\": \"string\",\n      \"state\": \"string\",\n      \"country\": \"string\",\n      \"additionalMetadata\": {\n        \"type\": \"string\",\n        \"value\": {}\n      }\n    },\n    \"additionalMetadata\": {\n      \"type\": \"string\",\n      \"value\": {}\n    }\n  },\n  \"dispatchedUnits\": {},\n  \"involvedVehicles\": {},\n  \"involvedPersons\": {},\n  \"additionalMetadata\": {\n    \"type\": \"string\",\n    \"value\": {}\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "289d4e83-fb90-4233-8748-7638a6469810",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cad",
+                    "events",
+                    ":externalId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "externalId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9c51b784-7f5a-457b-a6d0-866af5724b76",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cad",
+                    "events",
+                    ":externalId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "externalId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5007a7f4-087c-4c03-bbb6-2dca11a0a194",
+              "name": "Event Not Found (provided externalId doesn't match any existing)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cad",
+                    "events",
+                    ":externalId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "externalId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a8900420-9375-4ac4-af74-12ef605ff96d",
+          "name": "Retrieving Events",
+          "request": {
+            "name": "Retrieving Events",
+            "description": {
+              "content": "Gets events in chronological order of when they were created (most recent first)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cad",
+                "events"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "start",
+                  "value": "<dateTime>",
+                  "description": "(Required) start of time range to get events for"
+                },
+                {
+                  "disabled": false,
+                  "key": "end",
+                  "value": "<dateTime>",
+                  "description": "end of time range to get events for (defaults to current time if not provided)"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "<integer>",
+                  "description": "maximum number of events to return per request (defaults to max of 25 if not provided)"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "<integer>",
+                  "description": "page number of events to return (defaults to first page if not provided)"
+                },
+                {
+                  "disabled": false,
+                  "key": "activeOnly",
+                  "value": "<boolean>",
+                  "description": "whether to return only active events (defaults to false)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "77d9547f-3da4-4225-a915-b56013096201",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cad",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "activeOnly",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"events\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d3f5528f-d58f-485a-b991-e4d16bc3aa87",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cad",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "activeOnly",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "01fbb69b-9f91-4cda-b318-80b861c59ca7",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cad",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "start",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "end",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "activeOnly",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6f25acbd-c185-4e43-a926-711e271760e9",
+          "name": "Creating or Updating an Event",
+          "request": {
+            "name": "Creating or Updating an Event",
+            "description": {
+              "content": "Creates a new event, or updates an event if externalId matches an existing event",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cad",
+                "events"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"externalId\": \"<string>\",\n  \"eventType\": \"<string>\",\n  \"priority\": \"<integer>\",\n  \"groupingId\": \"<string>\",\n  \"displayId\": \"<string>\",\n  \"displayPriority\": \"<string>\",\n  \"timestamp\": \"<dateTime>\",\n  \"closedAt\": \"<dateTime>\",\n  \"displayStatus\": \"<string>\",\n  \"department\": \"<string>\",\n  \"area\": \"<string>\",\n  \"narratives\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"location\": {\n    \"name\": \"<string>\",\n    \"latitude\": \"<number>\",\n    \"longitude\": \"<number>\",\n    \"streetAddress\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"additionalMetadata\": {\n      \"type\": \"<string>\",\n      \"value\": \"<object>\"\n    }\n  },\n  \"callerInfo\": {\n    \"name\": \"<string>\",\n    \"phoneNumber\": \"<string>\",\n    \"timestamp\": \"<dateTime>\",\n    \"location\": {\n      \"name\": \"<string>\",\n      \"latitude\": \"<number>\",\n      \"longitude\": \"<number>\",\n      \"streetAddress\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"country\": \"<string>\",\n      \"additionalMetadata\": {\n        \"type\": \"<string>\",\n        \"value\": \"<object>\"\n      }\n    },\n    \"additionalMetadata\": {\n      \"type\": \"<string>\",\n      \"value\": \"<object>\"\n    }\n  },\n  \"dispatchedUnits\": {},\n  \"involvedVehicles\": {},\n  \"involvedPersons\": {},\n  \"additionalMetadata\": {\n    \"type\": \"<string>\",\n    \"value\": \"<object>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "07935f57-c4c9-4601-a944-bc6aa15e2fbb",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cad",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalId\": \"<string>\",\n  \"eventType\": \"<string>\",\n  \"priority\": \"<integer>\",\n  \"groupingId\": \"<string>\",\n  \"displayId\": \"<string>\",\n  \"displayPriority\": \"<string>\",\n  \"timestamp\": \"<dateTime>\",\n  \"closedAt\": \"<dateTime>\",\n  \"displayStatus\": \"<string>\",\n  \"department\": \"<string>\",\n  \"area\": \"<string>\",\n  \"narratives\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"location\": {\n    \"name\": \"<string>\",\n    \"latitude\": \"<number>\",\n    \"longitude\": \"<number>\",\n    \"streetAddress\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"additionalMetadata\": {\n      \"type\": \"<string>\",\n      \"value\": \"<object>\"\n    }\n  },\n  \"callerInfo\": {\n    \"name\": \"<string>\",\n    \"phoneNumber\": \"<string>\",\n    \"timestamp\": \"<dateTime>\",\n    \"location\": {\n      \"name\": \"<string>\",\n      \"latitude\": \"<number>\",\n      \"longitude\": \"<number>\",\n      \"streetAddress\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"country\": \"<string>\",\n      \"additionalMetadata\": {\n        \"type\": \"<string>\",\n        \"value\": \"<object>\"\n      }\n    },\n    \"additionalMetadata\": {\n      \"type\": \"<string>\",\n      \"value\": \"<object>\"\n    }\n  },\n  \"dispatchedUnits\": {},\n  \"involvedVehicles\": {},\n  \"involvedPersons\": {},\n  \"additionalMetadata\": {\n    \"type\": \"<string>\",\n    \"value\": \"<object>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"externalId\": \"<string>\",\n  \"eventType\": \"<string>\",\n  \"priority\": \"<integer>\",\n  \"groupingId\": \"<string>\",\n  \"displayId\": \"<string>\",\n  \"displayPriority\": \"<string>\",\n  \"timestamp\": \"<dateTime>\",\n  \"closedAt\": \"<dateTime>\",\n  \"displayStatus\": \"<string>\",\n  \"department\": \"<string>\",\n  \"area\": \"<string>\",\n  \"narratives\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"location\": {\n    \"name\": \"<string>\",\n    \"latitude\": \"<number>\",\n    \"longitude\": \"<number>\",\n    \"streetAddress\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"additionalMetadata\": {\n      \"type\": \"<string>\",\n      \"value\": \"<object>\"\n    }\n  },\n  \"callerInfo\": {\n    \"name\": \"<string>\",\n    \"phoneNumber\": \"<string>\",\n    \"timestamp\": \"<dateTime>\",\n    \"location\": {\n      \"name\": \"<string>\",\n      \"latitude\": \"<number>\",\n      \"longitude\": \"<number>\",\n      \"streetAddress\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"country\": \"<string>\",\n      \"additionalMetadata\": {\n        \"type\": \"<string>\",\n        \"value\": \"<object>\"\n      }\n    },\n    \"additionalMetadata\": {\n      \"type\": \"<string>\",\n      \"value\": \"<object>\"\n    }\n  },\n  \"dispatchedUnits\": {},\n  \"involvedVehicles\": {},\n  \"involvedPersons\": {},\n  \"additionalMetadata\": {\n    \"type\": \"<string>\",\n    \"value\": \"<object>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "04e89dbb-928e-4877-9bf0-17281738f129",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cad",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalId\": \"<string>\",\n  \"eventType\": \"<string>\",\n  \"priority\": \"<integer>\",\n  \"groupingId\": \"<string>\",\n  \"displayId\": \"<string>\",\n  \"displayPriority\": \"<string>\",\n  \"timestamp\": \"<dateTime>\",\n  \"closedAt\": \"<dateTime>\",\n  \"displayStatus\": \"<string>\",\n  \"department\": \"<string>\",\n  \"area\": \"<string>\",\n  \"narratives\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"location\": {\n    \"name\": \"<string>\",\n    \"latitude\": \"<number>\",\n    \"longitude\": \"<number>\",\n    \"streetAddress\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"additionalMetadata\": {\n      \"type\": \"<string>\",\n      \"value\": \"<object>\"\n    }\n  },\n  \"callerInfo\": {\n    \"name\": \"<string>\",\n    \"phoneNumber\": \"<string>\",\n    \"timestamp\": \"<dateTime>\",\n    \"location\": {\n      \"name\": \"<string>\",\n      \"latitude\": \"<number>\",\n      \"longitude\": \"<number>\",\n      \"streetAddress\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"country\": \"<string>\",\n      \"additionalMetadata\": {\n        \"type\": \"<string>\",\n        \"value\": \"<object>\"\n      }\n    },\n    \"additionalMetadata\": {\n      \"type\": \"<string>\",\n      \"value\": \"<object>\"\n    }\n  },\n  \"dispatchedUnits\": {},\n  \"involvedVehicles\": {},\n  \"involvedPersons\": {},\n  \"additionalMetadata\": {\n    \"type\": \"<string>\",\n    \"value\": \"<object>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0818e610-4ed4-40c8-b21a-158e4b7c19f6",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cad",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalId\": \"<string>\",\n  \"eventType\": \"<string>\",\n  \"priority\": \"<integer>\",\n  \"groupingId\": \"<string>\",\n  \"displayId\": \"<string>\",\n  \"displayPriority\": \"<string>\",\n  \"timestamp\": \"<dateTime>\",\n  \"closedAt\": \"<dateTime>\",\n  \"displayStatus\": \"<string>\",\n  \"department\": \"<string>\",\n  \"area\": \"<string>\",\n  \"narratives\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"location\": {\n    \"name\": \"<string>\",\n    \"latitude\": \"<number>\",\n    \"longitude\": \"<number>\",\n    \"streetAddress\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"additionalMetadata\": {\n      \"type\": \"<string>\",\n      \"value\": \"<object>\"\n    }\n  },\n  \"callerInfo\": {\n    \"name\": \"<string>\",\n    \"phoneNumber\": \"<string>\",\n    \"timestamp\": \"<dateTime>\",\n    \"location\": {\n      \"name\": \"<string>\",\n      \"latitude\": \"<number>\",\n      \"longitude\": \"<number>\",\n      \"streetAddress\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"country\": \"<string>\",\n      \"additionalMetadata\": {\n        \"type\": \"<string>\",\n        \"value\": \"<object>\"\n      }\n    },\n    \"additionalMetadata\": {\n      \"type\": \"<string>\",\n      \"value\": \"<object>\"\n    }\n  },\n  \"dispatchedUnits\": {},\n  \"involvedVehicles\": {},\n  \"involvedPersons\": {},\n  \"additionalMetadata\": {\n    \"type\": \"<string>\",\n    \"value\": \"<object>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2e802f2d-9b68-4c4e-8362-4c520c01ae65",
+              "name": "Event Not Found (provided externalId doesn't match any existing)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cad",
+                    "events"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalId\": \"<string>\",\n  \"eventType\": \"<string>\",\n  \"priority\": \"<integer>\",\n  \"groupingId\": \"<string>\",\n  \"displayId\": \"<string>\",\n  \"displayPriority\": \"<string>\",\n  \"timestamp\": \"<dateTime>\",\n  \"closedAt\": \"<dateTime>\",\n  \"displayStatus\": \"<string>\",\n  \"department\": \"<string>\",\n  \"area\": \"<string>\",\n  \"narratives\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"location\": {\n    \"name\": \"<string>\",\n    \"latitude\": \"<number>\",\n    \"longitude\": \"<number>\",\n    \"streetAddress\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"additionalMetadata\": {\n      \"type\": \"<string>\",\n      \"value\": \"<object>\"\n    }\n  },\n  \"callerInfo\": {\n    \"name\": \"<string>\",\n    \"phoneNumber\": \"<string>\",\n    \"timestamp\": \"<dateTime>\",\n    \"location\": {\n      \"name\": \"<string>\",\n      \"latitude\": \"<number>\",\n      \"longitude\": \"<number>\",\n      \"streetAddress\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"country\": \"<string>\",\n      \"additionalMetadata\": {\n        \"type\": \"<string>\",\n        \"value\": \"<object>\"\n      }\n    },\n    \"additionalMetadata\": {\n      \"type\": \"<string>\",\n      \"value\": \"<object>\"\n    }\n  },\n  \"dispatchedUnits\": {},\n  \"involvedVehicles\": {},\n  \"involvedPersons\": {},\n  \"additionalMetadata\": {\n    \"type\": \"<string>\",\n    \"value\": \"<object>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "20f96396-a3e9-4368-b763-d2fec5fc652d",
+          "name": "Marking an Event as Closed",
+          "request": {
+            "name": "Marking an Event as Closed",
+            "description": {
+              "content": "Closes event with given externalId",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cad",
+                "events",
+                ":externalId",
+                "close"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "timestamp",
+                  "value": "<dateTime>",
+                  "description": "time to mark the event as closed (defaults to current time if not provided)"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "externalId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "2e6fdd05-9f1e-41a8-a202-3a39be3a263d",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cad",
+                    "events",
+                    ":externalId",
+                    "close"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "timestamp",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "externalId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"externalId\": \"<string>\",\n  \"eventType\": \"<string>\",\n  \"priority\": \"<integer>\",\n  \"groupingId\": \"<string>\",\n  \"displayId\": \"<string>\",\n  \"displayPriority\": \"<string>\",\n  \"timestamp\": \"<dateTime>\",\n  \"closedAt\": \"<dateTime>\",\n  \"displayStatus\": \"<string>\",\n  \"department\": \"<string>\",\n  \"area\": \"<string>\",\n  \"narratives\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"location\": {\n    \"name\": \"<string>\",\n    \"latitude\": \"<number>\",\n    \"longitude\": \"<number>\",\n    \"streetAddress\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"additionalMetadata\": {\n      \"type\": \"<string>\",\n      \"value\": \"<object>\"\n    }\n  },\n  \"callerInfo\": {\n    \"name\": \"<string>\",\n    \"phoneNumber\": \"<string>\",\n    \"timestamp\": \"<dateTime>\",\n    \"location\": {\n      \"name\": \"<string>\",\n      \"latitude\": \"<number>\",\n      \"longitude\": \"<number>\",\n      \"streetAddress\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"country\": \"<string>\",\n      \"additionalMetadata\": {\n        \"type\": \"<string>\",\n        \"value\": \"<object>\"\n      }\n    },\n    \"additionalMetadata\": {\n      \"type\": \"<string>\",\n      \"value\": \"<object>\"\n    }\n  },\n  \"dispatchedUnits\": {},\n  \"involvedVehicles\": {},\n  \"involvedPersons\": {},\n  \"additionalMetadata\": {\n    \"type\": \"<string>\",\n    \"value\": \"<object>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0ef148cf-860c-41af-b8d8-d53ace1996de",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cad",
+                    "events",
+                    ":externalId",
+                    "close"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "timestamp",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "externalId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cec08e73-b8ee-43c7-889f-2e345a105c7a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cad",
+                    "events",
+                    ":externalId",
+                    "close"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "timestamp",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "externalId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2d41eddf-2d72-4cd1-9a72-416f58e9f37d",
+              "name": "Event Not Found (provided externalId doesn't match any existing)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cad",
+                    "events",
+                    ":externalId",
+                    "close"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "timestamp",
+                      "value": "<dateTime>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "externalId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bb55914a-a790-49af-8b60-d91ecae38d8a",
+          "name": "Appending a Narrative Entry",
+          "request": {
+            "name": "Appending a Narrative Entry",
+            "description": {
+              "content": "Appends new narrative entry to event",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cad",
+                "events",
+                ":externalId",
+                "narrative"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "externalId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"narratives\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "281709c7-b50e-4002-8076-63d61f83ed8d",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cad",
+                    "events",
+                    ":externalId",
+                    "narrative"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "externalId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"narratives\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"externalId\": \"<string>\",\n  \"eventType\": \"<string>\",\n  \"priority\": \"<integer>\",\n  \"groupingId\": \"<string>\",\n  \"displayId\": \"<string>\",\n  \"displayPriority\": \"<string>\",\n  \"timestamp\": \"<dateTime>\",\n  \"closedAt\": \"<dateTime>\",\n  \"displayStatus\": \"<string>\",\n  \"department\": \"<string>\",\n  \"area\": \"<string>\",\n  \"narratives\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"location\": {\n    \"name\": \"<string>\",\n    \"latitude\": \"<number>\",\n    \"longitude\": \"<number>\",\n    \"streetAddress\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"additionalMetadata\": {\n      \"type\": \"<string>\",\n      \"value\": \"<object>\"\n    }\n  },\n  \"callerInfo\": {\n    \"name\": \"<string>\",\n    \"phoneNumber\": \"<string>\",\n    \"timestamp\": \"<dateTime>\",\n    \"location\": {\n      \"name\": \"<string>\",\n      \"latitude\": \"<number>\",\n      \"longitude\": \"<number>\",\n      \"streetAddress\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"country\": \"<string>\",\n      \"additionalMetadata\": {\n        \"type\": \"<string>\",\n        \"value\": \"<object>\"\n      }\n    },\n    \"additionalMetadata\": {\n      \"type\": \"<string>\",\n      \"value\": \"<object>\"\n    }\n  },\n  \"dispatchedUnits\": {},\n  \"involvedVehicles\": {},\n  \"involvedPersons\": {},\n  \"additionalMetadata\": {\n    \"type\": \"<string>\",\n    \"value\": \"<object>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7a2f093d-5a4a-4be0-860d-95bafd75947d",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cad",
+                    "events",
+                    ":externalId",
+                    "narrative"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "externalId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"narratives\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b09e4e75-fa72-4b45-91dd-cc2e3b8af2eb",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cad",
+                    "events",
+                    ":externalId",
+                    "narrative"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "externalId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"narratives\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2a0f0c6e-f39a-4287-9ee7-22ae668bdbbc",
+              "name": "Event Not Found (provided externalId doesn't match any existing)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cad",
+                    "events",
+                    ":externalId",
+                    "narrative"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "externalId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"narratives\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "59c8b525-2966-4a28-8efd-d7680d830fb2",
+          "name": "Marking an Event as Open",
+          "request": {
+            "name": "Marking an Event as Open",
+            "description": {
+              "content": "Opens event with given externalId (removes closedAt time).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cad",
+                "events",
+                ":externalId",
+                "open"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "externalId",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "2220d15c-a409-4e96-9a53-3981ff8aee36",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cad",
+                    "events",
+                    ":externalId",
+                    "open"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "externalId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"externalId\": \"<string>\",\n  \"eventType\": \"<string>\",\n  \"priority\": \"<integer>\",\n  \"groupingId\": \"<string>\",\n  \"displayId\": \"<string>\",\n  \"displayPriority\": \"<string>\",\n  \"timestamp\": \"<dateTime>\",\n  \"closedAt\": \"<dateTime>\",\n  \"displayStatus\": \"<string>\",\n  \"department\": \"<string>\",\n  \"area\": \"<string>\",\n  \"narratives\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"location\": {\n    \"name\": \"<string>\",\n    \"latitude\": \"<number>\",\n    \"longitude\": \"<number>\",\n    \"streetAddress\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"additionalMetadata\": {\n      \"type\": \"<string>\",\n      \"value\": \"<object>\"\n    }\n  },\n  \"callerInfo\": {\n    \"name\": \"<string>\",\n    \"phoneNumber\": \"<string>\",\n    \"timestamp\": \"<dateTime>\",\n    \"location\": {\n      \"name\": \"<string>\",\n      \"latitude\": \"<number>\",\n      \"longitude\": \"<number>\",\n      \"streetAddress\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"country\": \"<string>\",\n      \"additionalMetadata\": {\n        \"type\": \"<string>\",\n        \"value\": \"<object>\"\n      }\n    },\n    \"additionalMetadata\": {\n      \"type\": \"<string>\",\n      \"value\": \"<object>\"\n    }\n  },\n  \"dispatchedUnits\": {},\n  \"involvedVehicles\": {},\n  \"involvedPersons\": {},\n  \"additionalMetadata\": {\n    \"type\": \"<string>\",\n    \"value\": \"<object>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "764fb9ce-7c46-4ab2-a68a-21d0e97f068f",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cad",
+                    "events",
+                    ":externalId",
+                    "open"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "externalId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5e17dfd6-1d4f-4f93-bd55-e88caa7c07af",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cad",
+                    "events",
+                    ":externalId",
+                    "open"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "externalId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5456c899-c71c-4d2f-99cb-4304aa9431a9",
+              "name": "Event Not Found (provided externalId doesn't match any existing)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cad",
+                    "events",
+                    ":externalId",
+                    "open"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "externalId",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5aeb0482-edf6-41cc-9037-6c64df064c11",
+          "name": "Retrieving Events by ExternalIDs",
+          "request": {
+            "name": "Retrieving Events by ExternalIDs",
+            "description": {
+              "content": "Get events for provided externalIds",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "cad",
+                "events",
+                "externalIds"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"externalIds\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "12976176-18af-4f44-9932-f98a3c9f9f2a",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cad",
+                    "events",
+                    "externalIds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalIds\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"externalId\": \"<string>\",\n  \"eventType\": \"<string>\",\n  \"priority\": \"<integer>\",\n  \"groupingId\": \"<string>\",\n  \"displayId\": \"<string>\",\n  \"displayPriority\": \"<string>\",\n  \"timestamp\": \"<dateTime>\",\n  \"closedAt\": \"<dateTime>\",\n  \"displayStatus\": \"<string>\",\n  \"department\": \"<string>\",\n  \"area\": \"<string>\",\n  \"narratives\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"location\": {\n    \"name\": \"<string>\",\n    \"latitude\": \"<number>\",\n    \"longitude\": \"<number>\",\n    \"streetAddress\": \"<string>\",\n    \"city\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"additionalMetadata\": {\n      \"type\": \"<string>\",\n      \"value\": \"<object>\"\n    }\n  },\n  \"callerInfo\": {\n    \"name\": \"<string>\",\n    \"phoneNumber\": \"<string>\",\n    \"timestamp\": \"<dateTime>\",\n    \"location\": {\n      \"name\": \"<string>\",\n      \"latitude\": \"<number>\",\n      \"longitude\": \"<number>\",\n      \"streetAddress\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"country\": \"<string>\",\n      \"additionalMetadata\": {\n        \"type\": \"<string>\",\n        \"value\": \"<object>\"\n      }\n    },\n    \"additionalMetadata\": {\n      \"type\": \"<string>\",\n      \"value\": \"<object>\"\n    }\n  },\n  \"dispatchedUnits\": {},\n  \"involvedVehicles\": {},\n  \"involvedPersons\": {},\n  \"additionalMetadata\": {\n    \"type\": \"<string>\",\n    \"value\": \"<object>\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "724416a1-9b15-490d-9b27-cf93bc734ee0",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cad",
+                    "events",
+                    "externalIds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalIds\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2b5da995-819d-49e4-a8f4-567ebf1b4e30",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cad",
+                    "events",
+                    "externalIds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalIds\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0ab04a23-a23d-40f9-9e2f-faf586e285cf",
+              "name": "Event Not Found (provided externalId doesn't match any existing)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "cad",
+                    "events",
+                    "externalIds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"externalIds\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.flocksafety.com/api/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a2813eb8-38d0-4a5c-a3fd-b73d4f3983f5",
+    "name": "Flock Safety API Platform (v3) Alerts CAD Events API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Flock Safety v3 API Platform harvested from the public developer hub (docs.flocksafety.com). Combines the Device, Custom Hotlist, LPR Search, Plate Lookup, Hotlist Alerts Subscription, Geolocation, CAD, Inbound Alerts, and Vehicle Detections Ingest APIs. OAuth2 client_credentials (machine) and authorization_code (user) flows against api.flocksafety.com.\n\nContact Support:\n Name: Flock Safety Developer Hub",
+      "type": "text/plain"
+    }
+  }
+}

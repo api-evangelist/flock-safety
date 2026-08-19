@@ -1,0 +1,45 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Flock Safety API Platform (v3) Alerts Vehicle Images API",
+    "version": "3.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Vehicle Images",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Uploading images of a vehicle.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.flocksafety.com/api/v3/devices/:deviceId/images",
+            "params": [
+              {
+                "name": "deviceId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the device that this image was captured by."
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": []
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Uploads images of a vehicle that will be ingested and processed. The total size of the main vehicle image and all of the context images must not exceed 9 MB. File size is calculated in binary mb (MB), where 1 MB is 1048576 bytes."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

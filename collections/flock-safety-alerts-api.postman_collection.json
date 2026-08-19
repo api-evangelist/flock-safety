@@ -1,0 +1,1355 @@
+{
+  "item": [
+    {
+      "id": "b8e59fd1-7c1b-4a52-ac1f-61b42d6c5bd1",
+      "name": "Alerts",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7364717d-d076-4ae0-9571-7e5efb8fbc43",
+          "name": "Fetching a single Alert",
+          "request": {
+            "name": "Fetching a single Alert",
+            "description": {
+              "content": "Fetches an existing alert",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "alerts",
+                ":alertId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "alertId",
+                  "description": "(Required) The ID of the alert that will be fetched."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d3e5566b-6b13-4fed-ae64-0d9d0b4753b4",
+              "name": "Successfully fetched single alert.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts",
+                    ":alertId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "alertId",
+                      "description": "(Required) The ID of the alert that will be fetched."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Generic Alert\": {\n    \"value\": {\n      \"id\": \"00000000-0000-0000-0000-000000000000\",\n      \"createdAt\": \"2023-12-31T23:59:59.999999Z\",\n      \"updatedAt\": \"2023-12-31T23:59:59.999999Z\",\n      \"vendorId\": \"00000000-0000-0000-0000-000000000000\",\n      \"vendorName\": \"Example Vendor\",\n      \"status\": \"closed\",\n      \"type\": \"other\",\n      \"subType\": \"traffic-accident\",\n      \"title\": \"Traffic Accident\",\n      \"description\": \"Traffic Accident at 456 State St\",\n      \"priority\": 3,\n      \"eventTime\": \"2023-12-31T23:59:59.999999Z\",\n      \"subjectId\": \"00000000-0000-0000-0000-000000000000\",\n      \"ttl\": 600,\n      \"location\": null,\n      \"attachments\": [\n        {\n          \"type\": \"link\",\n          \"name\": \"Accident link\",\n          \"url\": \"https://example/links/00000000-0000-0000-0000-000000000000\"\n        }\n      ],\n      \"metadata\": {\n        \"foo\": \"bar\"\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f3b71c3b-a00f-4a3b-adfe-17dbdb9d54a5",
+              "name": "The provided token is either expired or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts",
+                    ":alertId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "alertId",
+                      "description": "(Required) The ID of the alert that will be fetched."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"The token is either expired or invalid.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b0d8ab38-ec47-40a9-9ddf-1c59367e5c9c",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts",
+                    ":alertId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "alertId",
+                      "description": "(Required) The ID of the alert that will be fetched."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"alert not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0e5aabbb-d544-4915-ad2c-e2a1630008f6",
+              "name": "Too Many Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts",
+                    ":alertId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "alertId",
+                      "description": "(Required) The ID of the alert that will be fetched."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Throttled\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "be02f2b5-4ff1-464d-83f6-4ee80d2c9bb2",
+          "name": "Updating an Alert",
+          "request": {
+            "name": "Updating an Alert",
+            "description": {
+              "content": "Updates an existing alert displayed in FlockOS",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "alerts",
+                ":alertId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "alertId",
+                  "description": "(Required) The ID of the alert that will be updated."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"<string>\",\n  \"priority\": 3,\n  \"eventTime\": \"<dateTime>\",\n  \"location\": {\n    \"latitude\": \"<double>\",\n    \"longitude\": \"<double>\",\n    \"address\": \"<string>\"\n  },\n  \"type\": \"<string>\",\n  \"description\": \"<string>\",\n  \"subType\": \"<string>\",\n  \"subjectId\": \"<string>\",\n  \"ttl\": \"<integer>\",\n  \"attachments\": [\n    {\n      \"type\": \"<string>\",\n      \"name\": \"<string>\",\n      \"url\": \"<string>\"\n    }\n  ],\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8b4e7c4d-a374-4cef-a176-bed48ab68d00",
+              "name": "The alert was successfully updated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts",
+                    ":alertId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "alertId",
+                      "description": "(Required) The ID of the alert that will be updated."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Generic Alert\": {\n    \"value\": {\n      \"type\": \"other\",\n      \"subType\": \"traffic-accident\",\n      \"title\": \"Updated Traffic Accident\",\n      \"description\": \"Traffic Accident at 456 State St\",\n      \"priority\": 3,\n      \"eventTime\": \"2023-12-31T23:59:59.999999Z\",\n      \"subjectId\": \"00000000-0000-0000-0000-000000000000\",\n      \"attachments\": [\n        {\n          \"type\": \"link\",\n          \"name\": \"Accident link\",\n          \"url\": \"https://example/links/00000000-0000-0000-0000-000000000000\"\n        }\n      ],\n      \"metadata\": {\n        \"foo\": \"bar\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Generic Alert\": {\n    \"value\": {\n      \"id\": \"00000000-0000-0000-0000-000000000000\",\n      \"createdAt\": \"2023-12-31T23:59:59.999999Z\",\n      \"updatedAt\": \"2023-12-31T23:59:59.999999Z\",\n      \"vendorId\": \"00000000-0000-0000-0000-000000000000\",\n      \"vendorName\": \"Example Vendor\",\n      \"status\": \"open\",\n      \"type\": \"other\",\n      \"subType\": \"traffic-accident\",\n      \"title\": \"Updated Traffic Accident\",\n      \"description\": \"Traffic Accident at 456 State St\",\n      \"priority\": 3,\n      \"eventTime\": \"2023-12-31T23:59:59.999999Z\",\n      \"subjectId\": \"00000000-0000-0000-0000-000000000000\",\n      \"ttl\": 600,\n      \"location\": null,\n      \"attachments\": [\n        {\n          \"type\": \"link\",\n          \"name\": \"Accident link\",\n          \"url\": \"https://example/links/00000000-0000-0000-0000-000000000000\"\n        }\n      ],\n      \"metadata\": {\n        \"foo\": \"bar\"\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a8180a23-1b2e-4823-a3ca-f9030575d15e",
+              "name": "The given alert contains one or more errors.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts",
+                    ":alertId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "alertId",
+                      "description": "(Required) The ID of the alert that will be updated."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Generic Alert\": {\n    \"value\": {\n      \"type\": \"other\",\n      \"subType\": \"traffic-accident\",\n      \"title\": \"Updated Traffic Accident\",\n      \"description\": \"Traffic Accident at 456 State St\",\n      \"priority\": 3,\n      \"eventTime\": \"2023-12-31T23:59:59.999999Z\",\n      \"subjectId\": \"00000000-0000-0000-0000-000000000000\",\n      \"attachments\": [\n        {\n          \"type\": \"link\",\n          \"name\": \"Accident link\",\n          \"url\": \"https://example/links/00000000-0000-0000-0000-000000000000\"\n        }\n      ],\n      \"metadata\": {\n        \"foo\": \"bar\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"subject not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "079bce0a-3219-4ab2-ab35-171107835b7f",
+              "name": "The provided token is either expired or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts",
+                    ":alertId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "alertId",
+                      "description": "(Required) The ID of the alert that will be updated."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Generic Alert\": {\n    \"value\": {\n      \"type\": \"other\",\n      \"subType\": \"traffic-accident\",\n      \"title\": \"Updated Traffic Accident\",\n      \"description\": \"Traffic Accident at 456 State St\",\n      \"priority\": 3,\n      \"eventTime\": \"2023-12-31T23:59:59.999999Z\",\n      \"subjectId\": \"00000000-0000-0000-0000-000000000000\",\n      \"attachments\": [\n        {\n          \"type\": \"link\",\n          \"name\": \"Accident link\",\n          \"url\": \"https://example/links/00000000-0000-0000-0000-000000000000\"\n        }\n      ],\n      \"metadata\": {\n        \"foo\": \"bar\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"The token is either expired or invalid.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2643b1c5-81b8-4cf8-9043-a55e61384c7b",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts",
+                    ":alertId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "alertId",
+                      "description": "(Required) The ID of the alert that will be updated."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Generic Alert\": {\n    \"value\": {\n      \"type\": \"other\",\n      \"subType\": \"traffic-accident\",\n      \"title\": \"Updated Traffic Accident\",\n      \"description\": \"Traffic Accident at 456 State St\",\n      \"priority\": 3,\n      \"eventTime\": \"2023-12-31T23:59:59.999999Z\",\n      \"subjectId\": \"00000000-0000-0000-0000-000000000000\",\n      \"attachments\": [\n        {\n          \"type\": \"link\",\n          \"name\": \"Accident link\",\n          \"url\": \"https://example/links/00000000-0000-0000-0000-000000000000\"\n        }\n      ],\n      \"metadata\": {\n        \"foo\": \"bar\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"alert not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "789c4e26-6710-4be4-ac4c-2c088836a333",
+              "name": "Too Many Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts",
+                    ":alertId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "alertId",
+                      "description": "(Required) The ID of the alert that will be updated."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Generic Alert\": {\n    \"value\": {\n      \"type\": \"other\",\n      \"subType\": \"traffic-accident\",\n      \"title\": \"Updated Traffic Accident\",\n      \"description\": \"Traffic Accident at 456 State St\",\n      \"priority\": 3,\n      \"eventTime\": \"2023-12-31T23:59:59.999999Z\",\n      \"subjectId\": \"00000000-0000-0000-0000-000000000000\",\n      \"attachments\": [\n        {\n          \"type\": \"link\",\n          \"name\": \"Accident link\",\n          \"url\": \"https://example/links/00000000-0000-0000-0000-000000000000\"\n        }\n      ],\n      \"metadata\": {\n        \"foo\": \"bar\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Throttled\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9aa954ce-e351-48c5-9ebf-37b04b1fff76",
+          "name": "Fetching all recent Alerts",
+          "request": {
+            "name": "Fetching all recent Alerts",
+            "description": {
+              "content": "Fetches all recent alerts that are displayed in FlockOS",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "alerts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "includeInactive",
+                  "value": "false",
+                  "description": "Whether to include inactive alerts in the results."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "100",
+                  "description": "The maximum number of alerts returned in the response (1-100)."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "The number of alert results to skip before starting to collect the set of alerts."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "126b2996-85a9-4e38-9f59-833377d39435",
+              "name": "The alerts were successfully fetched.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "includeInactive",
+                      "value": "false"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"id\": \"00000000-0000-0000-0000-000000000000\",\n      \"createdAt\": \"2023-12-31T23:59:59.999999Z\",\n      \"updatedAt\": \"2023-12-31T23:59:59.999999Z\",\n      \"vendorId\": \"00000000-0000-0000-0000-000000000000\",\n      \"vendorName\": \"Example Vendor\",\n      \"status\": \"open\",\n      \"type\": \"vehicle\",\n      \"subType\": \"other\",\n      \"title\": \"Vehicle Alert\",\n      \"description\": \"Vehicle Alert at 835 Main St\",\n      \"priority\": 1,\n      \"eventTime\": \"2023-12-31T23:59:59.999999Z\",\n      \"subjectId\": \"00000000-0000-0000-0000-000000000000\",\n      \"ttl\": 600,\n      \"location\": null,\n      \"attachments\": [\n        {\n          \"type\": \"link\",\n          \"name\": \"Accident link\",\n          \"url\": \"https://example/links/00000000-0000-0000-0000-000000000000\"\n        }\n      ],\n      \"metadata\": {\n        \"foo\": \"bar\"\n      }\n    },\n    {\n      \"id\": \"00000000-0000-0000-0000-000000000000\",\n      \"createdAt\": \"2023-12-31T23:59:59.999999Z\",\n      \"updatedAt\": \"2023-12-31T23:59:59.999999Z\",\n      \"vendorId\": \"00000000-0000-0000-0000-000000000000\",\n      \"vendorName\": \"Example Vendor\",\n      \"status\": \"open\",\n      \"type\": \"vehicle\",\n      \"subType\": \"hotlist\",\n      \"title\": \"Vehicle Alert\",\n      \"description\": \"Vehicle Alert at 835 Main St\",\n      \"priority\": 1,\n      \"eventTime\": \"2023-12-31T23:59:59.999999Z\",\n      \"subjectId\": \"00000000-0000-0000-0000-000000000000\",\n      \"ttl\": 600,\n      \"location\": null,\n      \"attachments\": [\n        {\n          \"type\": \"link\",\n          \"name\": \"Accident link\",\n          \"url\": \"https://example/links/00000000-0000-0000-0000-000000000000\"\n        }\n      ],\n      \"metadata\": {\n        \"foo\": \"bar\"\n      }\n    },\n    {\n      \"id\": \"00000000-0000-0000-0000-000000000000\",\n      \"createdAt\": \"2023-12-31T23:59:59.999999Z\",\n      \"updatedAt\": \"2023-12-31T23:59:59.999999Z\",\n      \"vendorId\": \"00000000-0000-0000-0000-000000000000\",\n      \"vendorName\": \"Example Vendor\",\n      \"status\": \"open\",\n      \"type\": \"vehicle\",\n      \"subType\": \"customHotlist\",\n      \"title\": \"Vehicle Alert\",\n      \"description\": \"Vehicle Alert at 835 Main St\",\n      \"priority\": 1,\n      \"eventTime\": \"2023-12-31T23:59:59.999999Z\",\n      \"subjectId\": null,\n      \"ttl\": 600,\n      \"location\": {\n        \"latitude\": 40.783871,\n        \"longitude\": -73.97541,\n        \"address\": \"129 W 81st St, New York, NY 10024\"\n      },\n      \"attachments\": [\n        {\n          \"type\": \"link\",\n          \"name\": \"Accident link\",\n          \"url\": \"https://example/links/00000000-0000-0000-0000-000000000000\"\n        }\n      ],\n      \"metadata\": {\n        \"foo\": \"bar\"\n      }\n    },\n    {\n      \"id\": \"00000000-0000-0000-0000-000000000000\",\n      \"createdAt\": \"2023-12-31T23:59:59.999999Z\",\n      \"updatedAt\": \"2023-12-31T23:59:59.999999Z\",\n      \"vendorId\": \"00000000-0000-0000-0000-000000000000\",\n      \"vendorName\": \"Example Vendor\",\n      \"status\": \"open\",\n      \"type\": \"other\",\n      \"subType\": \"traffic-accident\",\n      \"title\": \"Traffic Accident\",\n      \"description\": \"Traffic Accident at 456 State St\",\n      \"priority\": 3,\n      \"eventTime\": \"2023-12-31T23:59:59.999999Z\",\n      \"subjectId\": \"00000000-0000-0000-0000-000000000000\",\n      \"ttl\": 600,\n      \"location\": null,\n      \"attachments\": [\n        {\n          \"type\": \"link\",\n          \"name\": \"Accident link\",\n          \"url\": \"https://example/links/00000000-0000-0000-0000-000000000000\"\n        }\n      ],\n      \"metadata\": {\n        \"foo\": \"bar\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a138f333-eb9a-4f20-9f21-6c4f1b8e30e3",
+              "name": "The provided token is either expired or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "includeInactive",
+                      "value": "false"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"The token is either expired or invalid.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5bb3237c-0488-47fb-9e3d-453e7282f87e",
+              "name": "Too Many Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "includeInactive",
+                      "value": "false"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "100"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "0"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Throttled\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e05f8864-f3ad-4a6c-bd06-965f2a3b0d32",
+          "name": "Creating an Generic Alert",
+          "request": {
+            "name": "Creating an Generic Alert",
+            "description": {
+              "content": "Creates a new generic alert that will be displayed in FlockOS",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "alerts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"<string>\",\n  \"priority\": 3,\n  \"eventTime\": \"<dateTime>\",\n  \"location\": {\n    \"latitude\": \"<double>\",\n    \"longitude\": \"<double>\",\n    \"address\": \"<string>\"\n  },\n  \"type\": \"<string>\",\n  \"description\": \"<string>\",\n  \"subType\": \"<string>\",\n  \"subjectId\": \"<string>\",\n  \"ttl\": \"<integer>\",\n  \"attachments\": [\n    {\n      \"type\": \"<string>\",\n      \"name\": \"<string>\",\n      \"url\": \"<string>\"\n    }\n  ],\n  \"metadata\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7b1ebebd-2b80-4595-b627-d6e89f8c0719",
+              "name": "The alert was successfully created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Generic Alert\": {\n    \"value\": {\n      \"title\": \"Traffic Accident\",\n      \"description\": \"Traffic Accident at 456 State St\",\n      \"type\": \"other\",\n      \"subType\": \"traffic-accident\",\n      \"priority\": 3,\n      \"eventTime\": \"2023-12-31T23:59:59.999999Z\",\n      \"subjectId\": \"00000000-0000-0000-0000-000000000000\",\n      \"ttl\": 600,\n      \"location\": null,\n      \"attachments\": [\n        {\n          \"type\": \"link\",\n          \"name\": \"Accident link\",\n          \"url\": \"https://example/links/00000000-0000-0000-0000-000000000000\"\n        }\n      ],\n      \"metadata\": {\n        \"foo\": \"bar\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Generic Alert\": {\n    \"value\": {\n      \"id\": \"00000000-0000-0000-0000-000000000000\",\n      \"createdAt\": \"2023-12-31T23:59:59.999999Z\",\n      \"updatedAt\": \"2023-12-31T23:59:59.999999Z\",\n      \"vendorId\": \"00000000-0000-0000-0000-000000000000\",\n      \"vendorName\": \"Example Vendor\",\n      \"status\": \"open\",\n      \"type\": \"other\",\n      \"subType\": \"traffic-accident\",\n      \"title\": \"Traffic Accident\",\n      \"description\": \"Traffic Accident at 456 State St\",\n      \"priority\": 3,\n      \"eventTime\": \"2023-12-31T23:59:59.999999Z\",\n      \"subjectId\": \"00000000-0000-0000-0000-000000000000\",\n      \"ttl\": 600,\n      \"location\": null,\n      \"attachments\": [\n        {\n          \"type\": \"link\",\n          \"name\": \"Accident link\",\n          \"url\": \"https://example/links/00000000-0000-0000-0000-000000000000\"\n        }\n      ],\n      \"metadata\": {\n        \"foo\": \"bar\"\n      }\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "77d75418-ac40-47ba-8ba7-c462e1c6b6a3",
+              "name": "The given alert contains one or more errors.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Generic Alert\": {\n    \"value\": {\n      \"title\": \"Traffic Accident\",\n      \"description\": \"Traffic Accident at 456 State St\",\n      \"type\": \"other\",\n      \"subType\": \"traffic-accident\",\n      \"priority\": 3,\n      \"eventTime\": \"2023-12-31T23:59:59.999999Z\",\n      \"subjectId\": \"00000000-0000-0000-0000-000000000000\",\n      \"ttl\": 600,\n      \"location\": null,\n      \"attachments\": [\n        {\n          \"type\": \"link\",\n          \"name\": \"Accident link\",\n          \"url\": \"https://example/links/00000000-0000-0000-0000-000000000000\"\n        }\n      ],\n      \"metadata\": {\n        \"foo\": \"bar\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"subject not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "024d2e0a-8be4-4ee1-8b2f-761ad08a54d2",
+              "name": "The provided token is either expired or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Generic Alert\": {\n    \"value\": {\n      \"title\": \"Traffic Accident\",\n      \"description\": \"Traffic Accident at 456 State St\",\n      \"type\": \"other\",\n      \"subType\": \"traffic-accident\",\n      \"priority\": 3,\n      \"eventTime\": \"2023-12-31T23:59:59.999999Z\",\n      \"subjectId\": \"00000000-0000-0000-0000-000000000000\",\n      \"ttl\": 600,\n      \"location\": null,\n      \"attachments\": [\n        {\n          \"type\": \"link\",\n          \"name\": \"Accident link\",\n          \"url\": \"https://example/links/00000000-0000-0000-0000-000000000000\"\n        }\n      ],\n      \"metadata\": {\n        \"foo\": \"bar\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"The token is either expired or invalid.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "117b4326-4211-4d40-8e19-f11706148f9c",
+              "name": "Too Many Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Generic Alert\": {\n    \"value\": {\n      \"title\": \"Traffic Accident\",\n      \"description\": \"Traffic Accident at 456 State St\",\n      \"type\": \"other\",\n      \"subType\": \"traffic-accident\",\n      \"priority\": 3,\n      \"eventTime\": \"2023-12-31T23:59:59.999999Z\",\n      \"subjectId\": \"00000000-0000-0000-0000-000000000000\",\n      \"ttl\": 600,\n      \"location\": null,\n      \"attachments\": [\n        {\n          \"type\": \"link\",\n          \"name\": \"Accident link\",\n          \"url\": \"https://example/links/00000000-0000-0000-0000-000000000000\"\n        }\n      ],\n      \"metadata\": {\n        \"foo\": \"bar\"\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Throttled\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6c712343-81b9-4ccc-9a48-1ece7f25deaf",
+          "name": "Closing an Alert.",
+          "request": {
+            "name": "Closing an Alert.",
+            "description": {
+              "content": "Closes an alert so that it is no longer visible",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "alerts",
+                ":alertId",
+                "close"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "alertId",
+                  "description": "(Required) The ID of the alert that will be closed."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "7d38a5bb-5aa4-4af8-aec8-58450c0a2241",
+              "name": "The alert was successfully closed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts",
+                    ":alertId",
+                    "close"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "alertId",
+                      "description": "(Required) The ID of the alert that will be closed."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "12507fe7-1a02-47bd-a2bb-64ca6f7e7d04",
+              "name": "The provided token is either expired or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts",
+                    ":alertId",
+                    "close"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "alertId",
+                      "description": "(Required) The ID of the alert that will be closed."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"The token is either expired or invalid.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5783e9ac-663c-40a9-87e4-6068e5b3c688",
+              "name": "Too Many Requests",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "alerts",
+                    ":alertId",
+                    "close"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "alertId",
+                      "description": "(Required) The ID of the alert that will be closed."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"Throttled\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.flocksafety.com/api/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "c7bc33a4-b90d-4eb6-989a-2b45d73b4d33",
+    "name": "Flock Safety API Platform (v3) Alerts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Flock Safety v3 API Platform harvested from the public developer hub (docs.flocksafety.com). Combines the Device, Custom Hotlist, LPR Search, Plate Lookup, Hotlist Alerts Subscription, Geolocation, CAD, Inbound Alerts, and Vehicle Detections Ingest APIs. OAuth2 client_credentials (machine) and authorization_code (user) flows against api.flocksafety.com.\n\nContact Support:\n Name: Flock Safety Developer Hub",
+      "type": "text/plain"
+    }
+  }
+}

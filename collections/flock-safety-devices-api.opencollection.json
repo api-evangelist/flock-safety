@@ -1,0 +1,129 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Flock Safety API Platform (v3) Alerts Devices API",
+    "version": "3.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Devices",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieving a device.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.flocksafety.com/api/v3/devices/:deviceId",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieves a particular device."
+        },
+        {
+          "info": {
+            "name": "Updating a device.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.flocksafety.com/api/v3/devices/:deviceId",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates a device."
+        },
+        {
+          "info": {
+            "name": "Retrieving devices.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.flocksafety.com/api/v3/devices",
+            "params": [
+              {
+                "name": "latitude",
+                "value": "",
+                "type": "query",
+                "description": "Used to filter by area."
+              },
+              {
+                "name": "longitude",
+                "value": "",
+                "type": "query",
+                "description": "Used to filter by area."
+              },
+              {
+                "name": "radius",
+                "value": "",
+                "type": "query",
+                "description": "Used to filter by area."
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page from which to retrieve results."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of results that should be on each page."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieves the devices that belong to your organization."
+        },
+        {
+          "info": {
+            "name": "Creating a device.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.flocksafety.com/api/v3/devices",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a device."
+        },
+        {
+          "info": {
+            "name": "Decommissioning a device.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.flocksafety.com/api/v3/devices/:deviceId/decommission"
+          },
+          "docs": "Decommissions a device. Once a device is decommissioned, vehicle images from that device can no longer be ingested. However, the device will remain in the system for compliance and auditing purposes."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

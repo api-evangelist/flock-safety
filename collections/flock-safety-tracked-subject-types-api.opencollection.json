@@ -1,0 +1,75 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Flock Safety API Platform (v3) Alerts Tracked Subject Types API",
+    "version": "3.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tracked Subject Types",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Deleting a Subject Type",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.flocksafety.com/api/v3/geo/types/:typeId",
+            "params": [
+              {
+                "name": "typeId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the subject type you are deleting"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a subject type. This will delete tracking information on subjects of that type"
+        },
+        {
+          "info": {
+            "name": "List Subject Types",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.flocksafety.com/api/v3/geo/types",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List Subject Types"
+        },
+        {
+          "info": {
+            "name": "Register a Subject Type",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.flocksafety.com/api/v3/geo/types",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Register a Subject Type"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

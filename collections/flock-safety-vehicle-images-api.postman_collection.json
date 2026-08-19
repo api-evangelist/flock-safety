@@ -1,0 +1,824 @@
+{
+  "item": [
+    {
+      "id": "1e6dd32d-b0b9-448a-9e61-5b7f5ecec75e",
+      "name": "Vehicle Images",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "afe77f70-3c8f-4c4d-9704-ba1a59f0a7b9",
+          "name": "Uploading images of a vehicle.",
+          "request": {
+            "name": "Uploading images of a vehicle.",
+            "description": {
+              "content": "Uploads images of a vehicle that will be ingested and processed. The total size of the main vehicle image and all of the context images must not exceed 9 MB. File size is calculated in binary mb (MB), where 1 MB is 1048576 bytes.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "devices",
+                ":deviceId",
+                "images"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "deviceId",
+                  "description": "(Required) The ID of the device that this image was captured by."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "image",
+                  "type": "file",
+                  "contentType": "image/jpeg",
+                  "description": "(Required) The image to ingest and process into FlockOS."
+                },
+                {
+                  "key": "contextImages",
+                  "value": "[\"<binary>\",\"<binary>\"]",
+                  "type": "text",
+                  "contentType": "image/jpeg",
+                  "description": "Additional context images to be ingested. These images will not be processed but will be viewable alongside the main image\n"
+                },
+                {
+                  "key": "capturedAt",
+                  "value": "<dateTime>",
+                  "type": "text",
+                  "description": "The timestamp (in RFC3339 UTC format) indicating when the image was captured."
+                },
+                {
+                  "key": "latitude",
+                  "value": "<float>",
+                  "type": "text",
+                  "description": "The latitude of the location where the images were captured."
+                },
+                {
+                  "key": "longitude",
+                  "value": "<float>",
+                  "type": "text",
+                  "description": "The longitude of the location where the images were captured."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "1b8ef738-ab65-4cce-8fba-8ace3d9295d9",
+              "name": "The image was successfully ingested.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "devices",
+                    ":deviceId",
+                    "images"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "deviceId",
+                      "description": "(Required) The ID of the device that this image was captured by."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) The image to ingest and process into FlockOS.",
+                        "type": "text/plain"
+                      },
+                      "key": "image",
+                      "value": "<binary>",
+                      "type": "text",
+                      "contentType": "image/jpeg"
+                    },
+                    {
+                      "description": {
+                        "content": "Additional context images to be ingested. These images will not be processed but will be viewable alongside the main image\n",
+                        "type": "text/plain"
+                      },
+                      "key": "contextImages",
+                      "value": "[\"<binary>\",\"<binary>\"]",
+                      "type": "text",
+                      "contentType": "image/jpeg"
+                    },
+                    {
+                      "description": {
+                        "content": "The timestamp (in RFC3339 UTC format) indicating when the image was captured.",
+                        "type": "text/plain"
+                      },
+                      "key": "capturedAt",
+                      "value": "2024-07-26T17:31:51.000Z",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The latitude of the location where the images were captured.",
+                        "type": "text/plain"
+                      },
+                      "key": "latitude",
+                      "value": "40.783979987434215",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The longitude of the location where the images were captured.",
+                        "type": "text/plain"
+                      },
+                      "key": "longitude",
+                      "value": "-73.97539595767532",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "dd07bf9a-c90c-4e1e-a699-4363258ae244",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "devices",
+                    ":deviceId",
+                    "images"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "deviceId",
+                      "description": "(Required) The ID of the device that this image was captured by."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) The image to ingest and process into FlockOS.",
+                        "type": "text/plain"
+                      },
+                      "key": "image",
+                      "value": "<binary>",
+                      "type": "text",
+                      "contentType": "image/jpeg"
+                    },
+                    {
+                      "description": {
+                        "content": "Additional context images to be ingested. These images will not be processed but will be viewable alongside the main image\n",
+                        "type": "text/plain"
+                      },
+                      "key": "contextImages",
+                      "value": "[\"<binary>\",\"<binary>\"]",
+                      "type": "text",
+                      "contentType": "image/jpeg"
+                    },
+                    {
+                      "description": {
+                        "content": "The timestamp (in RFC3339 UTC format) indicating when the image was captured.",
+                        "type": "text/plain"
+                      },
+                      "key": "capturedAt",
+                      "value": "2024-07-26T17:31:51.000Z",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The latitude of the location where the images were captured.",
+                        "type": "text/plain"
+                      },
+                      "key": "latitude",
+                      "value": "40.783979987434215",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The longitude of the location where the images were captured.",
+                        "type": "text/plain"
+                      },
+                      "key": "longitude",
+                      "value": "-73.97539595767532",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "25add1c8-32d8-4a57-b0aa-cdac97e41a58",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "devices",
+                    ":deviceId",
+                    "images"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "deviceId",
+                      "description": "(Required) The ID of the device that this image was captured by."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) The image to ingest and process into FlockOS.",
+                        "type": "text/plain"
+                      },
+                      "key": "image",
+                      "value": "<binary>",
+                      "type": "text",
+                      "contentType": "image/jpeg"
+                    },
+                    {
+                      "description": {
+                        "content": "Additional context images to be ingested. These images will not be processed but will be viewable alongside the main image\n",
+                        "type": "text/plain"
+                      },
+                      "key": "contextImages",
+                      "value": "[\"<binary>\",\"<binary>\"]",
+                      "type": "text",
+                      "contentType": "image/jpeg"
+                    },
+                    {
+                      "description": {
+                        "content": "The timestamp (in RFC3339 UTC format) indicating when the image was captured.",
+                        "type": "text/plain"
+                      },
+                      "key": "capturedAt",
+                      "value": "2024-07-26T17:31:51.000Z",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The latitude of the location where the images were captured.",
+                        "type": "text/plain"
+                      },
+                      "key": "latitude",
+                      "value": "40.783979987434215",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The longitude of the location where the images were captured.",
+                        "type": "text/plain"
+                      },
+                      "key": "longitude",
+                      "value": "-73.97539595767532",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bc520403-0a6c-4a17-9904-d21a7ed79b59",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "devices",
+                    ":deviceId",
+                    "images"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "deviceId",
+                      "description": "(Required) The ID of the device that this image was captured by."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) The image to ingest and process into FlockOS.",
+                        "type": "text/plain"
+                      },
+                      "key": "image",
+                      "value": "<binary>",
+                      "type": "text",
+                      "contentType": "image/jpeg"
+                    },
+                    {
+                      "description": {
+                        "content": "Additional context images to be ingested. These images will not be processed but will be viewable alongside the main image\n",
+                        "type": "text/plain"
+                      },
+                      "key": "contextImages",
+                      "value": "[\"<binary>\",\"<binary>\"]",
+                      "type": "text",
+                      "contentType": "image/jpeg"
+                    },
+                    {
+                      "description": {
+                        "content": "The timestamp (in RFC3339 UTC format) indicating when the image was captured.",
+                        "type": "text/plain"
+                      },
+                      "key": "capturedAt",
+                      "value": "2024-07-26T17:31:51.000Z",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The latitude of the location where the images were captured.",
+                        "type": "text/plain"
+                      },
+                      "key": "latitude",
+                      "value": "40.783979987434215",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The longitude of the location where the images were captured.",
+                        "type": "text/plain"
+                      },
+                      "key": "longitude",
+                      "value": "-73.97539595767532",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "405c1f79-7aa8-4c59-b387-2e01146ea4bd",
+              "name": "The total size of all the images uploaded exceeds 9 MiB. Total file sizes: 13 MiB",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "devices",
+                    ":deviceId",
+                    "images"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "deviceId",
+                      "description": "(Required) The ID of the device that this image was captured by."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) The image to ingest and process into FlockOS.",
+                        "type": "text/plain"
+                      },
+                      "key": "image",
+                      "value": "<binary>",
+                      "type": "text",
+                      "contentType": "image/jpeg"
+                    },
+                    {
+                      "description": {
+                        "content": "Additional context images to be ingested. These images will not be processed but will be viewable alongside the main image\n",
+                        "type": "text/plain"
+                      },
+                      "key": "contextImages",
+                      "value": "[\"<binary>\",\"<binary>\"]",
+                      "type": "text",
+                      "contentType": "image/jpeg"
+                    },
+                    {
+                      "description": {
+                        "content": "The timestamp (in RFC3339 UTC format) indicating when the image was captured.",
+                        "type": "text/plain"
+                      },
+                      "key": "capturedAt",
+                      "value": "2024-07-26T17:31:51.000Z",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The latitude of the location where the images were captured.",
+                        "type": "text/plain"
+                      },
+                      "key": "latitude",
+                      "value": "40.783979987434215",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The longitude of the location where the images were captured.",
+                        "type": "text/plain"
+                      },
+                      "key": "longitude",
+                      "value": "-73.97539595767532",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Request Entity Too Large",
+              "code": 413,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": {\n    \"code\": \"max_image_size_exceeded\",\n    \"message\": \"The total size of all the images uploaded exceeds 9 MiB. Total size: 13 MiB\",\n    \"errors\": [\n      {\n        \"field\": \"image\",\n        \"message\": \"The total size of all the images uploaded exceeds 9 MiB. Total size: 13 MiB\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a0148772-eb4d-4772-86b1-f4a1cd70346b",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "devices",
+                    ":deviceId",
+                    "images"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "deviceId",
+                      "description": "(Required) The ID of the device that this image was captured by."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) The image to ingest and process into FlockOS.",
+                        "type": "text/plain"
+                      },
+                      "key": "image",
+                      "value": "<binary>",
+                      "type": "text",
+                      "contentType": "image/jpeg"
+                    },
+                    {
+                      "description": {
+                        "content": "Additional context images to be ingested. These images will not be processed but will be viewable alongside the main image\n",
+                        "type": "text/plain"
+                      },
+                      "key": "contextImages",
+                      "value": "[\"<binary>\",\"<binary>\"]",
+                      "type": "text",
+                      "contentType": "image/jpeg"
+                    },
+                    {
+                      "description": {
+                        "content": "The timestamp (in RFC3339 UTC format) indicating when the image was captured.",
+                        "type": "text/plain"
+                      },
+                      "key": "capturedAt",
+                      "value": "2024-07-26T17:31:51.000Z",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The latitude of the location where the images were captured.",
+                        "type": "text/plain"
+                      },
+                      "key": "latitude",
+                      "value": "40.783979987434215",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The longitude of the location where the images were captured.",
+                        "type": "text/plain"
+                      },
+                      "key": "longitude",
+                      "value": "-73.97539595767532",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1e90d6c1-ed88-4e56-9b78-dcee0f0bbe51",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "devices",
+                    ":deviceId",
+                    "images"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "deviceId",
+                      "description": "(Required) The ID of the device that this image was captured by."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) The image to ingest and process into FlockOS.",
+                        "type": "text/plain"
+                      },
+                      "key": "image",
+                      "value": "<binary>",
+                      "type": "text",
+                      "contentType": "image/jpeg"
+                    },
+                    {
+                      "description": {
+                        "content": "Additional context images to be ingested. These images will not be processed but will be viewable alongside the main image\n",
+                        "type": "text/plain"
+                      },
+                      "key": "contextImages",
+                      "value": "[\"<binary>\",\"<binary>\"]",
+                      "type": "text",
+                      "contentType": "image/jpeg"
+                    },
+                    {
+                      "description": {
+                        "content": "The timestamp (in RFC3339 UTC format) indicating when the image was captured.",
+                        "type": "text/plain"
+                      },
+                      "key": "capturedAt",
+                      "value": "2024-07-26T17:31:51.000Z",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The latitude of the location where the images were captured.",
+                        "type": "text/plain"
+                      },
+                      "key": "latitude",
+                      "value": "40.783979987434215",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The longitude of the location where the images were captured.",
+                        "type": "text/plain"
+                      },
+                      "key": "longitude",
+                      "value": "-73.97539595767532",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.flocksafety.com/api/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "d46fc391-ce44-4341-97ea-182101c94874",
+    "name": "Flock Safety API Platform (v3) Alerts Vehicle Images API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Flock Safety v3 API Platform harvested from the public developer hub (docs.flocksafety.com). Combines the Device, Custom Hotlist, LPR Search, Plate Lookup, Hotlist Alerts Subscription, Geolocation, CAD, Inbound Alerts, and Vehicle Detections Ingest APIs. OAuth2 client_credentials (machine) and authorization_code (user) flows against api.flocksafety.com.\n\nContact Support:\n Name: Flock Safety Developer Hub",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Flock Safety API Platform (v3) Alerts Plate Reads API",
+    "version": "3.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Plate Reads",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "View license plate reads lookup results",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.flocksafety.com/api/v3/reads/lookup/page/:pageId",
+            "params": [
+              {
+                "name": "pageId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the page to view."
+              }
+            ]
+          },
+          "docs": "View the results of a license plate read lookup\n## Required API scope\n[plate-reads:lookup](https://docs.flocksafety.com/developer-hub/docs/client-credentials)\n"
+        },
+        {
+          "info": {
+            "name": "Lookup license plate reads",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.flocksafety.com/api/v3/reads/lookup",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Look up license plate reads by full license plate characters.\n## Required API scope\n[plate-reads:lookup](https://docs.flocksafety.com/developer-hub/docs/client-credentials)\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

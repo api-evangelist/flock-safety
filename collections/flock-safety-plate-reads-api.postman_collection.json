@@ -1,0 +1,572 @@
+{
+  "item": [
+    {
+      "id": "bee5f33c-9d99-4086-8532-3548173e3796",
+      "name": "Plate Reads",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "17c755bf-fb21-43c5-9682-075dc98f248c",
+          "name": "View license plate reads lookup results",
+          "request": {
+            "name": "View license plate reads lookup results",
+            "description": {
+              "content": "View the results of a license plate read lookup\n## Required API scope\n[plate-reads:lookup](https://docs.flocksafety.com/developer-hub/docs/client-credentials)\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "reads",
+                "lookup",
+                "page",
+                ":pageId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "pageId",
+                  "description": "(Required) The ID of the page to view."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1ccba94c-492b-4e59-b91d-51f00a594b2e",
+              "name": "List of license plate reads",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reads",
+                    "lookup",
+                    "page",
+                    ":pageId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "pageId",
+                      "description": "(Required) The ID of the page to view."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"id\": \"4171ae2b-843f-405b-922d-b1e89921f24f\",\n      \"capturedAt\": \"2023-12-31T23:59:59.999999Z\",\n      \"device\": {\n        \"id\": \"string\",\n        \"type\": \"camera\",\n        \"name\": \"string\",\n        \"location\": {\n          \"name\": \"string\",\n          \"latitude\": 9074.811606594038,\n          \"longitude\": 3501.65061575065,\n          \"streetAddress\": \"string\",\n          \"city\": \"string\",\n          \"state\": \"string\",\n          \"country\": \"string\",\n          \"additionalMetadata\": {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"network\": {\n          \"id\": \"72d97364-3f45-4e16-ae52-631aea3141cc\",\n          \"name\": \"Little Rock AR PD\"\n        },\n        \"metadata\": {},\n        \"createdAt\": {},\n        \"modifiedAt\": {},\n        \"link\": \"https://hotlist.flocksafety.com/dispatch/type/audio?id=00000000-0000-0000-000000000000\"\n      },\n      \"plate\": {\n        \"plate\": \"XNA357\",\n        \"confidence\": 0.9\n      },\n      \"state\": {\n        \"state\": \"arkansas\",\n        \"confidence\": 0.75\n      },\n      \"link\": \"https://share.flocksafety.com/lookup/33fc2d53-5b1e-4f9a-95b8-a3fe47823d26\"\n    },\n    {\n      \"id\": \"4171ae2b-843f-405b-922d-b1e89921f24f\",\n      \"capturedAt\": \"2023-12-31T23:59:59.999999Z\",\n      \"device\": {\n        \"id\": \"string\",\n        \"type\": \"external\",\n        \"name\": \"string\",\n        \"location\": {\n          \"name\": \"string\",\n          \"latitude\": 4446.22117646118,\n          \"longitude\": 824.9408676199166,\n          \"streetAddress\": \"string\",\n          \"city\": \"string\",\n          \"state\": \"string\",\n          \"country\": \"string\",\n          \"additionalMetadata\": {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"network\": {\n          \"id\": \"72d97364-3f45-4e16-ae52-631aea3141cc\",\n          \"name\": \"Little Rock AR PD\"\n        },\n        \"metadata\": {},\n        \"createdAt\": {},\n        \"modifiedAt\": {},\n        \"link\": \"https://hotlist.flocksafety.com/dispatch/type/audio?id=00000000-0000-0000-000000000000\"\n      },\n      \"plate\": {\n        \"plate\": \"XNA357\",\n        \"confidence\": 0.9\n      },\n      \"state\": {\n        \"state\": \"arkansas\",\n        \"confidence\": 0.75\n      },\n      \"link\": \"https://share.flocksafety.com/lookup/33fc2d53-5b1e-4f9a-95b8-a3fe47823d26\"\n    }\n  ],\n  \"totalItems\": 2,\n  \"nextPageId\": \"string\",\n  \"previousPageId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "790b57d9-00ce-4afe-a28a-64e6ad2061d5",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reads",
+                    "lookup",
+                    "page",
+                    ":pageId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "pageId",
+                      "description": "(Required) The ID of the page to view."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cee7cb60-1a68-4fa7-9afb-b43580590720",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reads",
+                    "lookup",
+                    "page",
+                    ":pageId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "pageId",
+                      "description": "(Required) The ID of the page to view."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8c483f9c-7bcc-4165-999e-91808729a081",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reads",
+                    "lookup",
+                    "page",
+                    ":pageId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "pageId",
+                      "description": "(Required) The ID of the page to view."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4dc1f261-1cf9-4adf-8d9f-5bc92c32cf49",
+              "name": "The maximum number of requests you can perform per second has been exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reads",
+                    "lookup",
+                    "page",
+                    ":pageId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "pageId",
+                      "description": "(Required) The ID of the page to view."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"reference #/components/examples/RateLimitError not found in the given specification\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "23751bf4-3bcd-4bac-8750-21793d9b4819",
+          "name": "Lookup license plate reads",
+          "request": {
+            "name": "Lookup license plate reads",
+            "description": {
+              "content": "Look up license plate reads by full license plate characters.\n## Required API scope\n[plate-reads:lookup](https://docs.flocksafety.com/developer-hub/docs/client-credentials)\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "reads",
+                "lookup"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"plate\": \"<string>\",\n  \"reason\": \"<string>\",\n  \"startDate\": \"<dateTime>\",\n  \"endDate\": \"<dateTime>\",\n  \"limit\": \"<number>\",\n  \"minConfidences\": [\n    {\n      \"attribute\": \"<string>\",\n      \"minConfidence\": \"<number>\"\n    },\n    {\n      \"attribute\": \"<string>\",\n      \"minConfidence\": \"<number>\"\n    }\n  ],\n  \"state\": \"<string>\",\n  \"caseNumber\": \"<string>\",\n  \"sort\": [\n    {\n      \"field\": \"<string>\",\n      \"order\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"order\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "79c27ce8-b35b-417e-9950-1a7f4aaad2c0",
+              "name": "List of license plate reads",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reads",
+                    "lookup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"plate\": \"FNA579\",\n  \"reason\": \"Tracking vehicle involved with case #103024\",\n  \"startDate\": \"2022-08-06T12:26:00.000Z\",\n  \"endDate\": \"2022-08-09T23:59:59.000Z\",\n  \"limit\": \"<number>\",\n  \"minConfidences\": [\n    {\n      \"attribute\": \"<string>\",\n      \"minConfidence\": 0.5\n    },\n    {\n      \"attribute\": \"<string>\",\n      \"minConfidence\": 0.5\n    }\n  ],\n  \"state\": \"<string>\",\n  \"caseNumber\": \"103024\",\n  \"sort\": [\n    {\n      \"field\": \"<string>\",\n      \"order\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"order\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"id\": \"4171ae2b-843f-405b-922d-b1e89921f24f\",\n      \"capturedAt\": \"2023-12-31T23:59:59.999999Z\",\n      \"device\": {\n        \"id\": \"string\",\n        \"type\": \"audio\",\n        \"name\": \"string\",\n        \"location\": {\n          \"name\": \"string\",\n          \"latitude\": 6398.505699806986,\n          \"longitude\": 1519.3524010433491,\n          \"streetAddress\": \"string\",\n          \"city\": \"string\",\n          \"state\": \"string\",\n          \"country\": \"string\",\n          \"additionalMetadata\": {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"network\": {\n          \"id\": \"72d97364-3f45-4e16-ae52-631aea3141cc\",\n          \"name\": \"Little Rock AR PD\"\n        },\n        \"metadata\": {},\n        \"createdAt\": {},\n        \"modifiedAt\": {},\n        \"link\": \"https://hotlist.flocksafety.com/dispatch/type/audio?id=00000000-0000-0000-000000000000\"\n      },\n      \"plate\": {\n        \"plate\": \"XNA357\",\n        \"confidence\": 0.9\n      },\n      \"state\": {\n        \"state\": \"arkansas\",\n        \"confidence\": 0.75\n      },\n      \"link\": \"https://share.flocksafety.com/lookup/33fc2d53-5b1e-4f9a-95b8-a3fe47823d26\"\n    },\n    {\n      \"id\": \"4171ae2b-843f-405b-922d-b1e89921f24f\",\n      \"capturedAt\": \"2023-12-31T23:59:59.999999Z\",\n      \"device\": {\n        \"id\": \"string\",\n        \"type\": \"video\",\n        \"name\": \"string\",\n        \"location\": {\n          \"name\": \"string\",\n          \"latitude\": 5189.642477499199,\n          \"longitude\": 8842.487614908796,\n          \"streetAddress\": \"string\",\n          \"city\": \"string\",\n          \"state\": \"string\",\n          \"country\": \"string\",\n          \"additionalMetadata\": {\n            \"type\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"value\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"network\": {\n          \"id\": \"72d97364-3f45-4e16-ae52-631aea3141cc\",\n          \"name\": \"Little Rock AR PD\"\n        },\n        \"metadata\": {},\n        \"createdAt\": {},\n        \"modifiedAt\": {},\n        \"link\": \"https://hotlist.flocksafety.com/dispatch/type/audio?id=00000000-0000-0000-000000000000\"\n      },\n      \"plate\": {\n        \"plate\": \"XNA357\",\n        \"confidence\": 0.9\n      },\n      \"state\": {\n        \"state\": \"arkansas\",\n        \"confidence\": 0.75\n      },\n      \"link\": \"https://share.flocksafety.com/lookup/33fc2d53-5b1e-4f9a-95b8-a3fe47823d26\"\n    }\n  ],\n  \"totalItems\": 2,\n  \"nextPageId\": \"string\",\n  \"previousPageId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dc7689e3-32f0-4fda-b466-6a95e10242cb",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reads",
+                    "lookup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"plate\": \"FNA579\",\n  \"reason\": \"Tracking vehicle involved with case #103024\",\n  \"startDate\": \"2022-08-06T12:26:00.000Z\",\n  \"endDate\": \"2022-08-09T23:59:59.000Z\",\n  \"limit\": \"<number>\",\n  \"minConfidences\": [\n    {\n      \"attribute\": \"<string>\",\n      \"minConfidence\": 0.5\n    },\n    {\n      \"attribute\": \"<string>\",\n      \"minConfidence\": 0.5\n    }\n  ],\n  \"state\": \"<string>\",\n  \"caseNumber\": \"103024\",\n  \"sort\": [\n    {\n      \"field\": \"<string>\",\n      \"order\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"order\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1a0eab2d-42f1-4196-9b2b-0ab501f69891",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reads",
+                    "lookup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"plate\": \"FNA579\",\n  \"reason\": \"Tracking vehicle involved with case #103024\",\n  \"startDate\": \"2022-08-06T12:26:00.000Z\",\n  \"endDate\": \"2022-08-09T23:59:59.000Z\",\n  \"limit\": \"<number>\",\n  \"minConfidences\": [\n    {\n      \"attribute\": \"<string>\",\n      \"minConfidence\": 0.5\n    },\n    {\n      \"attribute\": \"<string>\",\n      \"minConfidence\": 0.5\n    }\n  ],\n  \"state\": \"<string>\",\n  \"caseNumber\": \"103024\",\n  \"sort\": [\n    {\n      \"field\": \"<string>\",\n      \"order\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"order\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "287d60b3-1580-4a1b-9364-7cfe85ab8830",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reads",
+                    "lookup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"plate\": \"FNA579\",\n  \"reason\": \"Tracking vehicle involved with case #103024\",\n  \"startDate\": \"2022-08-06T12:26:00.000Z\",\n  \"endDate\": \"2022-08-09T23:59:59.000Z\",\n  \"limit\": \"<number>\",\n  \"minConfidences\": [\n    {\n      \"attribute\": \"<string>\",\n      \"minConfidence\": 0.5\n    },\n    {\n      \"attribute\": \"<string>\",\n      \"minConfidence\": 0.5\n    }\n  ],\n  \"state\": \"<string>\",\n  \"caseNumber\": \"103024\",\n  \"sort\": [\n    {\n      \"field\": \"<string>\",\n      \"order\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"order\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3bbf84d2-608c-4d2c-af3d-67122e3fc5f0",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reads",
+                    "lookup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"plate\": \"FNA579\",\n  \"reason\": \"Tracking vehicle involved with case #103024\",\n  \"startDate\": \"2022-08-06T12:26:00.000Z\",\n  \"endDate\": \"2022-08-09T23:59:59.000Z\",\n  \"limit\": \"<number>\",\n  \"minConfidences\": [\n    {\n      \"attribute\": \"<string>\",\n      \"minConfidence\": 0.5\n    },\n    {\n      \"attribute\": \"<string>\",\n      \"minConfidence\": 0.5\n    }\n  ],\n  \"state\": \"<string>\",\n  \"caseNumber\": \"103024\",\n  \"sort\": [\n    {\n      \"field\": \"<string>\",\n      \"order\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"order\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "390e8f0b-11fe-46b2-bdd5-27ad52ce29fc",
+              "name": "The maximum number of requests you can perform per second has been exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "reads",
+                    "lookup"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"plate\": \"FNA579\",\n  \"reason\": \"Tracking vehicle involved with case #103024\",\n  \"startDate\": \"2022-08-06T12:26:00.000Z\",\n  \"endDate\": \"2022-08-09T23:59:59.000Z\",\n  \"limit\": \"<number>\",\n  \"minConfidences\": [\n    {\n      \"attribute\": \"<string>\",\n      \"minConfidence\": 0.5\n    },\n    {\n      \"attribute\": \"<string>\",\n      \"minConfidence\": 0.5\n    }\n  ],\n  \"state\": \"<string>\",\n  \"caseNumber\": \"103024\",\n  \"sort\": [\n    {\n      \"field\": \"<string>\",\n      \"order\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"order\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "\"reference #/components/examples/RateLimitError not found in the given specification\"",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.flocksafety.com/api/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "3d797ed7-6cf6-4be0-92cb-b77fe5683c9b",
+    "name": "Flock Safety API Platform (v3) Alerts Plate Reads API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Flock Safety v3 API Platform harvested from the public developer hub (docs.flocksafety.com). Combines the Device, Custom Hotlist, LPR Search, Plate Lookup, Hotlist Alerts Subscription, Geolocation, CAD, Inbound Alerts, and Vehicle Detections Ingest APIs. OAuth2 client_credentials (machine) and authorization_code (user) flows against api.flocksafety.com.\n\nContact Support:\n Name: Flock Safety Developer Hub",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,130 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Flock Safety API Platform (v3) Alerts Tracked Subjects API",
+    "version": "3.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tracked Subjects",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieving a Tracked Subject",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.flocksafety.com/api/v3/geo/subjects/:externalSubjectId",
+            "params": [
+              {
+                "name": "externalSubjectId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the subject type you are fetching"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get a single subject's current location."
+        },
+        {
+          "info": {
+            "name": "Disable a Tracked Subject",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.flocksafety.com/api/v3/geo/subjects/:externalSubjectId",
+            "params": [
+              {
+                "name": "externalSubjectId",
+                "value": "",
+                "type": "path",
+                "description": "ID of the subject you are updating"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Disable a Tracked Subject"
+        },
+        {
+          "info": {
+            "name": "Retrieve All Tracked Subjects",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.flocksafety.com/api/v3/geo/subjects",
+            "params": [
+              {
+                "name": "since",
+                "value": "",
+                "type": "query",
+                "description": "Unix timestamp in seconds"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number, defaults to 1"
+              },
+              {
+                "name": "subjectType",
+                "value": "",
+                "type": "query",
+                "description": "Filter by subject type"
+              },
+              {
+                "name": "subjectSubtype",
+                "value": "",
+                "type": "query",
+                "description": "Filter by subject subtype"
+              },
+              {
+                "name": "showInactive",
+                "value": "",
+                "type": "query",
+                "description": "Show inactive subjects"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get all subjects' current locations"
+        },
+        {
+          "info": {
+            "name": "Create or updating a Tracked Subject",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.flocksafety.com/api/v3/geo/subjects",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Add or update a subject's location"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

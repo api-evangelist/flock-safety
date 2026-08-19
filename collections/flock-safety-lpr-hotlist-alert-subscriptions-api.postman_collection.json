@@ -1,0 +1,1350 @@
+{
+  "item": [
+    {
+      "id": "f8a57c9b-aee8-4804-8758-fb759a463053",
+      "name": "LPR Hotlist Alert Subscriptions",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9de6948e-f691-42b9-951a-c1299b9717f0",
+          "name": "Delete Subscription",
+          "request": {
+            "name": "Delete Subscription",
+            "description": {
+              "content": "Delete existing LPR hotlist alert webhook subscription by id",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "integrations",
+                "lpr",
+                "alerts",
+                "subscriptions",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "67964ac9-4d09-4216-9d3c-d1a8b88e978c",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations",
+                    "lpr",
+                    "alerts",
+                    "subscriptions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ba4e14dd-8bdf-48f3-b505-632ad6566076",
+              "name": "Forbidden (lacking appropriate scope or client claims)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations",
+                    "lpr",
+                    "alerts",
+                    "subscriptions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ab8c4e30-ea73-4ee3-8758-e32792e43e4c",
+              "name": "Subscription Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations",
+                    "lpr",
+                    "alerts",
+                    "subscriptions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "033e6721-958e-41fe-b19c-83edd0b505e1",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations",
+                    "lpr",
+                    "alerts",
+                    "subscriptions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2cad3390-a611-4927-904b-29088600aaf4",
+          "name": "Get Subscription",
+          "request": {
+            "name": "Get Subscription",
+            "description": {
+              "content": "Get existing LPR hotlist alert webhook subscription by id",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "integrations",
+                "lpr",
+                "alerts",
+                "subscriptions",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a2388338-5a41-4381-91cd-beb7e89d5ca4",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations",
+                    "lpr",
+                    "alerts",
+                    "subscriptions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"callbackUrl\": \"https://example.com/your/webhook\",\n  \"contentType\": \"application/json\",\n  \"credentials\": {\n    \"scheme\": \"none\",\n    \"apiKey\": {\n      \"key\": \"string\",\n      \"headerName\": \"x-api-key\"\n    },\n    \"basic\": {\n      \"username\": \"string\",\n      \"password\": \"string\",\n      \"headerName\": \"Authorization\"\n    },\n    \"oauth2\": {\n      \"tokenEndpoint\": \"https://example.auth0.com/oauth/token\",\n      \"clientId\": \"string\",\n      \"clientSecret\": \"string\",\n      \"grantType\": \"client_credentials\",\n      \"headerName\": \"Authorization\",\n      \"tokenScheme\": \"body\",\n      \"scope\": \"string\",\n      \"customFields\": {\n        \"key_0\": 8186.662956116052,\n        \"key_1\": 8999,\n        \"key_2\": 4893\n      }\n    }\n  },\n  \"id\": \"eb11d5a5-b527-1f49-dcbd-b4216ded592f\",\n  \"name\": \"string\",\n  \"customHotlistAudienceFilter\": \"organization\",\n  \"enabledFirstResponderJurisdictionAlerts\": false,\n  \"enabled\": false,\n  \"createdAt\": \"1988-03-23T23:31:26.493Z\",\n  \"updatedAt\": \"1991-10-09T02:03:16.002Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "702d0e88-ecf8-429a-a88f-84e7fb68ae2f",
+              "name": "Forbidden (lacking appropriate scope or client claims)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations",
+                    "lpr",
+                    "alerts",
+                    "subscriptions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "ce4a8c8f-9019-45b3-8bf9-44a0c5b9cc62",
+              "name": "Subscription Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations",
+                    "lpr",
+                    "alerts",
+                    "subscriptions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a9a2248c-1b1c-443f-b21f-42e252233650",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations",
+                    "lpr",
+                    "alerts",
+                    "subscriptions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f3238df0-8841-470e-8216-dcfdf4e6fac8",
+          "name": "Get Subscriptions",
+          "request": {
+            "name": "Get Subscriptions",
+            "description": {
+              "content": "Get existing LPR hotlist alerts webhook subscriptions",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "integrations",
+                "lpr",
+                "alerts",
+                "subscriptions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "63b2ba48-5fc1-422a-a20f-ef07540e700a",
+              "name": "Success",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations",
+                    "lpr",
+                    "alerts",
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"callbackUrl\": \"https://example.com/your/webhook\",\n    \"contentType\": \"application/xml\",\n    \"credentials\": {\n      \"scheme\": \"oauth2\",\n      \"apiKey\": {\n        \"key\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"headerName\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"basic\": {\n        \"username\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"password\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"headerName\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"oauth2\": {\n        \"tokenEndpoint\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"clientId\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"clientSecret\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"grantType\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"headerName\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"tokenScheme\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"scope\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"customFields\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    \"id\": \"895bfa4d-22c7-d323-26aa-4ee631136aff\",\n    \"name\": \"string\",\n    \"customHotlistAudienceFilter\": \"organization\",\n    \"enabledFirstResponderJurisdictionAlerts\": false,\n    \"enabled\": false,\n    \"createdAt\": \"1989-07-10T13:55:18.534Z\",\n    \"updatedAt\": \"1976-02-27T12:54:09.677Z\"\n  },\n  {\n    \"callbackUrl\": \"https://example.com/your/webhook\",\n    \"contentType\": \"application/xml\",\n    \"credentials\": {\n      \"scheme\": \"basic\",\n      \"apiKey\": {\n        \"key\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"headerName\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"basic\": {\n        \"username\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"password\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"headerName\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      },\n      \"oauth2\": {\n        \"tokenEndpoint\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"clientId\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"clientSecret\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"grantType\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"headerName\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"tokenScheme\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"scope\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"customFields\": {\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        }\n      }\n    },\n    \"id\": \"3fd7b188-441b-7f9a-61af-08585afb66c8\",\n    \"name\": \"string\",\n    \"customHotlistAudienceFilter\": \"organization\",\n    \"enabledFirstResponderJurisdictionAlerts\": false,\n    \"enabled\": false,\n    \"createdAt\": \"1985-06-25T18:01:23.071Z\",\n    \"updatedAt\": \"2020-05-30T06:16:55.485Z\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ea40e4cc-32ea-4c4e-9650-d8041b1a58e2",
+              "name": "Forbidden (lacking appropriate scope or client claims)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations",
+                    "lpr",
+                    "alerts",
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "204cd0eb-efd8-4416-9abb-8778a8fb7938",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations",
+                    "lpr",
+                    "alerts",
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "402b7182-da2f-4297-96c6-f85712be8730",
+          "name": "Create Subscription",
+          "request": {
+            "name": "Create Subscription",
+            "description": {
+              "content": "Create a new LPR hotlist alert webhook subscription",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "integrations",
+                "lpr",
+                "alerts",
+                "subscriptions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"callbackUrl\": \"<url>\",\n  \"credentials\": {\n    \"scheme\": \"<string>\",\n    \"apiKey\": {\n      \"key\": \"<string>\",\n      \"headerName\": \"<string>\"\n    },\n    \"basic\": {\n      \"username\": \"<string>\",\n      \"password\": \"<string>\",\n      \"headerName\": \"<string>\"\n    },\n    \"oauth2\": {\n      \"tokenEndpoint\": \"<url>\",\n      \"clientId\": \"<string>\",\n      \"clientSecret\": \"<string>\",\n      \"grantType\": \"<string>\",\n      \"headerName\": \"<string>\",\n      \"tokenScheme\": \"body\",\n      \"scope\": \"<string>\",\n      \"customFields\": {\n        \"key_0\": \"string\"\n      }\n    }\n  },\n  \"contentType\": \"<string>\",\n  \"name\": \"<string>\",\n  \"customHotlistAudienceFilter\": \"organization\",\n  \"enabledFirstResponderJurisdictionAlerts\": \"<boolean>\",\n  \"enabled\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fc6dad6d-24ca-4f57-b7c8-3befe439e9a8",
+              "name": "Subscription Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations",
+                    "lpr",
+                    "alerts",
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"callbackUrl\": \"https://example.com/your/webhook\",\n  \"credentials\": {\n    \"scheme\": \"<string>\",\n    \"apiKey\": {\n      \"key\": \"<string>\",\n      \"headerName\": \"x-api-key\"\n    },\n    \"basic\": {\n      \"username\": \"<string>\",\n      \"password\": \"<string>\",\n      \"headerName\": \"Authorization\"\n    },\n    \"oauth2\": {\n      \"tokenEndpoint\": \"https://example.auth0.com/oauth/token\",\n      \"clientId\": \"<string>\",\n      \"clientSecret\": \"<string>\",\n      \"grantType\": \"client_credentials\",\n      \"headerName\": \"Authorization\",\n      \"tokenScheme\": \"body\",\n      \"scope\": \"<string>\",\n      \"customFields\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      }\n    }\n  },\n  \"contentType\": \"<string>\",\n  \"name\": \"<string>\",\n  \"customHotlistAudienceFilter\": \"organization\",\n  \"enabledFirstResponderJurisdictionAlerts\": \"<boolean>\",\n  \"enabled\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"callbackUrl\": \"https://example.com/your/webhook\",\n  \"contentType\": \"<string>\",\n  \"credentials\": {\n    \"scheme\": \"<string>\",\n    \"apiKey\": {\n      \"key\": \"<string>\",\n      \"headerName\": \"x-api-key\"\n    },\n    \"basic\": {\n      \"username\": \"<string>\",\n      \"password\": \"<string>\",\n      \"headerName\": \"Authorization\"\n    },\n    \"oauth2\": {\n      \"tokenEndpoint\": \"https://example.auth0.com/oauth/token\",\n      \"clientId\": \"<string>\",\n      \"clientSecret\": \"<string>\",\n      \"grantType\": \"client_credentials\",\n      \"headerName\": \"Authorization\",\n      \"tokenScheme\": \"body\",\n      \"scope\": \"<string>\",\n      \"customFields\": {\n        \"key_0\": 3053\n      }\n    }\n  },\n  \"id\": \"233846e1-27dc-a113-fef2-08f22b2cea49\",\n  \"name\": \"<string>\",\n  \"customHotlistAudienceFilter\": \"organization\",\n  \"enabledFirstResponderJurisdictionAlerts\": \"<boolean>\",\n  \"enabled\": \"<boolean>\",\n  \"createdAt\": \"2003-10-02T20:08:10.030Z\",\n  \"updatedAt\": \"2010-11-12T09:37:57.557Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1be08e8d-fde3-4622-ac6a-454a6b3ebbb0",
+              "name": "Bad Request (missing required field or credentials failed to validate)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations",
+                    "lpr",
+                    "alerts",
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"callbackUrl\": \"https://example.com/your/webhook\",\n  \"credentials\": {\n    \"scheme\": \"<string>\",\n    \"apiKey\": {\n      \"key\": \"<string>\",\n      \"headerName\": \"x-api-key\"\n    },\n    \"basic\": {\n      \"username\": \"<string>\",\n      \"password\": \"<string>\",\n      \"headerName\": \"Authorization\"\n    },\n    \"oauth2\": {\n      \"tokenEndpoint\": \"https://example.auth0.com/oauth/token\",\n      \"clientId\": \"<string>\",\n      \"clientSecret\": \"<string>\",\n      \"grantType\": \"client_credentials\",\n      \"headerName\": \"Authorization\",\n      \"tokenScheme\": \"body\",\n      \"scope\": \"<string>\",\n      \"customFields\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      }\n    }\n  },\n  \"contentType\": \"<string>\",\n  \"name\": \"<string>\",\n  \"customHotlistAudienceFilter\": \"organization\",\n  \"enabledFirstResponderJurisdictionAlerts\": \"<boolean>\",\n  \"enabled\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f31528ed-ee8c-4661-a3e8-ab868857a1ab",
+              "name": "Forbidden (lacking appropriate scope or client claims)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations",
+                    "lpr",
+                    "alerts",
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"callbackUrl\": \"https://example.com/your/webhook\",\n  \"credentials\": {\n    \"scheme\": \"<string>\",\n    \"apiKey\": {\n      \"key\": \"<string>\",\n      \"headerName\": \"x-api-key\"\n    },\n    \"basic\": {\n      \"username\": \"<string>\",\n      \"password\": \"<string>\",\n      \"headerName\": \"Authorization\"\n    },\n    \"oauth2\": {\n      \"tokenEndpoint\": \"https://example.auth0.com/oauth/token\",\n      \"clientId\": \"<string>\",\n      \"clientSecret\": \"<string>\",\n      \"grantType\": \"client_credentials\",\n      \"headerName\": \"Authorization\",\n      \"tokenScheme\": \"body\",\n      \"scope\": \"<string>\",\n      \"customFields\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      }\n    }\n  },\n  \"contentType\": \"<string>\",\n  \"name\": \"<string>\",\n  \"customHotlistAudienceFilter\": \"organization\",\n  \"enabledFirstResponderJurisdictionAlerts\": \"<boolean>\",\n  \"enabled\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2a7e2c46-67b3-4ae1-9226-383bea33add0",
+              "name": "Conflict (violates a unique constraint)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations",
+                    "lpr",
+                    "alerts",
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"callbackUrl\": \"https://example.com/your/webhook\",\n  \"credentials\": {\n    \"scheme\": \"<string>\",\n    \"apiKey\": {\n      \"key\": \"<string>\",\n      \"headerName\": \"x-api-key\"\n    },\n    \"basic\": {\n      \"username\": \"<string>\",\n      \"password\": \"<string>\",\n      \"headerName\": \"Authorization\"\n    },\n    \"oauth2\": {\n      \"tokenEndpoint\": \"https://example.auth0.com/oauth/token\",\n      \"clientId\": \"<string>\",\n      \"clientSecret\": \"<string>\",\n      \"grantType\": \"client_credentials\",\n      \"headerName\": \"Authorization\",\n      \"tokenScheme\": \"body\",\n      \"scope\": \"<string>\",\n      \"customFields\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      }\n    }\n  },\n  \"contentType\": \"<string>\",\n  \"name\": \"<string>\",\n  \"customHotlistAudienceFilter\": \"organization\",\n  \"enabledFirstResponderJurisdictionAlerts\": \"<boolean>\",\n  \"enabled\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1e0bd904-20ce-4ac8-bf18-25bfd9cb5ebb",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations",
+                    "lpr",
+                    "alerts",
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"callbackUrl\": \"https://example.com/your/webhook\",\n  \"credentials\": {\n    \"scheme\": \"<string>\",\n    \"apiKey\": {\n      \"key\": \"<string>\",\n      \"headerName\": \"x-api-key\"\n    },\n    \"basic\": {\n      \"username\": \"<string>\",\n      \"password\": \"<string>\",\n      \"headerName\": \"Authorization\"\n    },\n    \"oauth2\": {\n      \"tokenEndpoint\": \"https://example.auth0.com/oauth/token\",\n      \"clientId\": \"<string>\",\n      \"clientSecret\": \"<string>\",\n      \"grantType\": \"client_credentials\",\n      \"headerName\": \"Authorization\",\n      \"tokenScheme\": \"body\",\n      \"scope\": \"<string>\",\n      \"customFields\": {\n        \"key_0\": \"string\",\n        \"key_1\": \"string\"\n      }\n    }\n  },\n  \"contentType\": \"<string>\",\n  \"name\": \"<string>\",\n  \"customHotlistAudienceFilter\": \"organization\",\n  \"enabledFirstResponderJurisdictionAlerts\": \"<boolean>\",\n  \"enabled\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "18c6c305-d7db-442f-ac14-0045720571bf",
+          "name": "Update Subscription",
+          "request": {
+            "name": "Update Subscription",
+            "description": {
+              "content": "Update an existing LPR hotlist alert webhook subscription",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "integrations",
+                "lpr",
+                "alerts",
+                "subscriptions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "<object>",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b64b7a1f-607a-4590-a51c-5982d85ac36c",
+              "name": "Subscription Updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations",
+                    "lpr",
+                    "alerts",
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"callbackUrl\": \"https://example.com/your/webhook\",\n  \"contentType\": \"<string>\",\n  \"credentials\": {\n    \"scheme\": \"<string>\",\n    \"apiKey\": {\n      \"key\": \"<string>\",\n      \"headerName\": \"x-api-key\"\n    },\n    \"basic\": {\n      \"username\": \"<string>\",\n      \"password\": \"<string>\",\n      \"headerName\": \"Authorization\"\n    },\n    \"oauth2\": {\n      \"tokenEndpoint\": \"https://example.auth0.com/oauth/token\",\n      \"clientId\": \"<string>\",\n      \"clientSecret\": \"<string>\",\n      \"grantType\": \"client_credentials\",\n      \"headerName\": \"Authorization\",\n      \"tokenScheme\": \"body\",\n      \"scope\": \"<string>\",\n      \"customFields\": {\n        \"key_0\": \"string\"\n      }\n    }\n  },\n  \"id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"customHotlistAudienceFilter\": \"organization\",\n  \"enabledFirstResponderJurisdictionAlerts\": \"<boolean>\",\n  \"enabled\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"callbackUrl\": \"https://example.com/your/webhook\",\n  \"contentType\": \"<string>\",\n  \"credentials\": {\n    \"scheme\": \"<string>\",\n    \"apiKey\": {\n      \"key\": \"<string>\",\n      \"headerName\": \"x-api-key\"\n    },\n    \"basic\": {\n      \"username\": \"<string>\",\n      \"password\": \"<string>\",\n      \"headerName\": \"Authorization\"\n    },\n    \"oauth2\": {\n      \"tokenEndpoint\": \"https://example.auth0.com/oauth/token\",\n      \"clientId\": \"<string>\",\n      \"clientSecret\": \"<string>\",\n      \"grantType\": \"client_credentials\",\n      \"headerName\": \"Authorization\",\n      \"tokenScheme\": \"body\",\n      \"scope\": \"<string>\",\n      \"customFields\": {\n        \"key_0\": false\n      }\n    }\n  },\n  \"id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"customHotlistAudienceFilter\": \"organization\",\n  \"enabledFirstResponderJurisdictionAlerts\": \"<boolean>\",\n  \"enabled\": \"<boolean>\",\n  \"createdAt\": \"2004-11-08T04:20:54.157Z\",\n  \"updatedAt\": \"2002-09-17T19:06:11.178Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c99a53f8-2275-47b9-9380-9313130c1f3c",
+              "name": "Bad Request (missing required field or credentials failed to validate)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations",
+                    "lpr",
+                    "alerts",
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"callbackUrl\": \"https://example.com/your/webhook\",\n  \"contentType\": \"<string>\",\n  \"credentials\": {\n    \"scheme\": \"<string>\",\n    \"apiKey\": {\n      \"key\": \"<string>\",\n      \"headerName\": \"x-api-key\"\n    },\n    \"basic\": {\n      \"username\": \"<string>\",\n      \"password\": \"<string>\",\n      \"headerName\": \"Authorization\"\n    },\n    \"oauth2\": {\n      \"tokenEndpoint\": \"https://example.auth0.com/oauth/token\",\n      \"clientId\": \"<string>\",\n      \"clientSecret\": \"<string>\",\n      \"grantType\": \"client_credentials\",\n      \"headerName\": \"Authorization\",\n      \"tokenScheme\": \"body\",\n      \"scope\": \"<string>\",\n      \"customFields\": {\n        \"key_0\": \"string\"\n      }\n    }\n  },\n  \"id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"customHotlistAudienceFilter\": \"organization\",\n  \"enabledFirstResponderJurisdictionAlerts\": \"<boolean>\",\n  \"enabled\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "81690ac2-2a2c-4bcc-8dd5-884c00e094c9",
+              "name": "Forbidden (lacking appropriate scope or client claims)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations",
+                    "lpr",
+                    "alerts",
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"callbackUrl\": \"https://example.com/your/webhook\",\n  \"contentType\": \"<string>\",\n  \"credentials\": {\n    \"scheme\": \"<string>\",\n    \"apiKey\": {\n      \"key\": \"<string>\",\n      \"headerName\": \"x-api-key\"\n    },\n    \"basic\": {\n      \"username\": \"<string>\",\n      \"password\": \"<string>\",\n      \"headerName\": \"Authorization\"\n    },\n    \"oauth2\": {\n      \"tokenEndpoint\": \"https://example.auth0.com/oauth/token\",\n      \"clientId\": \"<string>\",\n      \"clientSecret\": \"<string>\",\n      \"grantType\": \"client_credentials\",\n      \"headerName\": \"Authorization\",\n      \"tokenScheme\": \"body\",\n      \"scope\": \"<string>\",\n      \"customFields\": {\n        \"key_0\": \"string\"\n      }\n    }\n  },\n  \"id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"customHotlistAudienceFilter\": \"organization\",\n  \"enabledFirstResponderJurisdictionAlerts\": \"<boolean>\",\n  \"enabled\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e67fccd6-a644-4c26-88db-64eadc148bef",
+              "name": "Subscription Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations",
+                    "lpr",
+                    "alerts",
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"callbackUrl\": \"https://example.com/your/webhook\",\n  \"contentType\": \"<string>\",\n  \"credentials\": {\n    \"scheme\": \"<string>\",\n    \"apiKey\": {\n      \"key\": \"<string>\",\n      \"headerName\": \"x-api-key\"\n    },\n    \"basic\": {\n      \"username\": \"<string>\",\n      \"password\": \"<string>\",\n      \"headerName\": \"Authorization\"\n    },\n    \"oauth2\": {\n      \"tokenEndpoint\": \"https://example.auth0.com/oauth/token\",\n      \"clientId\": \"<string>\",\n      \"clientSecret\": \"<string>\",\n      \"grantType\": \"client_credentials\",\n      \"headerName\": \"Authorization\",\n      \"tokenScheme\": \"body\",\n      \"scope\": \"<string>\",\n      \"customFields\": {\n        \"key_0\": \"string\"\n      }\n    }\n  },\n  \"id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"customHotlistAudienceFilter\": \"organization\",\n  \"enabledFirstResponderJurisdictionAlerts\": \"<boolean>\",\n  \"enabled\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "45fcde92-ddc9-4e52-aee1-d3b625c0b83f",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "integrations",
+                    "lpr",
+                    "alerts",
+                    "subscriptions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"callbackUrl\": \"https://example.com/your/webhook\",\n  \"contentType\": \"<string>\",\n  \"credentials\": {\n    \"scheme\": \"<string>\",\n    \"apiKey\": {\n      \"key\": \"<string>\",\n      \"headerName\": \"x-api-key\"\n    },\n    \"basic\": {\n      \"username\": \"<string>\",\n      \"password\": \"<string>\",\n      \"headerName\": \"Authorization\"\n    },\n    \"oauth2\": {\n      \"tokenEndpoint\": \"https://example.auth0.com/oauth/token\",\n      \"clientId\": \"<string>\",\n      \"clientSecret\": \"<string>\",\n      \"grantType\": \"client_credentials\",\n      \"headerName\": \"Authorization\",\n      \"tokenScheme\": \"body\",\n      \"scope\": \"<string>\",\n      \"customFields\": {\n        \"key_0\": \"string\"\n      }\n    }\n  },\n  \"id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"customHotlistAudienceFilter\": \"organization\",\n  \"enabledFirstResponderJurisdictionAlerts\": \"<boolean>\",\n  \"enabled\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.flocksafety.com/api/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "71fb6c4c-507b-4488-8add-fa9c6220d80a",
+    "name": "Flock Safety API Platform (v3) Alerts LPR Hotlist Alert Subscriptions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Flock Safety v3 API Platform harvested from the public developer hub (docs.flocksafety.com). Combines the Device, Custom Hotlist, LPR Search, Plate Lookup, Hotlist Alerts Subscription, Geolocation, CAD, Inbound Alerts, and Vehicle Detections Ingest APIs. OAuth2 client_credentials (machine) and authorization_code (user) flows against api.flocksafety.com.\n\nContact Support:\n Name: Flock Safety Developer Hub",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,2037 @@
+{
+  "item": [
+    {
+      "id": "4a426219-0bfc-4470-aeeb-f3e18af3fe13",
+      "name": "Custom Hotlists",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "41ffb749-8675-418b-8215-7a5b2eec64dd",
+          "name": "Delete a custom hotlist",
+          "request": {
+            "name": "Delete a custom hotlist",
+            "description": {
+              "content": "Delete hotlist",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "hotlists",
+                ":hotlistId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "custom-holists:read custom-holists:write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.flocksafety.com/oauth/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "51aeeecf-a966-4421-b25c-0eb24ab6f4b0",
+              "name": "The hotlist was deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotlists",
+                    ":hotlistId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "a5be928e-6a6c-4a65-9280-64890fd021a4",
+              "name": "Unauthorized, authentication token was invalid or not provided",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotlists",
+                    ":hotlistId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e6006ef2-31a5-40a9-8906-638840763fd2",
+              "name": "Forbidden, your client does not have access to this resource",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotlists",
+                    ":hotlistId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "038be55e-6580-402f-baeb-d87d70a0db41",
+              "name": "No hotlist was found with the given ID",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotlists",
+                    ":hotlistId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2c43aaeb-792d-43a9-851a-c0cf4bd5ef82",
+          "name": "Retrieve a custom hotlist",
+          "request": {
+            "name": "Retrieve a custom hotlist",
+            "description": {
+              "content": "Retrieve a hotlist with the given ID",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "hotlists",
+                ":hotlistId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "custom-holists:read custom-holists:write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.flocksafety.com/oauth/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e23f6eef-99ad-440d-864e-9cc611315847",
+              "name": "The hotlist was successfully retrieved.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotlists",
+                    ":hotlistId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"entries\": [\n    {\n      \"caseNumber\": \"string\",\n      \"plate\": \"string\",\n      \"reason\": \"string\",\n      \"id\": \"string\",\n      \"expiry\": \"1948-04-21T09:13:35.752Z\",\n      \"state\": \"massachusetts\",\n      \"note\": {\n        \"message\": \"Vehicle observed at 5th and Main. Contact Det. Smith at 555-0123.\"\n      }\n    },\n    {\n      \"caseNumber\": \"string\",\n      \"plate\": \"string\",\n      \"reason\": \"string\",\n      \"id\": \"string\",\n      \"expiry\": \"1994-05-22T10:11:50.423Z\",\n      \"state\": \"oklahoma\",\n      \"note\": {\n        \"message\": \"Vehicle observed at 5th and Main. Contact Det. Smith at 555-0123.\"\n      }\n    }\n  ],\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"organizationId\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4c72b6ca-f231-41f8-8622-448ed5b129fd",
+              "name": "Unauthorized, authentication token was invalid or not provided",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotlists",
+                    ":hotlistId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d4f2f0b0-7008-40a5-922f-1ebd853a5eb6",
+              "name": "Forbidden, your client does not have access to this resource",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotlists",
+                    ":hotlistId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4ad70889-12dd-4695-9fb7-24cbd32a2bc5",
+              "name": "No hotlist was found with the given ID",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotlists",
+                    ":hotlistId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f3567a58-b1e3-4323-8492-9a40fcd0a4d4",
+          "name": "Update a custom hotlist",
+          "request": {
+            "name": "Update a custom hotlist",
+            "description": {
+              "content": "Update a hotlist",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "hotlists",
+                ":hotlistId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "custom-holists:read custom-holists:write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.flocksafety.com/oauth/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"entries\": [\n    {\n      \"caseNumber\": \"<string>\",\n      \"plate\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"expiry\": \"<dateTime>\",\n      \"state\": \"<string>\",\n      \"note\": {\n        \"message\": \"<string>\"\n      }\n    },\n    {\n      \"caseNumber\": \"<string>\",\n      \"plate\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"expiry\": \"<dateTime>\",\n      \"state\": \"<string>\",\n      \"note\": {\n        \"message\": \"<string>\"\n      }\n    }\n  ],\n  \"name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9b265daa-6ca8-4507-b58b-349c6de154e8",
+              "name": "The hotlist was updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotlists",
+                    ":hotlistId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entries\": [\n    {\n      \"caseNumber\": \"<string>\",\n      \"plate\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"expiry\": \"<dateTime>\",\n      \"state\": \"<string>\",\n      \"note\": {\n        \"message\": \"Vehicle observed at 5th and Main. Contact Det. Smith at 555-0123.\"\n      }\n    },\n    {\n      \"caseNumber\": \"<string>\",\n      \"plate\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"expiry\": \"<dateTime>\",\n      \"state\": \"<string>\",\n      \"note\": {\n        \"message\": \"Vehicle observed at 5th and Main. Contact Det. Smith at 555-0123.\"\n      }\n    }\n  ],\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "be4e6470-0fbd-4fdc-bc6f-f10cad533a4d",
+              "name": "Unauthorized, authentication token was invalid or not provided",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotlists",
+                    ":hotlistId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entries\": [\n    {\n      \"caseNumber\": \"<string>\",\n      \"plate\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"expiry\": \"<dateTime>\",\n      \"state\": \"<string>\",\n      \"note\": {\n        \"message\": \"Vehicle observed at 5th and Main. Contact Det. Smith at 555-0123.\"\n      }\n    },\n    {\n      \"caseNumber\": \"<string>\",\n      \"plate\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"expiry\": \"<dateTime>\",\n      \"state\": \"<string>\",\n      \"note\": {\n        \"message\": \"Vehicle observed at 5th and Main. Contact Det. Smith at 555-0123.\"\n      }\n    }\n  ],\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "dab0e410-5bf0-47b6-9bb6-5afa20266f10",
+              "name": "Forbidden, your client does not have access to this resource",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotlists",
+                    ":hotlistId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entries\": [\n    {\n      \"caseNumber\": \"<string>\",\n      \"plate\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"expiry\": \"<dateTime>\",\n      \"state\": \"<string>\",\n      \"note\": {\n        \"message\": \"Vehicle observed at 5th and Main. Contact Det. Smith at 555-0123.\"\n      }\n    },\n    {\n      \"caseNumber\": \"<string>\",\n      \"plate\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"expiry\": \"<dateTime>\",\n      \"state\": \"<string>\",\n      \"note\": {\n        \"message\": \"Vehicle observed at 5th and Main. Contact Det. Smith at 555-0123.\"\n      }\n    }\n  ],\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "df3cf3ee-48d4-4282-819a-48cc298f9200",
+              "name": "No hotlist was found with the given ID",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotlists",
+                    ":hotlistId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entries\": [\n    {\n      \"caseNumber\": \"<string>\",\n      \"plate\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"expiry\": \"<dateTime>\",\n      \"state\": \"<string>\",\n      \"note\": {\n        \"message\": \"Vehicle observed at 5th and Main. Contact Det. Smith at 555-0123.\"\n      }\n    },\n    {\n      \"caseNumber\": \"<string>\",\n      \"plate\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"expiry\": \"<dateTime>\",\n      \"state\": \"<string>\",\n      \"note\": {\n        \"message\": \"Vehicle observed at 5th and Main. Contact Det. Smith at 555-0123.\"\n      }\n    }\n  ],\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f9bba8a9-9e85-41a3-b3d5-91bbf29c3a54",
+              "name": "Request entity too large, the number of entries exceeds the organization's limit",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotlists",
+                    ":hotlistId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entries\": [\n    {\n      \"caseNumber\": \"<string>\",\n      \"plate\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"expiry\": \"<dateTime>\",\n      \"state\": \"<string>\",\n      \"note\": {\n        \"message\": \"Vehicle observed at 5th and Main. Contact Det. Smith at 555-0123.\"\n      }\n    },\n    {\n      \"caseNumber\": \"<string>\",\n      \"plate\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"expiry\": \"<dateTime>\",\n      \"state\": \"<string>\",\n      \"note\": {\n        \"message\": \"Vehicle observed at 5th and Main. Contact Det. Smith at 555-0123.\"\n      }\n    }\n  ],\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Request Entity Too Large",
+              "code": 413,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "569e54f7-7e9f-4ed1-882d-8b44bec830b9",
+          "name": "Retrieve a page of entries for a hotlist",
+          "request": {
+            "name": "Retrieve a page of entries for a hotlist",
+            "description": {
+              "content": "Retrieve a page of entries for the hotlist with the given ID",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "hotlists",
+                ":hotlistId",
+                "entries"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "3000",
+                  "description": "The maximum number of hotlist entries to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "cursor",
+                  "value": "<string>",
+                  "description": "A cursor for the next page of results"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "custom-holists:read custom-holists:write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.flocksafety.com/oauth/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d27b4117-1576-48ba-8cf8-e3fa6427cbf1",
+              "name": "The hotlist entries were successfully retrieved.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotlists",
+                    ":hotlistId",
+                    "entries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "3000"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"entries\": [\n    {\n      \"caseNumber\": \"string\",\n      \"plate\": \"string\",\n      \"reason\": \"string\",\n      \"id\": \"string\",\n      \"expiry\": \"1989-09-18T09:51:07.352Z\",\n      \"state\": \"<string>\",\n      \"note\": {\n        \"message\": \"Vehicle observed at 5th and Main. Contact Det. Smith at 555-0123.\"\n      }\n    },\n    {\n      \"caseNumber\": \"string\",\n      \"plate\": \"string\",\n      \"reason\": \"string\",\n      \"id\": \"string\",\n      \"expiry\": \"1962-08-17T08:46:45.037Z\",\n      \"state\": \"<string>\",\n      \"note\": {\n        \"message\": \"Vehicle observed at 5th and Main. Contact Det. Smith at 555-0123.\"\n      }\n    }\n  ],\n  \"totalResults\": 2775,\n  \"nextPage\": \"string\",\n  \"id\": 8188.333196045364\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "81102c15-736b-4994-8b69-7365a1132af5",
+              "name": "Unauthorized, authentication token was invalid or not provided",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotlists",
+                    ":hotlistId",
+                    "entries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "3000"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "634b4cd3-dddf-4a94-83de-26615976a841",
+              "name": "Forbidden, your client does not have access to this resource",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotlists",
+                    ":hotlistId",
+                    "entries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "3000"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1a7965fe-14dc-42a8-83f4-f970db956ab2",
+              "name": "No hotlist was found with the given ID",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotlists",
+                    ":hotlistId",
+                    "entries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "3000"
+                    },
+                    {
+                      "key": "cursor",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "85d910e1-848b-439b-96f9-63bc92677910",
+          "name": "Retrieve custom hotlists",
+          "request": {
+            "name": "Retrieve custom hotlists",
+            "description": {
+              "content": "Retrieve custom hotlists for the organization",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "hotlists"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "custom-holists:read custom-holists:write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.flocksafety.com/oauth/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "1ec54260-86ce-4f32-bdb8-6602441cd9ac",
+              "name": "The hotlists for your organization were successfully retrieved.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotlists"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"string\",\n    \"name\": \"string\"\n  },\n  {\n    \"id\": \"string\",\n    \"name\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e8460923-1a85-4ee0-ad0b-95befda885f9",
+              "name": "Unauthorized, authentication token was invalid or not provided",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotlists"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8fdb9e03-8cf5-4065-bc0e-cd9a7ef28e46",
+              "name": "Forbidden, your client does not have access to this resource",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotlists"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "59a2ac28-ace3-4bd2-9ef4-603a87f93853",
+          "name": "Create a custom hotlist",
+          "request": {
+            "name": "Create a custom hotlist",
+            "description": {
+              "content": "Create an organization-level hotlist",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "hotlists"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "custom-holists:read custom-holists:write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.flocksafety.com/oauth/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"entries\": [\n    {\n      \"caseNumber\": \"<string>\",\n      \"plate\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"expiry\": \"<dateTime>\",\n      \"state\": \"<string>\",\n      \"note\": {\n        \"message\": \"<string>\"\n      }\n    },\n    {\n      \"caseNumber\": \"<string>\",\n      \"plate\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"expiry\": \"<dateTime>\",\n      \"state\": \"<string>\",\n      \"note\": {\n        \"message\": \"<string>\"\n      }\n    }\n  ],\n  \"name\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "96321a72-f752-4ee5-b32c-12b55be8d116",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotlists"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entries\": [\n    {\n      \"caseNumber\": \"<string>\",\n      \"plate\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"expiry\": \"<dateTime>\",\n      \"state\": \"<string>\",\n      \"note\": {\n        \"message\": \"Vehicle observed at 5th and Main. Contact Det. Smith at 555-0123.\"\n      }\n    },\n    {\n      \"caseNumber\": \"<string>\",\n      \"plate\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"expiry\": \"<dateTime>\",\n      \"state\": \"<string>\",\n      \"note\": {\n        \"message\": \"Vehicle observed at 5th and Main. Contact Det. Smith at 555-0123.\"\n      }\n    }\n  ],\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"03a30b72-ef3c-b1ad-d81c-bca863b19408\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ec03648d-1b5f-459a-8b2e-88b0d5b97a9f",
+              "name": "Unauthorized, authentication token was invalid or not provided",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotlists"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entries\": [\n    {\n      \"caseNumber\": \"<string>\",\n      \"plate\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"expiry\": \"<dateTime>\",\n      \"state\": \"<string>\",\n      \"note\": {\n        \"message\": \"Vehicle observed at 5th and Main. Contact Det. Smith at 555-0123.\"\n      }\n    },\n    {\n      \"caseNumber\": \"<string>\",\n      \"plate\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"expiry\": \"<dateTime>\",\n      \"state\": \"<string>\",\n      \"note\": {\n        \"message\": \"Vehicle observed at 5th and Main. Contact Det. Smith at 555-0123.\"\n      }\n    }\n  ],\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "83a1b6a5-eb1d-491e-bd3d-c16b5ba0909c",
+              "name": "Forbidden, your client does not have access to this resource",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotlists"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entries\": [\n    {\n      \"caseNumber\": \"<string>\",\n      \"plate\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"expiry\": \"<dateTime>\",\n      \"state\": \"<string>\",\n      \"note\": {\n        \"message\": \"Vehicle observed at 5th and Main. Contact Det. Smith at 555-0123.\"\n      }\n    },\n    {\n      \"caseNumber\": \"<string>\",\n      \"plate\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"expiry\": \"<dateTime>\",\n      \"state\": \"<string>\",\n      \"note\": {\n        \"message\": \"Vehicle observed at 5th and Main. Contact Det. Smith at 555-0123.\"\n      }\n    }\n  ],\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "edc174de-9dde-430c-ab86-e48bcae4e45f",
+              "name": "Request entity too large, the number of entries exceeds the organization's limit",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotlists"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entries\": [\n    {\n      \"caseNumber\": \"<string>\",\n      \"plate\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"expiry\": \"<dateTime>\",\n      \"state\": \"<string>\",\n      \"note\": {\n        \"message\": \"Vehicle observed at 5th and Main. Contact Det. Smith at 555-0123.\"\n      }\n    },\n    {\n      \"caseNumber\": \"<string>\",\n      \"plate\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"expiry\": \"<dateTime>\",\n      \"state\": \"<string>\",\n      \"note\": {\n        \"message\": \"Vehicle observed at 5th and Main. Contact Det. Smith at 555-0123.\"\n      }\n    }\n  ],\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Request Entity Too Large",
+              "code": 413,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4b0d57ff-27ab-4ddb-876e-a68908305b41",
+          "name": "Add a batch of entries to a hotlist",
+          "request": {
+            "name": "Add a batch of entries to a hotlist",
+            "description": {
+              "content": "Add a batch of entries to the hotlist with the provided hotlistID. All entries will be normalized (O->0) and have whitespace trimmed. Duplicate entries will be ignored.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "hotlists",
+                ":hotlistId",
+                "entries",
+                "addBatch"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "custom-holists:read custom-holists:write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.flocksafety.com/oauth/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"entries\": [\n    {\n      \"caseNumber\": \"<string>\",\n      \"plate\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"expiry\": \"<dateTime>\",\n      \"state\": \"<string>\",\n      \"note\": {\n        \"message\": \"<string>\"\n      }\n    },\n    {\n      \"caseNumber\": \"<string>\",\n      \"plate\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"expiry\": \"<dateTime>\",\n      \"state\": \"<string>\",\n      \"note\": {\n        \"message\": \"<string>\"\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "823ec7d0-3524-4039-adcc-cdf0a9d183a3",
+              "name": "The batch of hotlist entries was successfully normalized and created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotlists",
+                    ":hotlistId",
+                    "entries",
+                    "addBatch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entries\": [\n    {\n      \"caseNumber\": \"<string>\",\n      \"plate\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"expiry\": \"<dateTime>\",\n      \"state\": \"<string>\",\n      \"note\": {\n        \"message\": \"Vehicle observed at 5th and Main. Contact Det. Smith at 555-0123.\"\n      }\n    },\n    {\n      \"caseNumber\": \"<string>\",\n      \"plate\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"expiry\": \"<dateTime>\",\n      \"state\": \"<string>\",\n      \"note\": {\n        \"message\": \"Vehicle observed at 5th and Main. Contact Det. Smith at 555-0123.\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"entries\": [\n    {\n      \"caseNumber\": \"string\",\n      \"plate\": \"string\",\n      \"reason\": \"string\",\n      \"id\": \"string\",\n      \"expiry\": \"2008-04-30T10:42:11.431Z\",\n      \"state\": \"<string>\",\n      \"note\": {\n        \"message\": \"Vehicle observed at 5th and Main. Contact Det. Smith at 555-0123.\"\n      }\n    },\n    {\n      \"caseNumber\": \"string\",\n      \"plate\": \"string\",\n      \"reason\": \"string\",\n      \"id\": \"string\",\n      \"expiry\": \"2006-05-15T21:31:21.944Z\",\n      \"state\": \"<string>\",\n      \"note\": {\n        \"message\": \"Vehicle observed at 5th and Main. Contact Det. Smith at 555-0123.\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8faf49ea-c927-4765-a5e2-c2a3fdf73b70",
+              "name": "Bad request, either the batch contained a duplicate plate or the request body was malformed.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotlists",
+                    ":hotlistId",
+                    "entries",
+                    "addBatch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entries\": [\n    {\n      \"caseNumber\": \"<string>\",\n      \"plate\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"expiry\": \"<dateTime>\",\n      \"state\": \"<string>\",\n      \"note\": {\n        \"message\": \"Vehicle observed at 5th and Main. Contact Det. Smith at 555-0123.\"\n      }\n    },\n    {\n      \"caseNumber\": \"<string>\",\n      \"plate\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"expiry\": \"<dateTime>\",\n      \"state\": \"<string>\",\n      \"note\": {\n        \"message\": \"Vehicle observed at 5th and Main. Contact Det. Smith at 555-0123.\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0d1c0f07-d637-4ada-ae47-d945437355d1",
+              "name": "Unauthorized, authentication token was invalid or not provided",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotlists",
+                    ":hotlistId",
+                    "entries",
+                    "addBatch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entries\": [\n    {\n      \"caseNumber\": \"<string>\",\n      \"plate\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"expiry\": \"<dateTime>\",\n      \"state\": \"<string>\",\n      \"note\": {\n        \"message\": \"Vehicle observed at 5th and Main. Contact Det. Smith at 555-0123.\"\n      }\n    },\n    {\n      \"caseNumber\": \"<string>\",\n      \"plate\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"expiry\": \"<dateTime>\",\n      \"state\": \"<string>\",\n      \"note\": {\n        \"message\": \"Vehicle observed at 5th and Main. Contact Det. Smith at 555-0123.\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8c0d906c-1d95-403c-bd87-54d78f8612fc",
+              "name": "Forbidden, your client does not have access to this resource",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotlists",
+                    ":hotlistId",
+                    "entries",
+                    "addBatch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entries\": [\n    {\n      \"caseNumber\": \"<string>\",\n      \"plate\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"expiry\": \"<dateTime>\",\n      \"state\": \"<string>\",\n      \"note\": {\n        \"message\": \"Vehicle observed at 5th and Main. Contact Det. Smith at 555-0123.\"\n      }\n    },\n    {\n      \"caseNumber\": \"<string>\",\n      \"plate\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"expiry\": \"<dateTime>\",\n      \"state\": \"<string>\",\n      \"note\": {\n        \"message\": \"Vehicle observed at 5th and Main. Contact Det. Smith at 555-0123.\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "92c001f0-3e9f-4002-bf57-aec59846ad14",
+              "name": "No hotlist was found with the given ID",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotlists",
+                    ":hotlistId",
+                    "entries",
+                    "addBatch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entries\": [\n    {\n      \"caseNumber\": \"<string>\",\n      \"plate\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"expiry\": \"<dateTime>\",\n      \"state\": \"<string>\",\n      \"note\": {\n        \"message\": \"Vehicle observed at 5th and Main. Contact Det. Smith at 555-0123.\"\n      }\n    },\n    {\n      \"caseNumber\": \"<string>\",\n      \"plate\": \"<string>\",\n      \"reason\": \"<string>\",\n      \"expiry\": \"<dateTime>\",\n      \"state\": \"<string>\",\n      \"note\": {\n        \"message\": \"Vehicle observed at 5th and Main. Contact Det. Smith at 555-0123.\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4c252e75-6234-4094-90bb-a2a7197836f3",
+          "name": "Delete a batch of entries from a hotlist",
+          "request": {
+            "name": "Delete a batch of entries from a hotlist",
+            "description": {
+              "content": "Delete a batch of entries from the hotlist with the provided hotlistID. Ignores any ids for which an entry does not exist",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "hotlists",
+                ":hotlistId",
+                "entries",
+                "deleteBatch"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "custom-holists:read custom-holists:write"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://api.flocksafety.com/oauth/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d8b0f1a3-8303-41e6-83f7-85bb23710470",
+              "name": "The batch of hotlist entries was successfully deleted.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotlists",
+                    ":hotlistId",
+                    "entries",
+                    "deleteBatch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bbe756df-316c-41a4-b26f-939e02915f84",
+              "name": "Unauthorized, authentication token was invalid or not provided",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotlists",
+                    ":hotlistId",
+                    "entries",
+                    "deleteBatch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "82518dc6-38fa-4465-962c-769c8a10b27f",
+              "name": "Forbidden, your client does not have access to this resource",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotlists",
+                    ":hotlistId",
+                    "entries",
+                    "deleteBatch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1cfb29b9-9c3b-45b7-b824-c914322e20d5",
+              "name": "No hotlist was found with the given ID",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "hotlists",
+                    ":hotlistId",
+                    "entries",
+                    "deleteBatch"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ids\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.flocksafety.com/api/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "3a0f6cbd-69ae-407b-8ed6-17f0edd8fd96",
+    "name": "Flock Safety API Platform (v3) Alerts Custom Hotlists API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Flock Safety v3 API Platform harvested from the public developer hub (docs.flocksafety.com). Combines the Device, Custom Hotlist, LPR Search, Plate Lookup, Hotlist Alerts Subscription, Geolocation, CAD, Inbound Alerts, and Vehicle Detections Ingest APIs. OAuth2 client_credentials (machine) and authorization_code (user) flows against api.flocksafety.com.\n\nContact Support:\n Name: Flock Safety Developer Hub",
+      "type": "text/plain"
+    }
+  }
+}

@@ -140,3 +140,9 @@ tools:
 - name: post_reads_lookup
   description: Lookup license plate reads
   source_operation: openapi/flock-safety-openapi-original.yml#POST /reads/lookup
+deployment:
+  mode: none
+  verified: derived
+  tools: 43
+  checked: '2026-08-12'
+  source: catalog MCP census

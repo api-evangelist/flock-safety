@@ -1,0 +1,145 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Flock Safety API Platform (v3) Alerts API",
+    "version": "3.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Alerts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Fetching a single Alert",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.flocksafety.com/api/v3/alerts/:alertId",
+            "params": [
+              {
+                "name": "alertId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the alert that will be fetched."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Fetches an existing alert"
+        },
+        {
+          "info": {
+            "name": "Updating an Alert",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.flocksafety.com/api/v3/alerts/:alertId",
+            "params": [
+              {
+                "name": "alertId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the alert that will be updated."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates an existing alert displayed in FlockOS"
+        },
+        {
+          "info": {
+            "name": "Fetching all recent Alerts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.flocksafety.com/api/v3/alerts",
+            "params": [
+              {
+                "name": "includeInactive",
+                "value": "",
+                "type": "query",
+                "description": "Whether to include inactive alerts in the results."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The maximum number of alerts returned in the response (1-100)."
+              },
+              {
+                "name": "offset",
+                "value": "",
+                "type": "query",
+                "description": "The number of alert results to skip before starting to collect the set of alerts."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Fetches all recent alerts that are displayed in FlockOS"
+        },
+        {
+          "info": {
+            "name": "Creating an Generic Alert",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.flocksafety.com/api/v3/alerts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a new generic alert that will be displayed in FlockOS"
+        },
+        {
+          "info": {
+            "name": "Closing an Alert.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.flocksafety.com/api/v3/alerts/:alertId/close",
+            "params": [
+              {
+                "name": "alertId",
+                "value": "",
+                "type": "path",
+                "description": "The ID of the alert that will be closed."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Closes an alert so that it is no longer visible"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
