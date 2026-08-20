@@ -49,6 +49,19 @@ tags:
 - LPR
 - Physical Security
 - Surveillance
+- Computer-Vision
+- Webhook
+- Geolocation
+- CAD
+tags_raw:
+- Company
+- American Dynamism
+- Public Safety
+- Law Enforcement
+- License Plate Recognition
+- LPR
+- Physical Security
+- Surveillance
 - Computer Vision
 - Webhooks
 - Geolocation
@@ -141,6 +154,8 @@ apis:
   humanURL: https://docs.flocksafety.com/developer-hub/docs/flock-developer-platform-overview
   baseURL: https://api.flocksafety.com/api/v3
   tags:
+  - Authentication
+  tags_raw:
   - OAuth2
   properties:
   - type: OpenAPI
