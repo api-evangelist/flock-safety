@@ -1,0 +1,58 @@
+slug: flock-safety
+provider: Flock Safety
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Public Sector & Government
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 4
+edges:
+- tag: CAD Events
+  spec_file: flock-safety-cad-events-api-openapi.yml
+  capability_id: BC-3310.10
+  capability_id_l1: BC-3310
+  capability_name: Emergency Communications and Dispatch
+  confidence: 0.9
+  evidence: 'POST /cad/events/{externalId}/narrative  Appending a Narrative Entry; schemas: DispatchedUnit,
+    CallerInfo, InvolvedPerson'
+  reason: Computer-aided dispatch events with dispatched units, caller info and narrative entries are
+    exactly emergency communications and dispatch for police/fire/EMS response.
+- tag: Alerts
+  spec_file: flock-safety-alerts-api-openapi.yml
+  capability_id: BC-3310.10
+  capability_id_l1: BC-3310
+  capability_name: Emergency Communications and Dispatch
+  confidence: 0.7
+  evidence: 'POST /alerts  Creating an Generic Alert; POST /alerts/{alertId}/close  Closing an Alert —
+    vendor: "crime detection, investigation, and response tools"'
+  reason: Alerts on this public-safety platform are law-enforcement notifications flowing into the FlockOS
+    situational-awareness/dispatch workflow, not IT monitoring alerts. Sub-capability choice between emergency
+    communications and incident coordination is somewhat uncertain.
+- tag: Custom Hotlists
+  spec_file: flock-safety-custom-hotlists-api-openapi.yml
+  capability_id: BC-3310.60
+  capability_id_l1: BC-3310
+  capability_name: Public Safety Investigations
+  confidence: 0.7
+  evidence: POST /hotlists  Create a custom hotlist; POST /hotlists/{hotlistId}/entries/addBatch  Add
+    a batch of entries to a hotlist
+  reason: Hotlists are watchlists of plates of investigative interest maintained by law-enforcement agencies,
+    supporting criminal/public-safety investigations and intelligence. Could alternatively be read as
+    field response support, hence 0.7.
+- tag: Plate Reads
+  spec_file: flock-safety-plate-reads-api-openapi.yml
+  capability_id: BC-3310.60
+  capability_id_l1: BC-3310
+  capability_name: Public Safety Investigations
+  confidence: 0.7
+  evidence: 'POST /reads/lookup — ''Lookup license plate reads''; schemas LicensePlateRead, PlateInfo,
+    Device; vendor: ''crime detection, investigation, and response tools ... for law enforcement'''
+  reason: Operations query the LPR read database (plate, state, confidence, location, radius filters)
+    — the classic law-enforcement investigative lookup supporting case work. Fits Public Safety Investigations;
+    some ambiguity since the same data can serve real-time response rather than investigation, hence 0.7.

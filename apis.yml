@@ -249,6 +249,9 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: CapabilityMap
+  url: capabilities/flock-safety-capability-edges.yml
+  name: Flock Safety Business Capability Map
 - type: Overlay
   url: overlays/flock-safety-api-platform-overlay.yaml
 - type: TrustCenter
