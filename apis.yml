@@ -306,8 +306,9 @@ common:
   url: data-model/flock-safety-data-model.yml
 - type: Packages
   url: packages/flock-safety-packages.yml
-- type: MCPServer
+- type: X-MCPServerCandidate
   url: mcp/flock-safety-mcp.yml
+  note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate — a tool list derived from the published API contracts, not an existing server. The scorer already read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type surfaces with a server that does not exist.'
 - type: LLMsTxt
   url: llms/flock-safety-llms.txt
 - type: DomainSecurity
