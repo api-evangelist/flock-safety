@@ -160,24 +160,6 @@ apis:
     url: https://docs.flocksafety.com/developer-hub/reference/post_oauth-token
   - type: GettingStarted
     url: https://docs.flocksafety.com/developer-hub/docs/quickstart
-- aid: flock-safety:flock-safety-oauth2-api
-  name: Flock Safety OAuth2 API
-  description: The OAuth2 API from Flock Safety — 1 operation(s) for oauth2.
-  humanURL: https://docs.flocksafety.com/developer-hub/docs/flock-developer-platform-overview
-  baseURL: https://api.flocksafety.com/api/v3
-  tags:
-  - Authentication
-  tags_raw:
-  - OAuth2
-  properties:
-  - type: OpenAPI
-    url: openapi/flock-safety-oauth2-api-openapi.yml
-  - type: Documentation
-    url: https://docs.flocksafety.com/developer-hub/docs/flock-developer-platform-overview
-  - type: APIReference
-    url: https://docs.flocksafety.com/developer-hub/reference/post_oauth-token
-  - type: GettingStarted
-    url: https://docs.flocksafety.com/developer-hub/docs/quickstart
 - aid: flock-safety:flock-safety-plate-reads-api
   name: Flock Safety Plate Reads API
   description: The Plate Reads API from Flock Safety — 2 operation(s) for plate reads.
@@ -237,6 +219,22 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/flock-safety-vehicle-images-api-openapi.yml
+  - type: Documentation
+    url: https://docs.flocksafety.com/developer-hub/docs/flock-developer-platform-overview
+  - type: APIReference
+    url: https://docs.flocksafety.com/developer-hub/reference/post_oauth-token
+  - type: GettingStarted
+    url: https://docs.flocksafety.com/developer-hub/docs/quickstart
+- aid: flock-safety:flock-safety-oauth2-api
+  name: Flock Safety O Auth2 API
+  description: The OAuth2 API from Flock Safety — 1 operation(s) for oauth2.
+  humanURL: https://docs.flocksafety.com/developer-hub/docs/flock-developer-platform-overview
+  baseURL: https://api.flocksafety.com/api/v3
+  tags:
+  - OAuth2
+  properties:
+  - type: OpenAPI
+    url: openapi/flock-safety-oauth2-api-openapi.yml
   - type: Documentation
     url: https://docs.flocksafety.com/developer-hub/docs/flock-developer-platform-overview
   - type: APIReference
