@@ -231,6 +231,8 @@ apis:
   humanURL: https://docs.flocksafety.com/developer-hub/docs/flock-developer-platform-overview
   baseURL: https://api.flocksafety.com/api/v3
   tags:
+  - Authentication
+  tags_raw:
   - OAuth2
   properties:
   - type: OpenAPI
