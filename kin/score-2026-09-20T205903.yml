@@ -1,31 +1,29 @@
-# Kin Score artifact — flock-safety — 2026-08-21T110057
+# Kin Score artifact — flock-safety — 2026-09-20T205903
 # The API Evangelist rating (https://github.com/api-evangelist/kin-score). Generated; do not edit.
 ---
 kin_score:
   slug: flock-safety
-  schema_version: 0.12.0
-  scored_at: '2026-08-21'
-  run_ts: 2026-08-21T110057
-  composite: 49.8
+  schema_version: 0.22.0
+  scored_at: '2026-09-20'
+  run_ts: 2026-09-20T205903
+  composite: 49.9
   band: developing
   facets:
-    discoverability: 81.5
-    contract_quality: 63.0
-    governance: 16.7
+    discoverability: 75.9
+    contract_quality: 63.1
+    contract_governance: 4.5
     operational_transparency: 42.1
     developer_ergonomics: 44.6
-    commercial_clarity: 47.4
-    contract_governance: 16.7
     access_clarity: 47.4
   agent_readiness:
-    score: 48.9
-    band: agent-native
+    score: 36.5
+    band: agent-ready
     dimensions:
       spec_presence: true
       agentic_access: derived
       reversibility_documented: false
       mcp_server: false
-      auth_clarity: true
+      auth_clarity: bearer
       idempotency: documented
       error_semantics: verified
       openapi_examples: partial
@@ -36,6 +34,10 @@ kin_score:
       consent_identity: false
       agent_card: false
       dry_run_mode: false
+      delegated_identity: false
+      protected_resource_metadata: false
+      dynamic_client_registration: false
+      agentic_commerce: false
   provenance:
     mcp: derived
     skills: derived
