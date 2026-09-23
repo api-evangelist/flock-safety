@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Flock Safety API Platform (v3) Alerts Devices API
+  title: Flock Safety API Platform (v3) Devices API
   description: Flock Safety v3 API Platform harvested from the public developer hub (docs.flocksafety.com). Combines the Device, Custom Hotlist, LPR Search, Plate Lookup, Hotlist Alerts Subscription, Geolocation, CAD, Inbound Alerts, and Vehicle Detections Ingest APIs. OAuth2 client_credentials (machine) and authorization_code (user) flows against api.flocksafety.com.
   version: 3.0.0
   contact:
@@ -16,7 +16,7 @@ tags:
 paths:
   /devices/{deviceId}:
     get:
-      summary: Retrieving a device.
+      summary: Retrieving a device
       description: Retrieves a particular device.
       tags:
       - Devices
@@ -40,8 +40,10 @@ paths:
           $ref: '#/components/responses/RateLimitError'
         '500':
           $ref: '#/components/responses/InternalError'
+      operationId: getDevicesByDeviceId
+      x-operation-id-source: derived
     patch:
-      summary: Updating a device.
+      summary: Updating a device
       description: Updates a device.
       tags:
       - Devices
@@ -79,9 +81,11 @@ paths:
           $ref: '#/components/responses/RateLimitError'
         '500':
           $ref: '#/components/responses/InternalError'
+      operationId: patchDevicesByDeviceId
+      x-operation-id-source: derived
   /devices:
     get:
-      summary: Retrieving devices.
+      summary: Retrieving devices
       description: Retrieves the devices that belong to your organization.
       tags:
       - Devices
@@ -174,8 +178,10 @@ paths:
           $ref: '#/components/responses/RateLimitError'
         '500':
           $ref: '#/components/responses/InternalError'
+      operationId: getDevices
+      x-operation-id-source: derived
     post:
-      summary: Creating a device.
+      summary: Creating a device
       description: Creates a device.
       tags:
       - Devices
@@ -213,9 +219,11 @@ paths:
                   $ref: '#/components/examples/CreateLimitError'
         '500':
           $ref: '#/components/responses/InternalError'
+      operationId: postDevices
+      x-operation-id-source: derived
   /devices/{deviceId}/decommission:
     post:
-      summary: Decommissioning a device.
+      summary: Decommissioning a device
       description: Decommissions a device. Once a device is decommissioned, vehicle images from that device can no longer be ingested. However, the device will remain in the system for compliance and auditing purposes.
       tags:
       - Devices
@@ -241,27 +249,37 @@ paths:
                   $ref: '#/components/examples/DecommissionLimitError'
         '500':
           $ref: '#/components/responses/InternalError'
+      operationId: postDevicesByDeviceIdDecommission
+      x-operation-id-source: derived
 components:
   schemas:
-    Network:
+    UpdateDeviceRequest:
       type: object
-      description: The network that the device belongs to.
-      required:
-      - id
-      - name
+      minProperties: 1
       properties:
-        id:
-          type: string
-          description: The ID for the network
-          example: 72d97364-3f45-4e16-ae52-631aea3141cc
         name:
           type: string
-          description: The name of the network
-          example: Little Rock AR PD
-    ErrorResponse:
+          description: The name of the device.
+          example: Camera \#001 - Main Street
+        metadata:
+          type: object
+          description: Metadata about the device.
+        location:
+          $ref: '#/components/schemas/Location'
+          description: The location where the device is located.
+    AdditionalMetadata:
+      type: object
       properties:
-        error:
-          type: string
+        type:
+          enum:
+          - string
+          - number
+          - boolean
+          description: What type the value of the metadata value is
+        value:
+          type: object
+          description: value of the metadata. Must be a string, number, or boolean
+      description: flat json object, defaults to {} and returned as {} if not provided
     Location:
       properties:
         name:
@@ -321,33 +339,10 @@ components:
           type: string
           description: A link to view the device in the Flock UI.
           example: https://hotlist.flocksafety.com/dispatch/type/audio?id=00000000-0000-0000-000000000000
-    UpdateDeviceRequest:
-      type: object
-      minProperties: 1
+    ErrorResponse:
       properties:
-        name:
+        error:
           type: string
-          description: The name of the device.
-          example: Camera \#001 - Main Street
-        metadata:
-          type: object
-          description: Metadata about the device.
-        location:
-          $ref: '#/components/schemas/Location'
-          description: The location where the device is located.
-    AdditionalMetadata:
-      type: object
-      properties:
-        type:
-          enum:
-          - string
-          - number
-          - boolean
-          description: What type the value of the metadata value is
-        value:
-          type: object
-          description: value of the metadata. Must be a string, number, or boolean
-      description: flat json object, defaults to {} and returned as {} if not provided
     DeviceType:
       type: string
       description: The device's type.
@@ -371,6 +366,21 @@ components:
         metadata:
           type: object
           description: Metadata about the device.
+    Network:
+      type: object
+      description: The network that the device belongs to.
+      required:
+      - id
+      - name
+      properties:
+        id:
+          type: string
+          description: The ID for the network
+          example: 72d97364-3f45-4e16-ae52-631aea3141cc
+        name:
+          type: string
+          description: The name of the network
+          example: Little Rock AR PD
   securitySchemes:
     bearerAuth:
       type: http

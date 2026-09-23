@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Flock Safety API Platform (v3) Alerts Tracked Subjects API
+  title: Flock Safety API Platform (v3) Tracked Subjects API
   description: Flock Safety v3 API Platform harvested from the public developer hub (docs.flocksafety.com). Combines the Device, Custom Hotlist, LPR Search, Plate Lookup, Hotlist Alerts Subscription, Geolocation, CAD, Inbound Alerts, and Vehicle Detections Ingest APIs. OAuth2 client_credentials (machine) and authorization_code (user) flows against api.flocksafety.com.
   version: 3.0.0
   contact:
@@ -53,6 +53,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+      operationId: deleteGeoSubjectsByExternalSubjectId
+      x-operation-id-source: derived
     get:
       summary: Retrieving a Tracked Subject
       description: Get a single subject's current location.
@@ -92,6 +94,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+      operationId: getGeoSubjectsByExternalSubjectId
+      x-operation-id-source: derived
   /geo/subjects:
     get:
       summary: Retrieve All Tracked Subjects
@@ -159,6 +163,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+      operationId: getGeoSubjects
+      x-operation-id-source: derived
     put:
       summary: Create or updating a Tracked Subject
       description: Add or update a subject's location
@@ -190,6 +196,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+      operationId: putGeoSubjects
+      x-operation-id-source: derived
 components:
   schemas:
     Heartbeat:

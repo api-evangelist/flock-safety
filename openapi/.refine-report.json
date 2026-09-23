@@ -1,16 +1,7 @@
 {
   "provider": "flock-safety",
   "sources": [
-    "flock-safety-alerts-api-openapi.yml",
-    "flock-safety-cad-events-api-openapi.yml",
-    "flock-safety-custom-hotlists-api-openapi.yml",
-    "flock-safety-devices-api-openapi.yml",
-    "flock-safety-lpr-hotlist-alert-subscriptions-api-openapi.yml",
-    "flock-safety-oauth2-api-openapi.yml",
-    "flock-safety-plate-reads-api-openapi.yml",
-    "flock-safety-tracked-subject-types-api-openapi.yml",
-    "flock-safety-tracked-subjects-api-openapi.yml",
-    "flock-safety-vehicle-images-api-openapi.yml"
+    "_original/flock-safety-openapi-original.yml"
   ],
   "outputs": [
     "flock-safety-alerts-api-openapi.yml",
@@ -24,32 +15,51 @@
     "flock-safety-tracked-subjects-api-openapi.yml",
     "flock-safety-vehicle-images-api-openapi.yml"
   ],
-  "archived": [],
+  "archived": [
+    "deleted 1 superseded output(s) from the previous generation"
+  ],
   "errors": [
-    "flock-safety-custom-hotlists-api-openapi.yml: dangling $ref: #/components/parameters/HotlistIdParam",
-    "flock-safety-devices-api-openapi.yml: dangling $ref: #/components/examples/CreateLimitError",
-    "flock-safety-devices-api-openapi.yml: dangling $ref: #/components/examples/DecommissionLimitError",
-    "flock-safety-devices-api-openapi.yml: dangling $ref: #/components/examples/RateLimitError",
-    "flock-safety-devices-api-openapi.yml: dangling $ref: #/components/parameters/DeviceIdParam",
-    "flock-safety-devices-api-openapi.yml: dangling $ref: #/components/responses/AuthorizationError",
-    "flock-safety-devices-api-openapi.yml: dangling $ref: #/components/responses/BadRequestError",
-    "flock-safety-devices-api-openapi.yml: dangling $ref: #/components/responses/GetDevicesValidationError",
-    "flock-safety-devices-api-openapi.yml: dangling $ref: #/components/responses/InternalError",
-    "flock-safety-devices-api-openapi.yml: dangling $ref: #/components/responses/NotFoundError",
-    "flock-safety-devices-api-openapi.yml: dangling $ref: #/components/responses/RateLimitError",
-    "flock-safety-devices-api-openapi.yml: dangling $ref: #/components/responses/ValidationError",
-    "flock-safety-plate-reads-api-openapi.yml: dangling $ref: #/components/examples/RateLimitError",
-    "flock-safety-plate-reads-api-openapi.yml: dangling $ref: #/components/responses/AuthorizationError",
-    "flock-safety-plate-reads-api-openapi.yml: dangling $ref: #/components/responses/BadRequestError",
-    "flock-safety-plate-reads-api-openapi.yml: dangling $ref: #/components/responses/UnauthorizedError",
-    "flock-safety-plate-reads-api-openapi.yml: dangling $ref: #/components/responses/ValidationError",
-    "flock-safety-vehicle-images-api-openapi.yml: dangling $ref: #/components/responses/AuthorizationError",
-    "flock-safety-vehicle-images-api-openapi.yml: dangling $ref: #/components/responses/InternalError",
-    "flock-safety-vehicle-images-api-openapi.yml: dangling $ref: #/components/responses/NotFoundError",
-    "flock-safety-vehicle-images-api-openapi.yml: dangling $ref: #/components/responses/RateLimitError",
-    "flock-safety-vehicle-images-api-openapi.yml: dangling $ref: #/components/responses/ValidationError"
+    "flock-safety-openapi-original.yml: dangling $ref: #/components/examples/CreateLimitError",
+    "flock-safety-openapi-original.yml: dangling $ref: #/components/examples/DecommissionLimitError",
+    "flock-safety-openapi-original.yml: dangling $ref: #/components/examples/RateLimitError",
+    "flock-safety-openapi-original.yml: dangling $ref: #/components/parameters/DeviceIdParam",
+    "flock-safety-openapi-original.yml: dangling $ref: #/components/parameters/HotlistIdParam",
+    "flock-safety-openapi-original.yml: dangling $ref: #/components/responses/AuthorizationError",
+    "flock-safety-openapi-original.yml: dangling $ref: #/components/responses/BadRequestError",
+    "flock-safety-openapi-original.yml: dangling $ref: #/components/responses/GetDevicesValidationError",
+    "flock-safety-openapi-original.yml: dangling $ref: #/components/responses/InternalError",
+    "flock-safety-openapi-original.yml: dangling $ref: #/components/responses/NotFoundError",
+    "flock-safety-openapi-original.yml: dangling $ref: #/components/responses/RateLimitError",
+    "flock-safety-openapi-original.yml: dangling $ref: #/components/responses/UnauthorizedError",
+    "flock-safety-openapi-original.yml: dangling $ref: #/components/responses/ValidationError"
   ],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "flock-safety-openapi-original.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "flock-safety-openapi-original.yml: declared missing tag: Alerts",
+    "flock-safety-openapi-original.yml: declared missing tag: CAD Events",
+    "flock-safety-openapi-original.yml: declared missing tag: Custom Hotlists",
+    "flock-safety-openapi-original.yml: declared missing tag: Devices",
+    "flock-safety-openapi-original.yml: declared missing tag: LPR Hotlist Alert Subscriptions",
+    "flock-safety-openapi-original.yml: declared missing tag: OAuth2",
+    "flock-safety-openapi-original.yml: declared missing tag: Plate Reads",
+    "flock-safety-openapi-original.yml: declared missing tag: Tracked Subject Types",
+    "flock-safety-openapi-original.yml: declared missing tag: Tracked Subjects",
+    "flock-safety-openapi-original.yml: declared missing tag: Vehicle Images",
+    "superseded outputs removed: flock-safety-o-auth2-api-openapi.yml",
+    "apis.yml register: written (+1 apis, 10 total)"
+  ],
+  "skipped": [
+    "flock-safety-alerts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "flock-safety-cad-events-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "flock-safety-custom-hotlists-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "flock-safety-devices-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "flock-safety-lpr-hotlist-alert-subscriptions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "flock-safety-o-auth2-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "flock-safety-plate-reads-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "flock-safety-tracked-subject-types-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "flock-safety-tracked-subjects-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "flock-safety-vehicle-images-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

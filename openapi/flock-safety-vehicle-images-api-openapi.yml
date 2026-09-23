@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Flock Safety API Platform (v3) Alerts Vehicle Images API
+  title: Flock Safety API Platform (v3) Vehicle Images API
   description: Flock Safety v3 API Platform harvested from the public developer hub (docs.flocksafety.com). Combines the Device, Custom Hotlist, LPR Search, Plate Lookup, Hotlist Alerts Subscription, Geolocation, CAD, Inbound Alerts, and Vehicle Detections Ingest APIs. OAuth2 client_credentials (machine) and authorization_code (user) flows against api.flocksafety.com.
   version: 3.0.0
   contact:
@@ -16,7 +16,7 @@ tags:
 paths:
   /devices/{deviceId}/images:
     post:
-      summary: Uploading images of a vehicle.
+      summary: Uploading images of a vehicle
       description: Uploads images of a vehicle that will be ingested and processed. The total size of the main vehicle image and all of the context images must not exceed 9 MB. File size is calculated in binary mb (MB), where 1 MB is 1048576 bytes.
       tags:
       - Vehicle Images
@@ -65,6 +65,8 @@ paths:
           $ref: '#/components/responses/RateLimitError'
         '500':
           $ref: '#/components/responses/InternalError'
+      operationId: postDevicesByDeviceIdImages
+      x-operation-id-source: derived
 components:
   schemas:
     ImageUpload:

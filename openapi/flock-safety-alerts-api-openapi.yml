@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Flock Safety API Platform (v3) Alerts API
   description: Flock Safety v3 API Platform harvested from the public developer hub (docs.flocksafety.com). Combines the Device, Custom Hotlist, LPR Search, Plate Lookup, Hotlist Alerts Subscription, Geolocation, CAD, Inbound Alerts, and Vehicle Detections Ingest APIs. OAuth2 client_credentials (machine) and authorization_code (user) flows against api.flocksafety.com.
@@ -84,6 +84,8 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
               example:
                 error: Throttled
+      operationId: getAlertsByAlertId
+      x-operation-id-source: derived
     put:
       summary: Updating an Alert
       description: Updates an existing alert displayed in FlockOS
@@ -182,6 +184,8 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
               example:
                 error: Throttled
+      operationId: putAlertsByAlertId
+      x-operation-id-source: derived
   /alerts:
     get:
       summary: Fetching all recent Alerts
@@ -335,6 +339,8 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
               example:
                 error: Throttled
+      operationId: getAlerts
+      x-operation-id-source: derived
     post:
       summary: Creating an Generic Alert
       description: Creates a new generic alert that will be displayed in FlockOS
@@ -420,9 +426,11 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
               example:
                 error: Throttled
+      operationId: postAlerts
+      x-operation-id-source: derived
   /alerts/{alertId}/close:
     post:
-      summary: Closing an Alert.
+      summary: Closing an Alert
       description: Closes an alert so that it is no longer visible
       tags:
       - Alerts
@@ -454,30 +462,10 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
               example:
                 error: Throttled
+      operationId: postAlertsByAlertIdClose
+      x-operation-id-source: derived
 components:
   schemas:
-    Attachment:
-      type: object
-      required:
-      - type
-      - name
-      - url
-      properties:
-        type:
-          type: string
-          enum:
-          - link
-          description: The type of attachment.
-        name:
-          type: string
-          description: The display name for the attachment.
-        url:
-          type: string
-          description: The url for the attachment.
-    ErrorResponse:
-      properties:
-        error:
-          type: string
     GenericAlert:
       type: object
       required:
@@ -559,6 +547,28 @@ components:
           additionalProperties:
             type: string
           description: Custom metadata for the alert
+    Attachment:
+      type: object
+      required:
+      - type
+      - name
+      - url
+      properties:
+        type:
+          type: string
+          enum:
+          - link
+          description: The type of attachment.
+        name:
+          type: string
+          description: The display name for the attachment.
+        url:
+          type: string
+          description: The url for the attachment.
+    ErrorResponse:
+      properties:
+        error:
+          type: string
   securitySchemes:
     bearerAuth:
       type: http

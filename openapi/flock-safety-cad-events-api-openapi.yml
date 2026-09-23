@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Flock Safety API Platform (v3) Alerts CAD Events API
+  title: Flock Safety API Platform (v3) CAD Events API
   description: Flock Safety v3 API Platform harvested from the public developer hub (docs.flocksafety.com). Combines the Device, Custom Hotlist, LPR Search, Plate Lookup, Hotlist Alerts Subscription, Geolocation, CAD, Inbound Alerts, and Vehicle Detections Ingest APIs. OAuth2 client_credentials (machine) and authorization_code (user) flows against api.flocksafety.com.
   version: 3.0.0
   contact:
@@ -41,6 +41,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+      operationId: getCadEventsActive
+      x-operation-id-source: derived
     post:
       summary: Updating Active Events
       description: Creates or updates each provided event in the same manner as /v3/cad/events, then closes any open events not provided in the request
@@ -78,6 +80,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+      operationId: postCadEventsActive
+      x-operation-id-source: derived
   /cad/events/{externalId}:
     get:
       summary: Retrieving an Event by ExternalID
@@ -118,6 +122,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+      operationId: getCadEventsByExternalId
+      x-operation-id-source: derived
   /cad/events:
     get:
       summary: Retrieving Events
@@ -179,6 +185,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+      operationId: getCadEvents
+      x-operation-id-source: derived
     post:
       summary: Creating or Updating an Event
       description: Creates a new event, or updates an event if externalId matches an existing event
@@ -216,6 +224,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+      operationId: postCadEvents
+      x-operation-id-source: derived
   /cad/events/{externalId}/close:
     post:
       summary: Marking an Event as Closed
@@ -263,6 +273,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+      operationId: postCadEventsByExternalIdClose
+      x-operation-id-source: derived
   /cad/events/{externalId}/narrative:
     post:
       summary: Appending a Narrative Entry
@@ -308,6 +320,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+      operationId: postCadEventsByExternalIdNarrative
+      x-operation-id-source: derived
   /cad/events/{externalId}/open:
     post:
       summary: Marking an Event as Open
@@ -348,6 +362,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+      operationId: postCadEventsByExternalIdOpen
+      x-operation-id-source: derived
   /cad/events/externalIds:
     post:
       summary: Retrieving Events by ExternalIDs
@@ -386,35 +402,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+      operationId: postCadEventsExternalIds
+      x-operation-id-source: derived
 components:
   schemas:
-    EventsBody:
-      properties:
-        events:
-          items:
-            $ref: '#/components/schemas/Event'
-      required:
-      - events
-    Location:
-      properties:
-        name:
-          type: string
-          description: commmon name to identify location by
-        latitude:
-          type: number
-        longitude:
-          type: number
-        streetAddress:
-          type: string
-        city:
-          type: string
-        state:
-          type: string
-        country:
-          type: string
-        additionalMetadata:
-          $ref: '#/components/schemas/AdditionalMetadata'
-      description: either latitude and longitude is required, or one of streetAddress/city/state
     CallerInfo:
       properties:
         name:
@@ -434,26 +425,6 @@ components:
         events:
           items:
             $ref: '#/components/schemas/Event'
-    DispatchedUnit:
-      properties:
-        id:
-          type: string
-        displayId:
-          type: string
-          description: optional override of unit id to be displayed in UI
-        dispatchTime:
-          type: string
-          format: date-time
-          description: RFC3339 UTC datetime string
-        arrivalTime:
-          type: string
-          format: date-time
-          description: RFC3339 UTC datetime string
-        additionalMetadata:
-          $ref: '#/components/schemas/AdditionalMetadata'
-      required:
-      - id
-      - dispatchTime
     AdditionalMetadata:
       type: object
       properties:
@@ -467,43 +438,6 @@ components:
           type: object
           description: value of the metadata. Must be a string, number, or boolean
       description: flat json object, defaults to {} and returned as {} if not provided
-    ExternalIdsBody:
-      properties:
-        externalIds:
-          type: array
-          items:
-            type: string
-      required:
-      - externalIds
-    InvolvedVehicle:
-      properties:
-        color:
-          type: string
-        make:
-          type: string
-        model:
-          type: string
-        year:
-          type: integer
-          minimum: 1900
-        plateNumber:
-          type: string
-        plateState:
-          type: string
-        additionalMetadata:
-          $ref: '#/components/schemas/AdditionalMetadata'
-    NarrativeBody:
-      properties:
-        narratives:
-          type: array
-          items:
-            type: string
-      required:
-      - narratives
-    ErrorResponse:
-      properties:
-        error:
-          type: string
     InvolvedPerson:
       properties:
         name:
@@ -543,6 +477,90 @@ components:
           type: string
         additionalMetadata:
           $ref: '#/components/schemas/AdditionalMetadata'
+    NarrativeBody:
+      properties:
+        narratives:
+          type: array
+          items:
+            type: string
+      required:
+      - narratives
+    Location:
+      properties:
+        name:
+          type: string
+          description: commmon name to identify location by
+        latitude:
+          type: number
+        longitude:
+          type: number
+        streetAddress:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        country:
+          type: string
+        additionalMetadata:
+          $ref: '#/components/schemas/AdditionalMetadata'
+      description: either latitude and longitude is required, or one of streetAddress/city/state
+    ExternalIdsBody:
+      properties:
+        externalIds:
+          type: array
+          items:
+            type: string
+      required:
+      - externalIds
+    DispatchedUnit:
+      properties:
+        id:
+          type: string
+        displayId:
+          type: string
+          description: optional override of unit id to be displayed in UI
+        dispatchTime:
+          type: string
+          format: date-time
+          description: RFC3339 UTC datetime string
+        arrivalTime:
+          type: string
+          format: date-time
+          description: RFC3339 UTC datetime string
+        additionalMetadata:
+          $ref: '#/components/schemas/AdditionalMetadata'
+      required:
+      - id
+      - dispatchTime
+    ErrorResponse:
+      properties:
+        error:
+          type: string
+    InvolvedVehicle:
+      properties:
+        color:
+          type: string
+        make:
+          type: string
+        model:
+          type: string
+        year:
+          type: integer
+          minimum: 1900
+        plateNumber:
+          type: string
+        plateState:
+          type: string
+        additionalMetadata:
+          $ref: '#/components/schemas/AdditionalMetadata'
+    EventsBody:
+      properties:
+        events:
+          items:
+            $ref: '#/components/schemas/Event'
+      required:
+      - events
     Event:
       properties:
         externalId:

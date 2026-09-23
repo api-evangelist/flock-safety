@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Flock Safety API Platform (v3) Alerts LPR Hotlist Alert Subscriptions API
+  title: Flock Safety API Platform (v3) LPR Hotlist Alert…
   description: Flock Safety v3 API Platform harvested from the public developer hub (docs.flocksafety.com). Combines the Device, Custom Hotlist, LPR Search, Plate Lookup, Hotlist Alerts Subscription, Geolocation, CAD, Inbound Alerts, and Vehicle Detections Ingest APIs. OAuth2 client_credentials (machine) and authorization_code (user) flows against api.flocksafety.com.
   version: 3.0.0
   contact:
@@ -38,6 +38,8 @@ paths:
           description: Subscription Not Found
         '500':
           description: Internal Server Error
+      operationId: deleteIntegrationsLprAlertsSubscriptionsById
+      x-operation-id-source: derived
     get:
       summary: Get Subscription
       description: Get existing LPR hotlist alert webhook subscription by id
@@ -65,6 +67,8 @@ paths:
           description: Subscription Not Found
         '500':
           description: Internal Server Error
+      operationId: getIntegrationsLprAlertsSubscriptionsById
+      x-operation-id-source: derived
   /integrations/lpr/alerts/subscriptions:
     get:
       summary: Get Subscriptions
@@ -86,6 +90,8 @@ paths:
           description: Forbidden (lacking appropriate scope or client claims)
         '500':
           description: Internal Server Error
+      operationId: getIntegrationsLprAlertsSubscriptions
+      x-operation-id-source: derived
     post:
       summary: Create Subscription
       description: Create a new LPR hotlist alert webhook subscription
@@ -113,6 +119,8 @@ paths:
           description: Conflict (violates a unique constraint)
         '500':
           description: Internal Server Error
+      operationId: postIntegrationsLprAlertsSubscriptions
+      x-operation-id-source: derived
     put:
       summary: Update Subscription
       description: Update an existing LPR hotlist alert webhook subscription
@@ -140,21 +148,10 @@ paths:
           description: Subscription Not Found
         '500':
           description: Internal Server Error
+      operationId: putIntegrationsLprAlertsSubscriptions
+      x-operation-id-source: derived
 components:
   schemas:
-    UpdateSubscriptionRequest:
-      type: object
-      description: request body schema to update an existing webhook subscription
-      allOf:
-      - $ref: '#/components/schemas/CreateSubscriptionRequest'
-      - type: object
-        properties:
-          id:
-            type: string
-            format: uuid
-            description: id of the webhook subscription
-        required:
-        - id
     CreateSubscriptionRequest:
       type: object
       description: request body schema to create a new webhook subscription
@@ -192,6 +189,34 @@ components:
       - callbackUrl
       - credentials
       - contentType
+    UpdateSubscriptionRequest:
+      type: object
+      description: request body schema to update an existing webhook subscription
+      allOf:
+      - $ref: '#/components/schemas/CreateSubscriptionRequest'
+      - type: object
+        properties:
+          id:
+            type: string
+            format: uuid
+            description: id of the webhook subscription
+        required:
+        - id
+    Subscription:
+      type: object
+      description: response object when creating, updating or fetching a webhook subscription
+      allOf:
+      - $ref: '#/components/schemas/UpdateSubscriptionRequest'
+      - type: object
+        properties:
+          createdAt:
+            type: string
+            format: date-time
+            description: RFC3339 UTC timestamp of when the webhook subscription was created
+          updatedAt:
+            type: string
+            format: date-time
+            description: RFC3339 UTC timestamp of when the webhook subscription was most recently updated
     Credentials:
       type: object
       description: authentication details for calling the webhook endpoint
@@ -281,21 +306,6 @@ components:
           - headerName
       required:
       - scheme
-    Subscription:
-      type: object
-      description: response object when creating, updating or fetching a webhook subscription
-      allOf:
-      - $ref: '#/components/schemas/UpdateSubscriptionRequest'
-      - type: object
-        properties:
-          createdAt:
-            type: string
-            format: date-time
-            description: RFC3339 UTC timestamp of when the webhook subscription was created
-          updatedAt:
-            type: string
-            format: date-time
-            description: RFC3339 UTC timestamp of when the webhook subscription was most recently updated
   securitySchemes:
     bearerAuth:
       type: http
