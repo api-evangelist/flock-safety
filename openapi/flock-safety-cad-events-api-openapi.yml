@@ -406,6 +406,67 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    DispatchedUnit:
+      properties:
+        id:
+          type: string
+        displayId:
+          type: string
+          description: optional override of unit id to be displayed in UI
+        dispatchTime:
+          type: string
+          format: date-time
+          description: RFC3339 UTC datetime string
+        arrivalTime:
+          type: string
+          format: date-time
+          description: RFC3339 UTC datetime string
+        additionalMetadata:
+          $ref: '#/components/schemas/AdditionalMetadata'
+      required:
+      - id
+      - dispatchTime
+    Location:
+      properties:
+        name:
+          type: string
+          description: commmon name to identify location by
+        latitude:
+          type: number
+        longitude:
+          type: number
+        streetAddress:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        country:
+          type: string
+        additionalMetadata:
+          $ref: '#/components/schemas/AdditionalMetadata'
+      description: either latitude and longitude is required, or one of streetAddress/city/state
+    NarrativeBody:
+      properties:
+        narratives:
+          type: array
+          items:
+            type: string
+      required:
+      - narratives
+    EventsResponse:
+      properties:
+        events:
+          items:
+            $ref: '#/components/schemas/Event'
+    ExternalIdsBody:
+      properties:
+        externalIds:
+          type: array
+          items:
+            type: string
+      required:
+      - externalIds
     CallerInfo:
       properties:
         name:
@@ -420,11 +481,10 @@ components:
           $ref: '#/components/schemas/Location'
         additionalMetadata:
           $ref: '#/components/schemas/AdditionalMetadata'
-    EventsResponse:
+    ErrorResponse:
       properties:
-        events:
-          items:
-            $ref: '#/components/schemas/Event'
+        error:
+          type: string
     AdditionalMetadata:
       type: object
       properties:
@@ -438,6 +498,23 @@ components:
           type: object
           description: value of the metadata. Must be a string, number, or boolean
       description: flat json object, defaults to {} and returned as {} if not provided
+    InvolvedVehicle:
+      properties:
+        color:
+          type: string
+        make:
+          type: string
+        model:
+          type: string
+        year:
+          type: integer
+          minimum: 1900
+        plateNumber:
+          type: string
+        plateState:
+          type: string
+        additionalMetadata:
+          $ref: '#/components/schemas/AdditionalMetadata'
     InvolvedPerson:
       properties:
         name:
@@ -477,90 +554,6 @@ components:
           type: string
         additionalMetadata:
           $ref: '#/components/schemas/AdditionalMetadata'
-    NarrativeBody:
-      properties:
-        narratives:
-          type: array
-          items:
-            type: string
-      required:
-      - narratives
-    Location:
-      properties:
-        name:
-          type: string
-          description: commmon name to identify location by
-        latitude:
-          type: number
-        longitude:
-          type: number
-        streetAddress:
-          type: string
-        city:
-          type: string
-        state:
-          type: string
-        country:
-          type: string
-        additionalMetadata:
-          $ref: '#/components/schemas/AdditionalMetadata'
-      description: either latitude and longitude is required, or one of streetAddress/city/state
-    ExternalIdsBody:
-      properties:
-        externalIds:
-          type: array
-          items:
-            type: string
-      required:
-      - externalIds
-    DispatchedUnit:
-      properties:
-        id:
-          type: string
-        displayId:
-          type: string
-          description: optional override of unit id to be displayed in UI
-        dispatchTime:
-          type: string
-          format: date-time
-          description: RFC3339 UTC datetime string
-        arrivalTime:
-          type: string
-          format: date-time
-          description: RFC3339 UTC datetime string
-        additionalMetadata:
-          $ref: '#/components/schemas/AdditionalMetadata'
-      required:
-      - id
-      - dispatchTime
-    ErrorResponse:
-      properties:
-        error:
-          type: string
-    InvolvedVehicle:
-      properties:
-        color:
-          type: string
-        make:
-          type: string
-        model:
-          type: string
-        year:
-          type: integer
-          minimum: 1900
-        plateNumber:
-          type: string
-        plateState:
-          type: string
-        additionalMetadata:
-          $ref: '#/components/schemas/AdditionalMetadata'
-    EventsBody:
-      properties:
-        events:
-          items:
-            $ref: '#/components/schemas/Event'
-      required:
-      - events
     Event:
       properties:
         externalId:
@@ -622,6 +615,13 @@ components:
       - externalId
       - eventType
       - priority
+    EventsBody:
+      properties:
+        events:
+          items:
+            $ref: '#/components/schemas/Event'
+      required:
+      - events
   securitySchemes:
     bearerAuth:
       type: http

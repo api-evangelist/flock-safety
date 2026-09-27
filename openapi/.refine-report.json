@@ -15,9 +15,7 @@
     "flock-safety-tracked-subjects-api-openapi.yml",
     "flock-safety-vehicle-images-api-openapi.yml"
   ],
-  "archived": [
-    "deleted 1 superseded output(s) from the previous generation"
-  ],
+  "archived": [],
   "errors": [
     "flock-safety-openapi-original.yml: dangling $ref: #/components/examples/CreateLimitError",
     "flock-safety-openapi-original.yml: dangling $ref: #/components/examples/DecommissionLimitError",
@@ -47,8 +45,7 @@
     "flock-safety-openapi-original.yml: declared missing tag: Tracked Subject Types",
     "flock-safety-openapi-original.yml: declared missing tag: Tracked Subjects",
     "flock-safety-openapi-original.yml: declared missing tag: Vehicle Images",
-    "superseded outputs removed: flock-safety-o-auth2-api-openapi.yml",
-    "apis.yml register: written (+1 apis, 10 total)"
+    "apis.yml register: already-registered"
   ],
   "skipped": [
     "flock-safety-alerts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
@@ -56,7 +53,7 @@
     "flock-safety-custom-hotlists-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "flock-safety-devices-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "flock-safety-lpr-hotlist-alert-subscriptions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "flock-safety-o-auth2-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "flock-safety-oauth2-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "flock-safety-plate-reads-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "flock-safety-tracked-subject-types-api-openapi.yml: previously refined output, superseded by openapi/_original/",
     "flock-safety-tracked-subjects-api-openapi.yml: previously refined output, superseded by openapi/_original/",

@@ -244,56 +244,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    OrgHotlist:
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-    HotlistEntry:
-      properties:
-        id:
-          type: string
-        caseNumber:
-          type: string
-        expiry:
-          description: ISO datetime string
-          type: string
-          format: date-time
-        plate:
-          type: string
-        reason:
-          type: string
-        state:
-          $ref: '#/components/schemas/State'
-        note:
-          $ref: '#/components/schemas/HotlistEntryNote'
-      required:
-      - caseNumber
-      - plate
-      - reason
-      type: object
-    CreateHotlistEntryRequest:
-      properties:
-        caseNumber:
-          type: string
-        expiry:
-          description: ISO datetime string. After this date, alerts will not be triggered for this entry.
-          type: string
-          format: date-time
-        plate:
-          type: string
-        reason:
-          type: string
-        state:
-          $ref: '#/components/schemas/State'
-        note:
-          $ref: '#/components/schemas/HotlistEntryNote'
-      required:
-      - caseNumber
-      - plate
-      - reason
-      type: object
     Hotlist:
       properties:
         entries:
@@ -310,95 +260,12 @@ components:
       - name
       - organizationId
       type: object
-    CreateHotlistResponse:
+    OrgHotlist:
       properties:
         id:
-          format: uuid
           type: string
-      required:
-      - id
-      type: object
-    HotlistEntryNote:
-      type: object
-      description: Optional note with message field for the hotlist entry
-      required:
-      - message
-      properties:
-        message:
-          type: string
-          description: Note message text (supports URLs for clickable links in UI)
-          example: Vehicle observed at 5th and Main. Contact Det. Smith at 555-0123.
-    GetHotlistEntriesResponse:
-      properties:
-        entries:
-          items:
-            $ref: '#/components/schemas/HotlistEntry'
-          type: array
-        totalResults:
-          type: integer
-        nextPage:
-          type:
-          - string
-          - 'null'
-      required:
-      - entries
-      - id
-      - name
-      - organizationId
-      type: object
-    CreateHotlistEntriesRequest:
-      properties:
-        entries:
-          items:
-            $ref: '#/components/schemas/CreateHotlistEntryRequest'
-          type: array
-      required:
-      - entries
-      type: object
-    DeleteHotlistEntriesRequest:
-      properties:
-        ids:
-          items:
-            type: string
-          type: array
-      required:
-      - ids
-      type: object
-    CreateEntriesResponse:
-      properties:
-        entries:
-          items:
-            $ref: '#/components/schemas/HotlistEntry'
-          type: array
-      required:
-      - entries
-      type: object
-    CreateHotlistRequest:
-      properties:
-        entries:
-          items:
-            $ref: '#/components/schemas/CreateHotlistEntryRequest'
-          type: array
-          maxItems: 3000
         name:
           type: string
-      required:
-      - entries
-      - name
-      type: object
-    UpdateHotlistRequest:
-      properties:
-        entries:
-          items:
-            $ref: '#/components/schemas/CreateHotlistEntryRequest'
-          type: array
-          maxItems: 3000
-        name:
-          type: string
-      required:
-      - entries
-      - name
-      type: object
     State:
       type: string
       enum:
@@ -454,6 +321,139 @@ components:
       - wisconsin
       - wyoming
       - puerto_rico
+    CreateHotlistRequest:
+      properties:
+        entries:
+          items:
+            $ref: '#/components/schemas/CreateHotlistEntryRequest'
+          type: array
+          maxItems: 3000
+        name:
+          type: string
+      required:
+      - entries
+      - name
+      type: object
+    GetHotlistEntriesResponse:
+      properties:
+        entries:
+          items:
+            $ref: '#/components/schemas/HotlistEntry'
+          type: array
+        totalResults:
+          type: integer
+        nextPage:
+          type:
+          - string
+          - 'null'
+      required:
+      - entries
+      - id
+      - name
+      - organizationId
+      type: object
+    HotlistEntryNote:
+      type: object
+      description: Optional note with message field for the hotlist entry
+      required:
+      - message
+      properties:
+        message:
+          type: string
+          description: Note message text (supports URLs for clickable links in UI)
+          example: Vehicle observed at 5th and Main. Contact Det. Smith at 555-0123.
+    UpdateHotlistRequest:
+      properties:
+        entries:
+          items:
+            $ref: '#/components/schemas/CreateHotlistEntryRequest'
+          type: array
+          maxItems: 3000
+        name:
+          type: string
+      required:
+      - entries
+      - name
+      type: object
+    CreateHotlistEntriesRequest:
+      properties:
+        entries:
+          items:
+            $ref: '#/components/schemas/CreateHotlistEntryRequest'
+          type: array
+      required:
+      - entries
+      type: object
+    CreateHotlistEntryRequest:
+      properties:
+        caseNumber:
+          type: string
+        expiry:
+          description: ISO datetime string. After this date, alerts will not be triggered for this entry.
+          type: string
+          format: date-time
+        plate:
+          type: string
+        reason:
+          type: string
+        state:
+          $ref: '#/components/schemas/State'
+        note:
+          $ref: '#/components/schemas/HotlistEntryNote'
+      required:
+      - caseNumber
+      - plate
+      - reason
+      type: object
+    CreateHotlistResponse:
+      properties:
+        id:
+          format: uuid
+          type: string
+      required:
+      - id
+      type: object
+    DeleteHotlistEntriesRequest:
+      properties:
+        ids:
+          items:
+            type: string
+          type: array
+      required:
+      - ids
+      type: object
+    HotlistEntry:
+      properties:
+        id:
+          type: string
+        caseNumber:
+          type: string
+        expiry:
+          description: ISO datetime string
+          type: string
+          format: date-time
+        plate:
+          type: string
+        reason:
+          type: string
+        state:
+          $ref: '#/components/schemas/State'
+        note:
+          $ref: '#/components/schemas/HotlistEntryNote'
+      required:
+      - caseNumber
+      - plate
+      - reason
+      type: object
+    CreateEntriesResponse:
+      properties:
+        entries:
+          items:
+            $ref: '#/components/schemas/HotlistEntry'
+          type: array
+      required:
+      - entries
+      type: object
   securitySchemes:
     bearerAuth:
       type: http

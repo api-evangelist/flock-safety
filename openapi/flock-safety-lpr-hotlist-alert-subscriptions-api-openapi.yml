@@ -189,19 +189,6 @@ components:
       - callbackUrl
       - credentials
       - contentType
-    UpdateSubscriptionRequest:
-      type: object
-      description: request body schema to update an existing webhook subscription
-      allOf:
-      - $ref: '#/components/schemas/CreateSubscriptionRequest'
-      - type: object
-        properties:
-          id:
-            type: string
-            format: uuid
-            description: id of the webhook subscription
-        required:
-        - id
     Subscription:
       type: object
       description: response object when creating, updating or fetching a webhook subscription
@@ -306,6 +293,19 @@ components:
           - headerName
       required:
       - scheme
+    UpdateSubscriptionRequest:
+      type: object
+      description: request body schema to update an existing webhook subscription
+      allOf:
+      - $ref: '#/components/schemas/CreateSubscriptionRequest'
+      - type: object
+        properties:
+          id:
+            type: string
+            format: uuid
+            description: id of the webhook subscription
+        required:
+        - id
   securitySchemes:
     bearerAuth:
       type: http

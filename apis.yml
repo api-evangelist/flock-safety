@@ -61,7 +61,7 @@ tags:
 - LPR
 - Physical Security
 - Surveillance
-- Computer-Vision
+- Computer Vision
 - Webhook
 - Geolocation
 - CAD
@@ -78,6 +78,7 @@ tags_raw:
 - Webhooks
 - Geolocation
 - CAD
+- Computer-Vision
 apis:
 - aid: flock-safety:flock-safety-alerts-api
   name: Flock Safety Alerts API

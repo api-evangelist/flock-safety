@@ -466,6 +466,28 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    Attachment:
+      type: object
+      required:
+      - type
+      - name
+      - url
+      properties:
+        type:
+          type: string
+          enum:
+          - link
+          description: The type of attachment.
+        name:
+          type: string
+          description: The display name for the attachment.
+        url:
+          type: string
+          description: The url for the attachment.
+    ErrorResponse:
+      properties:
+        error:
+          type: string
     GenericAlert:
       type: object
       required:
@@ -547,28 +569,6 @@ components:
           additionalProperties:
             type: string
           description: Custom metadata for the alert
-    Attachment:
-      type: object
-      required:
-      - type
-      - name
-      - url
-      properties:
-        type:
-          type: string
-          enum:
-          - link
-          description: The type of attachment.
-        name:
-          type: string
-          description: The display name for the attachment.
-        url:
-          type: string
-          description: The url for the attachment.
-    ErrorResponse:
-      properties:
-        error:
-          type: string
   securitySchemes:
     bearerAuth:
       type: http
