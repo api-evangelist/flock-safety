@@ -406,154 +406,13 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    DispatchedUnit:
-      properties:
-        id:
-          type: string
-        displayId:
-          type: string
-          description: optional override of unit id to be displayed in UI
-        dispatchTime:
-          type: string
-          format: date-time
-          description: RFC3339 UTC datetime string
-        arrivalTime:
-          type: string
-          format: date-time
-          description: RFC3339 UTC datetime string
-        additionalMetadata:
-          $ref: '#/components/schemas/AdditionalMetadata'
-      required:
-      - id
-      - dispatchTime
-    Location:
-      properties:
-        name:
-          type: string
-          description: commmon name to identify location by
-        latitude:
-          type: number
-        longitude:
-          type: number
-        streetAddress:
-          type: string
-        city:
-          type: string
-        state:
-          type: string
-        country:
-          type: string
-        additionalMetadata:
-          $ref: '#/components/schemas/AdditionalMetadata'
-      description: either latitude and longitude is required, or one of streetAddress/city/state
-    NarrativeBody:
-      properties:
-        narratives:
-          type: array
-          items:
-            type: string
-      required:
-      - narratives
-    EventsResponse:
+    EventsBody:
       properties:
         events:
           items:
             $ref: '#/components/schemas/Event'
-    ExternalIdsBody:
-      properties:
-        externalIds:
-          type: array
-          items:
-            type: string
       required:
-      - externalIds
-    CallerInfo:
-      properties:
-        name:
-          type: string
-        phoneNumber:
-          type: string
-        timestamp:
-          type: string
-          format: date-time
-          description: RFC3339 UTC datetime string
-        location:
-          $ref: '#/components/schemas/Location'
-        additionalMetadata:
-          $ref: '#/components/schemas/AdditionalMetadata'
-    ErrorResponse:
-      properties:
-        error:
-          type: string
-    AdditionalMetadata:
-      type: object
-      properties:
-        type:
-          enum:
-          - string
-          - number
-          - boolean
-          description: What type the value of the metadata value is
-        value:
-          type: object
-          description: value of the metadata. Must be a string, number, or boolean
-      description: flat json object, defaults to {} and returned as {} if not provided
-    InvolvedVehicle:
-      properties:
-        color:
-          type: string
-        make:
-          type: string
-        model:
-          type: string
-        year:
-          type: integer
-          minimum: 1900
-        plateNumber:
-          type: string
-        plateState:
-          type: string
-        additionalMetadata:
-          $ref: '#/components/schemas/AdditionalMetadata'
-    InvolvedPerson:
-      properties:
-        name:
-          type: string
-        externalId:
-          type: string
-          description: unique identifier for person, generated if not provided
-        description:
-          type: string
-        dateOfBirth:
-          type: string
-          format: date
-          example: '2017-01-20'
-        email:
-          type: string
-        secondaryEmail:
-          type: string
-        phone:
-          type: string
-        secondaryPhone:
-          type: string
-        streetAddress:
-          type: string
-        secondaryStreetAddress:
-          type: string
-        ethnicity:
-          type: string
-        eyeColor:
-          type: string
-        hairColor:
-          type: string
-        height:
-          type: string
-        age:
-          type: integer
-        gender:
-          type: string
-        additionalMetadata:
-          $ref: '#/components/schemas/AdditionalMetadata'
+      - events
     Event:
       properties:
         externalId:
@@ -615,13 +474,154 @@ components:
       - externalId
       - eventType
       - priority
-    EventsBody:
+    DispatchedUnit:
+      properties:
+        id:
+          type: string
+        displayId:
+          type: string
+          description: optional override of unit id to be displayed in UI
+        dispatchTime:
+          type: string
+          format: date-time
+          description: RFC3339 UTC datetime string
+        arrivalTime:
+          type: string
+          format: date-time
+          description: RFC3339 UTC datetime string
+        additionalMetadata:
+          $ref: '#/components/schemas/AdditionalMetadata'
+      required:
+      - id
+      - dispatchTime
+    ExternalIdsBody:
+      properties:
+        externalIds:
+          type: array
+          items:
+            type: string
+      required:
+      - externalIds
+    EventsResponse:
       properties:
         events:
           items:
             $ref: '#/components/schemas/Event'
+    InvolvedVehicle:
+      properties:
+        color:
+          type: string
+        make:
+          type: string
+        model:
+          type: string
+        year:
+          type: integer
+          minimum: 1900
+        plateNumber:
+          type: string
+        plateState:
+          type: string
+        additionalMetadata:
+          $ref: '#/components/schemas/AdditionalMetadata'
+    ErrorResponse:
+      properties:
+        error:
+          type: string
+    InvolvedPerson:
+      properties:
+        name:
+          type: string
+        externalId:
+          type: string
+          description: unique identifier for person, generated if not provided
+        description:
+          type: string
+        dateOfBirth:
+          type: string
+          format: date
+          example: '2017-01-20'
+        email:
+          type: string
+        secondaryEmail:
+          type: string
+        phone:
+          type: string
+        secondaryPhone:
+          type: string
+        streetAddress:
+          type: string
+        secondaryStreetAddress:
+          type: string
+        ethnicity:
+          type: string
+        eyeColor:
+          type: string
+        hairColor:
+          type: string
+        height:
+          type: string
+        age:
+          type: integer
+        gender:
+          type: string
+        additionalMetadata:
+          $ref: '#/components/schemas/AdditionalMetadata'
+    Location:
+      properties:
+        name:
+          type: string
+          description: commmon name to identify location by
+        latitude:
+          type: number
+        longitude:
+          type: number
+        streetAddress:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        country:
+          type: string
+        additionalMetadata:
+          $ref: '#/components/schemas/AdditionalMetadata'
+      description: either latitude and longitude is required, or one of streetAddress/city/state
+    NarrativeBody:
+      properties:
+        narratives:
+          type: array
+          items:
+            type: string
       required:
-      - events
+      - narratives
+    CallerInfo:
+      properties:
+        name:
+          type: string
+        phoneNumber:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+          description: RFC3339 UTC datetime string
+        location:
+          $ref: '#/components/schemas/Location'
+        additionalMetadata:
+          $ref: '#/components/schemas/AdditionalMetadata'
+    AdditionalMetadata:
+      type: object
+      properties:
+        type:
+          enum:
+          - string
+          - number
+          - boolean
+          description: What type the value of the metadata value is
+        value:
+          type: object
+          description: value of the metadata. Must be a string, number, or boolean
+      description: flat json object, defaults to {} and returned as {} if not provided
   securitySchemes:
     bearerAuth:
       type: http

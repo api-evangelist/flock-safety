@@ -69,10 +69,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    ErrorResponse:
-      properties:
-        error:
-          type: string
     ImageUpload:
       type: object
       required:
@@ -109,6 +105,10 @@ components:
           example: -73.97539595767532
           minimum: -180
           maximum: 180
+    ErrorResponse:
+      properties:
+        error:
+          type: string
   securitySchemes:
     bearerAuth:
       type: http

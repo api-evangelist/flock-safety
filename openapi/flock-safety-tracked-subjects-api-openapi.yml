@@ -200,6 +200,10 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    ErrorResponse:
+      properties:
+        error:
+          type: string
     Heartbeat:
       type: object
       required:
@@ -284,10 +288,6 @@ components:
           type: boolean
           default: false
           description: if the subject is a law enforcement subject or not
-    ErrorResponse:
-      properties:
-        error:
-          type: string
   securitySchemes:
     bearerAuth:
       type: http
