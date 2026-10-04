@@ -138,6 +138,10 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    ErrorResponse:
+      properties:
+        error:
+          type: string
     SubjectType:
       type: object
       required:
@@ -159,10 +163,6 @@ components:
         ttlSeconds:
           type: integer
           description: 0 is disabled TTL
-    ErrorResponse:
-      properties:
-        error:
-          type: string
   securitySchemes:
     bearerAuth:
       type: http

@@ -101,38 +101,72 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    SortCriteria:
+    PlateInfo:
+      type: object
+      required:
+      - plate
+      - confidence
+      properties:
+        plate:
+          type: string
+          description: The license plate.
+          example: XNA357
+        confidence:
+          type: number
+          description: A number expressing certainty in that the license plate was correctly identified. The range is between 0.0 and 1.0
+          example: 0.9
+    ErrorResponse:
+      properties:
+        error:
+          type: string
+    AdditionalMetadata:
       type: object
       properties:
-        field:
-          type: string
+        type:
           enum:
-          - capturedAt
-          description: The field to sort results by.
-        order:
-          type: string
-          enum:
-          - asc
-          - desc
-          description: "The order to sort by:\n  * `asc` - Ascending, from the oldest to the newest.\n  * `desc` - Descending, from the newest to the oldest.\n"
-      required:
-      - field
-      - order
-    Network:
+          - string
+          - number
+          - boolean
+          description: What type the value of the metadata value is
+        value:
+          type: object
+          description: value of the metadata. Must be a string, number, or boolean
+      description: flat json object, defaults to {} and returned as {} if not provided
+    StateInfo:
       type: object
-      description: The network that the device belongs to.
       required:
-      - id
-      - name
+      - state
+      - confidence
       properties:
-        id:
+        state:
           type: string
-          description: The ID for the network
-          example: 72d97364-3f45-4e16-ae52-631aea3141cc
-        name:
-          type: string
-          description: The name of the network
-          example: Little Rock AR PD
+          description: The state that the license plate is from.
+          example: arkansas
+        confidence:
+          type: number
+          description: A number expressing certainty in that the state was correctly identified. The range is between 0.0 and 1.0
+          example: 0.75
+    RadiusFilter:
+      type: object
+      description: Filters the results to where only reads captured within this radius will be returned.
+      properties:
+        radius:
+          type: object
+          properties:
+            latitude:
+              type: number
+              description: The latitude for the center-point of the radius.
+              example: 40.783871
+            longitude:
+              type: number
+              description: The longitude for the center-point of the radius.
+              example: -73.97541
+            radius:
+              type: number
+              minimum: 1
+              maximum: 2000
+              example: 5
+              description: The radius, in miles, of the circle around the centerpoint.
     AreaFilter:
       type: object
       description: 'Filters the results to where only reads captured within an area will be returned. The area must be defined as a [GeoJSON Polygon with a single ring](https://mapsam.com/geojson-ring-visual/).
@@ -175,6 +209,23 @@ components:
                 - 3
               - - 102
                 - 2
+    SortCriteria:
+      type: object
+      properties:
+        field:
+          type: string
+          enum:
+          - capturedAt
+          description: The field to sort results by.
+        order:
+          type: string
+          enum:
+          - asc
+          - desc
+          description: "The order to sort by:\n  * `asc` - Ascending, from the oldest to the newest.\n  * `desc` - Descending, from the newest to the oldest.\n"
+      required:
+      - field
+      - order
     Location:
       properties:
         name:
@@ -195,10 +246,28 @@ components:
         additionalMetadata:
           $ref: '#/components/schemas/AdditionalMetadata'
       description: either latitude and longitude is required, or one of streetAddress/city/state
-    ErrorResponse:
+    LookupResult:
+      type: object
+      description: Results
+      required:
+      - results
+      - totalItems
       properties:
-        error:
+        results:
+          type: array
+          description: List of license plate reads
+          items:
+            $ref: '#/components/schemas/LicensePlateRead'
+        nextPageId:
           type: string
+          description: The ID of the next page. This ID is used in the [Get Results](#/paths/~1reads~1lookup/get) endpoint.
+        previousPageId:
+          type: string
+          description: The ID of the previous page. This ID is used in the [Get Results](#/paths/~1reads~1lookup/get) endpoint.
+        totalItems:
+          type: number
+          description: The total number of reads that are available to view.
+          example: 2
     LicensePlateRead:
       type: object
       description: A license plate read
@@ -247,116 +316,6 @@ components:
           description: 'The minimum confidence threshold, expressed as a decimal between 0.0 and 1.0. This filter applies only to the specified attribute. Results where the confidence score for the specified attribute is below this value will be excluded.
 
             '
-    LookupResult:
-      type: object
-      description: Results
-      required:
-      - results
-      - totalItems
-      properties:
-        results:
-          type: array
-          description: List of license plate reads
-          items:
-            $ref: '#/components/schemas/LicensePlateRead'
-        nextPageId:
-          type: string
-          description: The ID of the next page. This ID is used in the [Get Results](#/paths/~1reads~1lookup/get) endpoint.
-        previousPageId:
-          type: string
-          description: The ID of the previous page. This ID is used in the [Get Results](#/paths/~1reads~1lookup/get) endpoint.
-        totalItems:
-          type: number
-          description: The total number of reads that are available to view.
-          example: 2
-    StateInfo:
-      type: object
-      required:
-      - state
-      - confidence
-      properties:
-        state:
-          type: string
-          description: The state that the license plate is from.
-          example: arkansas
-        confidence:
-          type: number
-          description: A number expressing certainty in that the state was correctly identified. The range is between 0.0 and 1.0
-          example: 0.75
-    DeviceType:
-      type: string
-      description: The device's type.
-      enum:
-      - camera
-      - video
-      - audio
-      - external
-    AdditionalMetadata:
-      type: object
-      properties:
-        type:
-          enum:
-          - string
-          - number
-          - boolean
-          description: What type the value of the metadata value is
-        value:
-          type: object
-          description: value of the metadata. Must be a string, number, or boolean
-      description: flat json object, defaults to {} and returned as {} if not provided
-    Device:
-      type: object
-      required:
-      - id
-      - type
-      - name
-      - location
-      - network
-      - metadata
-      - createdAt
-      - modifiedAt
-      properties:
-        id:
-          type: string
-          description: The ID of the device.
-        type:
-          $ref: '#/components/schemas/DeviceType'
-        name:
-          type: string
-          description: The name of the device.
-        location:
-          $ref: '#/components/schemas/Location'
-        network:
-          $ref: '#/components/schemas/Network'
-        metadata:
-          type: object
-          description: Metadata about the device.
-        createdAt:
-          type: object
-          description: The timestamp (in RFC3339 UTC format) indicating when the image was captured.
-          example: '2023-12-31T23:59:59.999999Z'
-        modifiedAt:
-          type: object
-          description: The timestamp (in RFC3339 UTC format) indicating when the image was captured.
-          example: '2023-12-31T23:59:59.999999Z'
-        link:
-          type: string
-          description: A link to view the device in the Flock UI.
-          example: https://hotlist.flocksafety.com/dispatch/type/audio?id=00000000-0000-0000-000000000000
-    PlateInfo:
-      type: object
-      required:
-      - plate
-      - confidence
-      properties:
-        plate:
-          type: string
-          description: The license plate.
-          example: XNA357
-        confidence:
-          type: number
-          description: A number expressing certainty in that the license plate was correctly identified. The range is between 0.0 and 1.0
-          example: 0.9
     LookupRequest:
       type: object
       description: A request to lookup license plate reads.
@@ -485,27 +444,68 @@ components:
             latitude: 40.783871
             longitude: -73.97541
             radius: 5
-    RadiusFilter:
+    DeviceType:
+      type: string
+      description: The device's type.
+      enum:
+      - camera
+      - video
+      - audio
+      - external
+    Device:
       type: object
-      description: Filters the results to where only reads captured within this radius will be returned.
+      required:
+      - id
+      - type
+      - name
+      - location
+      - network
+      - metadata
+      - createdAt
+      - modifiedAt
       properties:
-        radius:
+        id:
+          type: string
+          description: The ID of the device.
+        type:
+          $ref: '#/components/schemas/DeviceType'
+        name:
+          type: string
+          description: The name of the device.
+        location:
+          $ref: '#/components/schemas/Location'
+        network:
+          $ref: '#/components/schemas/Network'
+        metadata:
           type: object
-          properties:
-            latitude:
-              type: number
-              description: The latitude for the center-point of the radius.
-              example: 40.783871
-            longitude:
-              type: number
-              description: The longitude for the center-point of the radius.
-              example: -73.97541
-            radius:
-              type: number
-              minimum: 1
-              maximum: 2000
-              example: 5
-              description: The radius, in miles, of the circle around the centerpoint.
+          description: Metadata about the device.
+        createdAt:
+          type: object
+          description: The timestamp (in RFC3339 UTC format) indicating when the image was captured.
+          example: '2023-12-31T23:59:59.999999Z'
+        modifiedAt:
+          type: object
+          description: The timestamp (in RFC3339 UTC format) indicating when the image was captured.
+          example: '2023-12-31T23:59:59.999999Z'
+        link:
+          type: string
+          description: A link to view the device in the Flock UI.
+          example: https://hotlist.flocksafety.com/dispatch/type/audio?id=00000000-0000-0000-000000000000
+    Network:
+      type: object
+      description: The network that the device belongs to.
+      required:
+      - id
+      - name
+      properties:
+        id:
+          type: string
+          description: The ID for the network
+          example: 72d97364-3f45-4e16-ae52-631aea3141cc
+        name:
+          type: string
+          description: The name of the network
+          example: Little Rock AR PD
   securitySchemes:
     bearerAuth:
       type: http

@@ -152,6 +152,56 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    UpdateSubscriptionRequest:
+      type: object
+      description: request body schema to update an existing webhook subscription
+      allOf:
+      - $ref: '#/components/schemas/CreateSubscriptionRequest'
+      - type: object
+        properties:
+          id:
+            type: string
+            format: uuid
+            description: id of the webhook subscription
+        required:
+        - id
+    CreateSubscriptionRequest:
+      type: object
+      description: request body schema to create a new webhook subscription
+      properties:
+        name:
+          type: string
+          description: optional name to describe the webhook subscription
+        callbackUrl:
+          type: string
+          description: endpoint that webhooks should be submitted to
+          format: url
+          example: https://example.com/your/webhook
+        credentials:
+          $ref: '#/components/schemas/Credentials'
+        contentType:
+          type: string
+          description: content type that webhooks should be provided as
+          enum:
+          - application/json
+          - application/xml
+        customHotlistAudienceFilter:
+          type: string
+          description: "Optionally include LPR hotlist alerts from custom hotlists with restricted audiences\n * `any` - Custom hotlists with organization-wide audience and restricted audience e.g. role-based or user-based audiences\n * `organization` - Custom hotlists with organization-wide audience only\n"
+          enum:
+          - any
+          - organization
+          default: organization
+        enabledFirstResponderJurisdictionAlerts:
+          type: boolean
+          description: indicates whether the subscription should accept hotlist alerts from shared networks in the organization's First Responder Jurisdiction or not
+        enabled:
+          type: boolean
+          description: indicates whether the subscription should be enabled or not
+      required:
+      - callbackUrl
+      - credentials
+      - contentType
     Credentials:
       type: object
       description: authentication details for calling the webhook endpoint
@@ -241,43 +291,6 @@ components:
           - headerName
       required:
       - scheme
-    CreateSubscriptionRequest:
-      type: object
-      description: request body schema to create a new webhook subscription
-      properties:
-        name:
-          type: string
-          description: optional name to describe the webhook subscription
-        callbackUrl:
-          type: string
-          description: endpoint that webhooks should be submitted to
-          format: url
-          example: https://example.com/your/webhook
-        credentials:
-          $ref: '#/components/schemas/Credentials'
-        contentType:
-          type: string
-          description: content type that webhooks should be provided as
-          enum:
-          - application/json
-          - application/xml
-        customHotlistAudienceFilter:
-          type: string
-          description: "Optionally include LPR hotlist alerts from custom hotlists with restricted audiences\n * `any` - Custom hotlists with organization-wide audience and restricted audience e.g. role-based or user-based audiences\n * `organization` - Custom hotlists with organization-wide audience only\n"
-          enum:
-          - any
-          - organization
-          default: organization
-        enabledFirstResponderJurisdictionAlerts:
-          type: boolean
-          description: indicates whether the subscription should accept hotlist alerts from shared networks in the organization's First Responder Jurisdiction or not
-        enabled:
-          type: boolean
-          description: indicates whether the subscription should be enabled or not
-      required:
-      - callbackUrl
-      - credentials
-      - contentType
     Subscription:
       type: object
       description: response object when creating, updating or fetching a webhook subscription
@@ -293,19 +306,6 @@ components:
             type: string
             format: date-time
             description: RFC3339 UTC timestamp of when the webhook subscription was most recently updated
-    UpdateSubscriptionRequest:
-      type: object
-      description: request body schema to update an existing webhook subscription
-      allOf:
-      - $ref: '#/components/schemas/CreateSubscriptionRequest'
-      - type: object
-        properties:
-          id:
-            type: string
-            format: uuid
-            description: id of the webhook subscription
-        required:
-        - id
   securitySchemes:
     bearerAuth:
       type: http

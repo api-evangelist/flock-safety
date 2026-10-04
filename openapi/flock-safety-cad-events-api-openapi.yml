@@ -406,13 +406,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    EventsBody:
-      properties:
-        events:
-          items:
-            $ref: '#/components/schemas/Event'
-      required:
-      - events
     Event:
       properties:
         externalId:
@@ -474,6 +467,31 @@ components:
       - externalId
       - eventType
       - priority
+    NarrativeBody:
+      properties:
+        narratives:
+          type: array
+          items:
+            type: string
+      required:
+      - narratives
+    ErrorResponse:
+      properties:
+        error:
+          type: string
+    AdditionalMetadata:
+      type: object
+      properties:
+        type:
+          enum:
+          - string
+          - number
+          - boolean
+          description: What type the value of the metadata value is
+        value:
+          type: object
+          description: value of the metadata. Must be a string, number, or boolean
+      description: flat json object, defaults to {} and returned as {} if not provided
     DispatchedUnit:
       properties:
         id:
@@ -494,40 +512,6 @@ components:
       required:
       - id
       - dispatchTime
-    ExternalIdsBody:
-      properties:
-        externalIds:
-          type: array
-          items:
-            type: string
-      required:
-      - externalIds
-    EventsResponse:
-      properties:
-        events:
-          items:
-            $ref: '#/components/schemas/Event'
-    InvolvedVehicle:
-      properties:
-        color:
-          type: string
-        make:
-          type: string
-        model:
-          type: string
-        year:
-          type: integer
-          minimum: 1900
-        plateNumber:
-          type: string
-        plateState:
-          type: string
-        additionalMetadata:
-          $ref: '#/components/schemas/AdditionalMetadata'
-    ErrorResponse:
-      properties:
-        error:
-          type: string
     InvolvedPerson:
       properties:
         name:
@@ -567,6 +551,31 @@ components:
           type: string
         additionalMetadata:
           $ref: '#/components/schemas/AdditionalMetadata'
+    InvolvedVehicle:
+      properties:
+        color:
+          type: string
+        make:
+          type: string
+        model:
+          type: string
+        year:
+          type: integer
+          minimum: 1900
+        plateNumber:
+          type: string
+        plateState:
+          type: string
+        additionalMetadata:
+          $ref: '#/components/schemas/AdditionalMetadata'
+    ExternalIdsBody:
+      properties:
+        externalIds:
+          type: array
+          items:
+            type: string
+      required:
+      - externalIds
     Location:
       properties:
         name:
@@ -587,14 +596,6 @@ components:
         additionalMetadata:
           $ref: '#/components/schemas/AdditionalMetadata'
       description: either latitude and longitude is required, or one of streetAddress/city/state
-    NarrativeBody:
-      properties:
-        narratives:
-          type: array
-          items:
-            type: string
-      required:
-      - narratives
     CallerInfo:
       properties:
         name:
@@ -609,19 +610,18 @@ components:
           $ref: '#/components/schemas/Location'
         additionalMetadata:
           $ref: '#/components/schemas/AdditionalMetadata'
-    AdditionalMetadata:
-      type: object
+    EventsBody:
       properties:
-        type:
-          enum:
-          - string
-          - number
-          - boolean
-          description: What type the value of the metadata value is
-        value:
-          type: object
-          description: value of the metadata. Must be a string, number, or boolean
-      description: flat json object, defaults to {} and returned as {} if not provided
+        events:
+          items:
+            $ref: '#/components/schemas/Event'
+      required:
+      - events
+    EventsResponse:
+      properties:
+        events:
+          items:
+            $ref: '#/components/schemas/Event'
   securitySchemes:
     bearerAuth:
       type: http

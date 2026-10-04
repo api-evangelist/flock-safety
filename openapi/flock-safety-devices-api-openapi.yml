@@ -253,19 +253,10 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    AdditionalMetadata:
-      type: object
+    ErrorResponse:
       properties:
-        type:
-          enum:
-          - string
-          - number
-          - boolean
-          description: What type the value of the metadata value is
-        value:
-          type: object
-          description: value of the metadata. Must be a string, number, or boolean
-      description: flat json object, defaults to {} and returned as {} if not provided
+        error:
+          type: string
     UpdateDeviceRequest:
       type: object
       minProperties: 1
@@ -280,10 +271,19 @@ components:
         location:
           $ref: '#/components/schemas/Location'
           description: The location where the device is located.
-    ErrorResponse:
+    AdditionalMetadata:
+      type: object
       properties:
-        error:
-          type: string
+        type:
+          enum:
+          - string
+          - number
+          - boolean
+          description: What type the value of the metadata value is
+        value:
+          type: object
+          description: value of the metadata. Must be a string, number, or boolean
+      description: flat json object, defaults to {} and returned as {} if not provided
     Location:
       properties:
         name:
@@ -304,6 +304,21 @@ components:
         additionalMetadata:
           $ref: '#/components/schemas/AdditionalMetadata'
       description: either latitude and longitude is required, or one of streetAddress/city/state
+    CreateDeviceRequest:
+      type: object
+      required:
+      - name
+      - location
+      properties:
+        name:
+          type: string
+          description: The name of the device.
+          example: 'Camera #001 - Main Street'
+        location:
+          $ref: '#/components/schemas/Location'
+        metadata:
+          type: object
+          description: Metadata about the device.
     DeviceType:
       type: string
       description: The device's type.
@@ -312,21 +327,6 @@ components:
       - video
       - audio
       - external
-    Network:
-      type: object
-      description: The network that the device belongs to.
-      required:
-      - id
-      - name
-      properties:
-        id:
-          type: string
-          description: The ID for the network
-          example: 72d97364-3f45-4e16-ae52-631aea3141cc
-        name:
-          type: string
-          description: The name of the network
-          example: Little Rock AR PD
     Device:
       type: object
       required:
@@ -366,21 +366,21 @@ components:
           type: string
           description: A link to view the device in the Flock UI.
           example: https://hotlist.flocksafety.com/dispatch/type/audio?id=00000000-0000-0000-000000000000
-    CreateDeviceRequest:
+    Network:
       type: object
+      description: The network that the device belongs to.
       required:
+      - id
       - name
-      - location
       properties:
+        id:
+          type: string
+          description: The ID for the network
+          example: 72d97364-3f45-4e16-ae52-631aea3141cc
         name:
           type: string
-          description: The name of the device.
-          example: 'Camera #001 - Main Street'
-        location:
-          $ref: '#/components/schemas/Location'
-        metadata:
-          type: object
-          description: Metadata about the device.
+          description: The name of the network
+          example: Little Rock AR PD
   securitySchemes:
     bearerAuth:
       type: http
