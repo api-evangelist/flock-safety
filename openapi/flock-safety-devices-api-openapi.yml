@@ -253,24 +253,25 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    Network:
+      type: object
+      description: The network that the device belongs to.
+      required:
+      - id
+      - name
+      properties:
+        id:
+          type: string
+          description: The ID for the network
+          example: 72d97364-3f45-4e16-ae52-631aea3141cc
+        name:
+          type: string
+          description: The name of the network
+          example: Little Rock AR PD
     ErrorResponse:
       properties:
         error:
           type: string
-    UpdateDeviceRequest:
-      type: object
-      minProperties: 1
-      properties:
-        name:
-          type: string
-          description: The name of the device.
-          example: Camera \#001 - Main Street
-        metadata:
-          type: object
-          description: Metadata about the device.
-        location:
-          $ref: '#/components/schemas/Location'
-          description: The location where the device is located.
     AdditionalMetadata:
       type: object
       properties:
@@ -284,41 +285,6 @@ components:
           type: object
           description: value of the metadata. Must be a string, number, or boolean
       description: flat json object, defaults to {} and returned as {} if not provided
-    Location:
-      properties:
-        name:
-          type: string
-          description: commmon name to identify location by
-        latitude:
-          type: number
-        longitude:
-          type: number
-        streetAddress:
-          type: string
-        city:
-          type: string
-        state:
-          type: string
-        country:
-          type: string
-        additionalMetadata:
-          $ref: '#/components/schemas/AdditionalMetadata'
-      description: either latitude and longitude is required, or one of streetAddress/city/state
-    CreateDeviceRequest:
-      type: object
-      required:
-      - name
-      - location
-      properties:
-        name:
-          type: string
-          description: The name of the device.
-          example: 'Camera #001 - Main Street'
-        location:
-          $ref: '#/components/schemas/Location'
-        metadata:
-          type: object
-          description: Metadata about the device.
     DeviceType:
       type: string
       description: The device's type.
@@ -366,21 +332,55 @@ components:
           type: string
           description: A link to view the device in the Flock UI.
           example: https://hotlist.flocksafety.com/dispatch/type/audio?id=00000000-0000-0000-000000000000
-    Network:
-      type: object
-      description: The network that the device belongs to.
-      required:
-      - id
-      - name
+    Location:
       properties:
-        id:
-          type: string
-          description: The ID for the network
-          example: 72d97364-3f45-4e16-ae52-631aea3141cc
         name:
           type: string
-          description: The name of the network
-          example: Little Rock AR PD
+          description: commmon name to identify location by
+        latitude:
+          type: number
+        longitude:
+          type: number
+        streetAddress:
+          type: string
+        city:
+          type: string
+        state:
+          type: string
+        country:
+          type: string
+        additionalMetadata:
+          $ref: '#/components/schemas/AdditionalMetadata'
+      description: either latitude and longitude is required, or one of streetAddress/city/state
+    UpdateDeviceRequest:
+      type: object
+      minProperties: 1
+      properties:
+        name:
+          type: string
+          description: The name of the device.
+          example: Camera \#001 - Main Street
+        metadata:
+          type: object
+          description: Metadata about the device.
+        location:
+          $ref: '#/components/schemas/Location'
+          description: The location where the device is located.
+    CreateDeviceRequest:
+      type: object
+      required:
+      - name
+      - location
+      properties:
+        name:
+          type: string
+          description: The name of the device.
+          example: 'Camera #001 - Main Street'
+        location:
+          $ref: '#/components/schemas/Location'
+        metadata:
+          type: object
+          description: Metadata about the device.
   securitySchemes:
     bearerAuth:
       type: http

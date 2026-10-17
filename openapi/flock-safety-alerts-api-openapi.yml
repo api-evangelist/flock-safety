@@ -466,10 +466,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    ErrorResponse:
-      properties:
-        error:
-          type: string
     GenericAlert:
       type: object
       required:
@@ -569,6 +565,10 @@ components:
         url:
           type: string
           description: The url for the attachment.
+    ErrorResponse:
+      properties:
+        error:
+          type: string
   securitySchemes:
     bearerAuth:
       type: http

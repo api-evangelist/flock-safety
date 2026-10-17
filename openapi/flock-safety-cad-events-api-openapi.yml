@@ -406,6 +406,90 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    InvolvedPerson:
+      properties:
+        name:
+          type: string
+        externalId:
+          type: string
+          description: unique identifier for person, generated if not provided
+        description:
+          type: string
+        dateOfBirth:
+          type: string
+          format: date
+          example: '2017-01-20'
+        email:
+          type: string
+        secondaryEmail:
+          type: string
+        phone:
+          type: string
+        secondaryPhone:
+          type: string
+        streetAddress:
+          type: string
+        secondaryStreetAddress:
+          type: string
+        ethnicity:
+          type: string
+        eyeColor:
+          type: string
+        hairColor:
+          type: string
+        height:
+          type: string
+        age:
+          type: integer
+        gender:
+          type: string
+        additionalMetadata:
+          $ref: '#/components/schemas/AdditionalMetadata'
+    DispatchedUnit:
+      properties:
+        id:
+          type: string
+        displayId:
+          type: string
+          description: optional override of unit id to be displayed in UI
+        dispatchTime:
+          type: string
+          format: date-time
+          description: RFC3339 UTC datetime string
+        arrivalTime:
+          type: string
+          format: date-time
+          description: RFC3339 UTC datetime string
+        additionalMetadata:
+          $ref: '#/components/schemas/AdditionalMetadata'
+      required:
+      - id
+      - dispatchTime
+    ExternalIdsBody:
+      properties:
+        externalIds:
+          type: array
+          items:
+            type: string
+      required:
+      - externalIds
+    ErrorResponse:
+      properties:
+        error:
+          type: string
+    AdditionalMetadata:
+      type: object
+      properties:
+        type:
+          enum:
+          - string
+          - number
+          - boolean
+          description: What type the value of the metadata value is
+        value:
+          type: object
+          description: value of the metadata. Must be a string, number, or boolean
+      description: flat json object, defaults to {} and returned as {} if not provided
     Event:
       properties:
         externalId:
@@ -467,90 +551,11 @@ components:
       - externalId
       - eventType
       - priority
-    NarrativeBody:
+    EventsResponse:
       properties:
-        narratives:
-          type: array
+        events:
           items:
-            type: string
-      required:
-      - narratives
-    ErrorResponse:
-      properties:
-        error:
-          type: string
-    AdditionalMetadata:
-      type: object
-      properties:
-        type:
-          enum:
-          - string
-          - number
-          - boolean
-          description: What type the value of the metadata value is
-        value:
-          type: object
-          description: value of the metadata. Must be a string, number, or boolean
-      description: flat json object, defaults to {} and returned as {} if not provided
-    DispatchedUnit:
-      properties:
-        id:
-          type: string
-        displayId:
-          type: string
-          description: optional override of unit id to be displayed in UI
-        dispatchTime:
-          type: string
-          format: date-time
-          description: RFC3339 UTC datetime string
-        arrivalTime:
-          type: string
-          format: date-time
-          description: RFC3339 UTC datetime string
-        additionalMetadata:
-          $ref: '#/components/schemas/AdditionalMetadata'
-      required:
-      - id
-      - dispatchTime
-    InvolvedPerson:
-      properties:
-        name:
-          type: string
-        externalId:
-          type: string
-          description: unique identifier for person, generated if not provided
-        description:
-          type: string
-        dateOfBirth:
-          type: string
-          format: date
-          example: '2017-01-20'
-        email:
-          type: string
-        secondaryEmail:
-          type: string
-        phone:
-          type: string
-        secondaryPhone:
-          type: string
-        streetAddress:
-          type: string
-        secondaryStreetAddress:
-          type: string
-        ethnicity:
-          type: string
-        eyeColor:
-          type: string
-        hairColor:
-          type: string
-        height:
-          type: string
-        age:
-          type: integer
-        gender:
-          type: string
-        additionalMetadata:
-          $ref: '#/components/schemas/AdditionalMetadata'
+            $ref: '#/components/schemas/Event'
     InvolvedVehicle:
       properties:
         color:
@@ -568,14 +573,21 @@ components:
           type: string
         additionalMetadata:
           $ref: '#/components/schemas/AdditionalMetadata'
-    ExternalIdsBody:
+    EventsBody:
       properties:
-        externalIds:
+        events:
+          items:
+            $ref: '#/components/schemas/Event'
+      required:
+      - events
+    NarrativeBody:
+      properties:
+        narratives:
           type: array
           items:
             type: string
       required:
-      - externalIds
+      - narratives
     Location:
       properties:
         name:
@@ -610,18 +622,6 @@ components:
           $ref: '#/components/schemas/Location'
         additionalMetadata:
           $ref: '#/components/schemas/AdditionalMetadata'
-    EventsBody:
-      properties:
-        events:
-          items:
-            $ref: '#/components/schemas/Event'
-      required:
-      - events
-    EventsResponse:
-      properties:
-        events:
-          items:
-            $ref: '#/components/schemas/Event'
   securitySchemes:
     bearerAuth:
       type: http
