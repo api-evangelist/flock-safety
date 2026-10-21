@@ -10,6 +10,11 @@ checked:
 - https://www.firstnet.com/content/dam/firstnet/white-papers/firstnet-app-catalog-booklet.pdf
 - https://www.ijis.org/
 - https://www.nena.org/
+- https://500.co/api/startups
+- https://500.co/companies
+- https://www.antler.co/portfolio
+- https://www.techstars.com/portfolio
+- https://www.ycombinator.com/companies
 marketplace_apps: []
 edges:
 - partner_name: AWS Marketplace
@@ -55,6 +60,35 @@ edges:
     identity_source: wikidata P856 (labelled provenance step; Kin 2026-10-15 decision 1)
   detected_by: sweep-public-safety-ng911.py
   first_seen: '2026-10-20'
+- partner_name: Y Combinator
+  partner: y-combinator
+  partner_match: register
+  type: register
+  channel: standard-directory
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://www.ycombinator.com/companies/flock-safety
+  category: accelerator portfolio participation
+  contract_reference:
+    register: Y Combinator company directory (ycombinator.com/companies/<slug>)
+    standard: null
+    spec_file: null
+    role: accelerator-portfolio-company
+    registered_name: Flock Safety
+    register_id: https://www.ycombinator.com/companies/flock-safety
+    register_country: US
+    register_website: http://www.flocksafety.com
+    matched_domain: flocksafety.com
+    matched_by: domain
+    signal_note: 'participation only: the accelerator''s own portfolio register lists the company (cohort / investment);
+      an ownership and participation record, not conformance or certification'
+    detected_by: sweep-accelerator-portfolios.py
+    detected: '2026-10-21'
+    batch: Summer 2017
+    year: '2017'
+    status: Active
+  detected_by: sweep-accelerator-portfolios.py
+  first_seen: '2026-10-21'
 source:
 - https://www.firstnet.com/apps.html
 - https://www.firstnet.com/content/dam/firstnet/white-papers/firstnet-app-catalog-booklet.pdf
