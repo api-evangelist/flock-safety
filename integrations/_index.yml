@@ -15,3 +15,30 @@
   relationship: distribution-channel
   status: not-a-workflow
   arazzo: null
+- slug: flock-safety-colorado-cbi-cjis-vendor-management-program
+  label: Colorado CBI CJIS Vendor Management Program
+  partner_name: Colorado CBI CJIS Vendor Management Program
+  category: CJIS vendor programme (Colorado)
+  type: register
+  channel: regulator-register
+  evidence: https://cbi.colorado.gov/criminal-justice/cjis-security/cjis-vendor-management-program/vendor-directory
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: Colorado Bureau of Investigation CJIS Vendor Management Program directory
+    standard: FBI CJIS Security Policy
+    spec_file: null
+    role: cjis-vendor-enrolled
+    registered_name: FLOCK SAFETY
+    register_country: US
+    register_state: CO
+    matched_domain: flocksafety.com
+    matched_by: domain
+    signal_note: 'participation only: enrolment in a state CSA''s vendor programme (staff fingerprinting); the CBI
+      states presence is not a guarantee of CJIS compliance'
+    detected_by: sweep-public-safety-ng911.py
+    detected: '2026-10-20'
+    identity: wikidata Q108485435 'Flock Safety' P856 http://flocksafety.com/
+    identity_source: wikidata P856 (labelled provenance step; Kin 2026-10-15 decision 1)
+  status: not-a-workflow
+  arazzo: null

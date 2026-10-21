@@ -2,6 +2,14 @@ generated: '2026-10-13'
 method: searched
 checked:
 - https://aws.amazon.com/marketplace/
+- https://appcomm.org/
+- https://apps.firstnet.att.com/
+- https://cbi.colorado.gov/criminal-justice/cjis-security/cjis-vendor-management-program/vendor-directory
+- https://www.dps.texas.gov/section/infrastructure-operations/vendor-forms
+- https://www.firstnet.com/apps.html
+- https://www.firstnet.com/content/dam/firstnet/white-papers/firstnet-app-catalog-booklet.pdf
+- https://www.ijis.org/
+- https://www.nena.org/
 marketplace_apps: []
 edges:
 - partner_name: AWS Marketplace
@@ -20,3 +28,39 @@ edges:
   seller_name: Flock Safety
   detected_by: sweep-cloud-marketplaces.py
   detected: '2026-10-13'
+- partner_name: Colorado CBI CJIS Vendor Management Program
+  partner: null
+  partner_match: register
+  type: register
+  channel: regulator-register
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://cbi.colorado.gov/criminal-justice/cjis-security/cjis-vendor-management-program/vendor-directory
+  category: CJIS vendor programme (Colorado)
+  contract_reference:
+    register: Colorado Bureau of Investigation CJIS Vendor Management Program directory
+    standard: FBI CJIS Security Policy
+    spec_file: null
+    role: cjis-vendor-enrolled
+    registered_name: FLOCK SAFETY
+    register_country: US
+    register_state: CO
+    matched_domain: flocksafety.com
+    matched_by: domain
+    signal_note: 'participation only: enrolment in a state CSA''s vendor programme (staff fingerprinting); the CBI
+      states presence is not a guarantee of CJIS compliance'
+    detected_by: sweep-public-safety-ng911.py
+    detected: '2026-10-20'
+    identity: wikidata Q108485435 'Flock Safety' P856 http://flocksafety.com/
+    identity_source: wikidata P856 (labelled provenance step; Kin 2026-10-15 decision 1)
+  detected_by: sweep-public-safety-ng911.py
+  first_seen: '2026-10-20'
+source:
+- https://www.firstnet.com/apps.html
+- https://www.firstnet.com/content/dam/firstnet/white-papers/firstnet-app-catalog-booklet.pdf
+- https://cbi.colorado.gov/criminal-justice/cjis-security/cjis-vendor-management-program/vendor-directory
+- https://apps.firstnet.att.com/
+- https://www.nena.org/
+- https://www.ijis.org/
+- https://appcomm.org/
+- https://www.dps.texas.gov/section/infrastructure-operations/vendor-forms
