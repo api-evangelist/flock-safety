@@ -21,6 +21,9 @@ checked:
 - https://www.indexventures.com/companies/
 - https://www.sequoiacap.com/our-companies/
 - https://www.sequoiacap.com/sitemap.xml
+- https://api.first.org/data/v1/teams
+- https://raw.githubusercontent.com/CVEProject/cve-website/dev/src/assets/data/CNAsList.json
+- https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json
 marketplace_apps: []
 edges:
 - partner_name: AWS Marketplace
@@ -124,6 +127,43 @@ edges:
     sector: American Dynamism;Enterprise;Growth
   detected_by: sweep-vc-portfolios.py
   first_seen: '2026-10-21'
+- partner_name: CVE Program (CVE Numbering Authorities)
+  partner: null
+  partner_match: register
+  type: register
+  channel: standard-directory
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://www.cve.org/PartnerInformation/ListofPartners/partner/flock
+  category: Vulnerability disclosure (CVE Numbering Authority)
+  contract_reference:
+    register: CVE Program CNA list (github.com/CVEProject/cve-website CNAsList.json @ 239d3d9b68e0)
+    standard: CVE Program CNA Operational Rules (CVE Numbering Authority)
+    spec_file: null
+    role: cve-numbering-authority
+    registered_name: Flock
+    matched_domain: flocksafety.com
+    matched_by: domain
+    cna_id: CNA-2026-0073
+    cna_short_name: flock
+    cna_types:
+    - Vendor
+    cna_roles:
+    - CNA
+    scope: Flock branded hardware and software products only.
+    top_level_root: Cybersecurity and Infrastructure Security Agency (CISA)
+    root: Cybersecurity and Infrastructure Security Agency (CISA) Industrial Control Systems (ICS)
+    security_advisories:
+    - https://www.flocksafety.com/legal/security-advisories
+    disclosure_policy:
+    - https://www.flocksafety.com/legal/vulnerability-disclosure-policy
+    country: USA
+    signal_note: listing as a CVE Numbering Authority = participation (a public commitment to assign CVE IDs and
+      publish advisories for its scope); never a count of CVEs
+    detected_by: sweep-vulnerability-disclosure-cna.py
+    detected: '2026-10-22'
+  detected_by: sweep-vulnerability-disclosure-cna.py
+  first_seen: '2026-10-22'
 source:
 - https://www.firstnet.com/apps.html
 - https://www.firstnet.com/content/dam/firstnet/white-papers/firstnet-app-catalog-booklet.pdf
