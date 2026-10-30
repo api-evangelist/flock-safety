@@ -64,6 +64,165 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Flock Safety is a company surfaced as a portfolio company of a16z, crv, founders-fund, initialized-capital, kleiner-perkins, matrix-partners, spark-capital, sv-angel, y-combinator and added to the API Evangelist network as a stub for enrichment. Sector: american-dynamism. This profile is a lead awaiting the enrichment pipeline.
+Flock Safety is a public safety technology company whose platform connects communities, businesses, and law enforcement through crime detection, investigation, and response tools built around license plate recognition (LPR) cameras, audio detection, video, and the FlockOS situational-awareness platform. Its v3 API Platform (api.flocksafety.com) lets approved customer organizations and third-party developers build "Flock Apps" that bring data in (register hardware as devices, ingest vehicle images for detection, push CAD events, alerts, and geolocation telemetry, manage custom hotlists) and connect Flock data out (retrieve devices, look up license plate reads, and subscribe to real-time LPR hotlist alert webhooks). The APIs use OAuth 2.0 with machine-level (client_credentials) and recommended user-level (authorization_code) flows, role-based access control, audit logging, and data-stewardship requirements.
 
-Backed by: a16z, crv, founders-fund, initialized-capital, kleiner-perkins, matrix-partners, spark-capital, sv-angel, y-combinator — https://flocksafety.com
+**Areas:** Company · American Dynamism · Public Safety · Law Enforcement · License Plate Recognition · LPR · Physical Security · Surveillance · Computer Vision · Webhook · Geolocation · CAD
+
+## Flock Safety on APIs.io
+
+Everything profiled for Flock Safety is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/flock-safety/](https://apis.io/providers/flock-safety/)** — or go straight to one of the APIs or properties below.
+
+### APIs (10)
+
+- [Flock Safety Alerts API](https://apis.io/apis/flock-safety/flock-safety-alerts-api/) — The Alerts API from Flock Safety — 3 operation(s) for alerts.
+- [Flock Safety CAD Events API](https://apis.io/apis/flock-safety/flock-safety-cad-events-api/) — The CAD Events API from Flock Safety — 7 operation(s) for cad events.
+- [Flock Safety Custom Hotlists API](https://apis.io/apis/flock-safety/flock-safety-custom-hotlists-api/) — The Custom Hotlists API from Flock Safety — 5 operation(s) for custom hotlists.
+- [Flock Safety Devices API](https://apis.io/apis/flock-safety/flock-safety-devices-api/) — The Devices API from Flock Safety — 3 operation(s) for devices.
+- [Flock Safety LPR Hotlist Alert Subscriptions API](https://apis.io/apis/flock-safety/flock-safety-lpr-hotlist-alert-subscriptions-api/) — The LPR Hotlist Alert Subscriptions API from Flock Safety — 2 operation(s) for lpr hotlist alert subscriptions.
+- [Flock Safety Plate Reads API](https://apis.io/apis/flock-safety/flock-safety-plate-reads-api/) — The Plate Reads API from Flock Safety — 2 operation(s) for plate reads.
+- [Flock Safety Tracked Subject Types API](https://apis.io/apis/flock-safety/flock-safety-tracked-subject-types-api/) — The Tracked Subject Types API from Flock Safety — 2 operation(s) for tracked subject types.
+- [Flock Safety Tracked Subjects API](https://apis.io/apis/flock-safety/flock-safety-tracked-subjects-api/) — The Tracked Subjects API from Flock Safety — 2 operation(s) for tracked subjects.
+- [Flock Safety Vehicle Images API](https://apis.io/apis/flock-safety/flock-safety-vehicle-images-api/) — The Vehicle Images API from Flock Safety — 1 operation(s) for vehicle images.
+- [Flock Safety O Auth2 API](https://apis.io/apis/flock-safety/flock-safety-oauth2-api/) — The OAuth2 API from Flock Safety — 1 operation(s) for oauth2.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### AsyncAPI (1)
+
+Event-driven and webhook contracts.
+
+- [Flock Safety LPR Hotlist Alerts Webhook](https://apis.io/asyncapis/flock-safety/flock-safety-lpr-alerts-asyncapi/)
+
+#### Event channels (1)
+
+Individual events and webhooks the provider emits.
+
+- [lpr/hotlist-alert](https://apis.io/channels/flock-safety/lpr-hotlist-alert/)
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [flock-safety](https://apis.io/servers/flock-safety/flock-safety/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Flock Safety Agentic Access](https://apis.io/agentic-access/flock-safety/flock-safety-agentic-access/)
+
+#### Collections (10)
+
+Postman and Open Collection request collections.
+
+- [Flock Safety API Platform (v3) Alerts API](https://apis.io/collections/flock-safety/open-flock-safety-alerts-api/)
+- [Flock Safety API Platform (v3) Alerts CAD Events API](https://apis.io/collections/flock-safety/open-flock-safety-cad-events-api/)
+- [Flock Safety API Platform (v3) Alerts Custom Hotlists API](https://apis.io/collections/flock-safety/open-flock-safety-custom-hotlists-api/)
+- [Flock Safety API Platform (v3) Alerts Devices API](https://apis.io/collections/flock-safety/open-flock-safety-devices-api/)
+- [Flock Safety API Platform (v3) Alerts LPR Hotlist Alert Subscriptions API](https://apis.io/collections/flock-safety/open-flock-safety-lpr-hotlist-alert-subscriptions-api/)
+- [Flock Safety API Platform (v3) Alerts OAuth2 API](https://apis.io/collections/flock-safety/open-flock-safety-oauth2-api/)
+- [Flock Safety API Platform (v3) Alerts Plate Reads API](https://apis.io/collections/flock-safety/open-flock-safety-plate-reads-api/)
+- [Flock Safety API Platform (v3) Alerts Tracked Subject Types API](https://apis.io/collections/flock-safety/open-flock-safety-tracked-subject-types-api/)
+- [Flock Safety API Platform (v3) Alerts Tracked Subjects API](https://apis.io/collections/flock-safety/open-flock-safety-tracked-subjects-api/)
+- [Flock Safety API Platform (v3) Alerts Vehicle Images API](https://apis.io/collections/flock-safety/open-flock-safety-vehicle-images-api/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Flock Safety Api Platform Overlay](https://apis.io/overlays/flock-safety/flock-safety-api-platform-overlay/)
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Flock Safety Authentication](https://apis.io/security/flock-safety/flock-safety-authentication/)
+- [Flock Safety Domain Security](https://apis.io/security/flock-safety/flock-safety-domain-security/)
+- [Flock Safety Trust Center](https://apis.io/security/flock-safety/flock-safety-trust-center/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Flock Safety Scopes](https://apis.io/scopes/flock-safety/flock-safety-scopes/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Flock Safety Rate Limits](https://apis.io/rate-limits/flock-safety/flock-safety-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://flocksafety.com)
+- [Documentation](https://docs.flocksafety.com/developer-hub/docs/flock-developer-platform-overview)
+- [Getting started](https://docs.flocksafety.com/developer-hub/docs/quickstart)
+- [API reference](https://docs.flocksafety.com/developer-hub/reference/post_oauth-token)
+- [Pricing](https://flocksafety.com/pricing)
+- [Support](https://help.flocksafety.com/s/)
+- [Changelog](https://docs.flocksafety.com/developer-hub/changelog)
+- [Blog](https://flocksafety.com/blog)
+- [Compliance](https://security.flocksafety.com/)
+- [Terms of service](https://flocksafety.com/legal/terms-of-service)
+- [Privacy policy](https://flocksafety.com/legal/privacy-notice)
+- [GitHub](https://github.com/Flock-Safety)
+- [Status](https://status.flocksafety.com/)
+
+## API Evangelist rating
+
+**Kin Score 51.5** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 73.2 |
+| Contract quality | 57.8 |
+| Contract governance | 4.5 |
+| Operational transparency | 42.1 |
+| Developer ergonomics | 44.6 |
+| Access clarity | 47.4 |
+
+**Agent readiness 36.6** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | documented (partial credit) |
+| Error Semantics | verified |
+| OpenAPI Examples | partial |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | yes |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 36.4** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/flock-safety/](https://apis.io/providers/flock-safety/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Flock Safety: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/flock-safety/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
